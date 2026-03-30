@@ -1,0 +1,11 @@
+﻿start_time,home_team,away_team,home_pitcher,away_pitcher,proj_home,proj_away,prob_home_win,prob_away_win,rl_home_prob,rl_away_prob,linea_total,pick_total,pick_ml,valor_ml,pick_rl,valor_rl,mejor_pick,cuota_home,cuota_away,cuota_over,cuota_under,cuota_rl_home,cuota_rl_away,kelly_ml,kelly_rl
+2025-07-07T22:40:00,Detroit Tigers,Tampa Bay Rays,Keider Montero,Shane Baz,5.09,5.61,0.376,0.624,0.2664,0.378,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,1.83,2.09,,,2.71,2.65,0.0,0.0
+2025-07-07T23:10:00,Boston Red Sox,Colorado Rockies,Richard Fitts,Austin Gomber,3.67,5.15,0.25,0.75,0.1545,0.4924,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,1.43,3.14,,,1.92,2.03,0.0,0.0
+2025-07-07T23:10:00,Cincinnati Reds,Miami Marlins,Brady Singer,Janson Junk,6.19,5.11,0.566,0.434,0.4457,0.2188,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,34.0,1.01,,,3.84,4.25,0.0,0.0
+2025-07-07T23:40:00,Kansas City Royals,Pittsburgh Pirates,Noah Cameron,Andrew Heaney,5.03,6.7,0.262,0.738,0.1749,0.5127,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,1.74,2.27,,,2.54,1.59,0.0,0.0
+2025-07-07T23:40:00,Chicago White Sox,Toronto Blue Jays,Sean Burke,José Berríos,5.82,5.04,0.532,0.468,0.4101,0.2416,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,2.56,1.59,,,1.95,1.95,0.0,0.0
+2025-07-07T23:40:00,Milwaukee Brewers,Los Angeles Dodgers,Freddy Peralta,Yoshinobu Yamamoto,6.51,6.53,0.439,0.561,0.3313,0.3366,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,,,,,1.31,10.2,0.0,0.0
+2025-07-08T00:10:00,Houston Astros,Cleveland Guardians,Colton Gordon,Tanner Bibee,5.09,4.72,0.482,0.518,0.3556,0.2723,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,4.2,1.36,,,1.56,4.4,0.0,0.0
+2025-07-08T01:38:00,Los Angeles Angels,Texas Rangers,Yusei Kikuchi,Jacob deGrom,6.88,6.22,0.512,0.488,0.4019,0.271,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,2.8,2.15,,,2.5,1.89,0.0,0.0
+2025-07-08T01:40:00,San Diego Padres,Arizona Diamondbacks,Yu Darvish,Zac Gallen,4.19,2.92,0.612,0.388,0.4585,0.1457,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,2.32,2.05,,,2.2,2.6,0.0,0.0
+2025-07-08T01:45:00,San Francisco Giants,Philadelphia Phillies,Landen Roupp,Cristopher Sánchez,6.56,5.98,0.505,0.495,0.3926,0.2746,,Sin ventaja clara,Sin datos,0.0,Sin datos,0.0,Ninguno,1.57,2.76,,,2.32,2.06,0.0,0.0

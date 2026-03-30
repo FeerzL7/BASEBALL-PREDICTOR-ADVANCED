@@ -1,0 +1,11 @@
+﻿home_team,away_team,total_proj,linea_real,pick_OU,pick_ML,valor_ML,pick_RL,valor_RL,mejor_pick
+Washington Nationals,Detroit Tigers,10.845,9.0,Over,Detroit Tigers,19.14,Detroit Tigers,-0.6,ML: Detroit Tigers
+New York Mets,Milwaukee Brewers,11.754,8.5,Over,Milwaukee Brewers,17.98,Milwaukee Brewers,-54.37,ML: Milwaukee Brewers
+Miami Marlins,Minnesota Twins,10.773,8.5,Over,Minnesota Twins,18.07,Minnesota Twins,-5.29,ML: Minnesota Twins
+Toronto Blue Jays,New York Yankees,10.206,8.5,Over,New York Yankees,28.27,New York Yankees,4.8,ML: New York Yankees
+Atlanta Braves,Los Angeles Angels,7.371,9.0,Under,Atlanta Braves,67.87,Atlanta Braves,131.48,RL: Atlanta Braves
+Chicago Cubs,Cleveland Guardians,11.718,8.5,Over,Cleveland Guardians,389.8,Cleveland Guardians,32.14,ML: Cleveland Guardians
+Colorado Rockies,Houston Astros,15.304,8.5,Over,Colorado Rockies,613.91,Colorado Rockies,93.66,ML: Colorado Rockies
+Seattle Mariners,Kansas City Royals,12.609,5.5,Over,Seattle Mariners,39.68,Seattle Mariners,-28.99,ML: Seattle Mariners
+Arizona Diamondbacks,San Francisco Giants,11.736,8.5,Over,San Francisco Giants,-22.87,San Francisco Giants,-38.87,Over/Under: Over
+Los Angeles Dodgers,Chicago White Sox,10.79,12.5,Under,Chicago White Sox,36.93,Chicago White Sox,10.2,ML: Chicago White Sox

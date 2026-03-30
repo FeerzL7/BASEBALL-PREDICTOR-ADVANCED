@@ -1,0 +1,3 @@
+﻿start_time,home_team,away_team,home_pitcher,away_pitcher,proj_home,proj_away,prob_home_win,prob_away_win,rl_home_prob,rl_away_prob,linea_total,pick_total,pick_ml,valor_ml,pick_rl,valor_rl,mejor_pick,cuota_home,cuota_away,cuota_total_over,cuota_total_under,cuota_rl_home,cuota_rl_away,kelly_ml,kelly_rl
+2025-07-07T01:10:00,San Diego Padres,Texas Rangers,David Morgan,Jack Leiter,5.112,6.831,0.2588,0.7412,0.173,0.5181,5.5,Over,Texas Rangers,240.95,Sin datos,0,ML: Texas Rangers,,4.6,1.88,1.88,,,66.93,0.0
+2025-07-07T02:05:00,Athletics,San Francisco Giants,Jacob Lopez,Hayden Birdsong,5.31,5.553,0.4094,0.5906,0.2956,0.3482,8.5,Over,Athletics,37.15,Sin datos,0,ML: Athletics,3.35,,1.83,1.91,,,15.81,0.0
