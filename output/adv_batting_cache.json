@@ -1,0 +1,242 @@
+{
+  "Athletics": {
+    "OPS": 0.549,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 75.9,
+    "HardHit_aprox": 38.0,
+    "K_pct": 37.8,
+    "BB_pct": 6.7
+  },
+  "Pittsburgh Pirates": {
+    "OPS": 0.692,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 96.8,
+    "HardHit_aprox": 38.0,
+    "K_pct": 24.0,
+    "BB_pct": 9.8
+  },
+  "San Diego Padres": {
+    "OPS": 0.515,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 81.6,
+    "HardHit_aprox": 38.0,
+    "K_pct": 25.1,
+    "BB_pct": 9.1
+  },
+  "Seattle Mariners": {
+    "OPS": 0.687,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 97.8,
+    "HardHit_aprox": 38.0,
+    "K_pct": 27.7,
+    "BB_pct": 11.2
+  },
+  "San Francisco Giants": {
+    "OPS": 0.594,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 87.3,
+    "HardHit_aprox": 38.0,
+    "K_pct": 23.0,
+    "BB_pct": 6.7
+  },
+  "St. Louis Cardinals": {
+    "OPS": 0.732,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 95.6,
+    "HardHit_aprox": 38.0,
+    "K_pct": 19.5,
+    "BB_pct": 7.0
+  },
+  "Tampa Bay Rays": {
+    "OPS": 0.768,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 110.5,
+    "HardHit_aprox": 38.0,
+    "K_pct": 19.7,
+    "BB_pct": 8.2
+  },
+  "Texas Rangers": {
+    "OPS": 0.757,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 101.3,
+    "HardHit_aprox": 38.0,
+    "K_pct": 27.5,
+    "BB_pct": 7.4
+  },
+  "Toronto Blue Jays": {
+    "OPS": 0.815,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 115.6,
+    "HardHit_aprox": 38.0,
+    "K_pct": 18.2,
+    "BB_pct": 11.6
+  },
+  "Minnesota Twins": {
+    "OPS": 0.625,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 94.3,
+    "HardHit_aprox": 38.0,
+    "K_pct": 25.5,
+    "BB_pct": 11.0
+  },
+  "Philadelphia Phillies": {
+    "OPS": 0.609,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 91.4,
+    "HardHit_aprox": 38.0,
+    "K_pct": 22.8,
+    "BB_pct": 8.7
+  },
+  "Atlanta Braves": {
+    "OPS": 0.742,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 104.1,
+    "HardHit_aprox": 38.0,
+    "K_pct": 18.3,
+    "BB_pct": 9.4
+  },
+  "Chicago White Sox": {
+    "OPS": 0.677,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 92.1,
+    "HardHit_aprox": 38.0,
+    "K_pct": 35.9,
+    "BB_pct": 9.8
+  },
+  "Miami Marlins": {
+    "OPS": 0.786,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 111.1,
+    "HardHit_aprox": 38.0,
+    "K_pct": 19.8,
+    "BB_pct": 8.2
+  },
+  "New York Yankees": {
+    "OPS": 0.638,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 92.4,
+    "HardHit_aprox": 38.0,
+    "K_pct": 26.9,
+    "BB_pct": 7.1
+  },
+  "Milwaukee Brewers": {
+    "OPS": 0.858,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 125.1,
+    "HardHit_aprox": 38.0,
+    "K_pct": 18.5,
+    "BB_pct": 14.5
+  },
+  "Los Angeles Angels": {
+    "OPS": 0.745,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 109.8,
+    "HardHit_aprox": 38.0,
+    "K_pct": 27.0,
+    "BB_pct": 15.2
+  },
+  "Arizona Diamondbacks": {
+    "OPS": 0.728,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 94.9,
+    "HardHit_aprox": 38.0,
+    "K_pct": 23.7,
+    "BB_pct": 8.5
+  },
+  "Baltimore Orioles": {
+    "OPS": 0.645,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 97.8,
+    "HardHit_aprox": 38.0,
+    "K_pct": 28.0,
+    "BB_pct": 8.8
+  },
+  "Boston Red Sox": {
+    "OPS": 0.629,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 94.0,
+    "HardHit_aprox": 38.0,
+    "K_pct": 28.4,
+    "BB_pct": 10.0
+  },
+  "Chicago Cubs": {
+    "OPS": 0.666,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 100.3,
+    "HardHit_aprox": 38.0,
+    "K_pct": 20.7,
+    "BB_pct": 13.3
+  },
+  "Cincinnati Reds": {
+    "OPS": 0.634,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 98.7,
+    "HardHit_aprox": 38.0,
+    "K_pct": 27.4,
+    "BB_pct": 14.2
+  },
+  "Cleveland Guardians": {
+    "OPS": 0.574,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 85.4,
+    "HardHit_aprox": 38.0,
+    "K_pct": 29.5,
+    "BB_pct": 7.7
+  },
+  "Colorado Rockies": {
+    "OPS": 0.681,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 91.7,
+    "HardHit_aprox": 38.0,
+    "K_pct": 24.6,
+    "BB_pct": 5.3
+  },
+  "Detroit Tigers": {
+    "OPS": 0.601,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 98.1,
+    "HardHit_aprox": 38.0,
+    "K_pct": 28.8,
+    "BB_pct": 11.5
+  },
+  "Houston Astros": {
+    "OPS": 0.829,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 117.8,
+    "HardHit_aprox": 38.0,
+    "K_pct": 20.6,
+    "BB_pct": 12.6
+  },
+  "Kansas City Royals": {
+    "OPS": 0.573,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 82.9,
+    "HardHit_aprox": 38.0,
+    "K_pct": 22.5,
+    "BB_pct": 8.0
+  },
+  "Los Angeles Dodgers": {
+    "OPS": 0.713,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 101.0,
+    "HardHit_aprox": 38.0,
+    "K_pct": 18.5,
+    "BB_pct": 8.1
+  },
+  "Washington Nationals": {
+    "OPS": 0.788,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 110.2,
+    "HardHit_aprox": 38.0,
+    "K_pct": 22.6,
+    "BB_pct": 8.0
+  },
+  "New York Mets": {
+    "OPS": 0.684,
+    "SLG": 0.415,
+    "wRC_plus_aprox": 105.7,
+    "HardHit_aprox": 38.0,
+    "K_pct": 21.4,
+    "BB_pct": 12.4
+  }
+}
