@@ -9,16 +9,36 @@ from utils.constants import TODAY
 from analysis.offense import analizar_ofensiva
 from analysis.projections import proyectar_totales
 from analysis.simulation import aplicar_simulaciones
-from tracking.roi_tracker import inicializar_tracking, registrar_pick, calcular_roi
-
+from tracking.roi_tracker import inicializar_tracking, registrar_pick, calcular_roi, actualizar_resultados
+from analysis.statcast import cargar_statcast
+from notifications.telegram import enviar_picks
 import pandas as pd
 import os
 
 def main():
     print("[INFO] Iniciando análisis de predicciones MLB...\n")
     
+    # 0. Cargar stats avanzadas de Fangraphs (xFIP, Barrel%, wRC+)
+    #    Se cachea 24h en output/fg_pitching_cache.json y fg_batting_cache.json
+    print("[INFO] Cargando stats avanzadas de Fangraphs (xFIP, Barrel%, wRC+)...")
+    cargar_statcast()
+    
     # 1. Análisis estadístico
     partidos = analizar_pitchers()
+    total_raw = len(partidos)
+    partidos_sin_tbd   = [p for p in partidos if p.get('pitchers_confirmados')]
+    partidos_tbd       = [p for p in partidos if not p.get('pitchers_confirmados')]
+    
+    if partidos_tbd:
+        print(f"\n[FILTRO] {len(partidos_tbd)} partido(s) excluido(s) por lanzador TBD:")
+        for p in partidos_tbd:
+            hp = p['home_pitcher']
+            ap = p['away_pitcher']
+            print(f"   - {p['away_team']} @ {p['home_team']}  "
+                f"(home: {hp}, away: {ap})")
+    
+    print(f"[FILTRO] Partidos válidos: {len(partidos_sin_tbd)} / {total_raw}\n")
+    partidos = partidos_sin_tbd
     partidos = analizar_ofensiva(partidos)
     partidos = analizar_defensiva(partidos)
     partidos = proyectar_totales(partidos)
@@ -64,24 +84,75 @@ def main():
         p["cuota_rl_away"] = p.get("cuota_rl_away") or mercados.get(f"rl_{aw}")
 
     # 6. Inicializar tracking
+    from tracking.roi_tracker import (
+    inicializar_tracking,
+    registrar_pick,
+    calcular_roi,
+    actualizar_resultados,   # <-- nuevo
+    )
+ 
+    # 6a. Actualizar resultados de picks anteriores (antes de registrar los nuevos)
+    print("[INFO] Actualizando resultados de picks anteriores...")
+    actualizar_resultados()
+ 
+    # 6b. Inicializar y registrar picks del día
     inicializar_tracking()
     for p in partidos:
-        mejor = p.get("mejor_pick")
-        if isinstance(mejor, dict):
-            registrar_pick(
-                fecha=TODAY,
-                juego=f"{p['away_team']} @ {p['home_team']}",
-                mercado=mejor.get("mercado", ""),
-                seleccion=mejor.get("selección", ""),
-                cuota=mejor.get("cuota", 1.91),
-                probabilidad=mejor.get("prob", 0.50),
-                valor=mejor.get("valor", 0),
-                resultado="pendiente"
-            )
-
+        mejor = p.get("mejor_pick", "Ninguno")
+        if not isinstance(mejor, str) or mejor == "Ninguno":
+            continue
+ 
+        # Determinar mercado, seleccion, cuota y prob desde el string del pick
+        mercado, seleccion, cuota, prob, valor = "", "", 1.91, 0.50, 0
+ 
+        if mejor.startswith("ML:"):
+            mercado   = "ML"
+            seleccion = p.get("pick_ml", "")
+            cuota     = (p.get("cuota_home") if seleccion == p["home_team"]
+                        else p.get("cuota_away")) or 1.91
+            prob      = (p.get("prob_home_win") if seleccion == p["home_team"]
+                        else p.get("prob_away_win")) or 0.50
+            valor     = p.get("valor_ml", 0)
+ 
+        elif mejor.startswith("RL:"):
+            mercado   = "RL"
+            seleccion = p.get("pick_rl", "")
+            cuota     = (p.get("cuota_rl_home") if seleccion == p["home_team"]
+                        else p.get("cuota_rl_away")) or 1.91
+            prob      = (p.get("prob_home_win") if seleccion == p["home_team"]
+                        else p.get("prob_away_win")) or 0.50
+            valor     = p.get("valor_rl", 0)
+ 
+        elif mejor.startswith("TOTAL:"):
+            mercado   = "TOTAL"
+            pick_t    = p.get("pick_total", "")
+            linea     = p.get("linea_total", "")
+            seleccion = f"{pick_t} {linea}".strip()   # ej: "Over 8.5"
+            cuota     = (p.get("cuota_over") if pick_t == "Over"
+                        else p.get("cuota_under")) or 1.91
+            prob      = 0.50
+            valor     = p.get("valor_total", 0)
+ 
+        registrar_pick(
+            fecha       = TODAY,
+            juego       = f"{p['away_team']} @ {p['home_team']}",
+            mercado     = mercado,
+            seleccion   = seleccion,
+            cuota       = cuota,
+            probabilidad= prob,
+            valor       = valor,
+            resultado   = "pendiente",
+        )
+ 
+    # 6c. Mostrar resumen de ROI
     stats = calcular_roi()
-    print(f"📊 ROI Tracking → Apuestas: {stats['total_apuestas']} | ROI: {stats['roi']}% | Ganancias: {stats['ganancias']}\n")
-
+    print(
+        f"\n[ROI] Apuestas resueltas: {stats['total_apuestas']} | "
+        f"Wins: {stats['wins']} | "
+        f"ROI: {stats['roi']}% | "
+        f"Ganancias: {stats['ganancias']} u | "
+        f"Pendientes: {stats['pendientes']}\n"
+    )
     # 7. Guardar CSV
     columnas_clave = [
         "start_time", "home_team", "away_team",
@@ -131,6 +202,14 @@ def main():
                 stake_info = f" (Stake sugerido: {p['stake_pct_rl']}%)"
 
         print(f"   ✅ Mejor Pick: {mejor_pick}{stake_info}\n")
+    
+    # 9. Notificaciones Telegram
+    print("[INFO] Enviando picks a Telegram...")
+    enviado = enviar_picks(partidos, stats)
+    if enviado:
+        print("[INFO] Picks enviados correctamente a Telegram.")
+    else:
+        print("[INFO] Notificacion de Telegram omitida (revisa .env).")
 
 if __name__ == '__main__':
     main()
