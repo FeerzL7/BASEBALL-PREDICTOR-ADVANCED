@@ -1,8 +1,8 @@
 # analysis/value.py
 
-# ── Configuración de gestión de riesgo ────────────────────────────────────────
-KELLY_MAX_STAKE_PCT = 5.0   # Techo: nunca más del 5 % del bankroll por pick
-KELLY_FRACCION      = 0.5   # Kelly fraccionado (conservador)
+# ── Gestión de riesgo ─────────────────────────────────────────────────────────
+KELLY_MAX_STAKE_PCT = 5.0   # techo absoluto: nunca más del 5% del bankroll
+KELLY_FRACCION      = 0.5   # Kelly fraccionado conservador
 
 # ── Umbrales de valor esperado por mercado ────────────────────────────────────
 UMBRAL_VALOR_ML    = 5
@@ -13,6 +13,10 @@ UMBRAL_VALOR_TOTAL = 4
 UMBRAL_PROB_MIN    = 0.40
 MIN_CUOTA_ACEPTADA = 1.65
 MAX_CUOTA_ACEPTADA = 2.50
+
+# Probabilidad mínima para apostar totales (Over o Under)
+# Más conservador que ML porque la muestra Poisson es menos precisa en colas
+UMBRAL_PROB_TOTAL  = 0.52
 
 
 def analizar_valor(partidos):
@@ -28,10 +32,10 @@ def analizar_valor(partidos):
     def calc_valor(prob, cuota):
         return round((prob * cuota - 1) * 100, 2)
 
-    def kelly_con_techo(prob, cuota):
+    def kelly_con_techo(prob, cuota) -> float:
         """
         Kelly fraccionado con techo duro de KELLY_MAX_STAKE_PCT.
-        Devuelve el porcentaje de bankroll a apostar (0–KELLY_MAX_STAKE_PCT).
+        Devuelve el porcentaje de bankroll a apostar (0 – KELLY_MAX_STAKE_PCT).
         """
         if not prob or not cuota or cuota <= 1:
             return 0.0
@@ -39,9 +43,21 @@ def analizar_valor(partidos):
         kelly_full = (prob * (b + 1) - 1) / b
         if kelly_full <= 0:
             return 0.0
-        stake = kelly_full * KELLY_FRACCION * 100          # % bankroll
-        stake = min(stake, KELLY_MAX_STAKE_PCT)             # aplicar techo
-        return round(stake, 2)
+        stake = kelly_full * KELLY_FRACCION * 100
+        return round(min(stake, KELLY_MAX_STAKE_PCT), 2)
+
+    def prob_total(mu_total, linea, pick):
+        """
+        Probabilidad Poisson de que el total de carreras supere (Over)
+        o quede por debajo (Under) de la línea.
+        Usa distribución de la suma de dos Poisson independientes.
+        """
+        if pick == 'Over':
+            # P(X > linea) donde X ~ Poisson(mu_total)
+            return float(poisson.sf(linea, mu_total))
+        else:
+            # P(X < linea) — excluye el push (X == linea)
+            return float(poisson.cdf(linea - 1, mu_total))
 
     for partido in partidos:
         hs  = partido['home_stats']
@@ -71,25 +87,32 @@ def analizar_valor(partidos):
         ou_over  = partido.get("cuota_over")
         ou_under = partido.get("cuota_under")
 
-        # Inicializar campos
+        # Usar proyecciones del pipeline completo si están disponibles
+        proj_home  = partido.get('proj_home', proj_home)
+        proj_away  = partido.get('proj_away', proj_away)
+        total_proj = proj_home + proj_away
+
+        # Inicializar todos los campos
         partido.update({
-            'proj_home':      proj_home,
-            'proj_away':      proj_away,
-            'prob_home_win':  round(prob_home, 3),
-            'prob_away_win':  round(prob_away, 3),
-            'linea_total':    ou_line,
-            'cuota_over':     ou_over,
-            'cuota_under':    ou_under,
-            'pick_total':     "Sin ventaja clara",
-            'pick_ml':        "Sin datos",
-            'valor_ml':       0.0,
-            'pick_rl':        "Sin datos",
-            'valor_rl':       0.0,
-            'mejor_pick':     "Ninguno",
-            'kelly_ml':       0.0,
-            'kelly_rl':       0.0,
-            'stake_pct_ml':   0.0,
-            'stake_pct_rl':   0.0,
+            'proj_home':       proj_home,
+            'proj_away':       proj_away,
+            'prob_home_win':   round(prob_home, 3),
+            'prob_away_win':   round(prob_away, 3),
+            'linea_total':     ou_line,
+            'cuota_over':      ou_over,
+            'cuota_under':     ou_under,
+            'pick_total':      "Sin ventaja clara",
+            'valor_total':     0.0,
+            'stake_pct_total': 0.0,   # ← nuevo campo
+            'pick_ml':         "Sin datos",
+            'valor_ml':        0.0,
+            'pick_rl':         "Sin datos",
+            'valor_rl':        0.0,
+            'mejor_pick':      "Ninguno",
+            'kelly_ml':        0.0,
+            'kelly_rl':        0.0,
+            'stake_pct_ml':    0.0,
+            'stake_pct_rl':    0.0,
         })
 
         predicciones = []
@@ -112,12 +135,9 @@ def analizar_valor(partidos):
                 'stake_pct_ml': stake_ml,
             })
             predicciones.append({
-                'mercado':    'ML',
-                'seleccion':  pick_ml,
-                'valor':      val_ml,
-                'prob':       round(prob_ml, 3),
-                'cuota':      cuota_ml,
-                'stake_pct':  stake_ml,
+                'mercado': 'ML', 'seleccion': pick_ml,
+                'valor': val_ml, 'prob': round(prob_ml, 3),
+                'cuota': cuota_ml, 'stake_pct': stake_ml,
             })
 
         # ── RL ────────────────────────────────────────────────────────────────
@@ -135,34 +155,40 @@ def analizar_valor(partidos):
                 'stake_pct_rl': stake_rl,
             })
             predicciones.append({
-                'mercado':    'RL',
-                'seleccion':  pick_rl_team,
-                'valor':      val_rl,
-                'prob':       round(rl_prob, 3),
-                'cuota':      rl_cuota,
-                'stake_pct':  stake_rl,
+                'mercado': 'RL', 'seleccion': pick_rl_team,
+                'valor': val_rl, 'prob': round(rl_prob, 3),
+                'cuota': rl_cuota, 'stake_pct': stake_rl,
             })
 
-        # ── Totales ───────────────────────────────────────────────────────────
-        valor_total = 0.0
+        # ── Totales con Kelly ─────────────────────────────────────────────────
         if ou_line and ou_over and ou_under:
             diff = total_proj - ou_line
+
             if abs(diff) >= 1.0:
                 pick_t  = 'Over' if diff > 0 else 'Under'
                 cuota_t = ou_over if pick_t == 'Over' else ou_under
-                prob_t  = (poisson.sf(ou_line, total_proj)
-                           if pick_t == 'Over'
-                           else poisson.cdf(ou_line, total_proj))
-                valor_total = calc_valor(prob_t, cuota_t)
-                partido['pick_total'] = pick_t
-                partido['valor_total'] = valor_total
+
+                # Probabilidad Poisson del total proyectado
+                mu_total = max(total_proj, 0.1)
+                p_total  = prob_total(mu_total, ou_line, pick_t)
+
+                valor_t  = calc_valor(p_total, cuota_t)
+
+                # Kelly para totales — mismo mecanismo que ML/RL
+                # Solo asignar stake si la probabilidad supera el umbral mínimo
+                stake_t = 0.0
+                if p_total >= UMBRAL_PROB_TOTAL and valor_t >= UMBRAL_VALOR_TOTAL:
+                    stake_t = kelly_con_techo(p_total, cuota_t)
+
+                partido.update({
+                    'pick_total':      pick_t,
+                    'valor_total':     valor_t,
+                    'stake_pct_total': stake_t,
+                })
                 predicciones.append({
-                    'mercado':    'TOTAL',
-                    'seleccion':  pick_t,
-                    'valor':      valor_total,
-                    'prob':       round(prob_t, 3),
-                    'cuota':      cuota_t,
-                    'stake_pct':  0.0,   # Totales no usan Kelly en este modelo
+                    'mercado': 'TOTAL', 'seleccion': pick_t,
+                    'valor': valor_t, 'prob': round(p_total, 3),
+                    'cuota': cuota_t, 'stake_pct': stake_t,
                 })
             else:
                 partido['valor_total'] = 0.0
@@ -175,12 +201,14 @@ def analizar_valor(partidos):
         mejor_valor  = -999
         mejor_opcion = "Ninguno"
 
+        # ML
         if (partido['valor_ml'] >= UMBRAL_VALOR_ML
                 and ml_h and MIN_CUOTA_ACEPTADA <= ml_h <= MAX_CUOTA_ACEPTADA
                 and partido['prob_home_win'] >= UMBRAL_PROB_MIN):
             mejor_valor  = partido['valor_ml']
             mejor_opcion = f"ML: {partido['pick_ml']}"
 
+        # RL
         if (partido['valor_rl'] >= UMBRAL_VALOR_RL
                 and rl_h and MIN_CUOTA_ACEPTADA <= rl_h <= MAX_CUOTA_ACEPTADA
                 and partido['prob_home_win'] >= UMBRAL_PROB_MIN
@@ -188,8 +216,11 @@ def analizar_valor(partidos):
             mejor_valor  = partido['valor_rl']
             mejor_opcion = f"RL: {partido['pick_rl']}"
 
-        if (partido['valor_total'] >= UMBRAL_VALOR_TOTAL
+        # TOTAL — ahora compite con ML y RL en la selección del mejor pick
+        # Solo entra si tiene stake asignado (prob >= umbral y valor >= umbral)
+        if (partido['stake_pct_total'] > 0
                 and partido['valor_total'] > mejor_valor):
+            mejor_valor  = partido['valor_total']
             mejor_opcion = f"TOTAL: {partido['pick_total']}"
 
         partido['mejor_pick'] = mejor_opcion

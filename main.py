@@ -159,13 +159,15 @@ def main():
         "home_pitcher", "away_pitcher",
         "proj_home", "proj_away",
         "prob_home_win", "prob_away_win",
-        "linea_total", "pick_total",
-        "pick_ml", "valor_ml", "stake_pct_ml",
-        "pick_rl", "valor_rl", "stake_pct_rl",
-        "mejor_pick", "cuota_home", "cuota_away",
+        "linea_total", "pick_total", "valor_total", "stake_pct_total",  # ← total completo
+        "pick_ml",  "valor_ml",  "stake_pct_ml",
+        "pick_rl",  "valor_rl",  "stake_pct_rl",
+        "mejor_pick",
+        "cuota_home", "cuota_away",
         "cuota_over", "cuota_under",
         "cuota_rl_home", "cuota_rl_away",
-        "kelly_ml", "kelly_rl","park_factor_usado"
+        "kelly_ml", "kelly_rl",
+        "park_factor_usado",
     ]
 
     df = pd.DataFrame(partidos)
@@ -197,10 +199,12 @@ def main():
         stake_info = ""
         if isinstance(mejor_pick, str):
             if mejor_pick.startswith("ML:") and p.get("stake_pct_ml", 0) > 0:
-                stake_info = f" (Stake sugerido: {p['stake_pct_ml']}%)"
+                stake_info = f" (Stake: {p['stake_pct_ml']}%)"
             elif mejor_pick.startswith("RL:") and p.get("stake_pct_rl", 0) > 0:
-                stake_info = f" (Stake sugerido: {p['stake_pct_rl']}%)"
-
+                stake_info = f" (Stake: {p['stake_pct_rl']}%)"
+            elif mejor_pick.startswith("TOTAL:") and p.get("stake_pct_total", 0) > 0:
+                stake_info = f" (Stake: {p['stake_pct_total']}%)"
+ 
         print(f"   ✅ Mejor Pick: {mejor_pick}{stake_info}\n")
     
     # 9. Notificaciones Telegram
