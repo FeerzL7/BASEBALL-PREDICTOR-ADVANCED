@@ -1,0 +1,140 @@
+2026-04-01 17:10:13 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-04-01.log
+2026-04-01 17:10:21 | INFO     | main.main                           | ============================================================
+2026-04-01 17:10:21 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-04-01 17:10:21 | INFO     | main.main                           | ============================================================
+2026-04-01 17:10:21 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-04-01 17:10:21 | INFO     | main.main                           | Analizando pitchers del día...
+2026-04-01 17:12:03 | INFO     | main.main                           | Partidos en schedule: 15
+2026-04-01 17:12:03 | INFO     | main.main                           | Partidos válidos: 15 / 15
+2026-04-01 17:12:03 | INFO     | main.main                           | Analizando ofensiva...
+2026-04-01 17:13:09 | INFO     | main.main                           | Analizando defensiva...
+2026-04-01 17:13:29 | INFO     | main.main                           | Proyectando totales...
+2026-04-01 17:13:32 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-04-01 17:13:53 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-04-01 17:13:54 | INFO     | main.main                           | Analizando historial H2H...
+2026-04-01 17:14:26 | INFO     | main.main                           | Obteniendo cuotas desde The Odds API...
+2026-04-01 17:14:26 | INFO     | main.main                           | Partidos con cuotas: 4
+2026-04-01 17:14:26 | INFO     | main.main                           | Calculando valor esperado y picks...
+2026-04-01 17:14:27 | INFO     | main.main                           | Actualizando resultados de picks anteriores...
+2026-04-01 17:14:27 | INFO     | main.main                           | ROI | Resueltos: 167 | Wins: 61 | ROI: -21.56% | Ganancia: -36.0 u | Pendientes: 2
+2026-04-01 17:14:27 | INFO     | main.main                           | CSV exportado → output/predicciones_2026-04-01.csv
+2026-04-01 17:14:27 | INFO     | main.main                           | ============================================================
+2026-04-01 17:14:27 | INFO     | main.main                           | PICKS DEL DÍA
+2026-04-01 17:14:27 | INFO     | main.main                           | ============================================================
+2026-04-01 17:14:27 | INFO     | main.main                           | St. Louis Cardinals vs New York Mets
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Pitchers: Freddy Peralta vs Matthew Liberatore
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   ML:    St. Louis Cardinals @ 2.08 | New York Mets @ 1.84
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   RL:    St. Louis Cardinals @ 1.62 | New York Mets @ 2.38
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Total: Over 7.5 @ 2.0 | Under 7.5 @ 2.07
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Proy:  4.22 - 2.93
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Pick total: Sin ventaja clara | ML: New York Mets (EV 38.6) | RL: New York Mets (EV 79.3)
+2026-04-01 17:14:27 | INFO     | main.main                           |   ✔ Ninguno
+2026-04-01 17:14:27 | INFO     | main.main                           | Arizona Diamondbacks vs Detroit Tigers
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Pitchers: Tarik Skubal vs Zac Gallen
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   ML:    Arizona Diamondbacks @ 2.09 | Detroit Tigers @ 1.83
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   RL:    Arizona Diamondbacks @ 1.65 | Detroit Tigers @ 2.3
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Total: Over 9.0 @ 1.99 | Under 9.0 @ 2.07
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Proy:  3.15 - 3.87
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Pick total: Under | ML: Arizona Diamondbacks (EV 44.3) | RL: Arizona Diamondbacks (EV 13.9)
+2026-04-01 17:14:27 | INFO     | main.main                           |   ✔ TOTAL: Under | Stake: 5.0%
+2026-04-01 17:14:27 | INFO     | main.main                           | Kansas City Royals vs Minnesota Twins
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Pitchers: Joe Ryan vs Noah Cameron
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   ML:    Kansas City Royals @ 1.98 | Minnesota Twins @ 1.93
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   RL:    Kansas City Royals @ 1.59 | Minnesota Twins @ 2.51
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Total: Over 7.5 @ 2.12 | Under 7.5 @ 2.0
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Proy:  3.49 - 4.36
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Pick total: Sin ventaja clara | ML: Kansas City Royals (EV 57.3) | RL: Kansas City Royals (EV 26.3)
+2026-04-01 17:14:27 | INFO     | main.main                           |   ✔ ML: Kansas City Royals | Stake: 5.0%
+2026-04-01 17:14:27 | INFO     | main.main                           | Los Angeles Dodgers vs Cleveland Guardians
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Pitchers: Gavin Williams vs Yoshinobu Yamamoto
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   ML:    Los Angeles Dodgers @ 1.35 | Cleveland Guardians @ 3.52
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   RL:    Los Angeles Dodgers @ 1.78 | Cleveland Guardians @ 2.15
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Total: Over 8.0 @ 1.99 | Under 8.0 @ 1.91
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Proy:  5.22 - 2.79
+2026-04-01 17:14:27 | DEBUG    | main.main                           |   Pick total: Sin ventaja clara | ML: Cleveland Guardians (EV 183.0) | RL: Cleveland Guardians (EV 72.8)
+2026-04-01 17:14:27 | INFO     | main.main                           |   ✔ Ninguno
+2026-04-01 17:14:27 | INFO     | main.main                           | Enviando picks a Telegram...
+2026-04-01 17:14:31 | INFO     | main.main                           | Picks enviados a Telegram correctamente.
+2026-04-01 17:14:31 | INFO     | main.main                           | Pipeline completado.
+2026-04-01 17:26:06 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-04-01.log
+2026-04-01 17:26:08 | INFO     | main.main                           | =======================================================
+2026-04-01 17:26:08 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-04-01 17:26:08 | INFO     | main.main                           | =======================================================
+2026-04-01 17:26:08 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-04-01 17:26:08 | INFO     | statcast.cargar_statcast            | Stats avanzadas desde caché (30 pitching, 30 batting).
+2026-04-01 17:26:08 | INFO     | main.main                           | Analizando pitchers del día...
+2026-04-01 17:27:45 | INFO     | main.main                           | Partidos válidos: 15 / 15
+2026-04-01 17:27:45 | INFO     | main.main                           | Analizando ofensiva...
+2026-04-01 17:28:39 | INFO     | main.main                           | Analizando defensiva...
+2026-04-01 17:28:57 | INFO     | main.main                           | Proyectando totales...
+2026-04-01 17:28:58 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-04-01 17:28:58 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-04-01 17:28:59 | DEBUG    | context.analizar_contexto           | Contexto Atlanta Braves vs Athletics: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 12h
+2026-04-01 17:29:01 | DEBUG    | context.analizar_contexto           | Contexto Baltimore Orioles vs Texas Rangers: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 12h
+2026-04-01 17:29:01 | DEBUG    | context.analizar_contexto           | Contexto Cincinnati Reds vs Pittsburgh Pirates: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 12h
+2026-04-01 17:29:02 | DEBUG    | context.analizar_contexto           | Contexto Philadelphia Phillies vs Washington Nationals: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 13h
+2026-04-01 17:29:03 | DEBUG    | context.analizar_contexto           | Contexto Toronto Blue Jays vs Colorado Rockies: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 13h
+2026-04-01 17:29:03 | DEBUG    | context.analizar_contexto           | Contexto Miami Marlins vs Chicago White Sox: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 13h
+2026-04-01 17:29:04 | DEBUG    | context.analizar_contexto           | Contexto St. Louis Cardinals vs New York Mets: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 13h
+2026-04-01 17:29:05 | DEBUG    | context.analizar_contexto           | Contexto Milwaukee Brewers vs Tampa Bay Rays: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 13h
+2026-04-01 17:29:08 | DEBUG    | context.analizar_contexto           | Contexto Houston Astros vs Boston Red Sox: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 14h
+2026-04-01 17:29:08 | DEBUG    | context.analizar_contexto           | Contexto Chicago Cubs vs Los Angeles Angels: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 14h
+2026-04-01 17:29:09 | DEBUG    | context.analizar_contexto           | Contexto Arizona Diamondbacks vs Detroit Tigers: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 15h
+2026-04-01 17:29:12 | DEBUG    | context.analizar_contexto           | Contexto San Diego Padres vs San Francisco Giants: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 16h
+2026-04-01 17:29:12 | DEBUG    | context.analizar_contexto           | Contexto Seattle Mariners vs New York Yankees: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 16h
+2026-04-01 17:29:13 | DEBUG    | context.analizar_contexto           | Contexto Kansas City Royals vs Minnesota Twins: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 19h
+2026-04-01 17:29:13 | DEBUG    | context.analizar_contexto           | Contexto Los Angeles Dodgers vs Cleveland Guardians: {'temperatura': 9.0, 'viento_kph': 15.9, 'condiciones': 'Nublado'} @ 20h
+2026-04-01 17:29:13 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-04-01 17:29:15 | INFO     | main.main                           | Analizando H2H...
+2026-04-01 17:29:35 | INFO     | main.main                           | Obteniendo cuotas (The Odds API)...
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Procesando mercados de apuestas...
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Atlanta Braves vs Athletics
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Baltimore Orioles vs Texas Rangers
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Cincinnati Reds vs Pittsburgh Pirates
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Philadelphia Phillies vs Washington Nationals
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Toronto Blue Jays vs Colorado Rockies
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Miami Marlins vs Chicago White Sox
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Milwaukee Brewers vs Tampa Bay Rays
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Houston Astros vs Boston Red Sox
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Chicago Cubs vs Los Angeles Angels
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: San Diego Padres vs San Francisco Giants
+2026-04-01 17:29:36 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Seattle Mariners vs New York Yankees
+2026-04-01 17:29:36 | INFO     | main.main                           | Partidos con cuotas disponibles: 4
+2026-04-01 17:29:36 | INFO     | main.main                           | Calculando valor esperado y picks...
+2026-04-01 17:29:36 | INFO     | main.main                           | Actualizando resultados anteriores...
+2026-04-01 17:29:36 | INFO     | main.main                           | ROI | Resueltos: 167 | Wins: 61 | ROI: -21.56% | Ganancia: -36.0 u | Pendientes: 2
+2026-04-01 17:29:36 | INFO     | main.main                           | CSV exportado → output/predicciones_2026-04-01.csv
+2026-04-01 17:29:36 | INFO     | main.main                           | =======================================================
+2026-04-01 17:29:36 | INFO     | main.main                           | PICKS DEL DÍA
+2026-04-01 17:29:36 | INFO     | main.main                           | =======================================================
+2026-04-01 17:29:36 | DEBUG    | main.main                           | St. Louis Cardinals vs New York Mets
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Pitchers : Freddy Peralta vs Matthew Liberatore
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Proy     : 4.22 - 2.93
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   ML pick  : New York Mets (EV 38.6)
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   RL pick  : New York Mets (EV 79.3)
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 7.5
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-04-01 17:29:36 | INFO     | main.main                           | Arizona Diamondbacks vs Detroit Tigers
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Pitchers : Tarik Skubal vs Zac Gallen
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Proy     : 3.15 - 3.87
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   ML pick  : Arizona Diamondbacks (EV 44.3)
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   RL pick  : Arizona Diamondbacks (EV 13.9)
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Total    : Under 9.0
+2026-04-01 17:29:36 | INFO     | main.main                           |   ✔ TOTAL: Under | Stake: 5.0%
+2026-04-01 17:29:36 | INFO     | main.main                           | Kansas City Royals vs Minnesota Twins
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Pitchers : Joe Ryan vs Noah Cameron
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Proy     : 3.49 - 4.36
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   ML pick  : Kansas City Royals (EV 57.3)
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   RL pick  : Kansas City Royals (EV 26.3)
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 7.5
+2026-04-01 17:29:36 | INFO     | main.main                           |   ✔ ML: Kansas City Royals | Stake: 5.0%
+2026-04-01 17:29:36 | DEBUG    | main.main                           | Los Angeles Dodgers vs Cleveland Guardians
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Pitchers : Gavin Williams vs Yoshinobu Yamamoto
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Proy     : 5.22 - 2.79
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   ML pick  : Cleveland Guardians (EV 183.0)
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   RL pick  : Cleveland Guardians (EV 80.9)
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 8.0
+2026-04-01 17:29:36 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-04-01 17:29:36 | INFO     | main.main                           | Enviando picks a Telegram...
+2026-04-01 17:29:42 | INFO     | main.main                           | Telegram: picks enviados.
+2026-04-01 17:29:42 | INFO     | main.main                           | Pipeline completado.

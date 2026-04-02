@@ -1,165 +1,179 @@
-from analysis.pitching import analizar_pitchers 
-from analysis.context import analizar_contexto
-from analysis.defense import analizar_defensiva
-from analysis.h2h import analizar_h2h
-from analysis.markets import analizar_mercados
-from analysis.value import analizar_valor
-from data.odds_api import obtener_cuotas
-from utils.constants import TODAY
-from analysis.offense import analizar_ofensiva
-from analysis.projections import proyectar_totales
-from analysis.simulation import aplicar_simulaciones
-from tracking.roi_tracker import inicializar_tracking, registrar_pick, calcular_roi, actualizar_resultados
-from analysis.statcast import cargar_statcast
-from notifications.telegram import enviar_picks
-import pandas as pd
+import sys
 import os
+import pandas as pd
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+# ── Logger — primer import ────────────────────────────────────────────────────
+from utils.logger import configurar, get as get_log
+log = configurar(nivel_consola="INFO", nivel_archivo="DEBUG")
+
+from analysis.pitching      import analizar_pitchers
+from analysis.context       import analizar_contexto
+from analysis.defense       import analizar_defensiva
+from analysis.h2h           import analizar_h2h
+from analysis.markets       import analizar_mercados
+from analysis.value         import analizar_valor
+from analysis.statcast      import cargar_statcast
+from data.odds_api          import obtener_cuotas
+from utils.constants        import TODAY
+from analysis.offense       import analizar_ofensiva
+from analysis.projections   import proyectar_totales
+from analysis.simulation    import aplicar_simulaciones
+from notifications.telegram import enviar_picks
+from tracking.roi_tracker   import (
+    inicializar_tracking, registrar_pick,
+    calcular_roi, actualizar_resultados,
+)
+
 
 def main():
-    print("[INFO] Iniciando análisis de predicciones MLB...\n")
-    
-    # 0. Cargar stats avanzadas de Fangraphs (xFIP, Barrel%, wRC+)
-    #    Se cachea 24h en output/fg_pitching_cache.json y fg_batting_cache.json
-    print("[INFO] Cargando stats avanzadas de Fangraphs (xFIP, Barrel%, wRC+)...")
+    log.info("=" * 55)
+    log.info("Iniciando análisis de predicciones MLB")
+    log.info("=" * 55)
+
+    # 0. Stats avanzadas
+    log.info("Cargando stats avanzadas (FIP, wRC+)...")
     cargar_statcast()
-    
-    # 1. Análisis estadístico
-    partidos = analizar_pitchers()
-    total_raw = len(partidos)
-    partidos_sin_tbd   = [p for p in partidos if p.get('pitchers_confirmados')]
-    partidos_tbd       = [p for p in partidos if not p.get('pitchers_confirmados')]
-    
+
+    # 1. Pitchers + filtro TBD
+    log.info("Analizando pitchers del día...")
+    partidos     = analizar_pitchers()
+    total_raw    = len(partidos)
+    partidos_tbd = [p for p in partidos if not p.get('pitchers_confirmados')]
+    partidos     = [p for p in partidos if p.get('pitchers_confirmados')]
+
     if partidos_tbd:
-        print(f"\n[FILTRO] {len(partidos_tbd)} partido(s) excluido(s) por lanzador TBD:")
+        log.warning(f"{len(partidos_tbd)} partido(s) excluido(s) por TBD:")
         for p in partidos_tbd:
-            hp = p['home_pitcher']
-            ap = p['away_pitcher']
-            print(f"   - {p['away_team']} @ {p['home_team']}  "
-                f"(home: {hp}, away: {ap})")
-    
-    print(f"[FILTRO] Partidos válidos: {len(partidos_sin_tbd)} / {total_raw}\n")
-    partidos = partidos_sin_tbd
+            log.warning(f"  {p['away_team']} @ {p['home_team']} "
+                        f"(home={p['home_pitcher']}, away={p['away_pitcher']})")
+
+    log.info(f"Partidos válidos: {len(partidos)} / {total_raw}")
+
+    if not partidos:
+        log.error("Sin partidos válidos. Abortando.")
+        return
+
+    # 2. Pipeline
+    log.info("Analizando ofensiva...")
     partidos = analizar_ofensiva(partidos)
+
+    log.info("Analizando defensiva...")
     partidos = analizar_defensiva(partidos)
+
+    log.info("Proyectando totales...")
     partidos = proyectar_totales(partidos)
+
+    log.info("Analizando contexto ambiental...")
     partidos = analizar_contexto(partidos)
+
+    log.info("Aplicando simulaciones Poisson...")
     partidos = aplicar_simulaciones(partidos)
+
+    log.info("Analizando H2H...")
     partidos = analizar_h2h(partidos)
 
-    # 2. Obtener cuotas y mercados
-    cuotas = obtener_cuotas()
+    # 3. Cuotas
+    log.info("Obteniendo cuotas (The Odds API)...")
+    cuotas   = obtener_cuotas()
     partidos = analizar_mercados(partidos, cuotas)
 
-    #print(f"[DEBUG] Total de partidos antes del filtrado por cuotas: {len(partidos)}")
-
-    # 3. Filtrar partidos sin cuotas útiles
+    # 4. Filtrar sin cuotas
     partidos = [
-        p for p in partidos
-        if any([
-            isinstance(p.get("cuota_home"), (int, float)),
-            isinstance(p.get("cuota_away"), (int, float)),
-            isinstance(p.get("cuota_over"), (int, float)),
+        p for p in partidos if any([
+            isinstance(p.get("cuota_home"),    (int, float)),
+            isinstance(p.get("cuota_away"),    (int, float)),
+            isinstance(p.get("cuota_over"),    (int, float)),
             isinstance(p.get("cuota_rl_home"), (int, float)),
-            isinstance(p.get("cuota_rl_away"), (int, float))
+            isinstance(p.get("cuota_rl_away"), (int, float)),
         ])
     ]
 
-    #print(f"[DEBUG] Total de partidos DESPUÉS del filtrado por cuotas: {len(partidos)}")
     if not partidos:
-        print("[ERROR] No hay partidos válidos con cuotas útiles. Verifica si la API devolvió datos correctos.")
+        log.error("Sin partidos con cuotas útiles. Verifica la API.")
         return
 
-    # 4. Análisis de valor
+    log.info(f"Partidos con cuotas disponibles: {len(partidos)}")
+
+    # 5. Valor esperado
+    log.info("Calculando valor esperado y picks...")
     partidos = analizar_valor(partidos)
 
-    # 5. Asegurar que cuotas planas estén siempre
+    # 6. Asegurar cuotas planas
     for p in partidos:
         ho = p["home_team"]
         aw = p["away_team"]
-        mercados = p.get("mercados", {})
+        m  = p.get("mercados", {})
+        p["cuota_home"]    = p.get("cuota_home")    or m.get(f"ml_{ho}")
+        p["cuota_away"]    = p.get("cuota_away")    or m.get(f"ml_{aw}")
+        p["cuota_rl_home"] = p.get("cuota_rl_home") or m.get(f"rl_{ho}")
+        p["cuota_rl_away"] = p.get("cuota_rl_away") or m.get(f"rl_{aw}")
 
-        p["cuota_home"] = p.get("cuota_home") or mercados.get(f"ml_{ho}")
-        p["cuota_away"] = p.get("cuota_away") or mercados.get(f"ml_{aw}")
-        p["cuota_rl_home"] = p.get("cuota_rl_home") or mercados.get(f"rl_{ho}")
-        p["cuota_rl_away"] = p.get("cuota_rl_away") or mercados.get(f"rl_{aw}")
-
-    # 6. Inicializar tracking
-    from tracking.roi_tracker import (
-    inicializar_tracking,
-    registrar_pick,
-    calcular_roi,
-    actualizar_resultados,   # <-- nuevo
-    )
- 
-    # 6a. Actualizar resultados de picks anteriores (antes de registrar los nuevos)
-    print("[INFO] Actualizando resultados de picks anteriores...")
+    # 7. ROI tracking
+    log.info("Actualizando resultados anteriores...")
     actualizar_resultados()
- 
-    # 6b. Inicializar y registrar picks del día
+
     inicializar_tracking()
     for p in partidos:
         mejor = p.get("mejor_pick", "Ninguno")
         if not isinstance(mejor, str) or mejor == "Ninguno":
             continue
- 
-        # Determinar mercado, seleccion, cuota y prob desde el string del pick
-        mercado, seleccion, cuota, prob, valor = "", "", 1.91, 0.50, 0
- 
+
+        mercado = seleccion = ""
+        cuota = prob = 1.91
+        valor = 0
+
         if mejor.startswith("ML:"):
             mercado   = "ML"
             seleccion = p.get("pick_ml", "")
             cuota     = (p.get("cuota_home") if seleccion == p["home_team"]
-                        else p.get("cuota_away")) or 1.91
+                         else p.get("cuota_away")) or 1.91
             prob      = (p.get("prob_home_win") if seleccion == p["home_team"]
-                        else p.get("prob_away_win")) or 0.50
+                         else p.get("prob_away_win")) or 0.50
             valor     = p.get("valor_ml", 0)
- 
         elif mejor.startswith("RL:"):
             mercado   = "RL"
             seleccion = p.get("pick_rl", "")
             cuota     = (p.get("cuota_rl_home") if seleccion == p["home_team"]
-                        else p.get("cuota_rl_away")) or 1.91
+                         else p.get("cuota_rl_away")) or 1.91
             prob      = (p.get("prob_home_win") if seleccion == p["home_team"]
-                        else p.get("prob_away_win")) or 0.50
+                         else p.get("prob_away_win")) or 0.50
             valor     = p.get("valor_rl", 0)
- 
         elif mejor.startswith("TOTAL:"):
             mercado   = "TOTAL"
             pick_t    = p.get("pick_total", "")
             linea     = p.get("linea_total", "")
-            seleccion = f"{pick_t} {linea}".strip()   # ej: "Over 8.5"
+            seleccion = f"{pick_t} {linea}".strip()
             cuota     = (p.get("cuota_over") if pick_t == "Over"
-                        else p.get("cuota_under")) or 1.91
-            prob      = 0.50
+                         else p.get("cuota_under")) or 1.91
+            prob      = 0.52
             valor     = p.get("valor_total", 0)
- 
+
         registrar_pick(
-            fecha       = TODAY,
-            juego       = f"{p['away_team']} @ {p['home_team']}",
-            mercado     = mercado,
-            seleccion   = seleccion,
-            cuota       = cuota,
-            probabilidad= prob,
-            valor       = valor,
-            resultado   = "pendiente",
+            fecha=TODAY,
+            juego=f"{p['away_team']} @ {p['home_team']}",
+            mercado=mercado, seleccion=seleccion,
+            cuota=cuota, probabilidad=prob,
+            valor=valor, resultado="pendiente",
         )
- 
-    # 6c. Mostrar resumen de ROI
+
     stats = calcular_roi()
-    print(
-        f"\n[ROI] Apuestas resueltas: {stats['total_apuestas']} | "
-        f"Wins: {stats['wins']} | "
+    log.info(
+        f"ROI | Resueltos: {stats['total_apuestas']} | "
+        f"Wins: {stats.get('wins','?')} | "
         f"ROI: {stats['roi']}% | "
-        f"Ganancias: {stats['ganancias']} u | "
-        f"Pendientes: {stats['pendientes']}\n"
+        f"Ganancia: {stats['ganancias']} u | "
+        f"Pendientes: {stats.get('pendientes','?')}"
     )
-    # 7. Guardar CSV
+
+    # 8. CSV
     columnas_clave = [
         "start_time", "home_team", "away_team",
         "home_pitcher", "away_pitcher",
         "proj_home", "proj_away",
         "prob_home_win", "prob_away_win",
-        "linea_total", "pick_total", "valor_total", "stake_pct_total",  # ← total completo
+        "linea_total", "pick_total", "valor_total", "stake_pct_total",
         "pick_ml",  "valor_ml",  "stake_pct_ml",
         "pick_rl",  "valor_rl",  "stake_pct_rl",
         "mejor_pick",
@@ -169,51 +183,52 @@ def main():
         "kelly_ml", "kelly_rl",
         "park_factor_usado",
     ]
-
-    df = pd.DataFrame(partidos)
-    #print("[DEBUG] Columnas reales en el DataFrame:", df.columns.tolist()) 
-
-    columnas_faltantes = [col for col in columnas_clave if col not in df.columns]
-    if columnas_faltantes:
-        print(f"[ERROR] No se pueden exportar resultados. Faltan columnas: {columnas_faltantes}")
+    df        = pd.DataFrame(partidos)
+    faltantes = [c for c in columnas_clave if c not in df.columns]
+    if faltantes:
+        log.error(f"Columnas faltantes: {faltantes}")
     else:
         os.makedirs("output", exist_ok=True)
-        df[columnas_clave].to_csv(f"output/predicciones_{TODAY}.csv", index=False, encoding='utf-8-sig')
-        print("[INFO] Predicciones guardadas en output/")
+        ruta = f"output/predicciones_{TODAY}.csv"
+        df[columnas_clave].to_csv(ruta, index=False, encoding='utf-8-sig')
+        log.info(f"CSV exportado → {ruta}")
 
-    # 8. Mostrar picks
-    print("\n🧠 Picks del día:\n")
+    # 9. Picks en consola
+    log.info("=" * 55)
+    log.info("PICKS DEL DÍA")
+    log.info("=" * 55)
+
     for p in partidos:
-        print(f"🧠 {p['home_team']} vs {p['away_team']}")
-        print(f"   🧑‍💼 Pitchers: {p['away_pitcher']} ({p['away_team']}) vs {p['home_pitcher']} ({p['home_team']})")
-        print(f"   💸 Cuotas ML: {p['home_team']} @ {p.get('cuota_home', 'N/D')} | {p['away_team']} @ {p.get('cuota_away', 'N/D')}")
-        print(f"   🧾 Cuotas RL: {p['home_team']} RL @ {p.get('cuota_rl_home', 'N/D')} | {p['away_team']} RL @ {p.get('cuota_rl_away', 'N/D')}")
-        linea = p.get('linea_total', 'N/D')
-        print(f"   📊 Cuotas Totales: Over {linea} @ {p.get('cuota_over', 'N/D')} | Under {linea} @ {p.get('cuota_under', 'N/D')}")
-        print(f"   🧮 Proyección: {p['proj_home']:.2f} - {p['proj_away']:.2f}")
-        print(f"   📈 Total Línea: {linea} → Pick: {p['pick_total']}")
-        print(f"   💰 ML: {p['pick_ml']} (Valor: {p['valor_ml']:.2f})")
-        print(f"   ⚾ RL: {p['pick_rl']} (Valor: {p['valor_rl']:.2f})")
-
-        mejor_pick = p['mejor_pick']
+        mejor = p.get('mejor_pick', 'Ninguno')
         stake_info = ""
-        if isinstance(mejor_pick, str):
-            if mejor_pick.startswith("ML:") and p.get("stake_pct_ml", 0) > 0:
-                stake_info = f" (Stake: {p['stake_pct_ml']}%)"
-            elif mejor_pick.startswith("RL:") and p.get("stake_pct_rl", 0) > 0:
-                stake_info = f" (Stake: {p['stake_pct_rl']}%)"
-            elif mejor_pick.startswith("TOTAL:") and p.get("stake_pct_total", 0) > 0:
-                stake_info = f" (Stake: {p['stake_pct_total']}%)"
- 
-        print(f"   ✅ Mejor Pick: {mejor_pick}{stake_info}\n")
-    
-    # 9. Notificaciones Telegram
-    print("[INFO] Enviando picks a Telegram...")
-    enviado = enviar_picks(partidos, stats)
-    if enviado:
-        print("[INFO] Picks enviados correctamente a Telegram.")
+        if mejor.startswith("ML:")    and p.get("stake_pct_ml",    0) > 0:
+            stake_info = f" | Stake: {p['stake_pct_ml']}%"
+        elif mejor.startswith("RL:")  and p.get("stake_pct_rl",    0) > 0:
+            stake_info = f" | Stake: {p['stake_pct_rl']}%"
+        elif mejor.startswith("TOTAL:") and p.get("stake_pct_total", 0) > 0:
+            stake_info = f" | Stake: {p['stake_pct_total']}%"
+
+        linea = p.get('linea_total', 'N/D')
+        nivel = log.info if stake_info else log.debug
+
+        nivel(f"{p['home_team']} vs {p['away_team']}")
+        log.debug(f"  Pitchers : {p['away_pitcher']} vs {p['home_pitcher']}")
+        log.debug(f"  Proy     : {p['proj_home']:.2f} - {p['proj_away']:.2f}")
+        log.debug(f"  ML pick  : {p['pick_ml']} (EV {p['valor_ml']:.1f})")
+        log.debug(f"  RL pick  : {p['pick_rl']} (EV {p['valor_rl']:.1f})")
+        log.debug(f"  Total    : {p['pick_total']} {linea}")
+        nivel(f"  ✔ {mejor}{stake_info}")
+
+    # 10. Telegram
+    log.info("Enviando picks a Telegram...")
+    ok = enviar_picks(partidos, stats)
+    if ok:
+        log.info("Telegram: picks enviados.")
     else:
-        print("[INFO] Notificacion de Telegram omitida (revisa .env).")
+        log.warning("Telegram: notificación omitida (revisa .env).")
+
+    log.info("Pipeline completado.")
+
 
 if __name__ == '__main__':
     main()
