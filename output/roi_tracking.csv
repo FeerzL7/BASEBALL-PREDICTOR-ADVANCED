@@ -23,9 +23,5 @@
 03/04/2026,Chicago Cubs @ Cleveland Guardians,ML,Cleveland Guardians,2.03,0.666,35.15,win,1.03
 03/04/2026,Tampa Bay Rays @ Minnesota Twins,ML,Minnesota Twins,1.95,0.82,59.93,win,0.95
 03/04/2026,Philadelphia Phillies @ Colorado Rockies,TOTAL,Over 10.5,1.95,0.52,36.13,win,0.95
-03/04/2026,Seattle Mariners @ Los Angeles Angels,ML,Los Angeles Angels,2.41,0.743,79.02,pendiente,0
-03/04/2026,New York Mets @ San Francisco Giants,ML,San Francisco Giants,2.17,0.541,17.35,pendiente,0
-03/04/2026,Los Angeles Dodgers @ Washington Nationals,TOTAL,Under 15.5,1.9,0.52,24.07,pendiente,0
-03/04/2026,St. Louis Cardinals @ Detroit Tigers,ML,St. Louis Cardinals,2.55,0.522,33.24,pendiente,0
-03/04/2026,Miami Marlins @ New York Yankees,TOTAL,Under 10.0,2.05,0.52,45.81,pendiente,0
-03/04/2026,Atlanta Braves @ Arizona Diamondbacks,TOTAL,Over 9.0,1.91,0.52,5.87,pendiente,0
+03/04/2026,Seattle Mariners @ Los Angeles Angels,ML,Los Angeles Angels,2.41,0.743,79.02,lose,-1
+03/04/2026,New York Mets @ San Francisco Giants,ML,San Francisco Giants,2.17,0.541,17.35,lose,-1

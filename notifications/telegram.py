@@ -96,6 +96,12 @@ def _formatear_partido(p: dict) -> str:
         total_str = f"{pick_tot} {linea} @ {cuota_t}  (EV {val_tot:+.1f})"
     else:
         total_str = f"{pick_tot} {linea}"
+        
+    mov_linea = ""
+    if p.get('mov_confirma'):
+        mov_linea = "\nMercado confirma el pick"
+    elif p.get('mov_contradice'):
+        mov_linea = "\nMercado va en contra — revisar"
 
     return "\n".join([
         f"<b>{away} @ {home}</b>",
@@ -104,7 +110,8 @@ def _formatear_partido(p: dict) -> str:
         f"ML: {pick_ml} (EV {val_ml:+.1f})   RL: {pick_rl} (EV {val_rl:+.1f})",
         f"Total: {total_str}",
         f"{emoji} <b>Pick: {mejor}  |  Stake: {stake}%</b>",
-    ])
+        
+    ])+ mov_linea
 
 
 def enviar_picks(partidos: list, stats_roi: dict) -> bool:
