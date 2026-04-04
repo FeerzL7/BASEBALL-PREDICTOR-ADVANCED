@@ -1,0 +1,71 @@
+2026-04-02 11:48:48 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-04-02.log
+2026-04-02 11:49:04 | INFO     | main.main                           | =======================================================
+2026-04-02 11:49:04 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-04-02 11:49:04 | INFO     | main.main                           | =======================================================
+2026-04-02 11:49:04 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-04-02 11:49:04 | INFO     | statcast.cargar_statcast            | Calculando FIP y stats avanzadas via MLB API (2026)...
+2026-04-02 11:49:28 | INFO     | statcast.cargar_statcast            | 30 equipos cargados con stats avanzadas.
+2026-04-02 11:49:28 | INFO     | main.main                           | Analizando pitchers del día...
+2026-04-02 11:49:31 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Kansas City Royals: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-02 11:49:31 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Minnesota Twins: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-02 11:49:34 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Arizona Diamondbacks: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-02 11:49:34 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-02 11:49:37 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Francisco Giants: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-02 11:49:37 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Mets: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-02 11:49:40 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-02 11:49:40 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Toronto Blue Jays: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-02 11:49:40 | INFO     | main.main                           | Partidos válidos: 4 / 4
+2026-04-02 11:49:40 | INFO     | main.main                           | Analizando ofensiva...
+2026-04-02 11:49:47 | INFO     | main.main                           | Analizando defensiva...
+2026-04-02 11:49:50 | INFO     | main.main                           | Proyectando totales...
+2026-04-02 11:49:51 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-04-02 11:49:51 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-04-02 11:49:59 | DEBUG    | context.analizar_contexto           | Contexto Kansas City Royals vs Minnesota Twins: {'temperatura': 11.5, 'viento_kph': 16.7, 'condiciones': 'Principalmente despejado'} @ 14h
+2026-04-02 11:50:04 | DEBUG    | context.analizar_contexto           | Contexto Arizona Diamondbacks vs Atlanta Braves: {'temperatura': 11.5, 'viento_kph': 16.7, 'condiciones': 'Principalmente despejado'} @ 21h
+2026-04-02 11:50:04 | WARNING  | context.obtener_clima               | Error obteniendo clima: HTTPSConnectionPool(host='api.open-meteo.com', port=443): Max retries exceeded with url: /v1/forecast?latitude=40.0&longitude=-100.0&current_weather=true (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-02 11:50:04 | DEBUG    | context.analizar_contexto           | Contexto San Francisco Giants vs New York Mets: {'temperatura': 22, 'viento_kph': 10, 'condiciones': 'desconocido'} @ 21h
+2026-04-02 11:50:05 | WARNING  | context.obtener_clima               | Error obteniendo clima: HTTPSConnectionPool(host='api.open-meteo.com', port=443): Max retries exceeded with url: /v1/forecast?latitude=40.0&longitude=-100.0&current_weather=true (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-02 11:50:05 | DEBUG    | context.analizar_contexto           | Contexto Chicago White Sox vs Toronto Blue Jays: {'temperatura': 22, 'viento_kph': 10, 'condiciones': 'desconocido'} @ 16h
+2026-04-02 11:50:05 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-04-02 11:50:05 | INFO     | main.main                           | Analizando H2H...
+2026-04-02 11:50:08 | INFO     | main.main                           | Obteniendo cuotas (The Odds API)...
+2026-04-02 11:50:09 | DEBUG    | markets.analizar_mercados           | Procesando mercados de apuestas...
+2026-04-02 11:50:09 | INFO     | main.main                           | Partidos con cuotas disponibles: 4
+2026-04-02 11:50:09 | INFO     | main.main                           | Calculando valor esperado y picks...
+2026-04-02 11:50:09 | INFO     | main.main                           | Actualizando resultados anteriores...
+2026-04-02 11:50:10 | INFO     | main.main                           | ROI | Resueltos: 2 | Wins: 1 | ROI: 0.5% | Ganancia: 0.01 u | Pendientes: 6
+2026-04-02 11:50:10 | INFO     | main.main                           | CSV exportado → output/predicciones_2026-04-02.csv
+2026-04-02 11:50:10 | INFO     | main.main                           | =======================================================
+2026-04-02 11:50:10 | INFO     | main.main                           | PICKS DEL DÍA
+2026-04-02 11:50:10 | INFO     | main.main                           | =======================================================
+2026-04-02 11:50:10 | INFO     | main.main                           | Kansas City Royals vs Minnesota Twins
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Pitchers : Taj Bradley vs Cole Ragans
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Proy     : 3.80 - 6.49
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   ML pick  : Kansas City Royals (EV 63.7)
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   RL pick  : Kansas City Royals (EV 125.4)
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 9.5
+2026-04-02 11:50:10 | INFO     | main.main                           |   ✔ RL: Kansas City Royals | Stake: 5.0%
+2026-04-02 11:50:10 | INFO     | main.main                           | Arizona Diamondbacks vs Atlanta Braves
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Pitchers : Reynaldo López vs Ryne Nelson
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Proy     : 2.85 - 6.04
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   ML pick  : Arizona Diamondbacks (EV 92.5)
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   RL pick  : Arizona Diamondbacks (EV 55.7)
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 9.0
+2026-04-02 11:50:10 | INFO     | main.main                           |   ✔ ML: Arizona Diamondbacks | Stake: 5.0%
+2026-04-02 11:50:10 | INFO     | main.main                           | San Francisco Giants vs New York Mets
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Pitchers : David Peterson vs Robbie Ray
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Proy     : 2.83 - 3.11
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   ML pick  : San Francisco Giants (EV 46.1)
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   RL pick  : San Francisco Giants (EV 13.2)
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Total    : Under 7.5
+2026-04-02 11:50:10 | INFO     | main.main                           |   ✔ ML: San Francisco Giants | Stake: 5.0%
+2026-04-02 11:50:10 | INFO     | main.main                           | Chicago White Sox vs Toronto Blue Jays
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Pitchers : Dylan Cease vs Sean Burke
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Proy     : 2.15 - 6.05
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   ML pick  : Chicago White Sox (EV 146.8)
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   RL pick  : Chicago White Sox (EV 78.2)
+2026-04-02 11:50:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 9.0
+2026-04-02 11:50:10 | INFO     | main.main                           |   ✔ RL: Chicago White Sox | Stake: 5.0%
+2026-04-02 11:50:10 | INFO     | main.main                           | Enviando picks a Telegram...
+2026-04-02 11:50:14 | INFO     | main.main                           | Telegram: picks enviados.
+2026-04-02 11:50:14 | INFO     | main.main                           | Pipeline completado.

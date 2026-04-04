@@ -138,3 +138,189 @@
 2026-04-01 17:29:36 | INFO     | main.main                           | Enviando picks a Telegram...
 2026-04-01 17:29:42 | INFO     | main.main                           | Telegram: picks enviados.
 2026-04-01 17:29:42 | INFO     | main.main                           | Pipeline completado.
+2026-04-01 23:12:23 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-04-01.log
+2026-04-01 23:12:23 | INFO     | backtesting.main                    | Iniciando backtesting histórico...
+2026-04-01 23:12:23 | INFO     | backtesting._leer_roi               | ROI tracking: 0 picks resueltos cargados.
+2026-04-01 23:15:24 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-04-01.log
+2026-04-01 23:15:26 | INFO     | main.main                           | =======================================================
+2026-04-01 23:15:26 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-04-01 23:15:26 | INFO     | main.main                           | =======================================================
+2026-04-01 23:15:26 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-04-01 23:15:26 | INFO     | statcast.cargar_statcast            | Stats avanzadas desde caché (30 pitching, 30 batting).
+2026-04-01 23:15:26 | INFO     | main.main                           | Analizando pitchers del día...
+2026-04-01 23:15:31 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:32 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Athletics: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:34 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Baltimore Orioles: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:34 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:38 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cincinnati Reds: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:39 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:43 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Philadelphia Phillies: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:43 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Washington Nationals: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:47 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Toronto Blue Jays: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:48 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Colorado Rockies: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:51 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Miami Marlins: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:15:56 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:00 | DEBUG    | bullpen.obtener_bullpen             | Bullpen St. Louis Cardinals: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:01 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Mets: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Milwaukee Brewers: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:06 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Tampa Bay Rays: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:10 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:11 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Boston Red Sox: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:22 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago Cubs: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:23 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Angels: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:27 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Arizona Diamondbacks: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:28 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Detroit Tigers: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:30 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Diego Padres: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:32 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Francisco Giants: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:35 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Seattle Mariners: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:35 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Yankees: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:39 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Kansas City Royals: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:40 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Minnesota Twins: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:43 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Dodgers: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:44 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cleveland Guardians: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:16:44 | INFO     | main.main                           | Partidos válidos: 15 / 15
+2026-04-01 23:16:44 | INFO     | main.main                           | Analizando ofensiva...
+2026-04-01 23:17:15 | INFO     | main.main                           | Analizando defensiva...
+2026-04-01 23:17:30 | INFO     | main.main                           | Proyectando totales...
+2026-04-01 23:17:31 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-04-01 23:17:31 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-04-01 23:17:32 | DEBUG    | context.analizar_contexto           | Contexto Atlanta Braves vs Athletics: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 12h
+2026-04-01 23:17:33 | DEBUG    | context.analizar_contexto           | Contexto Baltimore Orioles vs Texas Rangers: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 12h
+2026-04-01 23:17:33 | DEBUG    | context.analizar_contexto           | Contexto Cincinnati Reds vs Pittsburgh Pirates: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 12h
+2026-04-01 23:17:34 | DEBUG    | context.analizar_contexto           | Contexto Philadelphia Phillies vs Washington Nationals: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:17:35 | DEBUG    | context.analizar_contexto           | Contexto Toronto Blue Jays vs Colorado Rockies: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:17:37 | DEBUG    | context.analizar_contexto           | Contexto Miami Marlins vs Chicago White Sox: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:17:38 | DEBUG    | context.analizar_contexto           | Contexto St. Louis Cardinals vs New York Mets: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:17:38 | DEBUG    | context.analizar_contexto           | Contexto Milwaukee Brewers vs Tampa Bay Rays: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:17:39 | DEBUG    | context.analizar_contexto           | Contexto Houston Astros vs Boston Red Sox: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 14h
+2026-04-01 23:17:40 | DEBUG    | context.analizar_contexto           | Contexto Chicago Cubs vs Los Angeles Angels: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 14h
+2026-04-01 23:17:40 | DEBUG    | context.analizar_contexto           | Contexto Arizona Diamondbacks vs Detroit Tigers: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 15h
+2026-04-01 23:17:43 | DEBUG    | context.analizar_contexto           | Contexto San Diego Padres vs San Francisco Giants: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 16h
+2026-04-01 23:17:44 | DEBUG    | context.analizar_contexto           | Contexto Seattle Mariners vs New York Yankees: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 16h
+2026-04-01 23:17:44 | DEBUG    | context.analizar_contexto           | Contexto Kansas City Royals vs Minnesota Twins: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 19h
+2026-04-01 23:17:45 | DEBUG    | context.analizar_contexto           | Contexto Los Angeles Dodgers vs Cleveland Guardians: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 20h
+2026-04-01 23:17:45 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-04-01 23:17:46 | INFO     | main.main                           | Analizando H2H...
+2026-04-01 23:18:01 | INFO     | main.main                           | Obteniendo cuotas (The Odds API)...
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Procesando mercados de apuestas...
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Atlanta Braves vs Athletics
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Baltimore Orioles vs Texas Rangers
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Cincinnati Reds vs Pittsburgh Pirates
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Philadelphia Phillies vs Washington Nationals
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Toronto Blue Jays vs Colorado Rockies
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Miami Marlins vs Chicago White Sox
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Milwaukee Brewers vs Tampa Bay Rays
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Houston Astros vs Boston Red Sox
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Chicago Cubs vs Los Angeles Angels
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: San Diego Padres vs San Francisco Giants
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Seattle Mariners vs New York Yankees
+2026-04-01 23:18:03 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Los Angeles Dodgers vs Cleveland Guardians
+2026-04-01 23:18:03 | INFO     | main.main                           | Partidos con cuotas disponibles: 3
+2026-04-01 23:18:03 | INFO     | main.main                           | Calculando valor esperado y picks...
+2026-04-01 23:18:03 | INFO     | main.main                           | Actualizando resultados anteriores...
+2026-04-01 23:20:00 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-04-01.log
+2026-04-01 23:20:01 | INFO     | main.main                           | =======================================================
+2026-04-01 23:20:01 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-04-01 23:20:01 | INFO     | main.main                           | =======================================================
+2026-04-01 23:20:01 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-04-01 23:20:01 | INFO     | statcast.cargar_statcast            | Stats avanzadas desde caché (30 pitching, 30 batting).
+2026-04-01 23:20:01 | INFO     | main.main                           | Analizando pitchers del día...
+2026-04-01 23:20:04 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Athletics: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:11 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Baltimore Orioles: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:12 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:15 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cincinnati Reds: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:15 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:26 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Philadelphia Phillies: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:28 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Washington Nationals: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:30 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Toronto Blue Jays: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:31 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Colorado Rockies: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:34 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Miami Marlins: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:35 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:37 | DEBUG    | bullpen.obtener_bullpen             | Bullpen St. Louis Cardinals: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:39 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Mets: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:41 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Milwaukee Brewers: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:41 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Tampa Bay Rays: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:45 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:45 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Boston Red Sox: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:48 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago Cubs: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:49 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Angels: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:51 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Arizona Diamondbacks: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:52 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Detroit Tigers: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:55 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Diego Padres: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:56 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Francisco Giants: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:58 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Seattle Mariners: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:20:59 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Yankees: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:21:03 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Kansas City Royals: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:21:04 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Minnesota Twins: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:21:07 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Dodgers: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:21:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cleveland Guardians: ERA=4.2 WHIP=1.28 IP=0.0
+2026-04-01 23:21:08 | INFO     | main.main                           | Partidos válidos: 15 / 15
+2026-04-01 23:21:08 | INFO     | main.main                           | Analizando ofensiva...
+2026-04-01 23:21:42 | INFO     | main.main                           | Analizando defensiva...
+2026-04-01 23:22:03 | INFO     | main.main                           | Proyectando totales...
+2026-04-01 23:22:04 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-04-01 23:22:04 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-04-01 23:22:05 | DEBUG    | context.analizar_contexto           | Contexto Atlanta Braves vs Athletics: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 12h
+2026-04-01 23:22:05 | DEBUG    | context.analizar_contexto           | Contexto Baltimore Orioles vs Texas Rangers: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 12h
+2026-04-01 23:22:07 | DEBUG    | context.analizar_contexto           | Contexto Cincinnati Reds vs Pittsburgh Pirates: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 12h
+2026-04-01 23:22:08 | DEBUG    | context.analizar_contexto           | Contexto Philadelphia Phillies vs Washington Nationals: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:22:08 | DEBUG    | context.analizar_contexto           | Contexto Toronto Blue Jays vs Colorado Rockies: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:22:09 | DEBUG    | context.analizar_contexto           | Contexto Miami Marlins vs Chicago White Sox: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:22:10 | DEBUG    | context.analizar_contexto           | Contexto St. Louis Cardinals vs New York Mets: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:22:10 | DEBUG    | context.analizar_contexto           | Contexto Milwaukee Brewers vs Tampa Bay Rays: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 13h
+2026-04-01 23:22:12 | DEBUG    | context.analizar_contexto           | Contexto Houston Astros vs Boston Red Sox: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 14h
+2026-04-01 23:22:13 | DEBUG    | context.analizar_contexto           | Contexto Chicago Cubs vs Los Angeles Angels: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 14h
+2026-04-01 23:22:14 | DEBUG    | context.analizar_contexto           | Contexto Arizona Diamondbacks vs Detroit Tigers: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 15h
+2026-04-01 23:22:14 | DEBUG    | context.analizar_contexto           | Contexto San Diego Padres vs San Francisco Giants: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 16h
+2026-04-01 23:22:15 | DEBUG    | context.analizar_contexto           | Contexto Seattle Mariners vs New York Yankees: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 16h
+2026-04-01 23:22:15 | DEBUG    | context.analizar_contexto           | Contexto Kansas City Royals vs Minnesota Twins: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 19h
+2026-04-01 23:22:16 | DEBUG    | context.analizar_contexto           | Contexto Los Angeles Dodgers vs Cleveland Guardians: {'temperatura': 5.3, 'viento_kph': 18.6, 'condiciones': 'Niebla'} @ 20h
+2026-04-01 23:22:16 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-04-01 23:22:17 | INFO     | main.main                           | Analizando H2H...
+2026-04-01 23:22:32 | INFO     | main.main                           | Obteniendo cuotas (The Odds API)...
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Procesando mercados de apuestas...
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Atlanta Braves vs Athletics
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Baltimore Orioles vs Texas Rangers
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Cincinnati Reds vs Pittsburgh Pirates
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Philadelphia Phillies vs Washington Nationals
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Toronto Blue Jays vs Colorado Rockies
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Miami Marlins vs Chicago White Sox
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Milwaukee Brewers vs Tampa Bay Rays
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Houston Astros vs Boston Red Sox
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Chicago Cubs vs Los Angeles Angels
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: San Diego Padres vs San Francisco Giants
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Seattle Mariners vs New York Yankees
+2026-04-01 23:22:33 | DEBUG    | markets.analizar_mercados           | Sin evento de cuotas para: Los Angeles Dodgers vs Cleveland Guardians
+2026-04-01 23:22:33 | INFO     | main.main                           | Partidos con cuotas disponibles: 3
+2026-04-01 23:22:33 | INFO     | main.main                           | Calculando valor esperado y picks...
+2026-04-01 23:22:33 | INFO     | main.main                           | Actualizando resultados anteriores...
+2026-04-01 23:22:33 | INFO     | main.main                           | ROI | Resueltos: 0 | Wins: 0 | ROI: 0.0% | Ganancia: 0.0 u | Pendientes: 4
+2026-04-01 23:22:33 | INFO     | main.main                           | CSV exportado → output/predicciones_2026-04-01.csv
+2026-04-01 23:22:33 | INFO     | main.main                           | =======================================================
+2026-04-01 23:22:33 | INFO     | main.main                           | PICKS DEL DÍA
+2026-04-01 23:22:33 | INFO     | main.main                           | =======================================================
+2026-04-01 23:22:33 | DEBUG    | main.main                           | St. Louis Cardinals vs New York Mets
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Pitchers : Freddy Peralta vs Matthew Liberatore
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Proy     : 4.22 - 2.93
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   ML pick  : New York Mets (EV 37.9)
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   RL pick  : New York Mets (EV 85.4)
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 7.5
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-04-01 23:22:33 | INFO     | main.main                           | Arizona Diamondbacks vs Detroit Tigers
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Pitchers : Tarik Skubal vs Zac Gallen
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Proy     : 3.15 - 3.87
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   ML pick  : Arizona Diamondbacks (EV 40.8)
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   RL pick  : Arizona Diamondbacks (EV 11.8)
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Total    : Under 9.0
+2026-04-01 23:22:33 | INFO     | main.main                           |   ✔ TOTAL: Under | Stake: 5.0%
+2026-04-01 23:22:33 | INFO     | main.main                           | Kansas City Royals vs Minnesota Twins
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Pitchers : Joe Ryan vs Noah Cameron
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Proy     : 3.69 - 3.41
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   ML pick  : Minnesota Twins (EV 94.5)
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   RL pick  : Minnesota Twins (EV 38.1)
+2026-04-01 23:22:33 | DEBUG    | main.main                           |   Total    : Under 9.5
+2026-04-01 23:22:33 | INFO     | main.main                           |   ✔ TOTAL: Under | Stake: 5.0%
+2026-04-01 23:22:33 | INFO     | main.main                           | Enviando picks a Telegram...
+2026-04-01 23:22:36 | INFO     | main.main                           | Telegram: picks enviados.
+2026-04-01 23:22:36 | INFO     | main.main                           | Pipeline completado.

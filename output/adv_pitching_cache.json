@@ -1,242 +1,242 @@
 {
   "Athletics": {
-    "FIP": 5.055,
-    "ERA": 4.09,
-    "WHIP": 1.5,
-    "K_pct": 13.9,
-    "BB_pct": 12.4,
-    "HardHit_aprox": 45.8
+    "FIP": 4.658,
+    "ERA": 4.33,
+    "WHIP": 1.52,
+    "K_pct": 16.2,
+    "BB_pct": 12.7,
+    "HardHit_aprox": 38.0
   },
   "Pittsburgh Pirates": {
-    "FIP": 4.322,
-    "ERA": 3.8,
-    "WHIP": 1.44,
-    "K_pct": 26.6,
-    "BB_pct": 14.6,
-    "HardHit_aprox": 45.8
+    "FIP": 4.193,
+    "ERA": 3.67,
+    "WHIP": 1.35,
+    "K_pct": 26.5,
+    "BB_pct": 13.7,
+    "HardHit_aprox": 38.0
   },
   "San Diego Padres": {
-    "FIP": 3.744,
-    "ERA": 4.6,
-    "WHIP": 1.4,
-    "K_pct": 23.6,
-    "BB_pct": 10.8,
-    "HardHit_aprox": 55.0
+    "FIP": 3.285,
+    "ERA": 4.0,
+    "WHIP": 1.3,
+    "K_pct": 26.2,
+    "BB_pct": 10.5,
+    "HardHit_aprox": 38.0
   },
   "Seattle Mariners": {
-    "FIP": 2.536,
-    "ERA": 2.78,
+    "FIP": 2.881,
+    "ERA": 3.09,
     "WHIP": 0.98,
-    "K_pct": 31.2,
-    "BB_pct": 6.5,
-    "HardHit_aprox": 55.0
+    "K_pct": 30.5,
+    "BB_pct": 6.8,
+    "HardHit_aprox": 38.0
   },
   "San Francisco Giants": {
-    "FIP": 3.189,
-    "ERA": 3.4,
-    "WHIP": 1.09,
-    "K_pct": 26.7,
-    "BB_pct": 8.3,
-    "HardHit_aprox": 55.0
+    "FIP": 3.423,
+    "ERA": 3.48,
+    "WHIP": 1.16,
+    "K_pct": 25.8,
+    "BB_pct": 9.1,
+    "HardHit_aprox": 38.0
   },
   "St. Louis Cardinals": {
-    "FIP": 3.665,
-    "ERA": 5.09,
-    "WHIP": 1.65,
-    "K_pct": 13.2,
-    "BB_pct": 10.4,
-    "HardHit_aprox": 45.8
+    "FIP": 3.683,
+    "ERA": 4.05,
+    "WHIP": 1.47,
+    "K_pct": 13.5,
+    "BB_pct": 9.8,
+    "HardHit_aprox": 38.0
   },
   "Tampa Bay Rays": {
-    "FIP": 5.142,
-    "ERA": 5.61,
-    "WHIP": 1.32,
-    "K_pct": 15.3,
-    "BB_pct": 6.9,
-    "HardHit_aprox": 55.0
+    "FIP": 4.803,
+    "ERA": 5.44,
+    "WHIP": 1.31,
+    "K_pct": 17.3,
+    "BB_pct": 6.7,
+    "HardHit_aprox": 38.0
   },
   "Texas Rangers": {
-    "FIP": 3.1,
-    "ERA": 3.0,
-    "WHIP": 1.07,
-    "K_pct": 28.5,
-    "BB_pct": 7.5,
-    "HardHit_aprox": 55.0
+    "FIP": 3.666,
+    "ERA": 3.91,
+    "WHIP": 1.25,
+    "K_pct": 26.3,
+    "BB_pct": 8.8,
+    "HardHit_aprox": 38.0
   },
   "Toronto Blue Jays": {
-    "FIP": 3.057,
-    "ERA": 4.6,
-    "WHIP": 1.13,
-    "K_pct": 34.4,
-    "BB_pct": 6.8,
-    "HardHit_aprox": 55.0
+    "FIP": 2.626,
+    "ERA": 3.95,
+    "WHIP": 1.09,
+    "K_pct": 35.8,
+    "BB_pct": 6.9,
+    "HardHit_aprox": 38.0
   },
   "Minnesota Twins": {
-    "FIP": 3.645,
-    "ERA": 3.82,
-    "WHIP": 1.36,
-    "K_pct": 25.5,
-    "BB_pct": 11.3,
-    "HardHit_aprox": 54.9
+    "FIP": 3.96,
+    "ERA": 4.32,
+    "WHIP": 1.48,
+    "K_pct": 22.6,
+    "BB_pct": 10.4,
+    "HardHit_aprox": 38.0
   },
   "Philadelphia Phillies": {
-    "FIP": 3.23,
-    "ERA": 5.67,
+    "FIP": 3.261,
+    "ERA": 5.46,
     "WHIP": 1.41,
-    "K_pct": 25.5,
-    "BB_pct": 6.9,
-    "HardHit_aprox": 55.0
+    "K_pct": 25.6,
+    "BB_pct": 7.3,
+    "HardHit_aprox": 38.0
   },
   "Atlanta Braves": {
-    "FIP": 3.033,
-    "ERA": 2.2,
-    "WHIP": 1.0,
-    "K_pct": 23.9,
-    "BB_pct": 7.4,
-    "HardHit_aprox": 55.0
+    "FIP": 3.259,
+    "ERA": 2.0,
+    "WHIP": 0.9,
+    "K_pct": 22.0,
+    "BB_pct": 6.2,
+    "HardHit_aprox": 38.0
   },
   "Chicago White Sox": {
-    "FIP": 5.198,
-    "ERA": 8.34,
-    "WHIP": 1.98,
-    "K_pct": 20.3,
-    "BB_pct": 14.4,
-    "HardHit_aprox": 55.0
+    "FIP": 5.447,
+    "ERA": 8.63,
+    "WHIP": 2.0,
+    "K_pct": 19.3,
+    "BB_pct": 13.5,
+    "HardHit_aprox": 38.0
   },
   "Miami Marlins": {
-    "FIP": 2.633,
-    "ERA": 3.4,
-    "WHIP": 0.93,
-    "K_pct": 29.8,
-    "BB_pct": 5.1,
-    "HardHit_aprox": 55.0
+    "FIP": 2.773,
+    "ERA": 3.11,
+    "WHIP": 0.85,
+    "K_pct": 28.5,
+    "BB_pct": 4.7,
+    "HardHit_aprox": 38.0
   },
   "New York Yankees": {
-    "FIP": 1.944,
-    "ERA": 0.61,
-    "WHIP": 0.83,
-    "K_pct": 26.6,
-    "BB_pct": 6.5,
-    "HardHit_aprox": 55.0
+    "FIP": 2.009,
+    "ERA": 1.16,
+    "WHIP": 0.85,
+    "K_pct": 27.4,
+    "BB_pct": 5.8,
+    "HardHit_aprox": 38.0
   },
   "Milwaukee Brewers": {
-    "FIP": 4.3,
-    "ERA": 3.0,
-    "WHIP": 1.16,
-    "K_pct": 35.7,
-    "BB_pct": 9.9,
-    "HardHit_aprox": 55.0
+    "FIP": 4.211,
+    "ERA": 2.83,
+    "WHIP": 1.11,
+    "K_pct": 34.9,
+    "BB_pct": 9.6,
+    "HardHit_aprox": 38.0
   },
   "Los Angeles Angels": {
-    "FIP": 3.767,
-    "ERA": 3.53,
-    "WHIP": 1.53,
-    "K_pct": 21.5,
-    "BB_pct": 14.6,
-    "HardHit_aprox": 55.0
+    "FIP": 3.592,
+    "ERA": 3.81,
+    "WHIP": 1.58,
+    "K_pct": 22.0,
+    "BB_pct": 14.3,
+    "HardHit_aprox": 38.0
   },
   "Arizona Diamondbacks": {
-    "FIP": 4.195,
-    "ERA": 5.57,
-    "WHIP": 1.26,
-    "K_pct": 21.3,
-    "BB_pct": 9.6,
-    "HardHit_aprox": 55.0
+    "FIP": 4.767,
+    "ERA": 5.25,
+    "WHIP": 1.4,
+    "K_pct": 18.7,
+    "BB_pct": 9.5,
+    "HardHit_aprox": 38.0
   },
   "Baltimore Orioles": {
-    "FIP": 3.789,
-    "ERA": 4.6,
-    "WHIP": 1.42,
-    "K_pct": 26.5,
-    "BB_pct": 10.5,
-    "HardHit_aprox": 55.0
+    "FIP": 3.841,
+    "ERA": 4.33,
+    "WHIP": 1.37,
+    "K_pct": 24.6,
+    "BB_pct": 9.7,
+    "HardHit_aprox": 38.0
   },
   "Boston Red Sox": {
-    "FIP": 5.258,
-    "ERA": 4.78,
-    "WHIP": 1.52,
-    "K_pct": 23.1,
-    "BB_pct": 10.8,
-    "HardHit_aprox": 45.8
+    "FIP": 5.311,
+    "ERA": 4.91,
+    "WHIP": 1.48,
+    "K_pct": 23.4,
+    "BB_pct": 10.0,
+    "HardHit_aprox": 38.0
   },
   "Chicago Cubs": {
-    "FIP": 4.389,
-    "ERA": 4.0,
-    "WHIP": 1.18,
-    "K_pct": 24.6,
-    "BB_pct": 9.3,
-    "HardHit_aprox": 55.0
+    "FIP": 3.693,
+    "ERA": 3.5,
+    "WHIP": 1.09,
+    "K_pct": 28.2,
+    "BB_pct": 8.8,
+    "HardHit_aprox": 38.0
   },
   "Cincinnati Reds": {
-    "FIP": 4.568,
-    "ERA": 3.45,
-    "WHIP": 1.3,
+    "FIP": 4.761,
+    "ERA": 4.18,
+    "WHIP": 1.34,
     "K_pct": 23.9,
-    "BB_pct": 11.2,
-    "HardHit_aprox": 55.0
+    "BB_pct": 11.3,
+    "HardHit_aprox": 38.0
   },
   "Cleveland Guardians": {
-    "FIP": 4.562,
-    "ERA": 4.5,
-    "WHIP": 1.35,
-    "K_pct": 27.2,
-    "BB_pct": 10.7,
-    "HardHit_aprox": 55.0
+    "FIP": 4.313,
+    "ERA": 3.98,
+    "WHIP": 1.28,
+    "K_pct": 28.5,
+    "BB_pct": 10.5,
+    "HardHit_aprox": 38.0
   },
   "Colorado Rockies": {
-    "FIP": 4.605,
-    "ERA": 4.32,
-    "WHIP": 1.51,
-    "K_pct": 20.4,
-    "BB_pct": 8.6,
-    "HardHit_aprox": 55.0
+    "FIP": 4.135,
+    "ERA": 3.66,
+    "WHIP": 1.37,
+    "K_pct": 20.9,
+    "BB_pct": 7.6,
+    "HardHit_aprox": 38.0
   },
   "Detroit Tigers": {
-    "FIP": 4.1,
-    "ERA": 4.29,
-    "WHIP": 1.38,
-    "K_pct": 21.9,
-    "BB_pct": 10.4,
-    "HardHit_aprox": 55.0
+    "FIP": 3.985,
+    "ERA": 3.54,
+    "WHIP": 1.29,
+    "K_pct": 20.8,
+    "BB_pct": 9.3,
+    "HardHit_aprox": 38.0
   },
   "Houston Astros": {
-    "FIP": 4.878,
-    "ERA": 4.67,
-    "WHIP": 1.37,
-    "K_pct": 30.7,
-    "BB_pct": 14.3,
-    "HardHit_aprox": 55.0
+    "FIP": 4.814,
+    "ERA": 4.57,
+    "WHIP": 1.33,
+    "K_pct": 31.2,
+    "BB_pct": 13.4,
+    "HardHit_aprox": 38.0
   },
   "Kansas City Royals": {
-    "FIP": 4.654,
-    "ERA": 3.67,
-    "WHIP": 1.22,
-    "K_pct": 21.0,
-    "BB_pct": 8.0,
+    "FIP": 5.039,
+    "ERA": 4.3,
+    "WHIP": 1.36,
+    "K_pct": 23.5,
+    "BB_pct": 10.4,
     "HardHit_aprox": 38.0
   },
   "Los Angeles Dodgers": {
-    "FIP": 2.678,
-    "ERA": 2.6,
-    "WHIP": 0.96,
-    "K_pct": 25.6,
-    "BB_pct": 7.4,
-    "HardHit_aprox": 55.0
+    "FIP": 3.504,
+    "ERA": 3.32,
+    "WHIP": 1.02,
+    "K_pct": 22.7,
+    "BB_pct": 7.6,
+    "HardHit_aprox": 38.0
   },
   "Washington Nationals": {
-    "FIP": 5.193,
-    "ERA": 3.98,
-    "WHIP": 1.23,
-    "K_pct": 19.9,
-    "BB_pct": 9.7,
-    "HardHit_aprox": 55.0
+    "FIP": 5.864,
+    "ERA": 4.75,
+    "WHIP": 1.38,
+    "K_pct": 18.0,
+    "BB_pct": 9.8,
+    "HardHit_aprox": 38.0
   },
   "New York Mets": {
-    "FIP": 3.866,
-    "ERA": 2.87,
-    "WHIP": 1.26,
-    "K_pct": 25.5,
-    "BB_pct": 9.5,
+    "FIP": 3.606,
+    "ERA": 3.02,
+    "WHIP": 1.29,
+    "K_pct": 25.3,
+    "BB_pct": 9.6,
     "HardHit_aprox": 38.0
   }
 }

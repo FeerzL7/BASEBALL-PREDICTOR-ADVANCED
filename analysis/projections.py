@@ -3,9 +3,10 @@ from analysis.park_factors import calcular_park_factors
 from analysis.statcast import (
     get_pitching, get_batting,
     PITCH_DEFAULTS, BAT_DEFAULTS,
-    ERA_LIGA, FIP_LIGA, HARDHIT_LIGA, WRC_PLUS_LIGA, OPS_LIGA,
+    ERA_LIGA, FIP_LIGA, HARDHIT_LIGA, WRC_PLUS_LIGA, OPS_LIGA, 
 )
-
+from utils.logger import configurar, get as get_log
+log = get_log()
 PESO_BULLPEN = 0.33
 PESO_ABRIDOR = 1.0 - PESO_BULLPEN
 
@@ -89,9 +90,10 @@ def proyectar_carreras(
     Piso absoluto: _PISO_CARRERAS (2.0).
     """
     runs_base = max(float(ofensiva.get('runs_last_5', 4.5) or 4.5), _PISO_CARRERAS)
+    
 
     f_pit = _f_pitcheo(
-        starter_stats.get('ERA', ERA_LIGA),
+        starter_stats.get('ERA_efectiva', starter_stats['ERA']),
         bullpen_stats.get('ERA',  ERA_LIGA),
         fg_pitching.get('FIP', FIP_LIGA),
     )
@@ -177,18 +179,21 @@ def proyectar_totales(partidos):
             'proj_total':        round(home_proj + away_proj, 3),
             'park_factor_usado': pf_ajustado,
             'venue_usado':       venue,
-            'era_rival_home':    _era_combinada(partido['away_stats']['ERA'], away_bullpen.get('ERA', ERA_LIGA)),
-            'era_rival_away':    _era_combinada(partido['home_stats']['ERA'], home_bullpen.get('ERA', ERA_LIGA)),
+            'era_rival_home': _era_combinada(partido['away_stats'].get('ERA_efectiva', partido['away_stats']['ERA']),away_bullpen.get('ERA', ERA_LIGA)),
+            'era_rival_away': _era_combinada(partido['home_stats'].get('ERA_efectiva', partido['home_stats']['ERA']),home_bullpen.get('ERA', ERA_LIGA)),
             'fip_rival_home':    fg_pitch_away.get('FIP', FIP_LIGA),
             'fip_rival_away':    fg_pitch_home.get('FIP', FIP_LIGA),
             'wrc_home':          fg_bat_home.get('wRC_plus_aprox', WRC_PLUS_LIGA),
             'wrc_away':          fg_bat_away.get('wRC_plus_aprox', WRC_PLUS_LIGA),
         })
 
-        print(
-            f"[PROJ] {home_team} vs {away_team} | PF={pf_ajustado} "
-            f"FIP_rival={fg_pitch_away.get('FIP','?')}/{fg_pitch_home.get('FIP','?')} "
-            f"wRC+={fg_bat_home.get('wRC_plus_aprox','?')}/{fg_bat_away.get('wRC_plus_aprox','?')} | "
+        log.debug(
+            f"{home_team} vs {away_team} | PF={pf_ajustado} "
+            f"ERA_ef={partido['away_stats'].get('ERA_efectiva','?')}/"
+            f"{partido['home_stats'].get('ERA_efectiva','?')} "
+            f"FIP={fg_pitch_away.get('FIP','?')}/{fg_pitch_home.get('FIP','?')} "
+            f"wRC+={fg_bat_home.get('wRC_plus_aprox','?')}/"
+            f"{fg_bat_away.get('wRC_plus_aprox','?')} | "
             f"Proy: {home_proj} - {away_proj} (total={partido['proj_total']})"
         )
 
