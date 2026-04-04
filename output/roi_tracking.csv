@@ -1,3 +1,31 @@
 ﻿fecha,juego,mercado,seleccion,cuota,probabilidad,valor,resultado,ganancia
-01/04/2026,Detroit Tigers @ Arizona Diamondbacks,TOTAL,Under 9.0,2.07,0.5,50.44,pendiente,0
-01/04/2026,Minnesota Twins @ Kansas City Royals,ML,Kansas City Royals,1.98,0.794,57.26,pendiente,0
+30/03/2026,Texas Rangers @ Baltimore Orioles,ML,Baltimore Orioles,2.12,0.943,100.01,lose,-1
+30/03/2026,New York Mets @ St. Louis Cardinals,ML,St. Louis Cardinals,2.43,0.858,108.47,lose,-1
+30/03/2026,San Francisco Giants @ San Diego Padres,ML,San Diego Padres,2.22,0.911,102.25,lose,-1
+31/03/2026,Pittsburgh Pirates @ Cincinnati Reds,TOTAL,Over 7.5,2,-,75.91,win,1
+31/03/2026,Chicago White Sox @ Miami Marlins,TOTAL,Over 7.5,1.95,-,29.95,win,0.95
+31/03/2026,Athletics @ Atlanta Braves,RL,Atlanta Braves,2.05,-,103.47,win,1.05
+31/03/2026,Los Angeles Angels @ Chicago Cubs,TOTAL,Over 6.5,1.95,-,63.19,lose,-1
+31/03/2026,Tampa Bay Rays @ Milwaukee Brewers,TOTAL,Over 7.0,1.95,-,57.62,win,0.95
+31/03/2026,Boston Red Sox @ Houston Astros,TOTAL,Over 7.0,2.02,-,83.92,win,1.02
+31/03/2026,San Francisco Giants @ San Diego Padres,TOTAL,Over 8.0,1.95,-,17.7,win,0.95
+31/03/2026,New York Yankees @ Seattle Mariners,ML,Seattle Mariners,1.87,0.912,70.55,lose,-1
+01/04/2026,Detroit Tigers @ Arizona Diamondbacks,TOTAL,Under 9.0,2.01,0.52,46.08,win,1.01
+01/04/2026,Minnesota Twins @ Kansas City Royals,TOTAL,Under 9.5,2,-,43.32,lose,-1
+02/04/2026,Minnesota Twins @ Kansas City Royals,RL,Kansas City Royals,2.3,0.98,125.39,lose,-1
+02/04/2026,Atlanta Braves @ Arizona Diamondbacks,ML,Arizona Diamondbacks,2.04,0.944,92.52,lose,-1
+02/04/2026,New York Mets @ San Francisco Giants,ML,San Francisco Giants,2.09,0.699,46.09,win,1.09
+03/04/2026,Los Angeles Dodgers @ Washington Nationals,TOTAL,Over 9.5,1.95,0.52,57.16,win,0.95
+03/04/2026,St. Louis Cardinals @ Detroit Tigers,TOTAL,Under 8.5,1.91,0.52,34.8,win,0.91
+03/04/2026,San Diego Padres @ Boston Red Sox,ML,Boston Red Sox,1.84,0.911,67.63,win,0.84
+03/04/2026,Toronto Blue Jays @ Chicago White Sox,RL,Chicago White Sox,2,0.708,41.55,win,1
+03/04/2026,Cincinnati Reds @ Texas Rangers,TOTAL,Over 8.0,1.91,0.52,26.48,null,0
+03/04/2026,Chicago Cubs @ Cleveland Guardians,ML,Cleveland Guardians,2.03,0.666,35.15,win,1.03
+03/04/2026,Tampa Bay Rays @ Minnesota Twins,ML,Minnesota Twins,1.95,0.82,59.93,win,0.95
+03/04/2026,Philadelphia Phillies @ Colorado Rockies,TOTAL,Over 10.5,1.95,0.52,36.13,win,0.95
+03/04/2026,Seattle Mariners @ Los Angeles Angels,ML,Los Angeles Angels,2.41,0.743,79.02,pendiente,0
+03/04/2026,New York Mets @ San Francisco Giants,ML,San Francisco Giants,2.17,0.541,17.35,pendiente,0
+03/04/2026,Los Angeles Dodgers @ Washington Nationals,TOTAL,Under 15.5,1.9,0.52,24.07,pendiente,0
+03/04/2026,St. Louis Cardinals @ Detroit Tigers,ML,St. Louis Cardinals,2.55,0.522,33.24,pendiente,0
+03/04/2026,Miami Marlins @ New York Yankees,TOTAL,Under 10.0,2.05,0.52,45.81,pendiente,0
+03/04/2026,Atlanta Braves @ Arizona Diamondbacks,TOTAL,Over 9.0,1.91,0.52,5.87,pendiente,0
