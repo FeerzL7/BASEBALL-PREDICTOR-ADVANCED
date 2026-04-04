@@ -111,7 +111,7 @@ def cargar_roi() -> pd.DataFrame:
     if not os.path.exists(ROI_FILE):
         return pd.DataFrame()
     df = pd.read_csv(ROI_FILE, encoding='utf-8-sig')
-    df['fecha'] = pd.to_datetime(df['fecha'], errors='coerce')
+    df['fecha'] = pd.to_datetime(df['fecha'], dayfirst=True, errors='coerce')
     df['cuota']      = pd.to_numeric(df['cuota'],      errors='coerce')
     df['ganancia']   = pd.to_numeric(df['ganancia'],   errors='coerce')
     df['valor']      = pd.to_numeric(df['valor'],      errors='coerce')
@@ -470,7 +470,7 @@ def fmt_ganancia(g):
     return f"+{g:.2f}u" if g > 0 else f"{g:.2f}u"
 
 df_tabla['Resultado'] = df_tabla['resultado'].map({
-    'win': '🟢 WIN', 'lose': '🔴 LOSE', 'pendiente': '🔵 PEND'
+    'win': '🟢 WIN', 'lose': '🔴 LOSE', 'pendiente': '🔵 PEND', 'null': '⬜ PUSH',
 })
 df_tabla['Ganancia'] = df_tabla['ganancia'].apply(fmt_ganancia)
 df_tabla['Fecha']    = df_tabla['fecha'].dt.strftime('%b %d')

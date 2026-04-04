@@ -2,7 +2,7 @@ import sys
 import os
 import pandas as pd
 
-sys.stdout.reconfigure(encoding='utf-8')
+sys.stdout.reconfigure(encoding='utf-8')# type: ignore
 
 # ── Logger — primer import ────────────────────────────────────────────────────
 from utils.logger import configurar, get as get_log

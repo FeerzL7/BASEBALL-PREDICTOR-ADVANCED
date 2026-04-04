@@ -54,7 +54,7 @@ def _stats_temporada(player_id: int) -> dict:
         datos    = player_stat_data(player_id, group='pitching', type='season')
         statline = datos['stats'][0]['stats']
         ip       = _safe_float(statline.get('inningsPitched'), 0.0)
-        throws   = get("people", {"personIds": player_id})[
+        throws   = get("people", {"personIds": player_id})[# type: ignore
             'people'][0]['pitchHand']['code']
         return {
             'ERA':        _safe_float(statline.get('era'),                4.50),

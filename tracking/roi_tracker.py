@@ -87,9 +87,13 @@ def _resolver_resultado(seleccion, mercado, home_team, away_team,
             return "pendiente"
         total = home_runs + away_runs
         if seleccion.upper() == "OVER":
-            return "win" if total > linea else "lose"
+            if total > linea:  return "win"
+            if total == linea: return "null"   # push
+            return "lose"
         if seleccion.upper() == "UNDER":
-            return "win" if total < linea else "lose"
+            if total < linea:  return "win"
+            if total == linea: return "null"   # push
+            return "lose"
 
     return "pendiente"
 
@@ -199,7 +203,7 @@ def actualizar_resultados():
         print(f"  [{estado}] {juego} | {mercado} {seleccion} "
               f"({home_team} {home_runs} - {away_runs} {away_team})")
 
-        registros[i] = [
+        registros[i] = [ # type: ignore
             fecha_str, juego, mercado, seleccion, cuota, probabilidad,
             valor, nuevo_resultado, round(nueva_ganancia, 4)
         ]
@@ -232,6 +236,8 @@ def calcular_roi() -> dict:
             resultado = row[7]
             if resultado == "pendiente":
                 pendientes += 1
+                continue
+            if resultado == "null":        # push — no cuenta como apuesta resuelta
                 continue
             total_apuestas += 1
             ganancias += float(row[8])
