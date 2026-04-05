@@ -2,21 +2,30 @@
 from analysis.park_factors import calcular_park_factors
 from analysis.statcast import (
     get_pitching, get_batting,
-    PITCH_DEFAULTS, BAT_DEFAULTS,
-    ERA_LIGA, FIP_LIGA, HARDHIT_LIGA, WRC_PLUS_LIGA, OPS_LIGA, 
+    ERA_LIGA, FIP_LIGA, WRC_PLUS_LIGA, OPS_LIGA,
 )
-from utils.logger import configurar, get as get_log
+from utils.logger import get as get_log
+
 log = get_log()
+
 PESO_BULLPEN = 0.33
 PESO_ABRIDOR = 1.0 - PESO_BULLPEN
 
-# Clamps de factores multiplicativos — ninguno puede mover la proyección
-# más de un 45% en ninguna dirección desde la base
+# Pesos de la base de carreras:
+#   runs_last_5  → producción reciente del lineup (más reactiva)
+#   h2h_prom     → historial entre estos dos equipos específicos
+# El H2H solo entra si hay suficientes partidos (H2H_MIN_PARTIDOS).
+# Con pocos partidos, el promedio es ruidoso y es mejor ignorarlo.
+PESO_RECIENTE  = 0.80
+PESO_H2H       = 0.20
+H2H_MIN_PARTIDOS = 3   # mínimo de partidos H2H para considerarlo confiable
+
+# Clamps de factores multiplicativos
 _F_MIN = 0.60
 _F_MAX = 1.55
 
-_PARK_FACTORS = None
-_PISO_CARRERAS = 2.0   # mínimo absoluto de carreras proyectadas por equipo
+_PARK_FACTORS  = None
+_PISO_CARRERAS = 2.0
 
 
 def _get_park_factors() -> dict:
@@ -51,59 +60,83 @@ def _clamp(v: float) -> float:
 
 
 def _f_pitcheo(starter_era: float, bullpen_era: float, fip: float) -> float:
-    """
-    Factor de pitcheo rival combinado.
-    ERA alta → lineup anota más (factor > 1).
-    FIP bajo → pitcher mejor de lo que parece por ERA (modera hacia abajo).
-    Pesos: 55% ERA combinada, 45% FIP
-    """
     era_comb = _era_combinada(starter_era, bullpen_era)
     fip      = max(2.0, min(fip, 7.0))
-
-    f_era = era_comb / ERA_LIGA
-    f_fip = fip / FIP_LIGA
-
+    f_era    = era_comb / ERA_LIGA
+    f_fip    = fip / FIP_LIGA
     return _clamp(f_era * 0.55 + f_fip * 0.45)
 
 
 def _f_lineup(ops: float, wrc_aprox: float) -> float:
-    """Calidad ofensiva del lineup: promedio de OPS y wRC+ normalizados."""
-    ops      = max(0.50, min(ops, 1.10))
+    ops       = max(0.50, min(ops,       1.10))
     wrc_aprox = max(50.0, min(wrc_aprox, 170.0))
-    f_ops = ops / OPS_LIGA
+    f_ops = ops       / OPS_LIGA
     f_wrc = wrc_aprox / WRC_PLUS_LIGA
     return _clamp((f_ops + f_wrc) / 2.0)
 
 
+def _base_carreras(runs_last_5: float, h2h_prom: float | None,
+                   n_partidos_h2h: int) -> float:
+    """
+    Combina la producción reciente del lineup con el historial H2H.
+
+    Lógica:
+      - Si hay suficientes partidos H2H (>= H2H_MIN_PARTIDOS), mezcla
+        runs_last_5 (80%) con h2h_prom (20%).
+      - Si el H2H es insuficiente o no existe, usa solo runs_last_5.
+
+    Por qué 80/20 y no más peso al H2H:
+      El H2H captura dinámicas reales (un equipo que históricamente
+      golpea bien al pitcheo rival), pero con muestras pequeñas de
+      temporada (~5-10 partidos) tiene alta varianza. El 20% es
+      suficiente para que el dato mueva la proyección ~0.3-0.5 carreras
+      sin arriesgar que un outlier distorsione todo.
+    """
+    base = max(float(runs_last_5 or 4.5), _PISO_CARRERAS)
+
+    if h2h_prom is None or n_partidos_h2h < H2H_MIN_PARTIDOS:
+        return base
+
+    h2h_val = max(float(h2h_prom), _PISO_CARRERAS)
+    combinado = base * PESO_RECIENTE + h2h_val * PESO_H2H
+    return round(max(combinado, _PISO_CARRERAS), 3)
+
+
 def proyectar_carreras(
-    ofensiva: dict,
+    ofensiva:      dict,
     starter_stats: dict,
     bullpen_stats: dict,
-    park_factor: float,
-    fg_pitching: dict,
-    fg_batting: dict,
+    park_factor:   float,
+    fg_pitching:   dict,
+    fg_batting:    dict,
+    h2h_prom:      float | None = None,
+    n_partidos_h2h: int = 0,
 ) -> float:
     """
-    Proyección = runs_base × f_pitcheo × f_lineup × park_factor
+    Proyección de carreras con cuatro factores:
 
-    Cada factor está clampeado [0.60, 1.55].
-    Piso absoluto: _PISO_CARRERAS (2.0).
+      base × f_pitcheo × f_lineup × park_factor
+
+    donde base = combinación de runs_last_5 y h2h_prom.
     """
-    runs_base = max(float(ofensiva.get('runs_last_5', 4.5) or 4.5), _PISO_CARRERAS)
-    
+    base = _base_carreras(
+        ofensiva.get('runs_last_5', 4.5),
+        h2h_prom,
+        n_partidos_h2h,
+    )
 
     f_pit = _f_pitcheo(
         starter_stats.get('ERA_efectiva', starter_stats['ERA']),
-        bullpen_stats.get('ERA',  ERA_LIGA),
+        bullpen_stats.get('ERA', ERA_LIGA),
         fg_pitching.get('FIP', FIP_LIGA),
     )
 
     f_lin = _f_lineup(
-        fg_batting.get('OPS', OPS_LIGA),
+        fg_batting.get('OPS',            OPS_LIGA),
         fg_batting.get('wRC_plus_aprox', WRC_PLUS_LIGA),
     )
 
-    proyeccion = runs_base * f_pit * f_lin * park_factor
+    proyeccion = base * f_pit * f_lin * park_factor
     return round(max(proyeccion, _PISO_CARRERAS), 3)
 
 
@@ -144,7 +177,7 @@ def _nombre_a_venue(team_name: str) -> str:
     return MAPA.get(team_name, "default")
 
 
-def proyectar_totales(partidos):
+def proyectar_totales(partidos: list) -> list:
     pf_tabla = _get_park_factors()
 
     for partido in partidos:
@@ -158,19 +191,41 @@ def proyectar_totales(partidos):
         home_bullpen = partido.get('home_bullpen', {'ERA': ERA_LIGA})
         away_bullpen = partido.get('away_bullpen', {'ERA': ERA_LIGA})
 
-        # Stats avanzadas: pitching rival y batting propio
-        fg_pitch_away = get_pitching(away_team)   # rival del home
-        fg_pitch_home = get_pitching(home_team)   # rival del away
+        # Stats avanzadas Fangraphs/statsapi
+        fg_pitch_away = get_pitching(away_team)
+        fg_pitch_home = get_pitching(home_team)
         fg_bat_home   = get_batting(home_team)
         fg_bat_away   = get_batting(away_team)
 
+        # Datos H2H — extraer del partido si h2h.py ya los calculó
+        h2h           = partido.get('h2h', {})
+        n_h2h         = int(h2h.get('partidos', 0) or 0)
+        h2h_home_prom = h2h.get('runs_home_prom')   # carreras home en H2H
+        h2h_away_prom = h2h.get('runs_away_prom')   # carreras away en H2H
+
+        # Trazabilidad en log
+        h2h_str = (f"H2H={n_h2h}p home={h2h_home_prom}/away={h2h_away_prom}"
+                   if n_h2h >= H2H_MIN_PARTIDOS else "H2H insuf.")
+
         home_proj = proyectar_carreras(
-            partido['home_offense'], partido['away_stats'], away_bullpen,
-            pf_ajustado, fg_pitching=fg_pitch_away, fg_batting=fg_bat_home,
+            partido['home_offense'],
+            partido['away_stats'],
+            away_bullpen,
+            pf_ajustado,
+            fg_pitching=fg_pitch_away,
+            fg_batting=fg_bat_home,
+            h2h_prom=h2h_home_prom,
+            n_partidos_h2h=n_h2h,
         )
         away_proj = proyectar_carreras(
-            partido['away_offense'], partido['home_stats'], home_bullpen,
-            pf_ajustado, fg_pitching=fg_pitch_home, fg_batting=fg_bat_away,
+            partido['away_offense'],
+            partido['home_stats'],
+            home_bullpen,
+            pf_ajustado,
+            fg_pitching=fg_pitch_home,
+            fg_batting=fg_bat_away,
+            h2h_prom=h2h_away_prom,
+            n_partidos_h2h=n_h2h,
         )
 
         partido.update({
@@ -179,12 +234,19 @@ def proyectar_totales(partidos):
             'proj_total':        round(home_proj + away_proj, 3),
             'park_factor_usado': pf_ajustado,
             'venue_usado':       venue,
-            'era_rival_home': _era_combinada(partido['away_stats'].get('ERA_efectiva', partido['away_stats']['ERA']),away_bullpen.get('ERA', ERA_LIGA)),
-            'era_rival_away': _era_combinada(partido['home_stats'].get('ERA_efectiva', partido['home_stats']['ERA']),home_bullpen.get('ERA', ERA_LIGA)),
+            'era_rival_home':    _era_combinada(
+                partido['away_stats'].get('ERA_efectiva', partido['away_stats']['ERA']),
+                away_bullpen.get('ERA', ERA_LIGA)
+            ),
+            'era_rival_away':    _era_combinada(
+                partido['home_stats'].get('ERA_efectiva', partido['home_stats']['ERA']),
+                home_bullpen.get('ERA', ERA_LIGA)
+            ),
             'fip_rival_home':    fg_pitch_away.get('FIP', FIP_LIGA),
             'fip_rival_away':    fg_pitch_home.get('FIP', FIP_LIGA),
             'wrc_home':          fg_bat_home.get('wRC_plus_aprox', WRC_PLUS_LIGA),
             'wrc_away':          fg_bat_away.get('wRC_plus_aprox', WRC_PLUS_LIGA),
+            'h2h_partidos':      n_h2h,
         })
 
         log.debug(
@@ -193,7 +255,8 @@ def proyectar_totales(partidos):
             f"{partido['home_stats'].get('ERA_efectiva','?')} "
             f"FIP={fg_pitch_away.get('FIP','?')}/{fg_pitch_home.get('FIP','?')} "
             f"wRC+={fg_bat_home.get('wRC_plus_aprox','?')}/"
-            f"{fg_bat_away.get('wRC_plus_aprox','?')} | "
+            f"{fg_bat_away.get('wRC_plus_aprox','?')} "
+            f"{h2h_str} | "
             f"Proy: {home_proj} - {away_proj} (total={partido['proj_total']})"
         )
 
