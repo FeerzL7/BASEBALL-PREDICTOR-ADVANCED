@@ -71,6 +71,9 @@ def main():
 
     log.info("Analizando defensiva...")
     partidos = analizar_defensiva(partidos)
+    
+    log.info("Analizando historial H2H...")   # ← sube antes de proyectar
+    partidos = analizar_h2h(partidos)
 
     log.info("Proyectando totales...")
     partidos = proyectar_totales(partidos)
@@ -81,8 +84,6 @@ def main():
     log.info("Aplicando simulaciones Poisson...")
     partidos = aplicar_simulaciones(partidos)
 
-    log.info("Analizando historial H2H...")
-    partidos = analizar_h2h(partidos)
 
     # 3. Cuotas + snapshot de línea
     log.info("Obteniendo cuotas (The Odds API)...")
