@@ -109,7 +109,7 @@ def _top_bateadores(team_id: int, season: int) -> list:
             'sortStat':   'plateAppearances',
             'order':      'desc',
         })
-        splits  = data.get('stats', [{}])[0].get('splits', [])
+        splits  = data.get('stats', [{}])[0].get('splits', [])# type: ignore
         result  = []
         for s in splits:
             stat   = s.get('stat', {})
@@ -143,7 +143,7 @@ def _split_bateador(player_id: int, vs_hand: str, season: int) -> dict | None:
                 f"sitCodes={sit_code},season={season},sportId=1)")
     try:
         data    = get('person', {'personId': player_id, 'hydrate': hydrate})
-        persona = data.get('people', [{}])[0]
+        persona = data.get('people', [{}])[0]# type: ignore
         for sg in persona.get('stats', []):
             for split in sg.get('splits', []):
                 stat = split.get('stat', {})
@@ -210,7 +210,7 @@ def _runs_recientes(team_id: int, n: int = 10) -> float:
         from statsapi import schedule
         hoy  = datetime.now().strftime('%Y-%m-%d')
         hace = (datetime.now() - timedelta(days=25)).strftime('%Y-%m-%d')
-        juegos = schedule(start_date=hace, end_date=hoy, teamId=team_id)
+        juegos = schedule(start_date=hace, end_date=hoy, teamId=team_id)# type: ignore
         runs = []
         for j in juegos:
             if j.get('status') not in ('Final', 'Game Over'):
@@ -281,7 +281,7 @@ def obtener_stats_ofensivas(team_name: str, vs_hand: str = 'R',
                 'group':    'hitting',
                 'season':   season,
             })
-            splits = data.get('stats', [{}])[0].get('splits', [])
+            splits = data.get('stats', [{}])[0].get('splits', [])# type: ignore
             stat   = splits[0].get('stat', {}) if splits else {}
             ops_final = _safe(stat.get('ops'), defaults['OPS'], 0.4, 1.2)
         except Exception:
