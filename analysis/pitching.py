@@ -254,6 +254,7 @@ def analizar_pitchers() -> list:
             'home_bullpen':         home_bullpen,
             'away_bullpen':         away_bullpen,
             'start_time':           juego['game_datetime'][:19],
+            'venue_name':           juego.get('venue_name', ''),   # ← NUEVO
             'pitchers_confirmados': ambos_confirmados,
         })
 

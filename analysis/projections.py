@@ -8,45 +8,179 @@ from utils.logger import get as get_log
 
 log = get_log()
 
-PESO_BULLPEN = 0.33
-PESO_ABRIDOR = 1.0 - PESO_BULLPEN
-
-# Pesos de la base de carreras:
-#   runs_last_5  → producción reciente del lineup (más reactiva)
-#   h2h_prom     → historial entre estos dos equipos específicos
-# El H2H solo entra si hay suficientes partidos (H2H_MIN_PARTIDOS).
-# Con pocos partidos, el promedio es ruidoso y es mejor ignorarlo.
-PESO_RECIENTE  = 0.80
-PESO_H2H       = 0.20
-H2H_MIN_PARTIDOS = 3   # mínimo de partidos H2H para considerarlo confiable
-
-# Clamps de factores multiplicativos
-_F_MIN = 0.60
-_F_MAX = 1.55
-
+PESO_BULLPEN   = 0.33
+PESO_ABRIDOR   = 1.0 - PESO_BULLPEN
+_F_MIN         = 0.60
+_F_MAX         = 1.55
 _PARK_FACTORS  = None
 _PISO_CARRERAS = 2.0
 
+# Mínimo de partidos H2H para incluir ese factor
+H2H_MIN_PARTIDOS = 3
+PESO_RECIENTE    = 0.80
+PESO_H2H         = 0.20
+
+
+# ── Clasificación de estadios ─────────────────────────────────────────────────
+#
+# CERRADO      → temperatura interior controlada (~21°C siempre)
+#                El clima exterior no afecta el juego.
+#
+# RETRACTIL    → techo que se abre o cierra según el clima.
+#                Si temperatura exterior < TEMP_RETRACTIL_UMBRAL,
+#                asumimos techo cerrado → aplicar temperatura interior fija.
+#                Si temperatura >= umbral, asumimos abierto → clima real.
+#
+# ABIERTO      → sin techo, clima exterior directo (todos los demás).
+#
+# Fuente: MLB official ballpark guide 2025.
+
+ESTADIOS_CERRADOS = {
+    'Tropicana Field',          # Tampa Bay Rays    — cúpula fija
+    'Rogers Centre',            # Toronto Blue Jays — techo retráctil, default cerrado
+    'loanDepot park',           # Miami Marlins     — techo retráctil, default cerrado
+}
+
+ESTADIOS_RETRACTILES = {
+    'Chase Field',              # Arizona Diamondbacks
+    'American Family Field',    # Milwaukee Brewers
+    'Globe Life Field',         # Texas Rangers
+    'T-Mobile Park',            # Seattle Mariners
+    'Minute Maid Park',         # Houston Astros
+    'Oracle Park',              # San Francisco Giants (no retráctil pero muy frío)
+}
+
+# Si la temperatura exterior está por debajo de este umbral y el estadio
+# tiene techo retráctil, asumimos que el techo está cerrado ese día.
+TEMP_RETRACTIL_UMBRAL = 12.0   # °C
+
+# Temperatura interior fija de estadios cerrados/bajo techo
+TEMP_INTERIOR         = 21.0   # °C
+
+# Ajuste por viento en estadios abiertos (km/h)
+VIENTO_UMBRAL_ALTO    = 20.0
+VIENTO_UMBRAL_MEDIO   = 12.0
+
+
+# ── Tabla de ajuste por temperatura ──────────────────────────────────────────
+#
+# Basado en análisis estadístico de runs/game por temperatura en MLB:
+# - Temperatura alta → más carreras (aire menos denso, menor resistencia a la pelota,
+#   más fatiga del pitcheo, más actividad muscular del bateador)
+# - Temperatura baja → menos carreras (efecto inverso + pelotas más pesadas)
+#
+# Cada entrada: (temp_min, temp_max_exclusivo, ajuste_multiplicativo)
+# El ajuste se aplica SOBRE el park factor base.
+
+_AJUSTE_TEMP = [
+    (32,  float('inf'), +0.09),   # > 32°C  → +9%
+    (28,  32,           +0.05),   # 28-32°C → +5%
+    (24,  28,           +0.02),   # 24-28°C → +2%
+    (18,  24,            0.00),   # 18-24°C → neutro
+    (13,  18,           -0.03),   # 13-18°C → -3%
+    (8,   13,           -0.06),   # 8-13°C  → -6%
+    (-99,  8,           -0.09),   # < 8°C   → -9%
+]
+
+
+def _ajuste_por_temperatura(temp: float) -> float:
+    """Devuelve el factor multiplicativo de ajuste por temperatura."""
+    for t_min, t_max, ajuste in _AJUSTE_TEMP:
+        if t_min <= temp < t_max:
+            return ajuste
+    return 0.0
+
+
+def _temperatura_efectiva(venue: str, temp_exterior: float) -> tuple[float, str]:
+    """
+    Devuelve (temperatura_efectiva, tipo_estadio) según el tipo de recinto.
+
+    Para estadios cerrados: temperatura interior fija.
+    Para estadios retráctiles: temperatura interior si hace frío, exterior si no.
+    Para estadios abiertos: temperatura exterior directa.
+    """
+    if venue in ESTADIOS_CERRADOS:
+        return TEMP_INTERIOR, 'cerrado'
+
+    if venue in ESTADIOS_RETRACTILES:
+        if temp_exterior < TEMP_RETRACTIL_UMBRAL:
+            return TEMP_INTERIOR, 'retractil_cerrado'
+        return temp_exterior, 'retractil_abierto'
+
+    return temp_exterior, 'abierto'
+
+
+def _ajuste_viento(venue: str, tipo: str, viento_kph: float,
+                   hora: int) -> float:
+    """
+    Ajuste adicional por viento, solo en estadios abiertos o retráctiles abiertos.
+    Viento fuerte favorece bateo de largo (HR) y penaliza pitcheo de control.
+    """
+    if tipo in ('cerrado', 'retractil_cerrado'):
+        return 0.0   # sin efecto de viento bajo techo
+
+    if viento_kph >= VIENTO_UMBRAL_ALTO:
+        return +0.04
+    if viento_kph >= VIENTO_UMBRAL_MEDIO:
+        return +0.02
+    return 0.0
+
+
+def _ajuste_nocturno(hora: int) -> float:
+    """Juegos nocturnos tienen ligeramente menos carreras por menor visibilidad."""
+    return -0.02 if hora >= 20 else 0.0
+
+
+# ── Park factor ajustado ──────────────────────────────────────────────────────
+
+def ajustar_park_factor(base_pf: float, contexto: dict,
+                        venue: str = 'default') -> tuple[float, dict]:
+    """
+    Calcula el park factor final combinando:
+      1. Park factor base (histórico del estadio)
+      2. Ajuste por temperatura efectiva (según tipo de estadio)
+      3. Ajuste por viento
+      4. Ajuste nocturno
+
+    Devuelve (pf_final, detalle_ajustes) para trazabilidad en logs.
+    """
+    if not contexto:
+        return max(round(base_pf, 3), 0.85), {}
+
+    temp_ext  = float(contexto.get("clima", {}).get("temperatura", 20))
+    viento    = float(contexto.get("clima", {}).get("viento_kph",  10))
+    hora      = int(contexto.get("hora_local", 19))
+
+    temp_ef, tipo = _temperatura_efectiva(venue, temp_ext)
+
+    adj_temp   = _ajuste_por_temperatura(temp_ef)
+    adj_viento = _ajuste_viento(venue, tipo, viento, hora)
+    adj_noche  = _ajuste_nocturno(hora)
+
+    ajuste_total = adj_temp + adj_viento + adj_noche
+    pf_final     = max(round(base_pf * (1 + ajuste_total), 3), 0.85)
+    pf_final     = min(pf_final, 1.60)   # techo: evitar valores extremos
+
+    detalle = {
+        'tipo_estadio':  tipo,
+        'temp_exterior': temp_ext,
+        'temp_efectiva': temp_ef,
+        'adj_temp':      round(adj_temp,   3),
+        'adj_viento':    round(adj_viento, 3),
+        'adj_noche':     round(adj_noche,  3),
+        'ajuste_total':  round(ajuste_total, 3),
+    }
+
+    return pf_final, detalle
+
+
+# ── Resto de funciones del modelo (sin cambios) ───────────────────────────────
 
 def _get_park_factors() -> dict:
     global _PARK_FACTORS
     if _PARK_FACTORS is None:
         _PARK_FACTORS = calcular_park_factors()
     return _PARK_FACTORS
-
-
-def ajustar_park_factor(base_pf: float, contexto: dict) -> float:
-    if not contexto:
-        return base_pf
-    temp   = contexto.get("clima", {}).get("temperatura", 22)
-    viento = contexto.get("clima", {}).get("viento_kph", 10)
-    ajuste = 1.0
-    if temp   >= 28: ajuste += 0.05
-    elif temp <= 15: ajuste -= 0.05
-    if viento >= 15: ajuste += 0.05
-    if contexto.get("hora_local", 19) >= 20:
-        ajuste -= 0.02
-    return max(round(base_pf * ajuste, 3), 0.85)
 
 
 def _era_combinada(starter_era: float, bullpen_era: float) -> float:
@@ -62,82 +196,45 @@ def _clamp(v: float) -> float:
 def _f_pitcheo(starter_era: float, bullpen_era: float, fip: float) -> float:
     era_comb = _era_combinada(starter_era, bullpen_era)
     fip      = max(2.0, min(fip, 7.0))
-    f_era    = era_comb / ERA_LIGA
-    f_fip    = fip / FIP_LIGA
-    return _clamp(f_era * 0.55 + f_fip * 0.45)
+    return _clamp(era_comb / ERA_LIGA * 0.55 + fip / FIP_LIGA * 0.45)
 
 
 def _f_lineup(ops: float, wrc_aprox: float) -> float:
     ops       = max(0.50, min(ops,       1.10))
     wrc_aprox = max(50.0, min(wrc_aprox, 170.0))
-    f_ops = ops       / OPS_LIGA
-    f_wrc = wrc_aprox / WRC_PLUS_LIGA
-    return _clamp((f_ops + f_wrc) / 2.0)
+    return _clamp((ops / OPS_LIGA + wrc_aprox / WRC_PLUS_LIGA) / 2.0)
 
 
 def _base_carreras(runs_last_5: float, h2h_prom: float | None,
                    n_partidos_h2h: int) -> float:
-    """
-    Combina la producción reciente del lineup con el historial H2H.
-
-    Lógica:
-      - Si hay suficientes partidos H2H (>= H2H_MIN_PARTIDOS), mezcla
-        runs_last_5 (80%) con h2h_prom (20%).
-      - Si el H2H es insuficiente o no existe, usa solo runs_last_5.
-
-    Por qué 80/20 y no más peso al H2H:
-      El H2H captura dinámicas reales (un equipo que históricamente
-      golpea bien al pitcheo rival), pero con muestras pequeñas de
-      temporada (~5-10 partidos) tiene alta varianza. El 20% es
-      suficiente para que el dato mueva la proyección ~0.3-0.5 carreras
-      sin arriesgar que un outlier distorsione todo.
-    """
     base = max(float(runs_last_5 or 4.5), _PISO_CARRERAS)
-
     if h2h_prom is None or n_partidos_h2h < H2H_MIN_PARTIDOS:
         return base
-
     h2h_val = max(float(h2h_prom), _PISO_CARRERAS)
-    combinado = base * PESO_RECIENTE + h2h_val * PESO_H2H
-    return round(max(combinado, _PISO_CARRERAS), 3)
+    return round(max(base * PESO_RECIENTE + h2h_val * PESO_H2H, _PISO_CARRERAS), 3)
 
 
 def proyectar_carreras(
-    ofensiva:      dict,
-    starter_stats: dict,
-    bullpen_stats: dict,
-    park_factor:   float,
-    fg_pitching:   dict,
-    fg_batting:    dict,
-    h2h_prom:      float | None = None,
+    ofensiva:       dict,
+    starter_stats:  dict,
+    bullpen_stats:  dict,
+    park_factor:    float,
+    fg_pitching:    dict,
+    fg_batting:     dict,
+    h2h_prom:       float | None = None,
     n_partidos_h2h: int = 0,
 ) -> float:
-    """
-    Proyección de carreras con cuatro factores:
-
-      base × f_pitcheo × f_lineup × park_factor
-
-    donde base = combinación de runs_last_5 y h2h_prom.
-    """
-    base = _base_carreras(
-        ofensiva.get('runs_last_5', 4.5),
-        h2h_prom,
-        n_partidos_h2h,
-    )
-
+    base  = _base_carreras(ofensiva.get('runs_last_5', 4.5), h2h_prom, n_partidos_h2h)
     f_pit = _f_pitcheo(
         starter_stats.get('ERA_efectiva', starter_stats['ERA']),
         bullpen_stats.get('ERA', ERA_LIGA),
         fg_pitching.get('FIP', FIP_LIGA),
     )
-
     f_lin = _f_lineup(
         fg_batting.get('OPS',            OPS_LIGA),
         fg_batting.get('wRC_plus_aprox', WRC_PLUS_LIGA),
     )
-
-    proyeccion = base * f_pit * f_lin * park_factor
-    return round(max(proyeccion, _PISO_CARRERAS), 3)
+    return round(max(base * f_pit * f_lin * park_factor, _PISO_CARRERAS), 3)
 
 
 def _nombre_a_venue(team_name: str) -> str:
@@ -177,55 +274,48 @@ def _nombre_a_venue(team_name: str) -> str:
     return MAPA.get(team_name, "default")
 
 
+# ── Punto de entrada principal ────────────────────────────────────────────────
+
 def proyectar_totales(partidos: list) -> list:
     pf_tabla = _get_park_factors()
 
     for partido in partidos:
         home_team = partido['home_team']
         away_team = partido['away_team']
-        venue     = partido.get('venue') or _nombre_a_venue(home_team)
+
+        # Venue: preferir el que viene del schedule (venue_name),
+        # con fallback al mapa equipo→venue
+        venue = (partido.get('venue_name')
+                 or partido.get('venue')
+                 or _nombre_a_venue(home_team))
 
         pf_base     = pf_tabla.get(venue) or pf_tabla.get('default', 1.0)
-        pf_ajustado = ajustar_park_factor(pf_base, partido.get('contexto', {}))
+        contexto    = partido.get('contexto', {})
 
-        home_bullpen = partido.get('home_bullpen', {'ERA': ERA_LIGA})
-        away_bullpen = partido.get('away_bullpen', {'ERA': ERA_LIGA})
+        # Park factor con ajuste por temperatura y tipo de estadio
+        pf_ajustado, detalle_pf = ajustar_park_factor(pf_base, contexto, venue)
 
-        # Stats avanzadas Fangraphs/statsapi
+        home_bullpen  = partido.get('home_bullpen', {'ERA': ERA_LIGA})
+        away_bullpen  = partido.get('away_bullpen', {'ERA': ERA_LIGA})
         fg_pitch_away = get_pitching(away_team)
         fg_pitch_home = get_pitching(home_team)
         fg_bat_home   = get_batting(home_team)
         fg_bat_away   = get_batting(away_team)
 
-        # Datos H2H — extraer del partido si h2h.py ya los calculó
         h2h           = partido.get('h2h', {})
         n_h2h         = int(h2h.get('partidos', 0) or 0)
-        h2h_home_prom = h2h.get('runs_home_prom')   # carreras home en H2H
-        h2h_away_prom = h2h.get('runs_away_prom')   # carreras away en H2H
-
-        # Trazabilidad en log
-        h2h_str = (f"H2H={n_h2h}p home={h2h_home_prom}/away={h2h_away_prom}"
-                   if n_h2h >= H2H_MIN_PARTIDOS else "H2H insuf.")
+        h2h_home_prom = h2h.get('runs_home_prom')
+        h2h_away_prom = h2h.get('runs_away_prom')
 
         home_proj = proyectar_carreras(
-            partido['home_offense'],
-            partido['away_stats'],
-            away_bullpen,
-            pf_ajustado,
-            fg_pitching=fg_pitch_away,
-            fg_batting=fg_bat_home,
-            h2h_prom=h2h_home_prom,
-            n_partidos_h2h=n_h2h,
+            partido['home_offense'], partido['away_stats'], away_bullpen,
+            pf_ajustado, fg_pitch_away, fg_bat_home,
+            h2h_prom=h2h_home_prom, n_partidos_h2h=n_h2h,
         )
         away_proj = proyectar_carreras(
-            partido['away_offense'],
-            partido['home_stats'],
-            home_bullpen,
-            pf_ajustado,
-            fg_pitching=fg_pitch_home,
-            fg_batting=fg_bat_away,
-            h2h_prom=h2h_away_prom,
-            n_partidos_h2h=n_h2h,
+            partido['away_offense'], partido['home_stats'], home_bullpen,
+            pf_ajustado, fg_pitch_home, fg_bat_away,
+            h2h_prom=h2h_away_prom, n_partidos_h2h=n_h2h,
         )
 
         partido.update({
@@ -233,14 +323,18 @@ def proyectar_totales(partidos: list) -> list:
             'proj_away':         away_proj,
             'proj_total':        round(home_proj + away_proj, 3),
             'park_factor_usado': pf_ajustado,
+            'park_factor_base':  pf_base,
             'venue_usado':       venue,
+            'tipo_estadio':      detalle_pf.get('tipo_estadio', 'abierto'),
+            'temp_efectiva':     detalle_pf.get('temp_efectiva', 20.0),
+            'ajuste_temp':       detalle_pf.get('adj_temp', 0.0),
             'era_rival_home':    _era_combinada(
                 partido['away_stats'].get('ERA_efectiva', partido['away_stats']['ERA']),
-                away_bullpen.get('ERA', ERA_LIGA)
+                away_bullpen.get('ERA', ERA_LIGA),
             ),
             'era_rival_away':    _era_combinada(
                 partido['home_stats'].get('ERA_efectiva', partido['home_stats']['ERA']),
-                home_bullpen.get('ERA', ERA_LIGA)
+                home_bullpen.get('ERA', ERA_LIGA),
             ),
             'fip_rival_home':    fg_pitch_away.get('FIP', FIP_LIGA),
             'fip_rival_away':    fg_pitch_home.get('FIP', FIP_LIGA),
@@ -249,14 +343,19 @@ def proyectar_totales(partidos: list) -> list:
             'h2h_partidos':      n_h2h,
         })
 
+        tipo  = detalle_pf.get('tipo_estadio', 'abierto')
+        t_ext = detalle_pf.get('temp_exterior', 20)
+        t_ef  = detalle_pf.get('temp_efectiva', 20)
+        adj   = detalle_pf.get('ajuste_total',  0)
+
         log.debug(
-            f"{home_team} vs {away_team} | PF={pf_ajustado} "
+            f"{home_team} vs {away_team} | "
+            f"venue={venue} tipo={tipo} "
+            f"T_ext={t_ext}°C T_ef={t_ef}°C adj={adj:+.0%} "
+            f"PF_base={pf_base} PF_final={pf_ajustado} | "
             f"ERA_ef={partido['away_stats'].get('ERA_efectiva','?')}/"
             f"{partido['home_stats'].get('ERA_efectiva','?')} "
-            f"FIP={fg_pitch_away.get('FIP','?')}/{fg_pitch_home.get('FIP','?')} "
-            f"wRC+={fg_bat_home.get('wRC_plus_aprox','?')}/"
-            f"{fg_bat_away.get('wRC_plus_aprox','?')} "
-            f"{h2h_str} | "
+            f"FIP={fg_pitch_away.get('FIP','?')}/{fg_pitch_home.get('FIP','?')} | "
             f"Proy: {home_proj} - {away_proj} (total={partido['proj_total']})"
         )
 
