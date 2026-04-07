@@ -71,26 +71,29 @@ def main():
 
     log.info("Analizando defensiva...")
     partidos = analizar_defensiva(partidos)
-    
-    log.info("Analizando historial H2H...")   # ← sube antes de proyectar
+
+    log.info("Analizando historial H2H...")   # DEBE ir antes de proyectar
     partidos = analizar_h2h(partidos)
+
+    # FIX #4 — contexto climático va ANTES de proyectar_totales
+    # para que ajustar_park_factor() tenga temperatura y viento reales.
+    # En el código anterior este paso iba DESPUÉS, dejando contexto={}
+    # durante toda la proyección y anulando los ajustes de temperatura/estadio.
+    log.info("Analizando contexto ambiental...")
+    partidos = analizar_contexto(partidos)
 
     log.info("Proyectando totales...")
     partidos = proyectar_totales(partidos)
 
-    log.info("Analizando contexto ambiental...")
-    partidos = analizar_contexto(partidos)
-
     log.info("Aplicando simulaciones Poisson...")
     partidos = aplicar_simulaciones(partidos)
-
 
     # 3. Cuotas + snapshot de línea
     log.info("Obteniendo cuotas (The Odds API)...")
     cuotas = obtener_cuotas()
 
     # Guardar snapshot ANTES de procesar para capturar el estado actual de la línea
-    guardar_snapshot_diario(cuotas) # type: ignore
+    guardar_snapshot_diario(cuotas)  # type: ignore
 
     partidos = analizar_mercados(partidos, cuotas)
 
@@ -233,9 +236,9 @@ def main():
 
         # Stake info
         stake_info = ""
-        if mejor.startswith("ML:")     and p.get("stake_pct_ml",    0) > 0:
+        if mejor.startswith("ML:")      and p.get("stake_pct_ml",    0) > 0:
             stake_info = f" | Stake: {p['stake_pct_ml']}%"
-        elif mejor.startswith("RL:")   and p.get("stake_pct_rl",    0) > 0:
+        elif mejor.startswith("RL:")    and p.get("stake_pct_rl",    0) > 0:
             stake_info = f" | Stake: {p['stake_pct_rl']}%"
         elif mejor.startswith("TOTAL:") and p.get("stake_pct_total", 0) > 0:
             stake_info = f" | Stake: {p['stake_pct_total']}%"
@@ -247,8 +250,6 @@ def main():
         elif p.get('mov_contradice'):
             mov_tag = " | LINEA CONTRADICE"
 
-        # Picks con stake → INFO (visible en consola)
-        # Picks sin stake → DEBUG (solo en archivo de log)
         nivel = log.info if stake_info else log.debug
         linea = p.get('linea_total', 'N/D')
 
