@@ -25,25 +25,28 @@ log = get_log()
 KELLY_MAX_STAKE_PCT = 5.0
 KELLY_FRACCION      = 0.5
 
-# ── Umbrales ML / RL ──────────────────────────────────────────────────────────
-# ML y RL dependen de que la prob Poisson supere la implícita en la cuota.
-# El edge real en MLB es pequeño → umbrales conservadores.
+# ── Umbrales ML ───────────────────────────────────────────────────────────────
 UMBRAL_EV_ML       = 5
-UMBRAL_EV_RL       = 7
-UMBRAL_PROB_ML     = 0.42   # probabilidad mínima para apostar ML
-UMBRAL_PROB_RL     = 0.40   # RL es más exigente en proyección
+UMBRAL_PROB_ML     = 0.42
 MIN_CUOTA_ML       = 1.65
 MAX_CUOTA_ML       = 2.50
+
+# ── Umbrales RL ───────────────────────────────────────────────────────────────
+# FIX #2 — el umbral de prob para RL se aplica ahora sobre rl_home_prob /
+# rl_away_prob (prob real de cubrir +1.5) calculada en simulation.py,
+# no sobre la prob de ganar el moneyline (que siempre es mayor).
+# Se sube el umbral de 0.40 → 0.33 para compensar que ahora usamos
+# la probabilidad correcta (más baja por naturaleza del runline).
+UMBRAL_EV_RL       = 7
+UMBRAL_PROB_RL     = 0.33   # prob de cubrir +1.5, no de ganar ML
 MIN_CUOTA_RL       = 1.55
 MAX_CUOTA_RL       = 2.60
 
 # ── Umbrales TOTAL ────────────────────────────────────────────────────────────
-# Totales dependen de la precisión de la proyección de carreras.
-# La distribución Poisson de la suma es más suave → umbrales distintos.
 UMBRAL_EV_TOTAL    = 4
-UMBRAL_PROB_TOTAL  = 0.52   # más alto que ML porque la muestra Poisson es menos precisa
-DIFF_LINEA_MIN     = 0.75   # diferencia mínima entre proj_total y linea para apostar
-MIN_CUOTA_TOTAL    = 1.75   # totales con cuota < 1.75 tienen poco valor residual
+UMBRAL_PROB_TOTAL  = 0.52
+DIFF_LINEA_MIN     = 0.75
+MIN_CUOTA_TOTAL    = 1.75
 MAX_CUOTA_TOTAL    = 2.20
 
 
@@ -65,21 +68,18 @@ def _kelly(prob: float, cuota: float) -> float:
 
 
 def _prob_ganar_poisson(mu_home: float, mu_away: float):
-    """Probabilidad de victoria simulada con distribución Poisson."""
+    """Probabilidad de victoria ML simulada con distribución Poisson."""
     prob_home = sum(
         poisson.pmf(h, mu_home) * poisson.pmf(a, mu_away)
         for h in range(15) for a in range(15) if h > a
     )
-    return round(prob_home, 4), round(1 - prob_home, 4) # type: ignore
+    return round(prob_home, 4), round(1 - prob_home, 4)  # type: ignore
 
 
-# ── Decisión ML / RL ─────────────────────────────────────────────────────────
+# ── Decisión ML ──────────────────────────────────────────────────────────────
 
 def _decidir_ml(partido: dict, prob_home: float, prob_away: float) -> dict:
-    """
-    Evalúa el mercado ML para un partido.
-    Devuelve dict con pick, valor, stake y predicciones.
-    """
+    """Evalúa el mercado ML para un partido."""
     ho   = partido['home_team']
     aw   = partido['away_team']
     ml_h = partido.get('cuota_home')
@@ -120,11 +120,20 @@ def _decidir_ml(partido: dict, prob_home: float, prob_away: float) -> dict:
     return resultado
 
 
+# ── Decisión RL ───────────────────────────────────────────────────────────────
+
 def _decidir_rl(partido: dict, prob_home: float, prob_away: float) -> dict:
     """
     Evalúa el mercado RL para un partido.
-    Usa la misma probabilidad Poisson de ML como aproximación —
-    RL favorito tiene probabilidad similar a ML pero cuota más alta.
+
+    FIX #2 — Usa rl_home_prob / rl_away_prob calculados por simulation.py
+    (probabilidad real de cubrir +1.5 runlines via Poisson) en lugar de
+    prob_home_win / prob_away_win (que son probabilidades de ganar ML y
+    siempre son mayores, haciendo que más picks pasen el filtro de prob).
+
+    Si los valores de RL de simulation.py no están disponibles en el partido
+    (por compatibilidad con ejecuciones parciales), hace fallback a las
+    probs ML como aproximación conservadora.
     """
     ho   = partido['home_team']
     aw   = partido['away_team']
@@ -142,11 +151,16 @@ def _decidir_rl(partido: dict, prob_home: float, prob_away: float) -> dict:
     if not rl_h or not rl_a:
         return resultado
 
-    # Pick RL al equipo con mayor probabilidad de victoria
-    if prob_home >= prob_away:
-        pick, rl_cuota, rl_prob = ho, rl_h, prob_home
+    # Probabilidades reales de cubrir el runline (simulación Poisson P[diff >= 2])
+    # Calculadas en aplicar_simulaciones() → rl_home_prob, rl_away_prob
+    rl_prob_home = partido.get('rl_home_prob', prob_home * 0.70)  # fallback conservador
+    rl_prob_away = partido.get('rl_away_prob', prob_away * 0.70)  # fallback conservador
+
+    # Elegir el equipo con mayor probabilidad de cubrir el RL
+    if rl_prob_home >= rl_prob_away:
+        pick, rl_cuota, rl_prob = ho, rl_h, rl_prob_home
     else:
-        pick, rl_cuota, rl_prob = aw, rl_a, prob_away
+        pick, rl_cuota, rl_prob = aw, rl_a, rl_prob_away
 
     ev    = _calc_ev(rl_prob, rl_cuota)
     stake = _kelly(rl_prob, rl_cuota)
@@ -222,15 +236,11 @@ def _decidir_total(partido: dict) -> dict:
     prob_t  = _prob_total_poisson(proj_total, ou_line, pick_t)
 
     # Ajuste de probabilidad por park factor
-    # Si el estadio favorece la ofensiva (PF > 1.10) y apostamos Over,
-    # el contexto confirma → ligero boost de confianza
-    # Si el estadio penaliza la ofensiva (PF < 0.90) y apostamos Over,
-    # el contexto contradice → pequeña penalización
     if pick_t == 'Over':
         if pf > 1.10:
-            prob_t = min(prob_t * 1.03, 0.85)  # boost +3%
+            prob_t = min(prob_t * 1.03, 0.85)
         elif pf < 0.90:
-            prob_t = prob_t * 0.97              # penalización -3%
+            prob_t = prob_t * 0.97
     else:  # Under
         if pf < 0.90:
             prob_t = min(prob_t * 1.03, 0.85)
@@ -267,8 +277,8 @@ def _mejor_pick(partido: dict, ml: dict, rl: dict, total: dict) -> str:
     Compara los tres mercados y devuelve el identificador del mejor pick.
 
     Criterios por mercado (todos deben cumplirse):
-      ML:    EV >= UMBRAL_EV_ML, prob >= UMBRAL_PROB_ML, cuota en rango
-      RL:    EV >= UMBRAL_EV_RL, prob >= UMBRAL_PROB_RL, cuota en rango
+      ML:    EV >= UMBRAL_EV_ML, prob ML >= UMBRAL_PROB_ML, cuota en rango
+      RL:    EV >= UMBRAL_EV_RL, prob RL >= UMBRAL_PROB_RL, cuota en rango
       TOTAL: EV >= UMBRAL_EV_TOTAL, prob >= UMBRAL_PROB_TOTAL,
              cuota en rango, stake > 0 (garantiza que pasó todos los filtros)
 
@@ -276,14 +286,11 @@ def _mejor_pick(partido: dict, ml: dict, rl: dict, total: dict) -> str:
     """
     candidatos = []
 
-    ml_h  = partido.get('cuota_home')
-    rl_h  = partido.get('cuota_rl_home')
-
     # ML
-    ev_ml   = ml.get('valor_ml', 0)
-    prob_ml = (partido.get('prob_home_win', 0)
-               if ml.get('pick_ml') == partido['home_team']
-               else partido.get('prob_away_win', 0))
+    ev_ml    = ml.get('valor_ml', 0)
+    prob_ml  = (partido.get('prob_home_win', 0)
+                if ml.get('pick_ml') == partido['home_team']
+                else partido.get('prob_away_win', 0))
     cuota_ml = (partido.get('cuota_home')
                 if ml.get('pick_ml') == partido['home_team']
                 else partido.get('cuota_away')) or 0
@@ -293,11 +300,12 @@ def _mejor_pick(partido: dict, ml: dict, rl: dict, total: dict) -> str:
             MIN_CUOTA_ML <= cuota_ml <= MAX_CUOTA_ML):
         candidatos.append(('ML', ev_ml, f"ML: {ml['pick_ml']}"))
 
-    # RL
-    ev_rl   = rl.get('valor_rl', 0)
-    prob_rl = (partido.get('prob_home_win', 0)
-               if rl.get('pick_rl') == partido['home_team']
-               else partido.get('prob_away_win', 0))
+    # RL — FIX #2: usa prob de cubrir RL (rl_home_prob/rl_away_prob),
+    # no la probabilidad de ganar el moneyline
+    ev_rl    = rl.get('valor_rl', 0)
+    prob_rl  = (partido.get('rl_home_prob', 0)
+                if rl.get('pick_rl') == partido['home_team']
+                else partido.get('rl_away_prob', 0))
     cuota_rl = (partido.get('cuota_rl_home')
                 if rl.get('pick_rl') == partido['home_team']
                 else partido.get('cuota_rl_away')) or 0
@@ -333,7 +341,7 @@ def analizar_valor(partidos: list) -> list:
         proj_home  = partido.get('proj_home', 4.5)
         proj_away  = partido.get('proj_away', 4.5)
 
-        # Probabilidades Poisson de victoria
+        # Probabilidades Poisson de victoria ML
         prob_home, prob_away = _prob_ganar_poisson(proj_home, proj_away)
 
         partido['prob_home_win'] = prob_home

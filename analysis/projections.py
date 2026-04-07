@@ -41,13 +41,17 @@ ESTADIOS_CERRADOS = {
     'loanDepot park',           # Miami Marlins     — techo retráctil, default cerrado
 }
 
+# FIX #3 — Oracle Park eliminado de ESTADIOS_RETRACTILES.
+# Oracle Park (San Francisco Giants) es un estadio ABIERTO sin techo.
+# Clasificarlo como retráctil causaba que con temp < 12°C el sistema
+# usara temperatura interior (21°C) en lugar de la real (~8-10°C en abril),
+# inflando las proyecciones de carreras para partidos en Oracle Park.
 ESTADIOS_RETRACTILES = {
     'Chase Field',              # Arizona Diamondbacks
     'American Family Field',    # Milwaukee Brewers
     'Globe Life Field',         # Texas Rangers
     'T-Mobile Park',            # Seattle Mariners
     'Minute Maid Park',         # Houston Astros
-    'Oracle Park',              # San Francisco Giants (no retráctil pero muy frío)
 }
 
 # Si la temperatura exterior está por debajo de este umbral y el estadio
@@ -292,7 +296,8 @@ def proyectar_totales(partidos: list) -> list:
         pf_base     = pf_tabla.get(venue) or pf_tabla.get('default', 1.0)
         contexto    = partido.get('contexto', {})
 
-        # Park factor con ajuste por temperatura y tipo de estadio
+        # Park factor con ajuste por temperatura y tipo de estadio.
+        # REQUIERE que analizar_contexto() haya corrido ANTES en main.py.
         pf_ajustado, detalle_pf = ajustar_park_factor(pf_base, contexto, venue)
 
         home_bullpen  = partido.get('home_bullpen', {'ERA': ERA_LIGA})
