@@ -1,4 +1,8 @@
 from scipy.stats import poisson
+from utils.logger import get as get_log
+
+log = get_log()
+
 
 def simular_probabilidades(home, away, max_runs=15):
     prob_home_win = 0.0
@@ -9,6 +13,7 @@ def simular_probabilidades(home, away, max_runs=15):
                 prob_home_win += p
     return round(prob_home_win, 4), round(1 - prob_home_win, 4)
 
+
 def simular_runline(team_proj, opp_proj, max_runs=15):
     cover_prob = 0.0
     for t in range(max_runs):
@@ -18,8 +23,10 @@ def simular_runline(team_proj, opp_proj, max_runs=15):
                 cover_prob += p
     return round(cover_prob, 4)
 
+
 def calcular_valor(prob, cuota):
     return round((prob * cuota - 1) * 100, 2)
+
 
 def calcular_kelly(probabilidad: float, cuota: float) -> float:
     if probabilidad is None or cuota is None:
@@ -30,9 +37,35 @@ def calcular_kelly(probabilidad: float, cuota: float) -> float:
     kelly = (probabilidad * (b + 1) - 1) / b
     return round(kelly * 100, 2) if kelly > 0 else 0.0
 
-def aplicar_simulaciones(partidos):
+
+def aplicar_simulaciones(partidos: list) -> list:
+    """
+    Aplica simulaciones Poisson usando las proyecciones del pipeline.
+
+    Orden interno:
+      1. Ensemble (Poisson + Regresión Lineal) ajusta proj_home/proj_away
+         si hay datos de carreras recientes disponibles.
+      2. Simulación Poisson estándar sobre las proyecciones (ya ajustadas).
+      3. Simulación de runline sobre las mismas proyecciones.
+
+    El ensemble es transparente para todo el downstream: value.py, markets.py,
+    etc. siguen consumiendo proj_home/proj_away sin saber si fueron ajustados.
+    """
+    # ── Paso 1: Ensemble Poisson + Regresión Lineal ───────────────────────────
+    # Importación lazy para evitar dependencia circular si ensemble.py
+    # necesita algún módulo que importa simulation.py en el futuro.
+    try:
+        from analysis.ensemble import ajustar_proyecciones_ensemble
+        partidos = ajustar_proyecciones_ensemble(partidos)
+    except Exception as e:
+        # Fallback silencioso: si el ensemble falla por cualquier razón,
+        # las proyecciones Poisson originales se mantienen intactas.
+        log.debug(f"Ensemble desactivado (fallback a Poisson puro): {e}")
+
+    # ── Paso 2: Simulación de probabilidades ──────────────────────────────────
     for p in partidos:
-        home, away = p['proj_home'], p['proj_away']
+        home = max(p.get('proj_home', 4.5), 0.5)
+        away = max(p.get('proj_away', 4.5), 0.5)
 
         prob_home, prob_away = simular_probabilidades(home, away)
         p['prob_home_win'] = prob_home
@@ -40,4 +73,5 @@ def aplicar_simulaciones(partidos):
 
         p['rl_home_prob'] = simular_runline(home, away)
         p['rl_away_prob'] = simular_runline(away, home)
+
     return partidos

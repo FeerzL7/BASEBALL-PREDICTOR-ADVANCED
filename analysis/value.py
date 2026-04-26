@@ -25,29 +25,23 @@ log = get_log()
 KELLY_MAX_STAKE_PCT = 5.0
 KELLY_FRACCION      = 0.5
 
-# ── Umbrales ML ───────────────────────────────────────────────────────────────
-UMBRAL_EV_ML       = 5
-UMBRAL_PROB_ML     = 0.42
-MIN_CUOTA_ML       = 1.65
-MAX_CUOTA_ML       = 2.50
+UMBRAL_EV_ML       = 8      # subir de 5 → 8, filtrar picks débiles
+UMBRAL_PROB_ML     = 0.48   # subir de 0.42 → 0.48, cerca del breakeven real
+MIN_CUOTA_ML       = 1.70   # subir de 1.65 → 1.70
+MAX_CUOTA_ML       = 2.30   # bajar de 2.50 → 2.30, cuotas muy altas son underdog puro
 
 # ── Umbrales RL ───────────────────────────────────────────────────────────────
-# FIX #2 — el umbral de prob para RL se aplica ahora sobre rl_home_prob /
-# rl_away_prob (prob real de cubrir +1.5) calculada en simulation.py,
-# no sobre la prob de ganar el moneyline (que siempre es mayor).
-# Se sube el umbral de 0.40 → 0.33 para compensar que ahora usamos
-# la probabilidad correcta (más baja por naturaleza del runline).
-UMBRAL_EV_RL       = 7
-UMBRAL_PROB_RL     = 0.33   # prob de cubrir +1.5, no de ganar ML
-MIN_CUOTA_RL       = 1.55
-MAX_CUOTA_RL       = 2.60
+UMBRAL_EV_RL       = 15     # subir fuerte de 7 → 15
+UMBRAL_PROB_RL     = 0.38   # subir de 0.33 → 0.38
+MIN_CUOTA_RL       = 1.60   # subir de 1.55 → 1.60
+MAX_CUOTA_RL       = 2.30   # bajar de 2.60 → 2.30
 
 # ── Umbrales TOTAL ────────────────────────────────────────────────────────────
-UMBRAL_EV_TOTAL    = 4
-UMBRAL_PROB_TOTAL  = 0.52
-DIFF_LINEA_MIN     = 0.75
-MIN_CUOTA_TOTAL    = 1.75
-MAX_CUOTA_TOTAL    = 2.20
+UMBRAL_EV_TOTAL    = 4      # mantener igual ← está funcionando
+UMBRAL_PROB_TOTAL  = 0.52   # mantener igual
+DIFF_LINEA_MIN     = 0.75   # mantener igual
+MIN_CUOTA_TOTAL    = 1.75   # mantener igual
+MAX_CUOTA_TOTAL    = 2.20   # mantener igual
 
 
 # ── Utilidades comunes ────────────────────────────────────────────────────────
