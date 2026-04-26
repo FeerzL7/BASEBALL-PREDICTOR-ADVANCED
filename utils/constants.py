@@ -1,7 +1,7 @@
 # utils/constants.py
 from datetime import datetime
 
-API_KEY = "e16bac9cd9c31a572916a8b86087018f"
+API_KEY = "0cee48b1825b975b6ad2a91f287de3a2"
 SPORT   = "baseball_mlb"
 REGION  = "us"
 MARKETS = "h2h,totals,spreads"

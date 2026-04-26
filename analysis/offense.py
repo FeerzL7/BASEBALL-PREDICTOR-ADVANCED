@@ -10,6 +10,10 @@
 #   3. Ponderar OPS y AVG por PA de cada bateador
 #   4. Si fallan los splits individuales → fallback a stats del equipo completo
 #
+# ENSEMBLE: este módulo ahora guarda runs_recientes_lista (list[float]) además
+# del promedio runs_last_5. La lista completa la consume ensemble.py para
+# calcular la regresión lineal y detectar equipos "todo o nada".
+#
 # Caché en disco de TTL_HORAS para no repetir en la misma ejecución del día.
 
 import json
@@ -28,14 +32,19 @@ IP_MINIMO_PA  = 50      # PA mínimos para considerar a un bateador
 CACHE_DIR     = "output"
 CACHE_FILE    = os.path.join(CACHE_DIR, "offense_cache.json")
 
+# Juegos recientes para la lista que consume ensemble.py
+N_JUEGOS_RECIENTES = 10
+
 # Promedios de liga para fallback y normalización
 OPS_LIGA_R    = 0.730
 OPS_LIGA_L    = 0.710
 AVG_LIGA      = 0.250
 RPG_LIGA      = 4.50
 
-DEFAULTS_VS_R = {'runsPerGame': 4.50, 'OPS': OPS_LIGA_R, 'wRC+': 100, 'runs_last_5': 4.50}
-DEFAULTS_VS_L = {'runsPerGame': 4.30, 'OPS': OPS_LIGA_L, 'wRC+':  96, 'runs_last_5': 4.30}
+DEFAULTS_VS_R = {'runsPerGame': 4.50, 'OPS': OPS_LIGA_R, 'wRC+': 100, 'runs_last_5': 4.50,
+                 'runs_recientes_lista': []}
+DEFAULTS_VS_L = {'runsPerGame': 4.30, 'OPS': OPS_LIGA_L, 'wRC+':  96, 'runs_last_5': 4.30,
+                 'runs_recientes_lista': []}
 
 
 # ── Caché en disco ─────────────────────────────────────────────────────────────
@@ -105,11 +114,11 @@ def _top_bateadores(team_id: int, season: int) -> list:
             'teamId':     team_id,
             'season':     season,
             'playerPool': 'All',
-            'limit':      N_BATEADORES * 3,   # pedir más para filtrar por PA
+            'limit':      N_BATEADORES * 3,
             'sortStat':   'plateAppearances',
             'order':      'desc',
         })
-        splits  = data.get('stats', [{}])[0].get('splits', [])# type: ignore
+        splits  = data.get('stats', [{}])[0].get('splits', [])  # type: ignore
         result  = []
         for s in splits:
             stat   = s.get('stat', {})
@@ -143,7 +152,7 @@ def _split_bateador(player_id: int, vs_hand: str, season: int) -> dict | None:
                 f"sitCodes={sit_code},season={season},sportId=1)")
     try:
         data    = get('person', {'personId': player_id, 'hydrate': hydrate})
-        persona = data.get('people', [{}])[0]# type: ignore
+        persona = data.get('people', [{}])[0]  # type: ignore
         for sg in persona.get('stats', []):
             for split in sg.get('splits', []):
                 stat = split.get('stat', {})
@@ -164,29 +173,20 @@ def _split_bateador(player_id: int, vs_hand: str, season: int) -> dict | None:
 def _ops_ponderado_lineup(bateadores: list, vs_hand: str, season: int) -> dict | None:
     """
     Calcula OPS y AVG ponderados por PA de los bateadores del corazón del lineup.
-    Para cada bateador intenta obtener el split específico vs la mano del pitcher.
-    Si el split falla, usa las stats generales del bateador como fallback.
-
-    Devuelve dict con ops_pond, avg_pond, n_con_split, n_total
-    o None si no hay datos suficientes.
     """
-    ops_sum = 0.0
+    ops_sum  = 0.0
     pa_total = 0
-
-    n_con_split  = 0
-    n_total      = len(bateadores)
+    n_con_split = 0
+    n_total     = len(bateadores)
 
     for bat in bateadores:
         pid = bat.get('id')
         pa  = bat.get('pa', 0)
 
-        split = _split_bateador(pid, vs_hand, season) if pid else None
-
+        split    = _split_bateador(pid, vs_hand, season) if pid else None
+        ops_usar = split['ops'] if split else bat['ops']
         if split:
-            ops_usar = split['ops']
             n_con_split += 1
-        else:
-            ops_usar = bat['ops']   # fallback a stats generales
 
         ops_sum  += ops_usar * pa
         pa_total += pa
@@ -194,35 +194,51 @@ def _ops_ponderado_lineup(bateadores: list, vs_hand: str, season: int) -> dict |
     if pa_total == 0:
         return None
 
-    ops_pond = round(ops_sum / pa_total, 3)
     return {
-        'ops_pond':   ops_pond,
+        'ops_pond':    round(ops_sum / pa_total, 3),
         'n_con_split': n_con_split,
         'n_total':     n_total,
     }
 
 
-def _runs_recientes(team_id: int, n: int = 10) -> float:
-    """Promedio de carreras anotadas en los últimos n juegos del schedule."""
+def _runs_recientes(team_id: int, n: int = N_JUEGOS_RECIENTES) -> tuple[float, list[float]]:
+    """
+    Devuelve (promedio_runs, lista_runs) de los últimos n juegos del equipo.
+
+    La LISTA es la novedad respecto a la versión anterior: ensemble.py la usa
+    para ajustar la proyección mediante regresión lineal sobre la tendencia.
+    El PROMEDIO se usa en projections.py como siempre.
+
+    Retorna (RPG_LIGA, []) si no hay datos suficientes.
+    """
     try:
         import numpy as np
         from datetime import timedelta
         from statsapi import schedule
+
         hoy  = datetime.now().strftime('%Y-%m-%d')
-        hace = (datetime.now() - timedelta(days=25)).strftime('%Y-%m-%d')
-        juegos = schedule(start_date=hace, end_date=hoy, teamId=team_id)# type: ignore
-        runs = []
+        hace = (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d')
+        juegos = schedule(start_date=hace, end_date=hoy, teamId=team_id)  # type: ignore
+
+        runs: list[float] = []
         for j in juegos:
             if j.get('status') not in ('Final', 'Game Over'):
                 continue
             if str(j.get('home_id')) == str(team_id):
-                runs.append(int(j.get('home_score', 0) or 0))
+                runs.append(float(j.get('home_score', 0) or 0))
             else:
-                runs.append(int(j.get('away_score', 0) or 0))
-        runs = runs[-n:]
-        return round(float(np.mean(runs)), 3) if runs else RPG_LIGA
+                runs.append(float(j.get('away_score', 0) or 0))
+
+        runs = runs[-n:]  # últimos n juegos
+
+        if not runs:
+            return RPG_LIGA, []
+
+        promedio = round(float(np.mean(runs)), 3)
+        return promedio, runs
+
     except Exception:
-        return RPG_LIGA
+        return RPG_LIGA, []
 
 
 def _wrc_plus_aprox(ops: float) -> float:
@@ -237,11 +253,15 @@ def obtener_stats_ofensivas(team_name: str, vs_hand: str = 'R',
     """
     Punto de entrada. Devuelve stats ofensivas del equipo ponderando
     el OPS de los primeros N_BATEADORES por PA.
+
+    NUEVO: incluye 'runs_recientes_lista' (list[float]) con las carreras
+    de los últimos N_JUEGOS_RECIENTES partidos, necesaria para ensemble.py.
     """
     _cargar_cache_si_vigente()
     clave = f"{team_name}|{vs_hand}"
 
-    if clave in _CACHE_MEM:
+    # Si el caché tiene el dato Y tiene la lista reciente (nueva clave) → usar caché
+    if clave in _CACHE_MEM and 'runs_recientes_lista' in _CACHE_MEM[clave]:
         return _CACHE_MEM[clave]
 
     defaults = dict(DEFAULTS_VS_L if vs_hand == 'L' else DEFAULTS_VS_R)
@@ -252,8 +272,8 @@ def obtener_stats_ofensivas(team_name: str, vs_hand: str = 'R',
         _guardar_en_cache(team_name, vs_hand, defaults)
         return defaults
 
-    # Carreras recientes (siempre desde schedule — más confiable)
-    runs_recientes = _runs_recientes(team_id, n=10)
+    # Carreras recientes — ahora devuelve (promedio, lista)
+    runs_promedio, runs_lista = _runs_recientes(team_id, n=N_JUEGOS_RECIENTES)
 
     # Top bateadores por PA → OPS ponderado con splits
     bateadores = _top_bateadores(team_id, season)
@@ -281,7 +301,7 @@ def obtener_stats_ofensivas(team_name: str, vs_hand: str = 'R',
                 'group':    'hitting',
                 'season':   season,
             })
-            splits = data.get('stats', [{}])[0].get('splits', [])# type: ignore
+            splits = data.get('stats', [{}])[0].get('splits', [])  # type: ignore
             stat   = splits[0].get('stat', {}) if splits else {}
             ops_final = _safe(stat.get('ops'), defaults['OPS'], 0.4, 1.2)
         except Exception:
@@ -292,11 +312,13 @@ def obtener_stats_ofensivas(team_name: str, vs_hand: str = 'R',
         )
 
     resultado = {
-        'runsPerGame': round(runs_recientes, 3),
-        'OPS':         round(ops_final, 3),
-        'wRC+':        _wrc_plus_aprox(ops_final),
-        'runs_last_5': max(runs_recientes, 1.5),
-        'split':       f"vs{'RHP' if vs_hand == 'R' else 'LHP'}",
+        'runsPerGame':          round(runs_promedio, 3),
+        'OPS':                  round(ops_final, 3),
+        'wRC+':                 _wrc_plus_aprox(ops_final),
+        'runs_last_5':          max(runs_promedio, 1.5),
+        'split':                f"vs{'RHP' if vs_hand == 'R' else 'LHP'}",
+        # NUEVO: lista completa para ensemble.py
+        'runs_recientes_lista': runs_lista,
     }
 
     _guardar_en_cache(team_name, vs_hand, resultado)
@@ -320,13 +342,18 @@ def analizar_ofensiva(partidos: list) -> list:
         partido['home_offense'] = obtener_stats_ofensivas(home, hand_vs_home, season)
         partido['away_offense'] = obtener_stats_ofensivas(away, hand_vs_away, season)
 
+        runs_lista_home = partido['home_offense'].get('runs_recientes_lista', [])
+        runs_lista_away = partido['away_offense'].get('runs_recientes_lista', [])
+
         log.debug(
             f"OFFENSE {home} ({partido['home_offense']['split']} "
             f"OPS={partido['home_offense']['OPS']} "
-            f"R/5={partido['home_offense']['runs_last_5']}) | "
+            f"R/10={partido['home_offense']['runs_last_5']} "
+            f"n_runs={len(runs_lista_home)}) | "
             f"{away} ({partido['away_offense']['split']} "
             f"OPS={partido['away_offense']['OPS']} "
-            f"R/5={partido['away_offense']['runs_last_5']})"
+            f"R/10={partido['away_offense']['runs_last_5']} "
+            f"n_runs={len(runs_lista_away)})"
         )
 
     return partidos
