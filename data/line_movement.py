@@ -320,8 +320,10 @@ def ajustar_picks_por_movimiento(partidos: list, movimientos: dict) -> list:
 
             # ── ML / RL ───────────────────────────────────────────────────────
             elif 'ML:' in mejor_pick or 'RL:' in mejor_pick:
-                pick_equipo = (partido.get('pick_ml', '') or
-                               partido.get('pick_rl', '')).lower()
+                pick_equipo = (
+                    partido.get('pick_rl', '') if 'RL:' in mejor_pick
+                    else partido.get('pick_ml', '')
+                ).lower()
 
                 if tipo == 'ML_MOVE':
                     if pick_equipo and pick_equipo in detalle:

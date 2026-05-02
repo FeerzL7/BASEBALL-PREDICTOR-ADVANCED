@@ -42,9 +42,9 @@ AVG_LIGA      = 0.250
 RPG_LIGA      = 4.50
 
 DEFAULTS_VS_R = {'runsPerGame': 4.50, 'OPS': OPS_LIGA_R, 'wRC+': 100, 'runs_last_5': 4.50,
-                 'runs_recientes_lista': []}
+                 'runs_recientes_lista': [], 'split': 'vsRHP'}
 DEFAULTS_VS_L = {'runsPerGame': 4.30, 'OPS': OPS_LIGA_L, 'wRC+':  96, 'runs_last_5': 4.30,
-                 'runs_recientes_lista': []}
+                 'runs_recientes_lista': [], 'split': 'vsLHP'}
 
 
 # ── Caché en disco ─────────────────────────────────────────────────────────────
@@ -100,6 +100,20 @@ def _safe(val, default: float, lo: float = -999, hi: float = 999) -> float:
         return default if (v != v or v < lo or v > hi) else v
     except (TypeError, ValueError):
         return default
+
+
+def _normalizar_resultado(resultado: dict, vs_hand: str) -> dict:
+    defaults = DEFAULTS_VS_L if vs_hand == 'L' else DEFAULTS_VS_R
+    normalizado = dict(defaults)
+    normalizado.update(resultado or {})
+    normalizado['split'] = normalizado.get('split') or defaults['split']
+    normalizado['runs_last_5'] = max(
+        _safe(normalizado.get('runs_last_5'), defaults['runs_last_5']),
+        1.5,
+    )
+    runs_lista = normalizado.get('runs_recientes_lista', [])
+    normalizado['runs_recientes_lista'] = runs_lista if isinstance(runs_lista, list) else []
+    return normalizado
 
 
 def _top_bateadores(team_id: int, season: int) -> list:
@@ -212,7 +226,6 @@ def _runs_recientes(team_id: int, n: int = N_JUEGOS_RECIENTES) -> tuple[float, l
     Retorna (RPG_LIGA, []) si no hay datos suficientes.
     """
     try:
-        import numpy as np
         from datetime import timedelta
         from statsapi import schedule
 
@@ -234,7 +247,7 @@ def _runs_recientes(team_id: int, n: int = N_JUEGOS_RECIENTES) -> tuple[float, l
         if not runs:
             return RPG_LIGA, []
 
-        promedio = round(float(np.mean(runs)), 3)
+        promedio = round(sum(runs) / len(runs), 3)
         return promedio, runs
 
     except Exception:
@@ -262,9 +275,9 @@ def obtener_stats_ofensivas(team_name: str, vs_hand: str = 'R',
 
     # Si el caché tiene el dato Y tiene la lista reciente (nueva clave) → usar caché
     if clave in _CACHE_MEM and 'runs_recientes_lista' in _CACHE_MEM[clave]:
-        return _CACHE_MEM[clave]
+        return _normalizar_resultado(_CACHE_MEM[clave], vs_hand)
 
-    defaults = dict(DEFAULTS_VS_L if vs_hand == 'L' else DEFAULTS_VS_R)
+    defaults = _normalizar_resultado({}, vs_hand)
 
     try:
         team_id = lookup_team(team_name)[0]['id']
@@ -321,6 +334,7 @@ def obtener_stats_ofensivas(team_name: str, vs_hand: str = 'R',
         'runs_recientes_lista': runs_lista,
     }
 
+    resultado = _normalizar_resultado(resultado, vs_hand)
     _guardar_en_cache(team_name, vs_hand, resultado)
     return resultado
 

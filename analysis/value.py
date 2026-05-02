@@ -15,31 +15,43 @@
 # Cada mercado tiene sus propios umbrales de EV, probabilidad mínima
 # y rango de cuota aceptable calibrados para su dinámica específica.
 
-from scipy.stats import poisson
-
 from utils.logger import get as get_log
+from utils import poisson_math as poisson
 
 log = get_log()
 
 # ── Gestión de riesgo ─────────────────────────────────────────────────────────
-KELLY_MAX_STAKE_PCT = 5.0
-KELLY_FRACCION      = 0.5
+KELLY_MAX_STAKE_PCT = 1.5
+KELLY_FRACCION      = 0.20
 
-UMBRAL_EV_ML       = 8      # subir de 5 → 8, filtrar picks débiles
-UMBRAL_PROB_ML     = 0.48   # subir de 0.42 → 0.48, cerca del breakeven real
+# Backtesting local: ML/RL estan en ROI negativo. Se calculan para diagnostico,
+# pero no entran como mejor_pick hasta recalibrarlos con muestra positiva.
+ENABLE_ML_PICKS    = False
+ENABLE_RL_PICKS    = False
+ENABLE_TOTAL_PICKS = True
+
+PROB_MODEL_WEIGHT_ML    = 0.65
+PROB_MODEL_WEIGHT_RL    = 0.60
+PROB_MODEL_WEIGHT_TOTAL = 0.70
+PROB_CAP_ML             = 0.68
+PROB_CAP_RL             = 0.58
+PROB_CAP_TOTAL          = 0.62
+
+UMBRAL_EV_ML       = 30
+UMBRAL_PROB_ML     = 0.54
 MIN_CUOTA_ML       = 1.70   # subir de 1.65 → 1.70
 MAX_CUOTA_ML       = 2.30   # bajar de 2.50 → 2.30, cuotas muy altas son underdog puro
 
 # ── Umbrales RL ───────────────────────────────────────────────────────────────
-UMBRAL_EV_RL       = 15     # subir fuerte de 7 → 15
-UMBRAL_PROB_RL     = 0.38   # subir de 0.33 → 0.38
+UMBRAL_EV_RL       = 20
+UMBRAL_PROB_RL     = 0.42
 MIN_CUOTA_RL       = 1.60   # subir de 1.55 → 1.60
 MAX_CUOTA_RL       = 2.30   # bajar de 2.60 → 2.30
 
 # ── Umbrales TOTAL ────────────────────────────────────────────────────────────
-UMBRAL_EV_TOTAL    = 4      # mantener igual ← está funcionando
-UMBRAL_PROB_TOTAL  = 0.52   # mantener igual
-DIFF_LINEA_MIN     = 0.75   # mantener igual
+UMBRAL_EV_TOTAL    = 15
+UMBRAL_PROB_TOTAL  = 0.54
+DIFF_LINEA_MIN     = 1.00
 MIN_CUOTA_TOTAL    = 1.75   # mantener igual
 MAX_CUOTA_TOTAL    = 2.20   # mantener igual
 
@@ -48,6 +60,27 @@ MAX_CUOTA_TOTAL    = 2.20   # mantener igual
 
 def _calc_ev(prob: float, cuota: float) -> float:
     return round((prob * cuota - 1) * 100, 2)
+
+
+def _implied_prob(cuota: float) -> float:
+    if not cuota or cuota <= 1:
+        return 0.50
+    return 1 / cuota
+
+
+def _no_vig_probs(cuota_a: float, cuota_b: float) -> tuple[float, float]:
+    pa = _implied_prob(cuota_a)
+    pb = _implied_prob(cuota_b)
+    total = pa + pb
+    if total <= 0:
+        return 0.50, 0.50
+    return pa / total, pb / total
+
+
+def _blend_prob(model_prob: float, market_prob: float, model_weight: float,
+                cap: float) -> float:
+    prob = model_prob * model_weight + market_prob * (1 - model_weight)
+    return round(max(0.02, min(prob, cap)), 4)
 
 
 def _kelly(prob: float, cuota: float) -> float:
@@ -90,13 +123,17 @@ def _decidir_ml(partido: dict, prob_home: float, prob_away: float) -> dict:
     if not ml_h or not ml_a:
         return resultado
 
-    ev_home = _calc_ev(prob_home, ml_h)
-    ev_away = _calc_ev(prob_away, ml_a)
+    mkt_home, mkt_away = _no_vig_probs(ml_h, ml_a)
+    prob_home_adj = _blend_prob(prob_home, mkt_home, PROB_MODEL_WEIGHT_ML, PROB_CAP_ML)
+    prob_away_adj = _blend_prob(prob_away, mkt_away, PROB_MODEL_WEIGHT_ML, PROB_CAP_ML)
+
+    ev_home = _calc_ev(prob_home_adj, ml_h)
+    ev_away = _calc_ev(prob_away_adj, ml_a)
 
     if ev_home >= ev_away:
-        pick, ev, prob, cuota = ho, ev_home, prob_home, ml_h
+        pick, ev, prob, cuota, prob_raw = ho, ev_home, prob_home_adj, ml_h, prob_home
     else:
-        pick, ev, prob, cuota = aw, ev_away, prob_away, ml_a
+        pick, ev, prob, cuota, prob_raw = aw, ev_away, prob_away_adj, ml_a, prob_away
 
     stake = _kelly(prob, cuota)
 
@@ -107,7 +144,7 @@ def _decidir_ml(partido: dict, prob_home: float, prob_away: float) -> dict:
         'stake_pct_ml': stake,
         'prediccion_ml': {
             'mercado': 'ML', 'seleccion': pick,
-            'valor': ev, 'prob': prob,
+            'valor': ev, 'prob': prob, 'prob_raw': prob_raw,
             'cuota': cuota, 'stake_pct': stake,
         },
     })
@@ -150,13 +187,17 @@ def _decidir_rl(partido: dict, prob_home: float, prob_away: float) -> dict:
     rl_prob_home = partido.get('rl_home_prob', prob_home * 0.70)  # fallback conservador
     rl_prob_away = partido.get('rl_away_prob', prob_away * 0.70)  # fallback conservador
 
-    # Elegir el equipo con mayor probabilidad de cubrir el RL
-    if rl_prob_home >= rl_prob_away:
-        pick, rl_cuota, rl_prob = ho, rl_h, rl_prob_home
-    else:
-        pick, rl_cuota, rl_prob = aw, rl_a, rl_prob_away
+    mkt_home, mkt_away = _no_vig_probs(rl_h, rl_a)
+    rl_prob_home_adj = _blend_prob(rl_prob_home, mkt_home, PROB_MODEL_WEIGHT_RL, PROB_CAP_RL)
+    rl_prob_away_adj = _blend_prob(rl_prob_away, mkt_away, PROB_MODEL_WEIGHT_RL, PROB_CAP_RL)
+    ev_home = _calc_ev(rl_prob_home_adj, rl_h)
+    ev_away = _calc_ev(rl_prob_away_adj, rl_a)
 
-    ev    = _calc_ev(rl_prob, rl_cuota)
+    if ev_home >= ev_away:
+        pick, rl_cuota, rl_prob, ev, prob_raw = ho, rl_h, rl_prob_home_adj, ev_home, rl_prob_home
+    else:
+        pick, rl_cuota, rl_prob, ev, prob_raw = aw, rl_a, rl_prob_away_adj, ev_away, rl_prob_away
+
     stake = _kelly(rl_prob, rl_cuota)
 
     resultado.update({
@@ -166,7 +207,7 @@ def _decidir_rl(partido: dict, prob_home: float, prob_away: float) -> dict:
         'stake_pct_rl': stake,
         'prediccion_rl': {
             'mercado': 'RL', 'seleccion': pick,
-            'valor': ev, 'prob': rl_prob,
+            'valor': ev, 'prob': rl_prob, 'prob_raw': prob_raw,
             'cuota': rl_cuota, 'stake_pct': stake,
         },
     })
@@ -226,8 +267,11 @@ def _decidir_total(partido: dict) -> dict:
     pick_t  = 'Over' if diff > 0 else 'Under'
     cuota_t = ou_over if pick_t == 'Over' else ou_under
 
-    # Probabilidad Poisson del total proyectado
-    prob_t  = _prob_total_poisson(proj_total, ou_line, pick_t)
+    # Probabilidad Poisson del total proyectado, con shrink hacia mercado.
+    prob_raw = _prob_total_poisson(proj_total, ou_line, pick_t)
+    mkt_over, mkt_under = _no_vig_probs(ou_over, ou_under)
+    prob_market = mkt_over if pick_t == 'Over' else mkt_under
+    prob_t = _blend_prob(prob_raw, prob_market, PROB_MODEL_WEIGHT_TOTAL, PROB_CAP_TOTAL)
 
     # Ajuste de probabilidad por park factor
     if pick_t == 'Over':
@@ -255,9 +299,12 @@ def _decidir_total(partido: dict) -> dict:
         'pick_total':      pick_t,
         'valor_total':     ev_t,
         'stake_pct_total': stake_t,
+        'prob_total':      round(prob_t, 4),
+        'prob_total_raw':  round(prob_raw, 4),
         'prediccion_total': {
             'mercado': 'TOTAL', 'seleccion': pick_t,
             'valor': ev_t, 'prob': round(prob_t, 3),
+            'prob_raw': round(prob_raw, 3),
             'cuota': cuota_t, 'stake_pct': stake_t,
         },
     })
@@ -282,14 +329,13 @@ def _mejor_pick(partido: dict, ml: dict, rl: dict, total: dict) -> str:
 
     # ML
     ev_ml    = ml.get('valor_ml', 0)
-    prob_ml  = (partido.get('prob_home_win', 0)
-                if ml.get('pick_ml') == partido['home_team']
-                else partido.get('prob_away_win', 0))
+    prob_ml  = (ml.get('prediccion_ml') or {}).get('prob', 0)
     cuota_ml = (partido.get('cuota_home')
                 if ml.get('pick_ml') == partido['home_team']
                 else partido.get('cuota_away')) or 0
 
-    if (ev_ml   >= UMBRAL_EV_ML and
+    if (ENABLE_ML_PICKS and
+            ev_ml   >= UMBRAL_EV_ML and
             prob_ml >= UMBRAL_PROB_ML and
             MIN_CUOTA_ML <= cuota_ml <= MAX_CUOTA_ML):
         candidatos.append(('ML', ev_ml, f"ML: {ml['pick_ml']}"))
@@ -297,14 +343,13 @@ def _mejor_pick(partido: dict, ml: dict, rl: dict, total: dict) -> str:
     # RL — FIX #2: usa prob de cubrir RL (rl_home_prob/rl_away_prob),
     # no la probabilidad de ganar el moneyline
     ev_rl    = rl.get('valor_rl', 0)
-    prob_rl  = (partido.get('rl_home_prob', 0)
-                if rl.get('pick_rl') == partido['home_team']
-                else partido.get('rl_away_prob', 0))
+    prob_rl  = (rl.get('prediccion_rl') or {}).get('prob', 0)
     cuota_rl = (partido.get('cuota_rl_home')
                 if rl.get('pick_rl') == partido['home_team']
                 else partido.get('cuota_rl_away')) or 0
 
-    if (ev_rl   >= UMBRAL_EV_RL and
+    if (ENABLE_RL_PICKS and
+            ev_rl   >= UMBRAL_EV_RL and
             prob_rl >= UMBRAL_PROB_RL and
             MIN_CUOTA_RL <= cuota_rl <= MAX_CUOTA_RL):
         candidatos.append(('RL', ev_rl, f"RL: {rl['pick_rl']}"))
@@ -313,7 +358,7 @@ def _mejor_pick(partido: dict, ml: dict, rl: dict, total: dict) -> str:
     ev_total    = total.get('valor_total', 0)
     stake_total = total.get('stake_pct_total', 0)
 
-    if stake_total > 0 and ev_total >= UMBRAL_EV_TOTAL:
+    if ENABLE_TOTAL_PICKS and stake_total > 0 and ev_total >= UMBRAL_EV_TOTAL:
         candidatos.append(('TOTAL', ev_total, f"TOTAL: {total['pick_total']}"))
 
     if not candidatos:
@@ -362,6 +407,8 @@ def analizar_valor(partidos: list) -> list:
             'pick_total':      total['pick_total'],
             'valor_total':     total['valor_total'],
             'stake_pct_total': total['stake_pct_total'],
+            'prob_total':      total.get('prob_total', 0.0),
+            'prob_total_raw':  total.get('prob_total_raw', 0.0),
             # Proyecciones (asegurar que están en el dict)
             'proj_home':    proj_home,
             'proj_away':    proj_away,

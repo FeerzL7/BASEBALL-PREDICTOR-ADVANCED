@@ -81,7 +81,14 @@ def configurar(
     logger.setLevel(logging.DEBUG)
 
     # ── Handler de consola ────────────────────────────────────────────────────
-    ch = logging.StreamHandler(sys.stdout)
+    stream = sys.stdout
+    if hasattr(stream, "reconfigure"):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
+    ch = logging.StreamHandler(stream)
     ch.setLevel(getattr(logging, nivel_consola.upper(), logging.INFO))
     ch.setFormatter(_ColorFormatter())
     logger.addHandler(ch)

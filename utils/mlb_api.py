@@ -1,7 +1,6 @@
 # utils/mlb_api.py
 from statsapi import lookup_team, get
 from datetime import datetime
-import numpy as np
 
 def get_team_stats_vs_pitch_hand(team_name, vs_hand='R'):
     try:
@@ -11,7 +10,8 @@ def get_team_stats_vs_pitch_hand(team_name, vs_hand='R'):
 
         game_logs = get(f"teams/{team_id}/stats/game/season", params={"season": datetime.now().year})["stats"][0]["splits"]
         recent_games = game_logs[-5:] if len(game_logs) >= 5 else game_logs
-        runs_last_5 = np.mean([int(g["stat"].get("runs", 4)) for g in recent_games]) if recent_games else 4.5
+        runs = [int(g["stat"].get("runs", 4)) for g in recent_games]
+        runs_last_5 = (sum(runs) / len(runs)) if runs else 4.5
 
         return {
             "runsPerGame": float(statline.get("runsPerGame", 4.5)),

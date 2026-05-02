@@ -1,0 +1,303 @@
+2026-05-01 12:00:11 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-05-01.log
+2026-05-01 12:00:38 | INFO     | main.main                           | =======================================================
+2026-05-01 12:00:38 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-05-01 12:00:38 | INFO     | main.main                           | =======================================================
+2026-05-01 12:00:38 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-05-01 12:00:38 | INFO     | statcast.cargar_statcast            | Calculando FIP y stats avanzadas via MLB API (2026)...
+2026-05-01 12:00:38 | INFO     | statcast.cargar_statcast            | 0 equipos cargados con stats avanzadas.
+2026-05-01 12:00:38 | INFO     | main.main                           | Analizando pitchers del día...
+2026-05-01 19:08:44 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-05-01.log
+2026-05-01 19:08:44 | INFO     | backtesting.main                    | Iniciando backtesting histórico...
+2026-05-01 19:08:44 | INFO     | backtesting._leer_roi               | ROI tracking: 88 picks resueltos cargados.
+2026-05-01 19:08:44 | INFO     | backtesting._leer_predicciones      | Predicciones cargadas: 347 filas de 29 archivos.
+2026-05-01 19:08:44 | INFO     | backtesting.cruzar                  | Picks cruzados: 117 | Sin resultado aún: 142
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | BACKTESTING — RESUMEN GLOBAL
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | Total picks resueltos : 117
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | Wins                  : 56
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | Hit rate              : 47.9%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | ROI                   : -4.84%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | EV medio de picks     : 43.4
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | Ganancia acumulada    : -5.66 u
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | Mercado        N    Hit%     ROI%   EV med
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | ML            47   38.3%  -24.21%    48.53
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | RL            14   35.7%   -27.0%    47.52
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | TOTAL         56   58.9%   16.96%    38.06
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | SENSIBILIDAD POR UMBRAL DE EV
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |   ML:
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  45  hit= 40.0%  ROI= -20.84%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  41  hit= 41.5%  ROI= -17.49%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  31  hit= 41.9%  ROI=  -16.0%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |   RL:
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=   9  hit= 33.3%  ROI= -32.78%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |   TOTAL:
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  56  hit= 58.9%  ROI=  16.96%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  51  hit= 54.9%  ROI=   9.25%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  47  hit= 59.6%  ROI=  18.55%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  42  hit= 57.1%  ROI=  14.12%
+2026-05-01 19:08:44 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  31  hit= 54.8%  ROI=   9.55%
+2026-05-01 19:08:44 | INFO     | backtesting.sugerir_umbrales        | Umbral óptimo ML: EV >= 30 → hit rate 41.9% | ROI -16.0% | n=31
+2026-05-01 19:08:44 | INFO     | backtesting.sugerir_umbrales        | Umbral óptimo RL: EV >= 15 → hit rate 41.7% | ROI -14.83% | n=12
+2026-05-01 19:08:44 | INFO     | backtesting.sugerir_umbrales        | Umbral óptimo TOTAL: EV >= 15 → hit rate 59.6% | ROI 18.55% | n=47
+2026-05-01 19:08:44 | INFO     | backtesting.exportar_csv            | Resultados exportados:
+2026-05-01 19:08:44 | INFO     | backtesting.exportar_csv            |   output/backtest_results.csv
+2026-05-01 19:08:44 | INFO     | backtesting.exportar_csv            |   output/backtest_results_resumen.csv
+2026-05-01 19:08:44 | INFO     | backtesting.exportar_csv            |   output/backtest_results_sensibilidad.csv
+2026-05-01 19:08:44 | INFO     | backtesting.main                    | Usa --calibrar para actualizar umbrales en value.py automáticamente.
+2026-05-01 19:08:44 | INFO     | backtesting.main                    | Backtesting completado.
+2026-05-01 19:14:10 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-05-01.log
+2026-05-01 19:14:10 | INFO     | backtesting.main                    | Iniciando backtesting histÃ³rico...
+2026-05-01 19:14:10 | INFO     | backtesting._leer_roi               | ROI tracking: 88 picks resueltos cargados.
+2026-05-01 19:14:10 | INFO     | backtesting._leer_predicciones      | Predicciones cargadas: 347 filas de 29 archivos.
+2026-05-01 19:14:10 | INFO     | backtesting.cruzar                  | Picks cruzados: 117 | Sin resultado aÃºn: 142
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | BACKTESTING â€” RESUMEN GLOBAL
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | Total picks resueltos : 117
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | Wins                  : 56
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | Hit rate              : 47.9%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | ROI                   : -4.84%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | EV medio de picks     : 43.4
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | Ganancia acumulada    : -5.66 u
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | Mercado        N    Hit%     ROI%   EV med
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | ML            47   38.3%  -24.21%    48.53
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | RL            14   35.7%   -27.0%    47.52
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | TOTAL         56   58.9%   16.96%    38.06
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | SENSIBILIDAD POR UMBRAL DE EV
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |   ML:
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  â†’  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  â†’  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  â†’  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  â†’  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  â†’  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  â†’  n=  45  hit= 40.0%  ROI= -20.84%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  â†’  n=  41  hit= 41.5%  ROI= -17.49%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  â†’  n=  31  hit= 41.9%  ROI=  -16.0%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |   RL:
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  â†’  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  â†’  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  â†’  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  â†’  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  â†’  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  â†’  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  â†’  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  â†’  n=   9  hit= 33.3%  ROI= -32.78%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |   TOTAL:
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  â†’  n=  56  hit= 58.9%  ROI=  16.96%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  â†’  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  â†’  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  â†’  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  â†’  n=  51  hit= 54.9%  ROI=   9.25%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  â†’  n=  47  hit= 59.6%  ROI=  18.55%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  â†’  n=  42  hit= 57.1%  ROI=  14.12%
+2026-05-01 19:14:10 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  â†’  n=  31  hit= 54.8%  ROI=   9.55%
+2026-05-01 19:14:10 | WARNING  | backtesting.sugerir_umbrales        | Umbral ML: sin banda con ROI >= 0.0% y n >= 8
+2026-05-01 19:14:10 | WARNING  | backtesting.sugerir_umbrales        | Umbral RL: sin banda con ROI >= 0.0% y n >= 8
+2026-05-01 19:14:10 | INFO     | backtesting.sugerir_umbrales        | Umbral Ã³ptimo TOTAL: EV >= 15 â†’ hit rate 59.6% | ROI 18.55% | n=47
+2026-05-01 19:14:10 | INFO     | backtesting.exportar_csv            | Resultados exportados:
+2026-05-01 19:14:10 | INFO     | backtesting.exportar_csv            |   output/backtest_results.csv
+2026-05-01 19:14:10 | INFO     | backtesting.exportar_csv            |   output/backtest_results_resumen.csv
+2026-05-01 19:14:10 | INFO     | backtesting.exportar_csv            |   output/backtest_results_sensibilidad.csv
+2026-05-01 19:14:10 | INFO     | backtesting.main                    | Usa --calibrar para actualizar umbrales en value.py automÃ¡ticamente.
+2026-05-01 19:14:10 | INFO     | backtesting.main                    | Backtesting completado.
+2026-05-01 19:14:46 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-05-01.log
+2026-05-01 19:14:46 | INFO     | backtesting.main                    | Iniciando backtesting histórico...
+2026-05-01 19:14:46 | INFO     | backtesting._leer_roi               | ROI tracking: 88 picks resueltos cargados.
+2026-05-01 19:14:46 | INFO     | backtesting._leer_predicciones      | Predicciones cargadas: 347 filas de 29 archivos.
+2026-05-01 19:14:46 | INFO     | backtesting.cruzar                  | Picks cruzados: 117 | Sin resultado aún: 142
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | BACKTESTING — RESUMEN GLOBAL
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | Total picks resueltos : 117
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | Wins                  : 56
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | Hit rate              : 47.9%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | ROI                   : -4.84%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | EV medio de picks     : 43.4
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | Ganancia acumulada    : -5.66 u
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | Mercado        N    Hit%     ROI%   EV med
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | ML            47   38.3%  -24.21%    48.53
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | RL            14   35.7%   -27.0%    47.52
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | TOTAL         56   58.9%   16.96%    38.06
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | SENSIBILIDAD POR UMBRAL DE EV
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |   ML:
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  45  hit= 40.0%  ROI= -20.84%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  41  hit= 41.5%  ROI= -17.49%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  31  hit= 41.9%  ROI=  -16.0%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |   RL:
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=   9  hit= 33.3%  ROI= -32.78%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |   TOTAL:
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  56  hit= 58.9%  ROI=  16.96%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  51  hit= 54.9%  ROI=   9.25%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  47  hit= 59.6%  ROI=  18.55%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  42  hit= 57.1%  ROI=  14.12%
+2026-05-01 19:14:46 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  31  hit= 54.8%  ROI=   9.55%
+2026-05-01 19:14:46 | WARNING  | backtesting.sugerir_umbrales        | Umbral ML: sin banda con ROI >= 0.0% y n >= 8
+2026-05-01 19:14:46 | WARNING  | backtesting.sugerir_umbrales        | Umbral RL: sin banda con ROI >= 0.0% y n >= 8
+2026-05-01 19:14:46 | INFO     | backtesting.sugerir_umbrales        | Umbral óptimo TOTAL: EV >= 15 → hit rate 59.6% | ROI 18.55% | n=47
+2026-05-01 19:14:46 | INFO     | backtesting.exportar_csv            | Resultados exportados:
+2026-05-01 19:14:46 | INFO     | backtesting.exportar_csv            |   output/backtest_results.csv
+2026-05-01 19:14:46 | INFO     | backtesting.exportar_csv            |   output/backtest_results_resumen.csv
+2026-05-01 19:14:46 | INFO     | backtesting.exportar_csv            |   output/backtest_results_sensibilidad.csv
+2026-05-01 19:14:46 | INFO     | backtesting.main                    | Usa --calibrar para actualizar umbrales en value.py automáticamente.
+2026-05-01 19:14:46 | INFO     | backtesting.main                    | Backtesting completado.
+2026-05-01 19:17:12 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-05-01.log
+2026-05-01 19:17:12 | INFO     | backtesting.main                    | Iniciando backtesting histórico...
+2026-05-01 19:17:12 | INFO     | backtesting._leer_roi               | ROI tracking: 88 picks resueltos cargados.
+2026-05-01 19:17:12 | INFO     | backtesting._leer_predicciones      | Predicciones cargadas: 347 filas de 29 archivos.
+2026-05-01 19:17:12 | INFO     | backtesting.cruzar                  | Picks cruzados: 117 | Sin resultado aún: 142
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | BACKTESTING — RESUMEN GLOBAL
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | Total picks resueltos : 117
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | Wins                  : 56
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | Hit rate              : 47.9%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | ROI                   : -4.84%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | EV medio de picks     : 43.4
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | Ganancia acumulada    : -5.66 u
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | Mercado        N    Hit%     ROI%   EV med
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | ML            47   38.3%  -24.21%    48.53
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | RL            14   35.7%   -27.0%    47.52
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | TOTAL         56   58.9%   16.96%    38.06
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | SENSIBILIDAD POR UMBRAL DE EV
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |   ML:
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  45  hit= 40.0%  ROI= -20.84%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  41  hit= 41.5%  ROI= -17.49%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  31  hit= 41.9%  ROI=  -16.0%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |   RL:
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=   9  hit= 33.3%  ROI= -32.78%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |   TOTAL:
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  56  hit= 58.9%  ROI=  16.96%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  51  hit= 54.9%  ROI=   9.25%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  47  hit= 59.6%  ROI=  18.55%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  42  hit= 57.1%  ROI=  14.12%
+2026-05-01 19:17:12 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  31  hit= 54.8%  ROI=   9.55%
+2026-05-01 19:17:12 | WARNING  | backtesting.sugerir_umbrales        | Umbral ML: sin banda con ROI >= 0.0% y n >= 8
+2026-05-01 19:17:12 | WARNING  | backtesting.sugerir_umbrales        | Umbral RL: sin banda con ROI >= 0.0% y n >= 8
+2026-05-01 19:17:12 | INFO     | backtesting.sugerir_umbrales        | Umbral óptimo TOTAL: EV >= 15 → hit rate 59.6% | ROI 18.55% | n=47
+2026-05-01 19:17:12 | INFO     | backtesting.exportar_csv            | Resultados exportados:
+2026-05-01 19:17:12 | INFO     | backtesting.exportar_csv            |   output/backtest_results.csv
+2026-05-01 19:17:12 | INFO     | backtesting.exportar_csv            |   output/backtest_results_resumen.csv
+2026-05-01 19:17:12 | INFO     | backtesting.exportar_csv            |   output/backtest_results_sensibilidad.csv
+2026-05-01 19:17:12 | INFO     | backtesting.main                    | Usa --calibrar para actualizar umbrales en value.py automáticamente.
+2026-05-01 19:17:12 | INFO     | backtesting.main                    | Backtesting completado.
+2026-05-01 19:18:16 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-05-01.log
+2026-05-01 19:18:16 | INFO     | backtesting.main                    | Iniciando backtesting histórico...
+2026-05-01 19:18:16 | INFO     | backtesting._leer_roi               | ROI tracking: 88 picks resueltos cargados.
+2026-05-01 19:18:16 | INFO     | backtesting._leer_predicciones      | Predicciones cargadas: 347 filas de 29 archivos.
+2026-05-01 19:18:16 | INFO     | backtesting.cruzar                  | Picks cruzados: 117 | Sin resultado aún: 142
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | BACKTESTING — RESUMEN GLOBAL
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | Total picks resueltos : 117
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | Wins                  : 56
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | Hit rate              : 47.9%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | ROI                   : -4.84%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | EV medio de picks     : 43.4
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | Ganancia acumulada    : -5.66 u
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | Mercado        N    Hit%     ROI%   EV med
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | ML            47   38.3%  -24.21%    48.53
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | RL            14   35.7%   -27.0%    47.52
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | TOTAL         56   58.9%   16.96%    38.06
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | SENSIBILIDAD POR UMBRAL DE EV
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |   ML:
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  47  hit= 38.3%  ROI= -24.21%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  45  hit= 40.0%  ROI= -20.84%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  41  hit= 41.5%  ROI= -17.49%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  31  hit= 41.9%  ROI=  -16.0%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |   RL:
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  14  hit= 35.7%  ROI=  -27.0%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  12  hit= 41.7%  ROI= -14.83%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=   9  hit= 33.3%  ROI= -32.78%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |   TOTAL:
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  56  hit= 58.9%  ROI=  16.96%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  52  hit= 55.8%  ROI=   10.9%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  51  hit= 54.9%  ROI=   9.25%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  47  hit= 59.6%  ROI=  18.55%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  42  hit= 57.1%  ROI=  14.12%
+2026-05-01 19:18:16 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  31  hit= 54.8%  ROI=   9.55%
+2026-05-01 19:18:16 | WARNING  | backtesting.sugerir_umbrales        | Umbral ML: sin banda con ROI >= 0.0% y n >= 8
+2026-05-01 19:18:16 | WARNING  | backtesting.sugerir_umbrales        | Umbral RL: sin banda con ROI >= 0.0% y n >= 8
+2026-05-01 19:18:16 | INFO     | backtesting.sugerir_umbrales        | Umbral óptimo TOTAL: EV >= 15 → hit rate 59.6% | ROI 18.55% | n=47
+2026-05-01 19:18:16 | INFO     | backtesting.exportar_csv            | Resultados exportados:
+2026-05-01 19:18:16 | INFO     | backtesting.exportar_csv            |   output/backtest_results.csv
+2026-05-01 19:18:16 | INFO     | backtesting.exportar_csv            |   output/backtest_results_resumen.csv
+2026-05-01 19:18:16 | INFO     | backtesting.exportar_csv            |   output/backtest_results_sensibilidad.csv
+2026-05-01 19:18:16 | INFO     | backtesting.main                    | Usa --calibrar para actualizar umbrales en value.py automáticamente.
+2026-05-01 19:18:16 | INFO     | backtesting.main                    | Backtesting completado.

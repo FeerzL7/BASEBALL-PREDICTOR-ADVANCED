@@ -1,5 +1,5 @@
-from scipy.stats import poisson
 from utils.logger import get as get_log
+from utils import poisson_math as poisson
 
 log = get_log()
 

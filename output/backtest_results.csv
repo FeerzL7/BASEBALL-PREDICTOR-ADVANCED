@@ -1,0 +1,118 @@
+﻿fecha,juego,mercado,seleccion,valor_ev,stake_pct,cuota,resultado,ganancia
+2025-07-08,toronto blue jays @ chicago white sox,ML,Chicago White Sox,26.75,10.28,2.3,win,1.3
+2026-03-30,texas rangers @ baltimore orioles,ML,Baltimore Orioles,100.01,44.64,2.12,lose,-1.0
+2026-03-30,pittsburgh pirates @ cincinnati reds,TOTAL,Over,0.0,0.0,1.97,win,0.97
+2026-03-30,tampa bay rays @ milwaukee brewers,TOTAL,Over,0.0,0.0,2.0,win,1.0
+2026-03-30,new york mets @ st. louis cardinals,ML,St. Louis Cardinals,108.47,37.92,2.43,lose,-1.0
+2026-03-30,boston red sox @ houston astros,TOTAL,Over,0.0,0.0,1.91,win,0.91
+2026-03-30,san francisco giants @ san diego padres,ML,San Diego Padres,102.25,41.9,2.22,lose,-1.0
+2026-03-30,detroit tigers @ arizona diamondbacks,TOTAL,Under,0.0,0.0,1.95,win,0.95
+2026-03-31,pittsburgh pirates @ cincinnati reds,TOTAL,Over,75.91,5.0,2.0,win,1.0
+2026-03-31,chicago white sox @ miami marlins,TOTAL,Over,29.95,5.0,1.95,win,0.95
+2026-03-31,athletics @ atlanta braves,RL,Atlanta Braves,103.47,5.0,2.05,win,1.05
+2026-03-31,los angeles angels @ chicago cubs,TOTAL,Over,63.19,5.0,1.95,lose,-1.0
+2026-03-31,tampa bay rays @ milwaukee brewers,TOTAL,Over,57.62,5.0,1.95,win,0.95
+2026-03-31,boston red sox @ houston astros,TOTAL,Over,83.92,5.0,2.02,win,1.02
+2026-03-31,san francisco giants @ san diego padres,TOTAL,Over,17.7,5.0,1.95,win,0.95
+2026-03-31,new york yankees @ seattle mariners,ML,Seattle Mariners,70.55,5.0,1.87,lose,-1.0
+2026-04-01,detroit tigers @ arizona diamondbacks,TOTAL,Under,46.08,5.0,2.01,win,1.01
+2026-04-01,minnesota twins @ kansas city royals,TOTAL,Under,43.32,5.0,2.0,lose,-1.0
+2026-04-02,minnesota twins @ kansas city royals,RL,Kansas City Royals,125.39,5.0,2.3,lose,-1.0
+2026-04-02,atlanta braves @ arizona diamondbacks,ML,Arizona Diamondbacks,92.52,5.0,2.04,win,1.04
+2026-04-02,new york mets @ san francisco giants,ML,San Francisco Giants,46.09,5.0,2.09,lose,-1.0
+2026-04-02,toronto blue jays @ chicago white sox,RL,Chicago White Sox,78.16,5.0,2.0,win,1.0
+2026-04-03,san diego padres @ boston red sox,ML,Boston Red Sox,68.54,5.0,1.85,win,0.85
+2026-04-03,toronto blue jays @ chicago white sox,RL,Chicago White Sox,41.55,5.0,2.0,win,1.0
+2026-04-03,chicago cubs @ cleveland guardians,ML,Cleveland Guardians,33.15,5.0,2.0,win,1.0
+2026-04-03,tampa bay rays @ minnesota twins,ML,Minnesota Twins,59.93,5.0,1.95,win,0.95
+2026-04-03,philadelphia phillies @ colorado rockies,TOTAL,Over,36.13,5.0,1.95,lose,-1.0
+2026-04-03,seattle mariners @ los angeles angels,ML,Los Angeles Angels,79.02,5.0,2.41,lose,-1.0
+2026-04-03,new york mets @ san francisco giants,ML,San Francisco Giants,17.35,5.0,2.17,lose,-1.0
+2026-04-04,st. louis cardinals @ detroit tigers,TOTAL,Over,21.81,5.0,1.98,win,0.98
+2026-04-04,milwaukee brewers @ kansas city royals,ML,Kansas City Royals,39.7,5.0,2.02,lose,-1.0
+2026-04-04,milwaukee brewers @ kansas city royals,TOTAL,Over,31.17,5.0,1.91,win,0.91
+2026-04-04,houston astros @ athletics,TOTAL,Over,25.08,5.0,2.01,win,1.01
+2026-04-04,san diego padres @ boston red sox,TOTAL,Under,7.21,3.79,1.95,win,0.95
+2026-04-04,cincinnati reds @ texas rangers,RL,Texas Rangers,32.15,5.0,2.48,lose,-1.0
+2026-04-04,tampa bay rays @ minnesota twins,TOTAL,Over,79.81,5.0,1.93,win,0.93
+2026-04-04,atlanta braves @ arizona diamondbacks,TOTAL,Under,41.44,5.0,1.93,win,0.93
+2026-04-04,philadelphia phillies @ colorado rockies,TOTAL,Over,48.15,5.0,1.98,lose,-1.0
+2026-04-04,new york mets @ san francisco giants,TOTAL,Under,62.25,5.0,2.06,lose,-1.0
+2026-04-05,los angeles dodgers @ washington nationals,RL,Washington Nationals,14.16,5.0,1.99,lose,-1.0
+2026-04-05,baltimore orioles @ pittsburgh pirates,TOTAL,Over,26.55,5.0,2.08,win,1.08
+2026-04-05,san diego padres @ boston red sox,RL,Boston Red Sox,53.74,5.0,2.32,lose,-1.0
+2026-04-05,miami marlins @ new york yankees,TOTAL,Over,20.12,5.0,1.95,win,0.95
+2026-04-05,toronto blue jays @ chicago white sox,ML,Chicago White Sox,63.48,5.0,2.48,win,1.48
+2026-04-05,milwaukee brewers @ kansas city royals,ML,Milwaukee Brewers,21.17,5.0,2.06,win,1.06
+2026-04-05,cincinnati reds @ texas rangers,ML,Texas Rangers,24.29,5.0,1.85,lose,-1.0
+2026-04-05,houston astros @ athletics,ML,Athletics,100.15,5.0,2.22,win,1.22
+2026-04-05,new york mets @ san francisco giants,ML,San Francisco Giants,64.56,5.0,1.87,lose,-1.0
+2026-04-05,seattle mariners @ los angeles angels,TOTAL,Under,21.22,5.0,2.0,lose,-1.0
+2026-04-05,atlanta braves @ arizona diamondbacks,ML,Arizona Diamondbacks,82.92,5.0,1.96,win,0.96
+2026-04-05,st. louis cardinals @ detroit tigers,TOTAL,Over,15.03,5.0,1.93,win,0.93
+2026-04-07,kansas city royals @ cleveland guardians,TOTAL,Over,43.92,5.0,1.96,lose,-1.0
+2026-04-07,baltimore orioles @ chicago white sox,TOTAL,Over,80.75,5.0,2.19,win,1.19
+2026-04-07,arizona diamondbacks @ new york mets,RL,New York Mets,11.0,3.67,2.5,lose,-1.0
+2026-04-07,san diego padres @ pittsburgh pirates,TOTAL,Over,47.86,5.0,2.0,win,1.0
+2026-04-07,chicago cubs @ tampa bay rays,ML,Tampa Bay Rays,14.65,5.0,1.81,lose,-1.0
+2026-04-07,cincinnati reds @ miami marlins,ML,Miami Marlins,13.43,5.0,1.75,lose,-1.0
+2026-04-07,st. louis cardinals @ washington nationals,ML,St. Louis Cardinals,36.13,5.0,2.02,win,1.02
+2026-04-07,milwaukee brewers @ boston red sox,ML,Milwaukee Brewers,75.36,5.0,2.34,lose,-1.0
+2026-04-07,athletics @ new york yankees,RL,New York Yankees,22.59,5.0,1.93,lose,-1.0
+2026-04-07,los angeles dodgers @ toronto blue jays,TOTAL,Under,31.29,5.0,2.02,win,1.02
+2026-04-07,detroit tigers @ minnesota twins,TOTAL,Under,27.13,5.0,2.0,win,1.0
+2026-04-07,seattle mariners @ texas rangers,ML,Seattle Mariners,54.39,5.0,1.9,lose,-1.0
+2026-04-07,houston astros @ colorado rockies,TOTAL,Over,15.77,5.0,2.0,lose,-1.0
+2026-04-07,atlanta braves @ los angeles angels,ML,Atlanta Braves,52.11,5.0,1.74,win,0.74
+2026-04-07,philadelphia phillies @ san francisco giants,TOTAL,Under,45.18,5.0,1.95,win,0.95
+2026-04-08,san diego padres @ pittsburgh pirates,TOTAL,Over,61.18,5.0,2.06,win,1.06
+2026-04-08,kansas city royals @ cleveland guardians,TOTAL,Under,38.24,5.0,2.12,lose,-1.0
+2026-04-08,milwaukee brewers @ boston red sox,ML,Milwaukee Brewers,83.58,5.0,2.25,lose,-1.0
+2026-04-08,baltimore orioles @ chicago white sox,TOTAL,Over,45.6,5.0,1.95,win,0.95
+2026-04-08,seattle mariners @ texas rangers,ML,Seattle Mariners,39.81,5.0,1.91,lose,-1.0
+2026-04-08,houston astros @ colorado rockies,TOTAL,Over,64.05,5.0,1.93,lose,-1.0
+2026-04-08,philadelphia phillies @ san francisco giants,ML,Philadelphia Phillies,46.44,5.0,1.79,lose,-1.0
+2026-04-08,st. louis cardinals @ washington nationals,TOTAL,Over,51.99,5.0,1.95,lose,-1.0
+2026-04-08,atlanta braves @ los angeles angels,TOTAL,Under,25.34,5.0,2.0,lose,-1.0
+2026-04-08,arizona diamondbacks @ new york mets,TOTAL,Over,29.87,5.0,2.0,win,1.0
+2026-04-08,cincinnati reds @ miami marlins,TOTAL,Over,16.21,5.0,1.95,win,0.95
+2026-04-08,athletics @ new york yankees,RL,New York Yankees,56.23,5.0,2.05,lose,-1.0
+2026-04-08,detroit tigers @ minnesota twins,RL,Detroit Tigers,38.5,5.0,2.19,lose,-1.0
+2026-04-09,arizona diamondbacks @ new york mets,RL,New York Mets,39.07,5.0,2.45,lose,-1.0
+2026-04-24,detroit tigers @ cincinnati reds,ML,Detroit Tigers,55.5,5.0,1.93,win,0.93
+2026-04-24,boston red sox @ baltimore orioles,ML,Baltimore Orioles,37.84,5.0,1.85,win,0.85
+2026-04-24,cleveland guardians @ toronto blue jays,ML,Cleveland Guardians,54.14,5.0,1.85,lose,-1.0
+2026-04-24,colorado rockies @ new york mets,TOTAL,Over,43.25,5.0,2.05,lose,-1.0
+2026-04-24,minnesota twins @ tampa bay rays,ML,Minnesota Twins,51.04,5.0,2.24,lose,-1.0
+2026-04-24,los angeles angels @ kansas city royals,TOTAL,Over,42.4,5.0,1.98,win,0.98
+2026-04-24,washington nationals @ chicago white sox,ML,Chicago White Sox,20.78,5.0,1.83,lose,-1.0
+2026-04-24,pittsburgh pirates @ milwaukee brewers,ML,Pittsburgh Pirates,22.02,5.0,1.92,lose,-1.0
+2026-04-24,athletics @ texas rangers,TOTAL,Over,54.89,5.0,1.97,lose,-1.0
+2026-04-24,new york yankees @ houston astros,RL,New York Yankees,28.4,5.0,2.07,win,1.07
+2026-04-24,seattle mariners @ st. louis cardinals,ML,Seattle Mariners,27.31,5.0,1.72,win,0.72
+2026-04-24,chicago cubs @ los angeles dodgers,TOTAL,Over,16.59,5.0,1.96,win,0.96
+2026-04-24,miami marlins @ san francisco giants,ML,Miami Marlins,43.87,5.0,1.94,lose,-1.0
+2026-04-25,boston red sox @ baltimore orioles,TOTAL,Over,69.89,5.0,2.06,win,1.06
+2026-04-25,seattle mariners @ st. louis cardinals,ML,Seattle Mariners,26.88,5.0,1.71,win,0.71
+2026-04-25,cleveland guardians @ toronto blue jays,ML,Cleveland Guardians,25.53,5.0,2.27,lose,-1.0
+2026-04-25,miami marlins @ san francisco giants,ML,Miami Marlins,22.1,5.0,2.05,lose,-1.0
+2026-04-25,minnesota twins @ tampa bay rays,ML,Minnesota Twins,46.43,5.0,2.17,lose,-1.0
+2026-04-25,washington nationals @ chicago white sox,TOTAL,Over,45.42,5.0,2.0,win,1.0
+2026-04-25,san diego padres @ arizona diamondbacks,TOTAL,Under,91.68,5.0,1.94,lose,-1.0
+2026-04-25,athletics @ texas rangers,TOTAL,Over,20.43,5.0,1.94,lose,-1.0
+2026-04-25,new york yankees @ houston astros,RL,New York Yankees,20.92,5.0,2.1,win,1.1
+2026-04-25,pittsburgh pirates @ milwaukee brewers,ML,Pittsburgh Pirates,29.58,5.0,2.22,lose,-1.0
+2026-04-25,detroit tigers @ cincinnati reds,ML,Detroit Tigers,57.17,5.0,1.95,win,0.95
+2026-04-25,chicago cubs @ los angeles dodgers,ML,Chicago Cubs,61.68,5.0,2.2,lose,-1.0
+2026-04-26,detroit tigers @ cincinnati reds,ML,Detroit Tigers,32.68,5.0,2.05,win,1.05
+2026-04-26,colorado rockies @ new york mets,TOTAL,Over,21.45,5.0,1.99,lose,-1.0
+2026-04-26,minnesota twins @ tampa bay rays,TOTAL,Over,49.72,5.0,2.05,lose,-1.0
+2026-04-26,washington nationals @ chicago white sox,ML,Chicago White Sox,16.56,5.0,1.87,lose,-1.0
+2026-04-26,new york yankees @ houston astros,TOTAL,Under,14.66,5.0,2.0,lose,-1.0
+2026-04-26,pittsburgh pirates @ milwaukee brewers,ML,Pittsburgh Pirates,16.23,5.0,2.05,lose,-1.0
+2026-04-26,seattle mariners @ st. louis cardinals,ML,Seattle Mariners,16.85,5.0,1.79,win,0.79
+2026-04-26,athletics @ texas rangers,TOTAL,Over,14.78,5.0,1.95,lose,-1.0
+2026-04-26,san diego padres @ arizona diamondbacks,TOTAL,Under,89.53,5.0,1.91,lose,-1.0
+2026-04-26,miami marlins @ san francisco giants,TOTAL,Under,11.57,5.0,1.96,lose,-1.0
+2026-04-26,los angeles angels @ kansas city royals,TOTAL,Under,14.12,5.0,1.98,lose,-1.0
+2026-04-26,chicago cubs @ los angeles dodgers,TOTAL,Under,53.01,5.0,2.0,win,1.0

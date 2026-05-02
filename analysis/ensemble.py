@@ -28,8 +28,7 @@
 # calcular probabilidades Poisson. Solo modifica proj_home y proj_away.
 # Todo downstream (value.py, etc.) funciona sin cambios.
 
-import numpy as np
-from scipy.stats import linregress
+import math
 from utils.logger import get as get_log
 
 log = get_log()
@@ -69,11 +68,12 @@ def _coef_variacion(runs: list[float]) -> float:
     """
     if len(runs) < 2:
         return 0.0
-    arr  = np.array(runs, dtype=float)
-    mean = arr.mean()
+    arr  = [float(r) for r in runs]
+    mean = sum(arr) / len(arr)
     if mean < 0.5:
         return 0.0
-    return float(arr.std() / mean)
+    var = sum((r - mean) ** 2 for r in arr) / len(arr)
+    return math.sqrt(var) / mean
 
 
 def _alpha_adaptativo(cv: float) -> float:
@@ -107,11 +107,22 @@ def _proyeccion_regresion(runs: list[float]) -> float | None:
     if len(runs) < MIN_JUEGOS_PARA_REGRESION:
         return None
 
-    runs_arr = np.array(runs[-N_JUEGOS_REGRESION:], dtype=float)
-    x        = np.arange(len(runs_arr), dtype=float)
+    runs_arr = [float(r) for r in runs[-N_JUEGOS_REGRESION:]]
+    x        = list(range(len(runs_arr)))
 
     try:
-        slope, intercept, r_value, p_value, std_err = linregress(x, runs_arr)
+        n = len(runs_arr)
+        x_mean = sum(x) / n
+        y_mean = sum(runs_arr) / n
+        ss_xx = sum((xi - x_mean) ** 2 for xi in x)
+        ss_yy = sum((yi - y_mean) ** 2 for yi in runs_arr)
+        if ss_xx <= 0 or ss_yy <= 0:
+            return None
+
+        ss_xy = sum((xi - x_mean) * (yi - y_mean) for xi, yi in zip(x, runs_arr))
+        slope = ss_xy / ss_xx
+        intercept = y_mean - slope * x_mean
+        r_squared = (ss_xy ** 2) / (ss_xx * ss_yy)
 
         # Predicción para el siguiente juego
         siguiente = float(intercept + slope * len(runs_arr))
@@ -120,7 +131,7 @@ def _proyeccion_regresion(runs: list[float]) -> float | None:
         siguiente = max(PROJ_MIN, min(siguiente, PROJ_MAX))
 
         # Si R² < 0.05, la tendencia es ruido → no confiar en la regresión
-        if r_value ** 2 < 0.05:
+        if r_squared < 0.05:
             return None
 
         return siguiente
@@ -135,8 +146,8 @@ def _obtener_runs_recientes(partido: dict, equipo_key: str) -> list[float]:
     Extrae la serie de carreras recientes de un equipo desde los datos
     disponibles en el partido. Busca en varias fuentes en orden de prioridad:
 
-    1. partido['home_offense']['runs_recientes']  ← si offense.py las guardó
-    2. partido['h2h']['runs_home_prom'] como proxy escalar  ← fallback
+    1. partido['home_offense']['runs_recientes']   si offense.py las guardó
+    2. partido['h2h']['runs_home_prom'] como proxy escalar   fallback
     3. Lista vacía → no hay datos suficientes
     """
     # Fuente 1: si offense.py guardó la lista de runs recientes del equipo
@@ -272,8 +283,8 @@ def ajustar_proyecciones_ensemble(partidos: list) -> list:
 def preparar_runs_lista(runs_raw) -> list[float]:
     """
     Normaliza una lista de runs recientes a formato list[float].
-    Acepta lista, numpy array, o escalar (en cuyo caso retorna lista vacía).
+    Acepta lista/tupla o escalar (en cuyo caso retorna lista vacía).
     """
-    if isinstance(runs_raw, (list, tuple, np.ndarray)):
+    if isinstance(runs_raw, (list, tuple)):
         return [float(r) for r in runs_raw if r is not None]
     return []

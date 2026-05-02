@@ -1,10 +1,31 @@
 # utils/constants.py
+import os
 from datetime import datetime
 
-API_KEY = "0cee48b1825b975b6ad2a91f287de3a2"
+def _env(name: str, default: str = "") -> str:
+    value = os.getenv(name)
+    if value:
+        return value
+    try:
+        with open(".env", encoding="utf-8") as f:
+            for line in f:
+                if not line.strip() or line.lstrip().startswith("#"):
+                    continue
+                key, _, raw_value = line.partition("=")
+                if key.strip() == name:
+                    return raw_value.strip().strip('"').strip("'")
+    except OSError:
+        pass
+    return default
+
+
+API_KEY = _env("ODDS_API_KEY") or _env("API_KEY")
 SPORT   = "baseball_mlb"
 REGION  = "us"
-MARKETS = "h2h,totals,spreads"
+ODDS_MARKET_GROUPS = _env("ODDS_MARKET_GROUPS", "core")
+ODDS_EVENT_MARKET_GROUPS = _env("ODDS_EVENT_MARKET_GROUPS", "")
+MARKETS = _env("ODDS_MARKETS", "h2h,totals,spreads")
+ODDS_BOOKMAKERS = _env("ODDS_BOOKMAKERS", "")
 TODAY   = datetime.now().strftime('%Y-%m-%d')
 
 # Valores históricos de park factor por estadio.
