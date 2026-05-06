@@ -31,8 +31,11 @@ def extraer_mejores_cuotas(evento, mercado_clave):
         mercados = evento["bookmakers"]
         mejores = {
             "over": None, "under": None,
-            "home": None, "away": None, "total_line": None
+            "home": None, "away": None, "total_line": None,
+            "home_point": None, "away_point": None,
         }
+        totals_por_linea = {}
+        spreads_por_equipo = {"home": [], "away": []}
 
         for book in mercados:
             for market in book.get("markets", []):
@@ -46,18 +49,20 @@ def extraer_mejores_cuotas(evento, mercado_clave):
                         continue
 
                     if mercado_clave == "totals":
+                        if point is None:
+                            continue
+                        linea = float(point)
+                        bucket = totals_por_linea.setdefault(linea, {"over": None, "under": None})
                         if "over" in name:
-                            if mejores["over"] is None or price > mejores["over"]:
-                                mejores["over"]       = price
-                                mejores["total_line"] = point
+                            if bucket["over"] is None or price > bucket["over"]:
+                                bucket["over"] = price
                         elif "under" in name:
-                            if mejores["under"] is None or price > mejores["under"]:
-                                mejores["under"]      = price
-                                mejores["total_line"] = point
+                            if bucket["under"] is None or price > bucket["under"]:
+                                bucket["under"] = price
                         else:
                             log.debug(f"Resultado inesperado en totals: {name}")
 
-                    elif mercado_clave in ("h2h", "spreads"):
+                    elif mercado_clave == "h2h":
                         if normalizar(name) == normalizar(evento['home_team']):
                             if mejores["home"] is None or price > mejores["home"]:
                                 mejores["home"] = price
@@ -65,12 +70,52 @@ def extraer_mejores_cuotas(evento, mercado_clave):
                             if mejores["away"] is None or price > mejores["away"]:
                                 mejores["away"] = price
 
+                    elif mercado_clave == "spreads":
+                        if normalizar(name) == normalizar(evento['home_team']):
+                            spreads_por_equipo["home"].append((price, point))
+                        elif normalizar(name) == normalizar(evento['away_team']):
+                            spreads_por_equipo["away"].append((price, point))
+
+        if mercado_clave == "totals" and totals_por_linea:
+            candidatas = [
+                (linea, vals["over"], vals["under"])
+                for linea, vals in totals_por_linea.items()
+                if vals["over"] is not None and vals["under"] is not None
+            ]
+            if candidatas:
+                def score_total(item):
+                    linea, over, under = item
+                    vig = (1 / over) + (1 / under)
+                    return (vig, abs(linea - 8.5))
+
+                linea, over, under = min(candidatas, key=score_total)
+                mejores["over"] = over
+                mejores["under"] = under
+                mejores["total_line"] = linea
+
+        if mercado_clave == "spreads":
+            def elegir_spread(candidatos):
+                validos = [(price, point) for price, point in candidatos if point is not None]
+                if not validos:
+                    return None, None
+                return max(
+                    validos,
+                    key=lambda item: (
+                        -abs(abs(float(item[1])) - 1.5),
+                        item[0],
+                    ),
+                )
+
+            mejores["home"], mejores["home_point"] = elegir_spread(spreads_por_equipo["home"])
+            mejores["away"], mejores["away_point"] = elegir_spread(spreads_por_equipo["away"])
+
         return mejores
 
     except Exception as e:
         log.error(f"Al extraer cuotas ({mercado_clave}): {e}")
         return {"over": None, "under": None,
-                "home": None, "away": None, "total_line": None}
+                "home": None, "away": None, "total_line": None,
+                "home_point": None, "away_point": None}
 
 
 def extraer_mercados_disponibles(evento: dict) -> dict:
@@ -150,6 +195,8 @@ def analizar_mercados(partidos, cuotas_api):
             partido["cuota_away"]    = None
             partido["cuota_rl_home"] = None
             partido["cuota_rl_away"] = None
+            partido["linea_rl_home"] = None
+            partido["linea_rl_away"] = None
             partido["cuota_over"]    = None
             partido["cuota_under"]   = None
             partido["linea_total"]   = None
@@ -170,6 +217,8 @@ def analizar_mercados(partidos, cuotas_api):
         rl  = extraer_mejores_cuotas(evento, "spreads")
         partido["cuota_rl_home"] = rl["home"]
         partido["cuota_rl_away"] = rl["away"]
+        partido["linea_rl_home"] = rl["home_point"]
+        partido["linea_rl_away"] = rl["away_point"]
 
         tot = extraer_mejores_cuotas(evento, "totals")
         if tot.get("over") is not None and \

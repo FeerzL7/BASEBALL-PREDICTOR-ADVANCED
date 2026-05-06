@@ -165,11 +165,14 @@ def main():
 
         elif mejor.startswith("RL:"):
             mercado   = "RL"
-            seleccion = p.get("pick_rl", "")
-            cuota     = (p.get("cuota_rl_home") if seleccion == p["home_team"]
+            pick_rl   = p.get("pick_rl", "")
+            linea_rl  = (p.get("linea_rl_home") if pick_rl == p["home_team"]
+                         else p.get("linea_rl_away"))
+            seleccion = f"{pick_rl} {float(linea_rl):+g}" if linea_rl is not None else pick_rl
+            cuota     = (p.get("cuota_rl_home") if pick_rl == p["home_team"]
                          else p.get("cuota_rl_away")) or 1.91
-            prob      = (p.get("prob_home_win") if seleccion == p["home_team"]
-                         else p.get("prob_away_win")) or 0.50
+            prob      = (p.get("rl_home_prob") if pick_rl == p["home_team"]
+                         else p.get("rl_away_prob")) or 0.50
             valor     = p.get("valor_rl", 0)
 
         elif mejor.startswith("TOTAL:"):
@@ -218,8 +221,10 @@ def main():
         "cuota_home", "cuota_away",
         "cuota_over", "cuota_under",
         "cuota_rl_home", "cuota_rl_away",
+        "linea_rl_home", "linea_rl_away",
         "kelly_ml", "kelly_rl",
         "park_factor_usado",
+        "venue_usado", "temp_efectiva", "ajuste_temp",
     ]
 
     df        = pd.DataFrame(partidos)

@@ -15,8 +15,6 @@
 # Cada mercado tiene sus propios umbrales de EV, probabilidad mínima
 # y rango de cuota aceptable calibrados para su dinámica específica.
 
-from sympy import true
-
 from utils.logger import get as get_log
 from utils import poisson_math as poisson
 
@@ -28,8 +26,8 @@ KELLY_FRACCION      = 0.20
 
 # Backtesting local: ML/RL estan en ROI negativo. Se calculan para diagnostico,
 # pero no entran como mejor_pick hasta recalibrarlos con muestra positiva.
-ENABLE_ML_PICKS    = True
-ENABLE_RL_PICKS    = True
+ENABLE_ML_PICKS    = False
+ENABLE_RL_PICKS    = False
 ENABLE_TOTAL_PICKS = True
 
 PROB_MODEL_WEIGHT_ML    = 0.65
@@ -98,11 +96,30 @@ def _kelly(prob: float, cuota: float) -> float:
 
 def _prob_ganar_poisson(mu_home: float, mu_away: float):
     """Probabilidad de victoria ML simulada con distribución Poisson."""
-    prob_home = sum(
-        poisson.pmf(h, mu_home) * poisson.pmf(a, mu_away)
-        for h in range(15) for a in range(15) if h > a
-    )
-    return round(prob_home, 4), round(1 - prob_home, 4)  # type: ignore
+    prob_home = 0.0
+    prob_away = 0.0
+    for h in range(20):
+        for a in range(20):
+            p = poisson.pmf(h, mu_home) * poisson.pmf(a, mu_away)
+            if h > a:
+                prob_home += p
+            elif a > h:
+                prob_away += p
+    total_decidido = prob_home + prob_away
+    if total_decidido <= 0:
+        return 0.5, 0.5
+    return round(prob_home / total_decidido, 4), round(prob_away / total_decidido, 4)
+
+
+def _prob_runline_poisson(mu_team: float, mu_opp: float, point: float | None) -> float:
+    """Probabilidad de cubrir el handicap publicado (-1.5/+1.5)."""
+    handicap = -1.5 if point is None else float(point)
+    prob = 0.0
+    for t in range(20):
+        for o in range(20):
+            if t + handicap > o:
+                prob += poisson.pmf(t, mu_team) * poisson.pmf(o, mu_opp)
+    return round(prob, 4)
 
 
 # ── Decisión ML ──────────────────────────────────────────────────────────────
@@ -184,10 +201,19 @@ def _decidir_rl(partido: dict, prob_home: float, prob_away: float) -> dict:
     if not rl_h or not rl_a:
         return resultado
 
-    # Probabilidades reales de cubrir el runline (simulación Poisson P[diff >= 2])
-    # Calculadas en aplicar_simulaciones() → rl_home_prob, rl_away_prob
-    rl_prob_home = partido.get('rl_home_prob', prob_home * 0.70)  # fallback conservador
-    rl_prob_away = partido.get('rl_away_prob', prob_away * 0.70)  # fallback conservador
+    # Recalcular con el handicap real de mercado, que llega despues de simulation.py.
+    rl_prob_home = _prob_runline_poisson(
+        partido.get('proj_home', 4.5),
+        partido.get('proj_away', 4.5),
+        partido.get('linea_rl_home'),
+    )
+    rl_prob_away = _prob_runline_poisson(
+        partido.get('proj_away', 4.5),
+        partido.get('proj_home', 4.5),
+        partido.get('linea_rl_away'),
+    )
+    partido['rl_home_prob'] = rl_prob_home
+    partido['rl_away_prob'] = rl_prob_away
 
     mkt_home, mkt_away = _no_vig_probs(rl_h, rl_a)
     rl_prob_home_adj = _blend_prob(rl_prob_home, mkt_home, PROB_MODEL_WEIGHT_RL, PROB_CAP_RL)
@@ -209,6 +235,7 @@ def _decidir_rl(partido: dict, prob_home: float, prob_away: float) -> dict:
         'stake_pct_rl': stake,
         'prediccion_rl': {
             'mercado': 'RL', 'seleccion': pick,
+            'linea': partido.get('linea_rl_home') if pick == ho else partido.get('linea_rl_away'),
             'valor': ev, 'prob': rl_prob, 'prob_raw': prob_raw,
             'cuota': rl_cuota, 'stake_pct': stake,
         },

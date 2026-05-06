@@ -77,10 +77,25 @@ def _resolver_resultado(seleccion, mercado, home_team, away_team,
         return "win" if seleccion == ganador else "lose"
 
     if mercado == "RL":
-        if seleccion == home_team:
-            return "win" if (home_runs - away_runs) >= 2 else "lose"
+        partes = seleccion.rsplit(" ", 1)
+        equipo = seleccion
+        handicap = -1.5
+        if len(partes) == 2:
+            try:
+                handicap = float(partes[1])
+                equipo = partes[0]
+            except ValueError:
+                pass
+
+        if equipo == home_team:
+            margen = home_runs - away_runs + handicap
         else:
-            return "win" if (away_runs - home_runs) >= 2 else "lose"
+            margen = away_runs - home_runs + handicap
+        if margen > 0:
+            return "win"
+        if margen == 0:
+            return "null"
+        return "lose"
 
     if mercado == "TOTAL":
         if linea is None:
