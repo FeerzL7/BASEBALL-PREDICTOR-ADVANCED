@@ -10,6 +10,7 @@ from utils.constants import (
     MARKETS,
     ODDS_BOOKMAKERS,
     ODDS_EVENT_MARKET_GROUPS,
+    ODDS_FETCH_EVENT_MARKETS,
     ODDS_MARKET_GROUPS,
     REGION,
     SPORT,
@@ -18,25 +19,54 @@ from utils.constants import (
 BASE_URL = "https://api.the-odds-api.com/v4"
 
 
-def _request_json(url: str, params: dict):
+def _redact_api_key(text: str) -> str:
+    if not API_KEY:
+        return text
+    return text.replace(API_KEY, "***")
+
+
+def _api_error_message(response) -> str:
+    try:
+        data = response.json()
+        if isinstance(data, dict):
+            return data.get("message") or data.get("error") or response.text
+    except ValueError:
+        pass
+    return response.text or response.reason
+
+
+def _request_json(url: str, params: dict, quiet_auth_error: bool = False):
     try:
         response = requests.get(url, params=params, timeout=20)
         response.raise_for_status()
+    except requests.HTTPError as e:
+        status = e.response.status_code if e.response is not None else None
+        detail = _api_error_message(e.response) if e.response is not None else str(e)
+        if status in (401, 403):
+            if not quiet_auth_error:
+                print(
+                    "[ERROR] The Odds API rechazó la solicitud "
+                    f"({status}): {_redact_api_key(detail)}"
+                )
+            return None, status
+        safe_error = _redact_api_key(str(e))
+        print(f"[ERROR] No se pudieron obtener cuotas: {safe_error}")
+        return None, status
     except requests.RequestException as e:
-        print(f"[ERROR] No se pudieron obtener cuotas: {e}")
-        return None
+        print(f"[ERROR] No se pudieron obtener cuotas: {_redact_api_key(str(e))}")
+        return None, None
 
     try:
         data = response.json()
     except ValueError:
         print("[ERROR] No se pudo decodificar el JSON de la API")
-        return None
+        return None, response.status_code
 
     if isinstance(data, dict) and data.get("message"):
-        print("[ERROR] API Error:", data["message"])
-        return None
+        print("[ERROR] API Error:", _redact_api_key(data["message"]))
+        return None, response.status_code
 
-    return data
+    return data, response.status_code
 
 
 def _odds_params(markets: list[str]) -> dict:
@@ -90,6 +120,9 @@ def _configured_markets() -> tuple[list[str], list[str]]:
     markets = list(dict.fromkeys(explicit_markets + grouped_markets))
     featured, event_markets = split_featured_and_event_markets(markets)
 
+    if not ODDS_FETCH_EVENT_MARKETS:
+        return featured or ["h2h"], []
+
     extra_event_markets = expand_market_groups(ODDS_EVENT_MARKET_GROUPS)
     _, env_event_markets = split_featured_and_event_markets(extra_event_markets)
     event_markets = list(dict.fromkeys(event_markets + env_event_markets))
@@ -104,20 +137,37 @@ def obtener_cuotas():
 
     featured_markets, event_markets = _configured_markets()
     url = f"{BASE_URL}/sports/{SPORT}/odds"
-    data = _request_json(url, _odds_params(featured_markets))
+    data, status = _request_json(url, _odds_params(featured_markets))
     if not isinstance(data, list):
+        if status in (401, 403):
+            print("[ERROR] Revisa que ODDS_API_KEY/API_KEY sea válida y activa.")
         return []
 
     if not event_markets:
         return data
 
+    event_auth_blocked = False
     for evento in data:
+        if event_auth_blocked:
+            break
         event_id = evento.get("id")
         if not event_id:
             continue
         for chunk in chunk_markets(event_markets):
             detail_url = f"{BASE_URL}/sports/{SPORT}/events/{event_id}/odds"
-            detalle = _request_json(detail_url, _odds_params(chunk))
+            detalle, status = _request_json(
+                detail_url,
+                _odds_params(chunk),
+                quiet_auth_error=event_auth_blocked,
+            )
+            if status in (401, 403):
+                print(
+                    "[WARNING] Mercados avanzados desactivados para esta ejecución: "
+                    "la API key no autorizó /events/{eventId}/odds. "
+                    "Se conservarán h2h/spreads/totals."
+                )
+                event_auth_blocked = True
+                break
             if isinstance(detalle, dict):
                 _merge_event_markets(evento, detalle)
 

@@ -15,6 +15,8 @@
 # Cada mercado tiene sus propios umbrales de EV, probabilidad mínima
 # y rango de cuota aceptable calibrados para su dinámica específica.
 
+from sympy import true
+
 from utils.logger import get as get_log
 from utils import poisson_math as poisson
 
@@ -26,8 +28,8 @@ KELLY_FRACCION      = 0.20
 
 # Backtesting local: ML/RL estan en ROI negativo. Se calculan para diagnostico,
 # pero no entran como mejor_pick hasta recalibrarlos con muestra positiva.
-ENABLE_ML_PICKS    = False
-ENABLE_RL_PICKS    = False
+ENABLE_ML_PICKS    = True
+ENABLE_RL_PICKS    = True
 ENABLE_TOTAL_PICKS = True
 
 PROB_MODEL_WEIGHT_ML    = 0.65

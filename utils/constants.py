@@ -24,6 +24,9 @@ SPORT   = "baseball_mlb"
 REGION  = "us"
 ODDS_MARKET_GROUPS = _env("ODDS_MARKET_GROUPS", "core")
 ODDS_EVENT_MARKET_GROUPS = _env("ODDS_EVENT_MARKET_GROUPS", "")
+ODDS_FETCH_EVENT_MARKETS = _env("ODDS_FETCH_EVENT_MARKETS", "false").lower() in {
+    "1", "true", "yes", "y", "si", "sí"
+}
 MARKETS = _env("ODDS_MARKETS", "h2h,totals,spreads")
 ODDS_BOOKMAKERS = _env("ODDS_BOOKMAKERS", "")
 TODAY   = datetime.now().strftime('%Y-%m-%d')

@@ -11,6 +11,7 @@ Core solamente:
 ```env
 ODDS_MARKET_GROUPS=core
 ODDS_EVENT_MARKET_GROUPS=
+ODDS_FETCH_EVENT_MARKETS=false
 ```
 
 Core + alternativos + innings:
@@ -18,6 +19,7 @@ Core + alternativos + innings:
 ```env
 ODDS_MARKET_GROUPS=core,baseball_game,baseball_periods
 ODDS_EVENT_MARKET_GROUPS=
+ODDS_FETCH_EVENT_MARKETS=true
 ```
 
 Core + props MLB:
@@ -25,6 +27,7 @@ Core + props MLB:
 ```env
 ODDS_MARKET_GROUPS=core
 ODDS_EVENT_MARKET_GROUPS=mlb_player_props,mlb_alternate_props
+ODDS_FETCH_EVENT_MARKETS=true
 ```
 
 Todo lo disponible para MLB:
@@ -32,7 +35,12 @@ Todo lo disponible para MLB:
 ```env
 ODDS_MARKET_GROUPS=core,baseball_game,baseball_periods
 ODDS_EVENT_MARKET_GROUPS=team_periods,mlb_player_props,mlb_alternate_props
+ODDS_FETCH_EVENT_MARKETS=true
 ```
+
+Si recibes `401 Unauthorized` en `/events/{eventId}/odds`, deja
+`ODDS_FETCH_EVENT_MARKETS=false` o revisa que tu plan/API key tenga acceso a
+mercados avanzados. El pipeline seguira usando `h2h/spreads/totals`.
 
 ## Grupos soportados
 
