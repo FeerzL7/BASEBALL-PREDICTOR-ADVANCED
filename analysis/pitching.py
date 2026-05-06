@@ -158,12 +158,16 @@ def get_pitcher_stats(name: str) -> dict:
     try:
         data = lookup_player(name)
         if not data:
-            log.warning(f"Lanzador '{name}' no encontrado en MLB API. Tratando como TBD.")
+            log.warning(
+                f"Lanzador '{name}' no encontrado en MLB API. "
+                "Usando defaults confirmados."
+            )
             return {
                 'ERA': 4.50, 'WHIP': 1.30, 'K9': 8.00, 'IP': 0,
-                'throws': 'R', 'confirmado': False,
+                'throws': 'R', 'confirmado': True,
                 'ERA_efectiva': 4.50, 'ERA_reciente': None,
                 'WHIP_reciente': None, 'n_salidas_recientes': 0,
+                'lookup_fallback': True,
             }
 
         player_id = data[0]['id']

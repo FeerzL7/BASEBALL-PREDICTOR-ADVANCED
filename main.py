@@ -33,6 +33,7 @@ from tracking.roi_tracker   import (
     calcular_roi,
     actualizar_resultados,
 )
+from utils.risk_management import aplicar_gestion_riesgo
 
 
 def main():
@@ -127,6 +128,8 @@ def main():
     if movimientos:
         log.info(resumen_movimientos(movimientos))
 
+    partidos = aplicar_gestion_riesgo(partidos)
+
     # 6. Asegurar cuotas planas (fallback desde mercados)
     for p in partidos:
         ho = p["home_team"]
@@ -176,7 +179,7 @@ def main():
             seleccion = f"{pick_t} {linea}".strip()
             cuota     = (p.get("cuota_over") if pick_t == "Over"
                          else p.get("cuota_under")) or 1.91
-            prob      = 0.52
+            prob      = p.get("prob_total") or 0.52
             valor     = p.get("valor_total", 0)
 
         registrar_pick(
@@ -206,9 +209,12 @@ def main():
         "proj_home", "proj_away",
         "prob_home_win", "prob_away_win",
         "linea_total", "pick_total", "valor_total", "stake_pct_total",
+        "prob_total", "prob_total_raw",
         "pick_ml",  "valor_ml",  "stake_pct_ml",
         "pick_rl",  "valor_rl",  "stake_pct_rl",
         "mejor_pick",
+        "riesgo_estado", "riesgo_motivo",
+        "odds_event_id", "odds_loaded",
         "cuota_home", "cuota_away",
         "cuota_over", "cuota_under",
         "cuota_rl_home", "cuota_rl_away",

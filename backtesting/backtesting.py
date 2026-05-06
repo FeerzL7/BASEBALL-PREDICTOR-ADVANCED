@@ -9,7 +9,7 @@
 #   1. Lee todos los CSVs de output/predicciones_*.csv
 #   2. Cruza cada pick con su resultado en roi_tracking.csv
 #   3. Calcula hit rate, ROI y EV medio por mercado y por umbral de EV
-#   4. Sugiere umbrales óptimos de UMBRAL_VALOR_ML/RL/TOTAL
+#   4. Sugiere umbrales óptimos de UMBRAL_EV_ML/RL/TOTAL
 #   5. Opcionalmente reescribe esas constantes en analysis/value.py
 
 import argparse
@@ -29,6 +29,7 @@ PRED_DIR  = "output"
 ROI_FILE  = "output/roi_tracking.csv"
 OUT_FILE  = "output/backtest_results.csv"
 VALUE_PY  = "analysis/value.py"
+ROI_MINIMO_UMBRAL = 0.0
 
 # Bandas de EV para el análisis de sensibilidad
 EV_BANDAS = [0, 3, 5, 7, 10, 15, 20, 30]
@@ -48,6 +49,7 @@ def _leer_roi() -> dict:
 
     with open(ROI_FILE, encoding='utf-8-sig') as f:
         for row in csv.DictReader(f):
+            row['fecha'] = _normalizar_fecha(row.get('fecha', '').strip())
             resultado = row.get('resultado', '').strip()
             if resultado not in ('win', 'lose'):
                 continue
@@ -89,6 +91,15 @@ def _leer_predicciones(desde: Optional[str], hasta: Optional[str]) -> list:
 
     log.info(f"Predicciones cargadas: {len(registros)} filas de {len(archivos)} archivos.")
     return registros
+
+
+def _normalizar_fecha(fecha: str) -> str:
+    for fmt in ("%Y-%m-%d", "%d/%m/%Y"):
+        try:
+            return datetime.strptime(fecha, fmt).strftime("%Y-%m-%d")
+        except ValueError:
+            continue
+    return fecha
 
 
 # ── Cruce ──────────────────────────────────────────────────────────────────────
@@ -254,7 +265,11 @@ def analizar(cruzados: list) -> dict:
 
 # ── Sugerencia de umbrales óptimos ────────────────────────────────────────────
 
-def _umbral_optimo(sensibilidad_mercado: dict, min_picks: int = 10) -> Optional[int]:
+def _umbral_optimo(
+    sensibilidad_mercado: dict,
+    min_picks: int = 10,
+    roi_minimo: float = ROI_MINIMO_UMBRAL,
+) -> Optional[int]:
     """
     Busca el umbral de EV donde el ROI es máximo con al menos min_picks muestras.
     Devuelve el umbral (int) o None si no hay datos suficientes.
@@ -263,7 +278,7 @@ def _umbral_optimo(sensibilidad_mercado: dict, min_picks: int = 10) -> Optional[
     mejor_umbral = None
 
     for banda, stats in sorted(sensibilidad_mercado.items()):
-        if stats['n'] < min_picks:
+        if stats['n'] < min_picks or stats['roi'] < roi_minimo:
             continue
         if stats['roi'] > mejor_roi:
             mejor_roi    = stats['roi']
@@ -272,11 +287,11 @@ def _umbral_optimo(sensibilidad_mercado: dict, min_picks: int = 10) -> Optional[
     return mejor_umbral
 
 
-def sugerir_umbrales(analisis: dict) -> dict:
+def sugerir_umbrales(analisis: dict, min_picks: int = 10) -> dict:
     sugeridos = {}
     for mercado in ('ML', 'RL', 'TOTAL'):
         sens = analisis['sensibilidad'].get(mercado, {})
-        u = _umbral_optimo(sens)
+        u = _umbral_optimo(sens, min_picks=min_picks)
         sugeridos[mercado] = u
         if u is not None:
             stats = sens[u]
@@ -286,7 +301,10 @@ def sugerir_umbrales(analisis: dict) -> dict:
                 f"| n={stats['n']}"
             )
         else:
-            log.warning(f"Umbral {mercado}: datos insuficientes (< 10 picks resueltos)")
+            log.warning(
+                f"Umbral {mercado}: sin banda con ROI >= {ROI_MINIMO_UMBRAL}% "
+                f"y n >= {min_picks}"
+            )
     return sugeridos
 
 
@@ -294,7 +312,7 @@ def sugerir_umbrales(analisis: dict) -> dict:
 
 def calibrar_value_py(sugeridos: dict):
     """
-    Reescribe las constantes UMBRAL_VALOR_ML/RL/TOTAL en analysis/value.py
+    Reescribe las constantes UMBRAL_EV_ML/RL/TOTAL en analysis/value.py
     con los umbrales sugeridos por el backtesting.
     Solo modifica si el valor sugerido es distinto al actual.
     """
@@ -306,9 +324,9 @@ def calibrar_value_py(sugeridos: dict):
         contenido = f.read()
 
     MAPA = {
-        'ML':    'UMBRAL_VALOR_ML',
-        'RL':    'UMBRAL_VALOR_RL',
-        'TOTAL': 'UMBRAL_VALOR_TOTAL',
+        'ML':    'UMBRAL_EV_ML',
+        'RL':    'UMBRAL_EV_RL',
+        'TOTAL': 'UMBRAL_EV_TOTAL',
     }
 
     cambios = 0
@@ -453,7 +471,7 @@ def main():
     analisis    = analizar(cruzados)
     imprimir_reporte(analisis)
 
-    sugeridos   = sugerir_umbrales(analisis)
+    sugeridos   = sugerir_umbrales(analisis, min_picks=args.min_picks)
     exportar_csv(cruzados, analisis)
 
     if args.calibrar:
