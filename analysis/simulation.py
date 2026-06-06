@@ -3,6 +3,11 @@ from utils import poisson_math as poisson
 
 log = get_log()
 
+# La version estable no usaba ensemble/regresion. Se deja disponible como
+# interruptor, pero apagado por defecto para evitar oscilaciones por muestras
+# cortas de carreras recientes.
+ENABLE_ENSEMBLE = False
+
 
 def simular_probabilidades(home, away, max_runs=15):
     prob_home_win = 0.0
@@ -48,27 +53,16 @@ def aplicar_simulaciones(partidos: list) -> list:
     """
     Aplica simulaciones Poisson usando las proyecciones del pipeline.
 
-    Orden interno:
-      1. Ensemble (Poisson + Regresión Lineal) ajusta proj_home/proj_away
-         si hay datos de carreras recientes disponibles.
-      2. Simulación Poisson estándar sobre las proyecciones (ya ajustadas).
-      3. Simulación de runline sobre las mismas proyecciones.
-
-    El ensemble es transparente para todo el downstream: value.py, markets.py,
-    etc. siguen consumiendo proj_home/proj_away sin saber si fueron ajustados.
+    El ensemble queda como capa opcional. Por defecto se usa Poisson puro,
+    igual que la version estable del proyecto.
     """
-    # ── Paso 1: Ensemble Poisson + Regresión Lineal ───────────────────────────
-    # Importación lazy para evitar dependencia circular si ensemble.py
-    # necesita algún módulo que importa simulation.py en el futuro.
-    try:
-        from analysis.ensemble import ajustar_proyecciones_ensemble
-        partidos = ajustar_proyecciones_ensemble(partidos)
-    except Exception as e:
-        # Fallback silencioso: si el ensemble falla por cualquier razón,
-        # las proyecciones Poisson originales se mantienen intactas.
-        log.debug(f"Ensemble desactivado (fallback a Poisson puro): {e}")
+    if ENABLE_ENSEMBLE:
+        try:
+            from analysis.ensemble import ajustar_proyecciones_ensemble
+            partidos = ajustar_proyecciones_ensemble(partidos)
+        except Exception as e:
+            log.debug(f"Ensemble desactivado (fallback a Poisson puro): {e}")
 
-    # ── Paso 2: Simulación de probabilidades ──────────────────────────────────
     for p in partidos:
         home = max(p.get('proj_home', 4.5), 0.5)
         away = max(p.get('proj_away', 4.5), 0.5)

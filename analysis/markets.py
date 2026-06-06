@@ -52,11 +52,16 @@ def extraer_mejores_cuotas(evento, mercado_clave):
                         if point is None:
                             continue
                         linea = float(point)
-                        bucket = totals_por_linea.setdefault(linea, {"over": None, "under": None})
+                        bucket = totals_por_linea.setdefault(
+                            linea,
+                            {"over": None, "under": None, "over_count": 0, "under_count": 0},
+                        )
                         if "over" in name:
+                            bucket["over_count"] += 1
                             if bucket["over"] is None or price > bucket["over"]:
                                 bucket["over"] = price
                         elif "under" in name:
+                            bucket["under_count"] += 1
                             if bucket["under"] is None or price > bucket["under"]:
                                 bucket["under"] = price
                         else:
@@ -78,17 +83,25 @@ def extraer_mejores_cuotas(evento, mercado_clave):
 
         if mercado_clave == "totals" and totals_por_linea:
             candidatas = [
-                (linea, vals["over"], vals["under"])
+                (
+                    linea,
+                    vals["over"],
+                    vals["under"],
+                    min(vals["over_count"], vals["under_count"]),
+                )
                 for linea, vals in totals_por_linea.items()
                 if vals["over"] is not None and vals["under"] is not None
             ]
             if candidatas:
-                def score_total(item):
-                    linea, over, under = item
-                    vig = (1 / over) + (1 / under)
-                    return (vig, abs(linea - 8.5))
+                total_pares = sum(item[3] for item in candidatas) or len(candidatas)
+                linea_consenso = sum(item[0] * max(item[3], 1) for item in candidatas) / total_pares
 
-                linea, over, under = min(candidatas, key=score_total)
+                def score_total(item):
+                    linea, over, under, pares = item
+                    vig = (1 / over) + (1 / under)
+                    return (-pares, abs(linea - linea_consenso), vig)
+
+                linea, over, under, _ = min(candidatas, key=score_total)
                 mejores["over"] = over
                 mejores["under"] = under
                 mejores["total_line"] = linea

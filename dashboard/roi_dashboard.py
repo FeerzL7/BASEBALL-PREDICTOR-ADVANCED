@@ -116,6 +116,10 @@ def cargar_roi() -> pd.DataFrame:
     df['ganancia']   = pd.to_numeric(df['ganancia'],   errors='coerce')
     df['valor']      = pd.to_numeric(df['valor'],      errors='coerce')
     df['probabilidad'] = pd.to_numeric(df['probabilidad'], errors='coerce')
+    for col in ['stake_pct', 'stake_amount', 'bankroll_before',
+                'bankroll_after', 'profit_amount', 'yield_pct']:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors='coerce')
     return df.sort_values('fecha')
 
 
@@ -205,8 +209,11 @@ wins    = (df['resultado'] == 'win').sum()
 losses  = (df['resultado'] == 'lose').sum()
 pend    = (df['resultado'] == 'pendiente').sum()
 hit_rate = wins / (wins + losses) * 100 if (wins + losses) > 0 else 0
-ganancia_total = df['ganancia'].sum()
-roi_total = ganancia_total / total * 100 if total > 0 else 0
+profit_col = 'profit_amount' if 'profit_amount' in df.columns else 'ganancia'
+stake_col = 'stake_amount' if 'stake_amount' in df.columns else None
+ganancia_total = df[profit_col].sum()
+stake_total = df[stake_col].sum() if stake_col else total
+roi_total = ganancia_total / stake_total * 100 if stake_total > 0 else 0
 cuota_media = df['cuota'].mean()
 ev_medio = df['valor'].mean() if 'valor' in df.columns else 0
 racha_actual = 0
@@ -241,7 +248,7 @@ def metric_card(col, label, value, sub="", cls="neutral"):
 
 metric_card(c1, "ROI",        f"{roi_total:+.1f}%",   f"{total} picks",        color_roi(roi_total))
 metric_card(c2, "Hit rate",   f"{hit_rate:.1f}%",     f"{wins}W / {losses}L",  "accent")
-metric_card(c3, "Ganancia",   f"{ganancia_total:+.2f}u", "unidades",           color_roi(ganancia_total))
+metric_card(c3, "Ganancia",   f"{ganancia_total:+.2f}", "bankroll",           color_roi(ganancia_total))
 metric_card(c4, "Cuota media",f"{cuota_media:.2f}",   "decimal",               "neutral")
 metric_card(c5, "EV medio",   f"{ev_medio:.1f}",      "valor esperado",        "neutral")
 metric_card(c6, "Racha",      f"+{racha_actual}",     "wins consecutivos",      "positive" if racha_actual > 0 else "neutral")
@@ -256,11 +263,14 @@ with col_izq:
     st.markdown("<div class='section-title'>Bankroll acumulado</div>", unsafe_allow_html=True)
 
     df_sorted = df[df['resultado'].isin(['win','lose'])].sort_values('fecha').copy()
-    df_sorted['acumulado'] = df_sorted['ganancia'].cumsum()
+    if 'bankroll_after' in df_sorted.columns and df_sorted['bankroll_after'].notna().any():
+        df_sorted['acumulado'] = df_sorted['bankroll_after']
+    else:
+        df_sorted['acumulado'] = df_sorted[profit_col].cumsum()
     df_sorted['pick_num']  = range(1, len(df_sorted) + 1)
 
     # Rolling ROI
-    df_sorted['rolling_ganancia'] = df_sorted['ganancia'].rolling(ventana_rolling, min_periods=1).mean() * 100
+    df_sorted['rolling_ganancia'] = df_sorted[profit_col].rolling(ventana_rolling, min_periods=1).mean()
 
     fig_bank = go.Figure()
 
@@ -271,7 +281,7 @@ with col_izq:
         fillcolor='rgba(74,222,128,0.06)',
         line=dict(color='#4ade80', width=2),
         name='Bankroll',
-        hovertemplate='Pick %{x}<br>Acumulado: %{y:.2f}u<extra></extra>',
+        hovertemplate='Pick %{x}<br>Bankroll: %{y:.2f}<extra></extra>',
     ))
 
     # Línea de break-even
@@ -324,10 +334,13 @@ with col_der:
         .reset_index()
     )
     stats_mercado['hit_rate'] = stats_mercado['wins'] / stats_mercado['picks'] * 100
-    stats_mercado['roi'] = stats_mercado.apply(
-        lambda r: df[(df['mercado']==r['mercado']) & df['resultado'].isin(['win','lose'])]['ganancia'].sum() / r['picks'] * 100,
-        axis=1
-    )
+    def roi_mercado(row):
+        sub = df[(df['mercado'] == row['mercado']) & df['resultado'].isin(['win','lose'])]
+        profit = sub[profit_col].sum()
+        stake = sub[stake_col].sum() if stake_col else row['picks']
+        return profit / stake * 100 if stake else 0
+
+    stats_mercado['roi'] = stats_mercado.apply(roi_mercado, axis=1)
 
     colors = ['#4ade80' if r > 0 else '#f87171' for r in stats_mercado['roi']]
 
@@ -467,12 +480,12 @@ def badge_resultado(r):
 
 def fmt_ganancia(g):
     if pd.isna(g): return '—'
-    return f"+{g:.2f}u" if g > 0 else f"{g:.2f}u"
+    return f"+{g:.2f}" if g > 0 else f"{g:.2f}"
 
 df_tabla['Resultado'] = df_tabla['resultado'].map({
     'win': '🟢 WIN', 'lose': '🔴 LOSE', 'pendiente': '🔵 PEND', 'null': '⬜ PUSH',
 })
-df_tabla['Ganancia'] = df_tabla['ganancia'].apply(fmt_ganancia)
+df_tabla['Ganancia'] = df_tabla[profit_col].apply(fmt_ganancia)
 df_tabla['Fecha']    = df_tabla['fecha'].dt.strftime('%b %d')
 
 st.dataframe(

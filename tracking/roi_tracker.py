@@ -1,68 +1,53 @@
-# tracking/roi_tracker.py
-import csv
-import os
 from datetime import datetime
 
-ROI_FILE = "output/roi_tracking.csv"
-
-KELLY_MAX_STAKE_PCT = 5.0
+from bankroll.tracker import (
+    exportar_reportes,
+    inicializar_ledger,
+    leer_registros,
+    liquidar_registro,
+    metricas_acumuladas,
+    registrar_apuesta,
+    escribir_registros,
+    bankroll_actual,
+)
 
 
 def inicializar_tracking():
-    if not os.path.exists(ROI_FILE):
-        with open(ROI_FILE, mode='w', newline='', encoding='utf-8-sig') as f:
-            csv.writer(f).writerow([
-                "fecha", "juego", "mercado", "seleccion", "cuota",
-                "probabilidad", "valor", "resultado", "ganancia"
-            ])
+    inicializar_ledger()
 
 
 def _picks_existentes() -> set:
-    """
-    Devuelve un set de tuplas (fecha, juego, mercado, seleccion)
-    para todos los picks ya registrados — pendientes o resueltos.
-    Usado para evitar duplicados al registrar picks del día.
-    """
-    existentes = set()
-    if not os.path.exists(ROI_FILE):
-        return existentes
-    with open(ROI_FILE, mode='r', encoding='utf-8-sig') as f:
-        reader = csv.reader(f)
-        next(reader, None)  # skip header
-        for row in reader:
-            if len(row) >= 4:
-                existentes.add((row[0], row[1], row[2], row[3]))
-    return existentes
+    return {
+        (
+            str(row.get("fecha", "")),
+            str(row.get("juego", "")),
+            str(row.get("mercado", "")),
+            str(row.get("seleccion", "")),
+        )
+        for row in leer_registros()
+    }
 
 
 def registrar_pick(fecha, juego, mercado, seleccion, cuota,
-                   probabilidad, valor, resultado="pendiente"):
+                   probabilidad, valor, resultado="pendiente",
+                   stake_pct=1):
     """
-    Registra un pick solo si no existe ya la misma combinación
-    (fecha, juego, mercado, seleccion) en el archivo.
-    Evita duplicados en ejecuciones consecutivas del mismo día.
+    Registra un pick con stake porcentual entero sobre el bankroll actual.
+
+    Se conserva el nombre historico de la funcion para no romper main.py ni
+    scripts existentes. El nuevo ledger guarda monto, bankroll y yield.
     """
-    clave = (str(fecha), str(juego), str(mercado), str(seleccion))
-    if clave in _picks_existentes():
-        return  # ya registrado, no duplicar
-
-    ganancia = (float(cuota) - 1) if resultado == "win" else \
-               (-1.0 if resultado == "lose" else 0)
-
-    with open(ROI_FILE, mode='a', newline='', encoding='utf-8-sig') as f:
-        csv.writer(f).writerow([
-            fecha, juego, mercado, seleccion, cuota,
-            probabilidad, valor, resultado, ganancia
-        ])
-
-
-def _parsear_marcador(linescore):
-    try:
-        home = int(linescore.get("teams", {}).get("home", {}).get("runs", -1))
-        away = int(linescore.get("teams", {}).get("away", {}).get("runs", -1))
-        return home, away
-    except Exception:
-        return -1, -1
+    registrar_apuesta(
+        fecha=fecha,
+        juego=juego,
+        mercado=mercado,
+        seleccion=seleccion,
+        cuota=cuota,
+        probabilidad=probabilidad,
+        valor=valor,
+        stake_pct=int(stake_pct or 0),
+        resultado=resultado,
+    )
 
 
 def _resolver_resultado(seleccion, mercado, home_team, away_team,
@@ -102,12 +87,16 @@ def _resolver_resultado(seleccion, mercado, home_team, away_team,
             return "pendiente"
         total = home_runs + away_runs
         if seleccion.upper() == "OVER":
-            if total > linea:  return "win"
-            if total == linea: return "null"   # push
+            if total > linea:
+                return "win"
+            if total == linea:
+                return "null"
             return "lose"
         if seleccion.upper() == "UNDER":
-            if total < linea:  return "win"
-            if total == linea: return "null"   # push
+            if total < linea:
+                return "win"
+            if total == linea:
+                return "null"
             return "lose"
 
     return "pendiente"
@@ -115,10 +104,7 @@ def _resolver_resultado(seleccion, mercado, home_team, away_team,
 
 def actualizar_resultados():
     """
-    Lee el CSV, resuelve picks 'pendiente' de días anteriores
-    consultando MLB statsapi, y reescribe el archivo.
-    Nunca procesa el mismo pick dos veces — la condición resultado != 'pendiente'
-    ya evita reprocesar picks resueltos.
+    Resuelve picks pendientes, actualiza bankroll y reexporta reportes.
     """
     try:
         from statsapi import schedule
@@ -126,31 +112,20 @@ def actualizar_resultados():
         print("[WARNING] statsapi no disponible.")
         return
 
-    if not os.path.exists(ROI_FILE):
+    registros = leer_registros()
+    if not registros:
         return
 
-    with open(ROI_FILE, mode='r', encoding='utf-8-sig') as f:
-        filas = list(csv.reader(f))
-
-    if len(filas) <= 1:
-        return
-
-    encabezado = filas[0]
-    registros  = filas[1:]
     actualizados = 0
     hoy = datetime.now().date()
     cache_schedule = {}
+    bankroll = bankroll_actual(registros)
 
-    for i, fila in enumerate(registros):
-        if len(fila) < 9:
+    for i, row in enumerate(registros):
+        if row.get("resultado") != "pendiente":
             continue
 
-        fecha_str, juego, mercado, seleccion, cuota, \
-            probabilidad, valor, resultado, ganancia = fila
-
-        if resultado != "pendiente":
-            continue
-
+        fecha_str = str(row.get("fecha", ""))
         try:
             fecha_pick = datetime.strptime(fecha_str, "%Y-%m-%d").date()
         except ValueError:
@@ -166,20 +141,21 @@ def actualizar_resultados():
                 print(f"[WARNING] Schedule {fecha_str}: {e}")
                 cache_schedule[fecha_str] = []
 
+        juego = str(row.get("juego", ""))
         partes = juego.split(" @ ")
         if len(partes) != 2:
             continue
         away_pick, home_pick = partes[0].strip(), partes[1].strip()
 
         juego_encontrado = None
-        for j in cache_schedule[fecha_str]:
-            if j.get("status") not in ("Final", "Game Over", "Completed Early"):
+        for game in cache_schedule[fecha_str]:
+            if game.get("status") not in ("Final", "Game Over", "Completed Early"):
                 continue
-            h = j.get("home_name", "")
-            a = j.get("away_name", "")
+            h = game.get("home_name", "")
+            a = game.get("away_name", "")
             if (away_pick.lower() in a.lower() or a.lower() in away_pick.lower()) and \
                (home_pick.lower() in h.lower() or h.lower() in home_pick.lower()):
-                juego_encontrado = j
+                juego_encontrado = game
                 break
 
         if not juego_encontrado:
@@ -187,15 +163,16 @@ def actualizar_resultados():
 
         home_runs = juego_encontrado.get("home_score", -1)
         away_runs = juego_encontrado.get("away_score", -1)
-
         if home_runs < 0 or away_runs < 0:
             continue
 
         home_team = juego_encontrado.get("home_name", "")
         away_team = juego_encontrado.get("away_name", "")
+        mercado = str(row.get("mercado", ""))
+        seleccion = str(row.get("seleccion", ""))
 
         linea_total = None
-        sel_limpia  = seleccion
+        sel_limpia = seleccion
         if mercado.upper() == "TOTAL":
             partes_sel = seleccion.split()
             if len(partes_sel) == 2:
@@ -213,57 +190,21 @@ def actualizar_resultados():
         if nuevo_resultado == "pendiente":
             continue
 
-        nueva_ganancia = (float(cuota) - 1) if nuevo_resultado == "win" else -1.0
-        estado = "WIN" if nuevo_resultado == "win" else "LOSE"
+        registros[i] = liquidar_registro(row, nuevo_resultado, bankroll)
+        bankroll = float(registros[i].get("bankroll_after") or bankroll)
+
+        estado = "PUSH" if nuevo_resultado == "null" else (
+            "WIN" if nuevo_resultado == "win" else "LOSE"
+        )
         print(f"  [{estado}] {juego} | {mercado} {seleccion} "
               f"({home_team} {home_runs} - {away_runs} {away_team})")
-
-        registros[i] = [ # type: ignore
-            fecha_str, juego, mercado, seleccion, cuota, probabilidad,
-            valor, nuevo_resultado, round(nueva_ganancia, 4)
-        ]
         actualizados += 1
 
-    with open(ROI_FILE, mode='w', newline='', encoding='utf-8-sig') as f:
-        writer = csv.writer(f)
-        writer.writerow(encabezado)
-        writer.writerows(registros)
-
+    escribir_registros(registros)
+    exportar_reportes(registros)
     print(f"[INFO] Resultados actualizados: {actualizados} pick(s) resueltos.")
 
 
 def calcular_roi() -> dict:
-    total_apuestas = 0
-    wins           = 0
-    ganancias      = 0.0
-    pendientes     = 0
+    return metricas_acumuladas()
 
-    if not os.path.exists(ROI_FILE):
-        return {"total_apuestas": 0, "wins": 0,
-                "ganancias": 0.0, "roi": 0.0, "pendientes": 0}
-
-    with open(ROI_FILE, mode='r', encoding='utf-8-sig') as f:
-        reader = csv.reader(f)
-        next(reader, None)
-        for row in reader:
-            if len(row) < 9:
-                continue
-            resultado = row[7]
-            if resultado == "pendiente":
-                pendientes += 1
-                continue
-            if resultado == "null":        # push — no cuenta como apuesta resuelta
-                continue
-            total_apuestas += 1
-            ganancias += float(row[8])
-            if resultado == "win":
-                wins += 1
-
-    roi = (ganancias / total_apuestas * 100) if total_apuestas > 0 else 0.0
-    return {
-        "total_apuestas": total_apuestas,
-        "wins":           wins,
-        "ganancias":      round(ganancias, 2),
-        "roi":            round(roi, 2),
-        "pendientes":     pendientes,
-    }

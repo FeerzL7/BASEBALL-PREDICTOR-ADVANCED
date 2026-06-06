@@ -1,0 +1,286 @@
+2026-06-02 12:33:36 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-06-02.log
+2026-06-02 12:33:38 | INFO     | main.main                           | =======================================================
+2026-06-02 12:33:38 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-06-02 12:33:38 | INFO     | main.main                           | =======================================================
+2026-06-02 12:33:38 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-06-02 12:33:38 | INFO     | statcast.cargar_statcast            | Stats avanzadas desde caché (30 pitching, 30 batting).
+2026-06-02 12:33:38 | INFO     | main.main                           | Analizando pitchers del día...
+2026-06-02 15:24:43 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-06-02.log
+2026-06-02 15:24:45 | INFO     | main.main                           | =======================================================
+2026-06-02 15:24:45 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-06-02 15:24:45 | INFO     | main.main                           | =======================================================
+2026-06-02 15:24:45 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-06-02 15:24:45 | INFO     | statcast.cargar_statcast            | Calculando FIP y stats avanzadas via MLB API (2026)...
+2026-06-02 15:25:14 | INFO     | statcast.cargar_statcast            | 30 equipos cargados con stats avanzadas.
+2026-06-02 15:25:14 | INFO     | main.main                           | Analizando pitchers del día...
+2026-06-02 15:25:17 | DEBUG    | pitching.get_pitcher_stats          | Steven Matz: ERA temp=4.67 | ERA últ.3 sal.=5.538 | ERA efectiva=5.017
+2026-06-02 15:25:18 | DEBUG    | pitching.get_pitcher_stats          | Jack Flaherty: ERA temp=5.81 | ERA últ.3 sal.=6.294 | ERA efectiva=6.004
+2026-06-02 15:25:19 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Tampa Bay Rays: ERA=3.618 WHIP=1.215 IP=577.9 (18 relievers)
+2026-06-02 15:25:19 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Detroit Tigers: ERA=3.701 WHIP=1.254 IP=569.7 (18 relievers)
+2026-06-02 15:25:21 | DEBUG    | pitching.get_pitcher_stats          | Aaron Nola: ERA temp=5.72 | ERA últ.3 sal.=7.606 | ERA efectiva=6.474
+2026-06-02 15:25:22 | DEBUG    | pitching.get_pitcher_stats          | Randy Vásquez: ERA temp=3.28 | ERA últ.3 sal.=4.118 | ERA efectiva=3.615
+2026-06-02 15:25:22 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Philadelphia Phillies: ERA=4.234 WHIP=1.312 IP=478.5 (16 relievers)
+2026-06-02 15:25:24 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Diego Padres: ERA=2.994 WHIP=1.159 IP=577.5 (14 relievers)
+2026-06-02 15:25:25 | DEBUG    | pitching.get_pitcher_stats          | Connelly Early: ERA temp=2.95 | ERA últ.3 sal.=2.486 | ERA efectiva=2.764
+2026-06-02 15:25:26 | DEBUG    | pitching.get_pitcher_stats          | Shane Baz: ERA temp=4.48 | ERA últ.3 sal.=2.25 | ERA efectiva=3.588
+2026-06-02 15:25:27 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Boston Red Sox: ERA=3.247 WHIP=1.208 IP=529.2 (17 relievers)
+2026-06-02 15:25:27 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Baltimore Orioles: ERA=4.257 WHIP=1.395 IP=560.5 (22 relievers)
+2026-06-02 15:25:28 | DEBUG    | pitching.get_pitcher_stats          | Richard Lovelady: ERA temp=3.38 | ERA últ.3 sal.=4.39 | ERA efectiva=3.784
+2026-06-02 15:25:29 | DEBUG    | pitching.get_pitcher_stats          | Lake Bachar: ERA temp=3.77 | sin salidas recientes
+2026-06-02 15:25:31 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Washington Nationals: ERA=5.903 WHIP=1.575 IP=504.2 (19 relievers)
+2026-06-02 15:25:32 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Miami Marlins: ERA=4.207 WHIP=1.328 IP=626.7 (17 relievers)
+2026-06-02 15:25:33 | DEBUG    | pitching.get_pitcher_stats          | Cam Schlittler: ERA temp=1.5 | ERA últ.3 sal.=1.978 | ERA efectiva=1.691
+2026-06-02 15:25:34 | DEBUG    | pitching.get_pitcher_stats          | Joey Cantillo: ERA temp=3.57 | ERA últ.3 sal.=5.902 | ERA efectiva=4.503
+2026-06-02 15:25:35 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Yankees: ERA=3.943 WHIP=1.255 IP=516.5 (16 relievers)
+2026-06-02 15:25:35 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cleveland Guardians: ERA=3.314 WHIP=1.208 IP=518.7 (13 relievers)
+2026-06-02 15:25:38 | DEBUG    | pitching.get_pitcher_stats          | Andrew Abbott: ERA temp=4.02 | ERA últ.3 sal.=2.795 | ERA efectiva=3.53
+2026-06-02 15:25:39 | DEBUG    | pitching.get_pitcher_stats          | Noah Cameron: ERA temp=4.61 | ERA últ.3 sal.=2.647 | ERA efectiva=3.825
+2026-06-02 15:25:39 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cincinnati Reds: ERA=3.917 WHIP=1.299 IP=530.5 (15 relievers)
+2026-06-02 15:25:40 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Kansas City Royals: ERA=3.507 WHIP=1.243 IP=553.3 (13 relievers)
+2026-06-02 15:25:41 | DEBUG    | pitching.get_pitcher_stats          | Bryce Elder: ERA temp=2.5 | ERA últ.3 sal.=4.737 | ERA efectiva=3.395
+2026-06-02 15:25:44 | DEBUG    | pitching.get_pitcher_stats          | Kevin Gausman: ERA temp=3.13 | ERA últ.3 sal.=1.047 | ERA efectiva=2.297
+2026-06-02 15:25:44 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=3.986 WHIP=1.229 IP=531.3 (18 relievers)
+2026-06-02 15:25:45 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Toronto Blue Jays: ERA=3.963 WHIP=1.273 IP=535.7 (18 relievers)
+2026-06-02 15:25:47 | DEBUG    | pitching.get_pitcher_stats          | Connor Prielipp: ERA temp=5.13 | ERA últ.3 sal.=7.66 | ERA efectiva=6.142
+2026-06-02 15:25:50 | DEBUG    | pitching.get_pitcher_stats          | Davis Martin: ERA temp=2.0 | ERA últ.3 sal.=3.14 | ERA efectiva=2.456
+2026-06-02 15:25:51 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Minnesota Twins: ERA=4.658 WHIP=1.407 IP=550.9 (21 relievers)
+2026-06-02 15:25:52 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.272 WHIP=1.411 IP=627.5 (17 relievers)
+2026-06-02 15:25:54 | DEBUG    | pitching.get_pitcher_stats          | Kyle Harrison: ERA temp=1.57 | ERA últ.3 sal.=0.0 | ERA efectiva=1.142
+2026-06-02 15:25:55 | DEBUG    | pitching.get_pitcher_stats          | Trevor McDonald: ERA temp=4.34 | ERA últ.3 sal.=5.806 | ERA efectiva=4.926
+2026-06-02 15:25:56 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Milwaukee Brewers: ERA=3.492 WHIP=1.256 IP=633.5 (20 relievers)
+2026-06-02 15:25:57 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Francisco Giants: ERA=3.658 WHIP=1.235 IP=519.1 (15 relievers)
+2026-06-02 15:25:58 | DEBUG    | pitching.get_pitcher_stats          | Dustin May: ERA temp=4.57 | ERA últ.3 sal.=3.978 | ERA efectiva=4.333
+2026-06-02 15:26:00 | DEBUG    | pitching.get_pitcher_stats          | Nathan Eovaldi: ERA temp=3.93 | ERA últ.3 sal.=3.429 | ERA efectiva=3.73
+2026-06-02 15:26:01 | DEBUG    | bullpen.obtener_bullpen             | Bullpen St. Louis Cardinals: ERA=3.785 WHIP=1.305 IP=537.7 (13 relievers)
+2026-06-02 15:26:02 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=3.466 WHIP=1.189 IP=571.9 (14 relievers)
+2026-06-02 15:26:03 | DEBUG    | pitching.get_pitcher_stats          | Jameson Taillon: ERA temp=5.37 | ERA últ.3 sal.=10.141 | ERA efectiva=7.278
+2026-06-02 15:26:04 | DEBUG    | pitching.get_pitcher_stats          | Gage Jump: ERA temp=7.2 | ERA últ.1 sal.=7.2 | ERA efectiva=7.2
+2026-06-02 15:26:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago Cubs: ERA=3.81 WHIP=1.218 IP=518.2 (20 relievers)
+2026-06-02 15:26:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Athletics: ERA=4.487 WHIP=1.423 IP=523.5 (18 relievers)
+2026-06-02 15:26:06 | DEBUG    | pitching.get_pitcher_stats          | Mike Burrows: ERA temp=5.4 | ERA últ.3 sal.=6.429 | ERA efectiva=5.812
+2026-06-02 15:26:08 | DEBUG    | pitching.get_pitcher_stats          | Bubba Chandler: ERA temp=4.85 | ERA últ.3 sal.=5.538 | ERA efectiva=5.125
+2026-06-02 15:26:09 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=3.463 WHIP=1.17 IP=528.9 (17 relievers)
+2026-06-02 15:26:10 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=3.906 WHIP=1.228 IP=436.9 (16 relievers)
+2026-06-02 15:26:11 | DEBUG    | pitching.get_pitcher_stats          | Grayson Rodriguez: ERA temp=7.53 | ERA últ.3 sal.=8.06 | ERA efectiva=7.742
+2026-06-02 15:26:12 | DEBUG    | pitching.get_pitcher_stats          | Tomoyuki Sugano: ERA temp=4.01 | ERA últ.3 sal.=4.091 | ERA efectiva=4.042
+2026-06-02 15:26:12 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Angels: ERA=4.53 WHIP=1.367 IP=558.0 (22 relievers)
+2026-06-02 15:26:13 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Colorado Rockies: ERA=5.108 WHIP=1.482 IP=597.2 (16 relievers)
+2026-06-02 15:26:15 | DEBUG    | pitching.get_pitcher_stats          | Michael Soroka: ERA temp=3.25 | ERA últ.3 sal.=2.616 | ERA efectiva=2.996
+2026-06-02 15:26:16 | DEBUG    | pitching.get_pitcher_stats          | Eric Lauer: ERA temp=5.95 | ERA últ.3 sal.=3.169 | ERA efectiva=4.838
+2026-06-02 15:26:17 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Arizona Diamondbacks: ERA=4.99 WHIP=1.433 IP=431.4 (22 relievers)
+2026-06-02 15:26:17 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Dodgers: ERA=4.244 WHIP=1.32 IP=625.8 (19 relievers)
+2026-06-02 15:26:21 | DEBUG    | pitching.get_pitcher_stats          | Logan Gilbert: ERA temp=3.69 | ERA últ.3 sal.=3.621 | ERA efectiva=3.662
+2026-06-02 15:26:21 | WARNING  | pitching.analizar_pitchers          | Seattle Mariners vs New York Mets — lanzador no confirmado (away: TBD)
+2026-06-02 15:26:21 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Seattle Mariners: ERA=3.701 WHIP=1.255 IP=551.5 (18 relievers)
+2026-06-02 15:26:22 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Mets: ERA=3.55 WHIP=1.232 IP=591.1 (23 relievers)
+2026-06-02 15:26:22 | INFO     | pitching.analizar_pitchers          | Pitchers analizados: 15 partidos.
+2026-06-02 15:26:22 | WARNING  | main.main                           | 1 partido(s) excluido(s) por lanzador TBD:
+2026-06-02 15:26:22 | WARNING  | main.main                           |   New York Mets @ Seattle Mariners (home=Logan Gilbert, away=TBD)
+2026-06-02 15:26:22 | INFO     | main.main                           | Partidos válidos: 14 / 15
+2026-06-02 15:26:22 | INFO     | main.main                           | Analizando ofensiva...
+2026-06-02 15:26:24 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Tampa Bay Rays vsRHP: OPS pond.=0.81 (5/5 con split)
+2026-06-02 15:26:27 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Detroit Tigers vsLHP: OPS pond.=0.678 (5/5 con split)
+2026-06-02 15:26:27 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Tampa Bay Rays (vsRHP OPS=0.81 R/10=4.5 n_runs=0) | Detroit Tigers (vsLHP OPS=0.678 R/10=4.5 n_runs=0)
+2026-06-02 15:26:29 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Philadelphia Phillies vsRHP: OPS pond.=0.731 (5/5 con split)
+2026-06-02 15:26:31 | DEBUG    | offense.obtener_stats_ofensivas     | Offense San Diego Padres vsRHP: OPS pond.=0.625 (5/5 con split)
+2026-06-02 15:26:31 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Philadelphia Phillies (vsRHP OPS=0.731 R/10=4.5 n_runs=0) | San Diego Padres (vsRHP OPS=0.625 R/10=4.5 n_runs=0)
+2026-06-02 15:26:32 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Boston Red Sox vsRHP: OPS pond.=0.698 (5/5 con split)
+2026-06-02 15:26:35 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Baltimore Orioles vsLHP: OPS pond.=0.719 (5/5 con split)
+2026-06-02 15:26:35 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Boston Red Sox (vsRHP OPS=0.698 R/10=4.5 n_runs=0) | Baltimore Orioles (vsLHP OPS=0.719 R/10=4.5 n_runs=0)
+2026-06-02 15:26:40 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Washington Nationals vsRHP: OPS pond.=0.804 (5/5 con split)
+2026-06-02 15:26:42 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Miami Marlins vsLHP: OPS pond.=0.796 (5/5 con split)
+2026-06-02 15:26:42 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Washington Nationals (vsRHP OPS=0.804 R/10=4.5 n_runs=0) | Miami Marlins (vsLHP OPS=0.796 R/10=4.5 n_runs=0)
+2026-06-02 15:26:45 | DEBUG    | offense.obtener_stats_ofensivas     | Offense New York Yankees vsLHP: OPS pond.=0.84 (5/5 con split)
+2026-06-02 15:26:47 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Cleveland Guardians vsRHP: OPS pond.=0.688 (5/5 con split)
+2026-06-02 15:26:47 | DEBUG    | offense.analizar_ofensiva           | OFFENSE New York Yankees (vsLHP OPS=0.84 R/10=4.5 n_runs=0) | Cleveland Guardians (vsRHP OPS=0.688 R/10=4.5 n_runs=0)
+2026-06-02 15:26:49 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Cincinnati Reds vsLHP: OPS pond.=0.857 (5/5 con split)
+2026-06-02 15:26:52 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Kansas City Royals vsLHP: OPS pond.=0.782 (5/5 con split)
+2026-06-02 15:26:52 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Cincinnati Reds (vsLHP OPS=0.857 R/10=4.5 n_runs=0) | Kansas City Royals (vsLHP OPS=0.782 R/10=4.5 n_runs=0)
+2026-06-02 15:26:54 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Atlanta Braves vsRHP: OPS pond.=0.792 (5/5 con split)
+2026-06-02 15:26:56 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Toronto Blue Jays vsRHP: OPS pond.=0.727 (5/5 con split)
+2026-06-02 15:26:56 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Atlanta Braves (vsRHP OPS=0.792 R/10=4.5 n_runs=0) | Toronto Blue Jays (vsRHP OPS=0.727 R/10=4.5 n_runs=0)
+2026-06-02 15:26:59 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Minnesota Twins vsRHP: OPS pond.=0.719 (5/5 con split)
+2026-06-02 15:27:01 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Chicago White Sox vsLHP: OPS pond.=0.896 (5/5 con split)
+2026-06-02 15:27:01 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Minnesota Twins (vsRHP OPS=0.719 R/10=4.5 n_runs=0) | Chicago White Sox (vsLHP OPS=0.896 R/10=4.5 n_runs=0)
+2026-06-02 15:27:02 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Milwaukee Brewers vsRHP: OPS pond.=0.813 (5/5 con split)
+2026-06-02 15:27:04 | DEBUG    | offense.obtener_stats_ofensivas     | Offense San Francisco Giants vsLHP: OPS pond.=0.722 (5/5 con split)
+2026-06-02 15:27:04 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Milwaukee Brewers (vsRHP OPS=0.813 R/10=4.5 n_runs=0) | San Francisco Giants (vsLHP OPS=0.722 R/10=4.5 n_runs=0)
+2026-06-02 15:27:07 | DEBUG    | offense.obtener_stats_ofensivas     | Offense St. Louis Cardinals vsRHP: OPS pond.=0.794 (5/5 con split)
+2026-06-02 15:27:09 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Texas Rangers vsRHP: OPS pond.=0.773 (5/5 con split)
+2026-06-02 15:27:09 | DEBUG    | offense.analizar_ofensiva           | OFFENSE St. Louis Cardinals (vsRHP OPS=0.794 R/10=4.5 n_runs=0) | Texas Rangers (vsRHP OPS=0.773 R/10=4.5 n_runs=0)
+2026-06-02 15:27:12 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Chicago Cubs vsLHP: OPS pond.=0.684 (5/5 con split)
+2026-06-02 15:27:13 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Athletics vsRHP: OPS pond.=0.824 (5/5 con split)
+2026-06-02 15:27:13 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Chicago Cubs (vsLHP OPS=0.684 R/10=4.5 n_runs=0) | Athletics (vsRHP OPS=0.824 R/10=4.5 n_runs=0)
+2026-06-02 15:27:15 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Houston Astros vsRHP: OPS pond.=0.798 (5/5 con split)
+2026-06-02 15:27:20 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Pittsburgh Pirates vsRHP: OPS pond.=0.803 (5/5 con split)
+2026-06-02 15:27:20 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Houston Astros (vsRHP OPS=0.798 R/10=4.5 n_runs=0) | Pittsburgh Pirates (vsRHP OPS=0.803 R/10=4.5 n_runs=0)
+2026-06-02 15:27:23 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Los Angeles Angels vsRHP: OPS pond.=0.745 (5/5 con split)
+2026-06-02 15:27:24 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Colorado Rockies vsRHP: OPS pond.=0.757 (5/5 con split)
+2026-06-02 15:27:24 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Los Angeles Angels (vsRHP OPS=0.745 R/10=4.5 n_runs=0) | Colorado Rockies (vsRHP OPS=0.757 R/10=4.5 n_runs=0)
+2026-06-02 15:27:26 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Arizona Diamondbacks vsLHP: OPS pond.=0.894 (5/5 con split)
+2026-06-02 15:27:29 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Los Angeles Dodgers vsRHP: OPS pond.=0.841 (5/5 con split)
+2026-06-02 15:27:29 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Arizona Diamondbacks (vsLHP OPS=0.894 R/10=4.5 n_runs=0) | Los Angeles Dodgers (vsRHP OPS=0.841 R/10=4.5 n_runs=0)
+2026-06-02 15:27:29 | INFO     | main.main                           | Analizando defensiva...
+2026-06-02 15:27:40 | INFO     | main.main                           | Analizando historial H2H...
+2026-06-02 15:27:53 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-06-02 15:27:53 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-06-02 15:27:58 | DEBUG    | context.analizar_contexto           | Contexto Tampa Bay Rays vs Detroit Tigers: {'temperatura': 32.2, 'viento_kph': 15.8, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:27:59 | DEBUG    | context.analizar_contexto           | Contexto Philadelphia Phillies vs San Diego Padres: {'temperatura': 25.1, 'viento_kph': 12.1, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:28:00 | DEBUG    | context.analizar_contexto           | Contexto Boston Red Sox vs Baltimore Orioles: {'temperatura': 25.1, 'viento_kph': 11.3, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:28:00 | DEBUG    | context.analizar_contexto           | Contexto Washington Nationals vs Miami Marlins: {'temperatura': 24.4, 'viento_kph': 8.8, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:28:02 | DEBUG    | context.analizar_contexto           | Contexto New York Yankees vs Cleveland Guardians: {'temperatura': 25.1, 'viento_kph': 17.5, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-06-02 15:28:03 | DEBUG    | context.analizar_contexto           | Contexto Cincinnati Reds vs Kansas City Royals: {'temperatura': 25.8, 'viento_kph': 20.3, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-06-02 15:28:03 | DEBUG    | context.analizar_contexto           | Contexto Atlanta Braves vs Toronto Blue Jays: {'temperatura': 24.4, 'viento_kph': 19.2, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-06-02 15:28:04 | DEBUG    | context.analizar_contexto           | Contexto Minnesota Twins vs Chicago White Sox: {'temperatura': 28.2, 'viento_kph': 10.8, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:28:05 | DEBUG    | context.analizar_contexto           | Contexto Milwaukee Brewers vs San Francisco Giants: {'temperatura': 20.8, 'viento_kph': 12.7, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:28:05 | DEBUG    | context.analizar_contexto           | Contexto St. Louis Cardinals vs Texas Rangers: {'temperatura': 27.1, 'viento_kph': 16.2, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:28:06 | DEBUG    | context.analizar_contexto           | Contexto Chicago Cubs vs Athletics: {'temperatura': 20.4, 'viento_kph': 16.6, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-06-02 15:28:07 | WARNING  | context.analizar_contexto           | Estadio sin coordenadas: Daikin Park. Usando coordenada default.
+2026-06-02 15:28:07 | DEBUG    | context.analizar_contexto           | Contexto Houston Astros vs Pittsburgh Pirates: {'temperatura': 27.9, 'viento_kph': 19.2, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': True} @ 20h
+2026-06-02 15:28:07 | DEBUG    | context.analizar_contexto           | Contexto Los Angeles Angels vs Colorado Rockies: {'temperatura': 25.0, 'viento_kph': 13.1, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:28:08 | DEBUG    | context.analizar_contexto           | Contexto Arizona Diamondbacks vs Los Angeles Dodgers: {'temperatura': 39.4, 'viento_kph': 8.0, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-06-02 15:28:08 | INFO     | main.main                           | Proyectando totales...
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Tampa Bay Rays vs Detroit Tigers | venue=Tropicana Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.91 PF_final=0.91 | ERA_ef=6.004/5.017 FIP=3.936/4.236 | Proy: 4.732 - 4.212 (total=8.944)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Philadelphia Phillies vs San Diego Padres | venue=Citizens Bank Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.01 PF_final=1.01 | ERA_ef=3.615/6.474 FIP=3.889/3.495 | Proy: 3.67 - 4.715 (total=8.385)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Boston Red Sox vs Baltimore Orioles | venue=Fenway Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.12 PF_final=1.12 | ERA_ef=3.588/2.764 FIP=4.344/3.995 | Proy: 4.834 - 4.13 (total=8.964)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Washington Nationals vs Miami Marlins | venue=Nationals Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.96 PF_final=0.96 | ERA_ef=3.77/3.784 FIP=4.057/4.769 | Proy: 4.235 - 4.717 (total=8.952)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | New York Yankees vs Cleveland Guardians | venue=Yankee Stadium tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.04 PF_final=1.04 | ERA_ef=4.503/1.691 FIP=3.891/3.573 | Proy: 4.777 - 3.267 (total=8.044)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Cincinnati Reds vs Kansas City Royals | venue=Great American Ball Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.08 PF_final=1.08 | ERA_ef=3.825/3.53 FIP=4.409/5.185 | Proy: 4.644 - 4.929 (total=9.573)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Atlanta Braves vs Toronto Blue Jays | venue=Truist Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.03 PF_final=1.03 | ERA_ef=2.297/3.395 FIP=3.678/3.872 | Proy: 3.739 - 4.002 (total=7.741)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Minnesota Twins vs Chicago White Sox | venue=Target Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.98 PF_final=0.98 | ERA_ef=2.456/6.142 FIP=4.343/4.202 | Proy: 3.806 - 5.375 (total=9.181)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Milwaukee Brewers vs San Francisco Giants | venue=American Family Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.96 PF_final=0.96 | ERA_ef=4.926/1.142 FIP=4.258/3.275 | Proy: 4.612 - 2.525 (total=7.137)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | St. Louis Cardinals vs Texas Rangers | venue=Busch Stadium tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.97 PF_final=0.97 | ERA_ef=3.73/4.333 FIP=4.111/4.276 | Proy: 3.958 - 4.326 (total=8.284)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Chicago Cubs vs Athletics | venue=Wrigley Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.05 PF_final=1.05 | ERA_ef=7.2/7.278 FIP=4.719/4.453 | Proy: 6.518 - 6.214 (total=12.732)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Houston Astros vs Pittsburgh Pirates | venue=Daikin Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=5.125/5.812 FIP=3.761/4.924 | Proy: 4.654 - 5.581 (total=10.235)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Los Angeles Angels vs Colorado Rockies | venue=Angel Stadium tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=4.042/7.742 FIP=4.739/4.47 | Proy: 4.825 - 6.037 (total=10.862)
+2026-06-02 15:28:08 | DEBUG    | projections.proyectar_totales       | Arizona Diamondbacks vs Los Angeles Dodgers | venue=Chase Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.02 PF_final=1.02 | ERA_ef=4.838/2.996 FIP=3.523/4.286 | Proy: 4.433 - 4.719 (total=9.152)
+2026-06-02 15:28:08 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-06-02 15:28:08 | INFO     | main.main                           | Obteniendo cuotas (The Odds API)...
+2026-06-02 15:28:09 | DEBUG    | line_movement.guardar_snapshot_diar | Snapshot de líneas guardado: 30 eventos @ 2026-06-02T21:28
+2026-06-02 15:28:09 | DEBUG    | markets.analizar_mercados           | Procesando mercados de apuestas...
+2026-06-02 15:28:09 | INFO     | main.main                           | Partidos con cuotas disponibles: 14
+2026-06-02 15:28:09 | INFO     | main.main                           | Calculando valor esperado y picks...
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Tampa Bay Rays vs Detroit Tigers | Proy: 4.73-4.21 | ML: Tampa Bay Rays EV=-2.0 stake=0.0% | RL: Tampa Bay Rays EV=-4.3 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Philadelphia Phillies vs San Diego Padres | Proy: 3.67-4.71 | ML: San Diego Padres EV=17.6 stake=0.0% | RL: San Diego Padres EV=-7.7 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Boston Red Sox vs Baltimore Orioles | Proy: 4.83-4.13 | ML: Boston Red Sox EV=0.9 stake=0.0% | RL: Boston Red Sox EV=-2.1 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Washington Nationals vs Miami Marlins | Proy: 4.24-4.72 | ML: Miami Marlins EV=5.4 stake=0.0% | RL: Miami Marlins EV=18.4 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | New York Yankees vs Cleveland Guardians | Proy: 4.78-3.27 | ML: Cleveland Guardians EV=-9.1 stake=0.0% | RL: New York Yankees EV=0.4 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Cincinnati Reds vs Kansas City Royals | Proy: 4.64-4.93 | ML: Kansas City Royals EV=4.4 stake=0.0% | RL: Cincinnati Reds EV=-9.7 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Atlanta Braves vs Toronto Blue Jays | Proy: 3.74-4.00 | ML: Toronto Blue Jays EV=2.4 stake=0.0% | RL: Toronto Blue Jays EV=20.0 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Minnesota Twins vs Chicago White Sox | Proy: 3.81-5.38 | ML: Chicago White Sox EV=6.1 stake=0.0% | RL: Chicago White Sox EV=7.9 stake=0.0% | Total: Over EV=5.5 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Milwaukee Brewers vs San Francisco Giants | Proy: 4.61-2.52 | ML: San Francisco Giants EV=-15.7 stake=0.0% | RL: Milwaukee Brewers EV=3.5 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | St. Louis Cardinals vs Texas Rangers | Proy: 3.96-4.33 | ML: Texas Rangers EV=1.9 stake=0.0% | RL: Texas Rangers EV=-4.2 stake=0.0% | Total: Over EV=8.4 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Chicago Cubs vs Athletics | Proy: 6.52-6.21 | ML: Chicago Cubs EV=-1.8 stake=0.0% | RL: Chicago Cubs EV=-1.4 stake=0.0% | Total: Over EV=29.0 stake=1.25% | Mejor: TOTAL: Over
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Houston Astros vs Pittsburgh Pirates | Proy: 4.65-5.58 | ML: Pittsburgh Pirates EV=7.7 stake=1.25% | RL: Pittsburgh Pirates EV=23.1 stake=0.0% | Total: Over EV=6.2 stake=0.0% | Mejor: ML: Pittsburgh Pirates
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Los Angeles Angels vs Colorado Rockies | Proy: 4.83-6.04 | ML: Colorado Rockies EV=19.5 stake=0.0% | RL: Colorado Rockies EV=-2.5 stake=0.0% | Total: Over EV=14.7 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | DEBUG    | value.analizar_valor                | Arizona Diamondbacks vs Los Angeles Dodgers | Proy: 4.43-4.72 | ML: Los Angeles Dodgers EV=0.1 stake=0.0% | RL: Arizona Diamondbacks EV=-5.4 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-06-02 15:28:09 | INFO     | main.main                           | Analizando movimiento de línea...
+2026-06-02 15:28:09 | DEBUG    | line_movement.analizar_movimiento   | Sin suficientes snapshots para detectar movimiento (necesita >= 2).
+2026-06-02 15:28:09 | INFO     | risk_management.aplicar_gestion_rie | Gestion de riesgo: 2 pick(s) activos | exposicion diaria 2.0%
+2026-06-02 15:28:09 | INFO     | main.main                           | Actualizando resultados de picks anteriores...
+2026-06-02 15:28:10 | INFO     | main.main                           | ROI | Resueltos: 149 | Wins: 74 | ROI: -1.79% | Ganancia: -2.66 u | Pendientes: 2
+2026-06-02 15:28:10 | INFO     | main.main                           | CSV exportado → output/predicciones_2026-06-02.csv
+2026-06-02 15:28:10 | INFO     | main.main                           | =======================================================
+2026-06-02 15:28:10 | INFO     | main.main                           | PICKS DEL DÍA
+2026-06-02 15:28:10 | INFO     | main.main                           | =======================================================
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Tampa Bay Rays vs Detroit Tigers
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Jack Flaherty vs Steven Matz
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.73 - 4.21
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Tampa Bay Rays (EV -2.0)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Tampa Bay Rays (EV -4.3)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 8.0
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Philadelphia Phillies vs San Diego Padres
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Randy Vásquez vs Aaron Nola
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 3.67 - 4.71
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : San Diego Padres (EV 17.6)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : San Diego Padres (EV -7.7)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 8.0
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Boston Red Sox vs Baltimore Orioles
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Shane Baz vs Connelly Early
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.83 - 4.13
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Boston Red Sox (EV 0.9)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Boston Red Sox (EV -2.1)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 8.5
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Washington Nationals vs Miami Marlins
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Lake Bachar vs Richard Lovelady
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.24 - 4.72
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Miami Marlins (EV 5.4)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Miami Marlins (EV 18.4)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 9.0
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | New York Yankees vs Cleveland Guardians
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Joey Cantillo vs Cam Schlittler
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.78 - 3.27
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Cleveland Guardians (EV -9.1)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : New York Yankees (EV 0.4)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 7.5
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Cincinnati Reds vs Kansas City Royals
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Noah Cameron vs Andrew Abbott
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.64 - 4.93
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Kansas City Royals (EV 4.4)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Cincinnati Reds (EV -9.7)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 9.0
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Atlanta Braves vs Toronto Blue Jays
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Kevin Gausman vs Bryce Elder
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 3.74 - 4.00
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Toronto Blue Jays (EV 2.4)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Toronto Blue Jays (EV 20.0)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 7.5
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Minnesota Twins vs Chicago White Sox
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Davis Martin vs Connor Prielipp
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 3.81 - 5.38
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Chicago White Sox (EV 6.1)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Chicago White Sox (EV 7.9)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Over 8.0
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Milwaukee Brewers vs San Francisco Giants
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Trevor McDonald vs Kyle Harrison
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.61 - 2.52
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : San Francisco Giants (EV -15.7)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Milwaukee Brewers (EV 3.5)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 7.0
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | St. Louis Cardinals vs Texas Rangers
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Nathan Eovaldi vs Dustin May
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 3.96 - 4.33
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Texas Rangers (EV 1.9)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Texas Rangers (EV -4.2)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Over 7.0
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | INFO     | main.main                           | Chicago Cubs vs Athletics
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Gage Jump vs Jameson Taillon
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 6.52 - 6.21
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Chicago Cubs (EV -1.8)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Chicago Cubs (EV -1.4)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Over 7.5
+2026-06-02 15:28:10 | INFO     | main.main                           |   ✔ TOTAL: Over | Stake: 1.0%
+2026-06-02 15:28:10 | INFO     | main.main                           | Houston Astros vs Pittsburgh Pirates
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Bubba Chandler vs Mike Burrows
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.65 - 5.58
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Pittsburgh Pirates (EV 7.7)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Pittsburgh Pirates (EV 23.1)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Over 9.0
+2026-06-02 15:28:10 | INFO     | main.main                           |   ✔ ML: Pittsburgh Pirates | Stake: 1.0%
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Los Angeles Angels vs Colorado Rockies
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Tomoyuki Sugano vs Grayson Rodriguez
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.83 - 6.04
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Colorado Rockies (EV 19.5)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Colorado Rockies (EV -2.5)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Over 8.5
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | DEBUG    | main.main                           | Arizona Diamondbacks vs Los Angeles Dodgers
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Pitchers : Eric Lauer vs Michael Soroka
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Proy     : 4.43 - 4.72
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ML pick  : Los Angeles Dodgers (EV 0.1)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   RL pick  : Arizona Diamondbacks (EV -5.4)
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 9.0
+2026-06-02 15:28:10 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-06-02 15:28:10 | INFO     | main.main                           | Enviando picks a Telegram...
+2026-06-02 15:28:33 | INFO     | main.main                           | Telegram: picks enviados correctamente.
+2026-06-02 15:28:33 | INFO     | main.main                           | Pipeline completado.

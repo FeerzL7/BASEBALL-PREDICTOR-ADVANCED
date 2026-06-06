@@ -42,9 +42,9 @@ AVG_LIGA      = 0.250
 RPG_LIGA      = 4.50
 
 DEFAULTS_VS_R = {'runsPerGame': 4.50, 'OPS': OPS_LIGA_R, 'wRC+': 100, 'runs_last_5': 4.50,
-                 'runs_recientes_lista': [], 'split': 'vsRHP'}
+                 'runs_recientes_lista': [], 'split': 'vsRHP', 'lookup_fallback': True}
 DEFAULTS_VS_L = {'runsPerGame': 4.30, 'OPS': OPS_LIGA_L, 'wRC+':  96, 'runs_last_5': 4.30,
-                 'runs_recientes_lista': [], 'split': 'vsLHP'}
+                 'runs_recientes_lista': [], 'split': 'vsLHP', 'lookup_fallback': True}
 
 
 # ── Caché en disco ─────────────────────────────────────────────────────────────
@@ -113,6 +113,7 @@ def _normalizar_resultado(resultado: dict, vs_hand: str) -> dict:
     )
     runs_lista = normalizado.get('runs_recientes_lista', [])
     normalizado['runs_recientes_lista'] = runs_lista if isinstance(runs_lista, list) else []
+    normalizado['lookup_fallback'] = bool((resultado or {}).get('lookup_fallback', not resultado))
     return normalizado
 
 
@@ -330,6 +331,7 @@ def obtener_stats_ofensivas(team_name: str, vs_hand: str = 'R',
         'wRC+':                 _wrc_plus_aprox(ops_final),
         'runs_last_5':          max(runs_promedio, 1.5),
         'split':                f"vs{'RHP' if vs_hand == 'R' else 'LHP'}",
+        'lookup_fallback':      False,
         # NUEVO: lista completa para ensemble.py
         'runs_recientes_lista': runs_lista,
     }

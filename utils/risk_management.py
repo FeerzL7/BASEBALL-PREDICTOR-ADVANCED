@@ -1,10 +1,11 @@
+from bankroll.config import MAX_DAILY_EXPOSURE_PCT, MAX_STAKE_PCT
 from utils.logger import get as get_log
 
 log = get_log()
 
 MAX_PICKS_DIARIOS = 3
-MAX_EXPOSICION_DIARIA_PCT = 3.0
-MAX_STAKE_PICK_PCT = 1.0
+MAX_EXPOSICION_DIARIA_PCT = MAX_DAILY_EXPOSURE_PCT
+MAX_STAKE_PICK_PCT = MAX_STAKE_PCT
 
 PRIORIDAD_MERCADO = {
     "TOTAL": 0,
@@ -38,8 +39,8 @@ def _valor_key(mercado: str) -> str:
 def aplicar_gestion_riesgo(
     partidos: list,
     max_picks: int = MAX_PICKS_DIARIOS,
-    max_exposicion_pct: float = MAX_EXPOSICION_DIARIA_PCT,
-    max_stake_pick_pct: float = MAX_STAKE_PICK_PCT,
+    max_exposicion_pct: int = MAX_EXPOSICION_DIARIA_PCT,
+    max_stake_pick_pct: int = MAX_STAKE_PICK_PCT,
 ) -> list:
     """
     Limita exposicion diaria y evita picks contradichos por movimiento de linea.
@@ -61,7 +62,7 @@ def aplicar_gestion_riesgo(
         if not mercado or not stake_key:
             continue
 
-        stake = float(partido.get(stake_key, 0) or 0)
+        stake = int(round(float(partido.get(stake_key, 0) or 0)))
         if stake <= 0:
             partido["mejor_pick"] = "Ninguno"
             partido["riesgo_estado"] = "descartado"
@@ -70,12 +71,12 @@ def aplicar_gestion_riesgo(
 
         if partido.get("mov_contradice"):
             partido["mejor_pick"] = "Ninguno"
-            partido[stake_key] = 0.0
+            partido[stake_key] = 0
             partido["riesgo_estado"] = "descartado"
             partido["riesgo_motivo"] = "movimiento_contradice"
             continue
 
-        partido[stake_key] = min(stake, max_stake_pick_pct)
+        partido[stake_key] = int(min(stake, max_stake_pick_pct))
         candidatos.append(partido)
 
     def score(partido: dict) -> tuple:
@@ -85,7 +86,7 @@ def aplicar_gestion_riesgo(
         return (confirma, -PRIORIDAD_MERCADO.get(mercado, 99), valor)
 
     seleccionados = set()
-    exposicion = 0.0
+    exposicion = 0
 
     for partido in sorted(candidatos, key=score, reverse=True):
         if len(seleccionados) >= max_picks:
@@ -96,19 +97,19 @@ def aplicar_gestion_riesgo(
 
         mercado = _mercado_mejor_pick(partido.get("mejor_pick", ""))
         stake_key = _stake_key(mercado)
-        stake = float(partido.get(stake_key, 0) or 0)
+        stake = int(round(float(partido.get(stake_key, 0) or 0)))
 
         if exposicion + stake > max_exposicion_pct:
-            stake = round(max_exposicion_pct - exposicion, 2)
+            stake = int(max_exposicion_pct - exposicion)
             if stake <= 0:
                 partido["mejor_pick"] = "Ninguno"
-                partido[stake_key] = 0.0
+                partido[stake_key] = 0
                 partido["riesgo_estado"] = "descartado"
                 partido["riesgo_motivo"] = "limite_exposicion_diaria"
                 continue
             partido[stake_key] = stake
 
-        exposicion = round(exposicion + stake, 2)
+        exposicion += int(stake)
         seleccionados.add(id(partido))
         partido["riesgo_estado"] = "activo"
         partido["riesgo_motivo"] = "aprobado"

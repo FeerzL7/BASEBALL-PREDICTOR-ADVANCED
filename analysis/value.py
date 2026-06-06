@@ -21,36 +21,40 @@ from utils import poisson_math as poisson
 log = get_log()
 
 # ── Gestión de riesgo ─────────────────────────────────────────────────────────
-KELLY_MAX_STAKE_PCT = 1.5
-KELLY_FRACCION      = 0.20
+KELLY_MAX_STAKE_PCT = 1.25
+KELLY_FRACCION      = 0.18
 
 # Backtesting local: ML/RL estan en ROI negativo. Se calculan para diagnostico,
 # pero no entran como mejor_pick hasta recalibrarlos con muestra positiva.
-ENABLE_ML_PICKS    = False
-ENABLE_RL_PICKS    = False
+ENABLE_ML_PICKS    = True
+ENABLE_RL_PICKS    = True
 ENABLE_TOTAL_PICKS = True
 
-PROB_MODEL_WEIGHT_ML    = 0.65
-PROB_MODEL_WEIGHT_RL    = 0.60
-PROB_MODEL_WEIGHT_TOTAL = 0.70
-PROB_CAP_ML             = 0.68
-PROB_CAP_RL             = 0.58
+PROB_MODEL_WEIGHT_ML    = 0.35
+PROB_MODEL_WEIGHT_RL    = 0.35
+PROB_MODEL_WEIGHT_TOTAL = 0.62
+PROB_CAP_ML             = 0.58
+PROB_CAP_RL             = 0.57
 PROB_CAP_TOTAL          = 0.62
 
-UMBRAL_EV_ML       = 30
-UMBRAL_PROB_ML     = 0.54
-MIN_CUOTA_ML       = 1.70   # subir de 1.65 → 1.70
-MAX_CUOTA_ML       = 2.30   # bajar de 2.50 → 2.30, cuotas muy altas son underdog puro
+UMBRAL_EV_ML       = 6
+UMBRAL_PROB_ML     = 0.535
+MIN_CUOTA_ML       = 1.88
+MAX_CUOTA_ML       = 2.12
+EDGE_MIN_ML        = 0.035
+EDGE_MAX_ML        = 0.180
 
 # ── Umbrales RL ───────────────────────────────────────────────────────────────
-UMBRAL_EV_RL       = 20
-UMBRAL_PROB_RL     = 0.42
-MIN_CUOTA_RL       = 1.60   # subir de 1.55 → 1.60
-MAX_CUOTA_RL       = 2.30   # bajar de 2.60 → 2.30
+UMBRAL_EV_RL       = 5
+UMBRAL_PROB_RL     = 0.53
+MIN_CUOTA_RL       = 1.88
+MAX_CUOTA_RL       = 2.12
+EDGE_MIN_RL        = 0.030
+EDGE_MAX_RL        = 0.160
 
 # ── Umbrales TOTAL ────────────────────────────────────────────────────────────
 UMBRAL_EV_TOTAL    = 15
-UMBRAL_PROB_TOTAL  = 0.54
+UMBRAL_PROB_TOTAL  = 0.56
 DIFF_LINEA_MIN     = 1.00
 MIN_CUOTA_TOTAL    = 1.75   # mantener igual
 MAX_CUOTA_TOTAL    = 2.20   # mantener igual
@@ -81,6 +85,10 @@ def _blend_prob(model_prob: float, market_prob: float, model_weight: float,
                 cap: float) -> float:
     prob = model_prob * model_weight + market_prob * (1 - model_weight)
     return round(max(0.02, min(prob, cap)), 4)
+
+
+def _market_edge(model_prob: float, market_prob: float) -> float:
+    return round((model_prob or 0.0) - (market_prob or 0.0), 4)
 
 
 def _kelly(prob: float, cuota: float) -> float:
@@ -136,6 +144,7 @@ def _decidir_ml(partido: dict, prob_home: float, prob_away: float) -> dict:
         'valor_ml':     0.0,
         'kelly_ml':     0.0,
         'stake_pct_ml': 0.0,
+        'edge_ml':      0.0,
         'prediccion_ml': None,
     }
 
@@ -150,21 +159,37 @@ def _decidir_ml(partido: dict, prob_home: float, prob_away: float) -> dict:
     ev_away = _calc_ev(prob_away_adj, ml_a)
 
     if ev_home >= ev_away:
-        pick, ev, prob, cuota, prob_raw = ho, ev_home, prob_home_adj, ml_h, prob_home
+        pick, ev, prob, cuota, prob_raw, prob_market = (
+            ho, ev_home, prob_home_adj, ml_h, prob_home, mkt_home
+        )
     else:
-        pick, ev, prob, cuota, prob_raw = aw, ev_away, prob_away_adj, ml_a, prob_away
+        pick, ev, prob, cuota, prob_raw, prob_market = (
+            aw, ev_away, prob_away_adj, ml_a, prob_away, mkt_away
+        )
 
-    stake = _kelly(prob, cuota)
+    edge = _market_edge(prob_raw, prob_market)
+    cuota_ok = MIN_CUOTA_ML <= cuota <= MAX_CUOTA_ML
+    edge_ok = EDGE_MIN_ML <= edge <= EDGE_MAX_ML
+    stake = 0.0
+    if (cuota_ok and edge_ok and
+            prob >= UMBRAL_PROB_ML and
+            ev >= UMBRAL_EV_ML):
+        stake = _kelly(prob, cuota)
 
     resultado.update({
         'pick_ml':      pick,
         'valor_ml':     ev,
         'kelly_ml':     stake,
         'stake_pct_ml': stake,
+        'edge_ml':      edge,
         'prediccion_ml': {
             'mercado': 'ML', 'seleccion': pick,
             'valor': ev, 'prob': prob, 'prob_raw': prob_raw,
+            'prob_market': round(prob_market, 4),
+            'edge_market': edge,
             'cuota': cuota, 'stake_pct': stake,
+            'cuota_ok': cuota_ok,
+            'edge_ok': edge_ok,
         },
     })
     return resultado
@@ -195,6 +220,7 @@ def _decidir_rl(partido: dict, prob_home: float, prob_away: float) -> dict:
         'valor_rl':     0.0,
         'kelly_rl':     0.0,
         'stake_pct_rl': 0.0,
+        'edge_rl':      0.0,
         'prediccion_rl': None,
     }
 
@@ -222,22 +248,38 @@ def _decidir_rl(partido: dict, prob_home: float, prob_away: float) -> dict:
     ev_away = _calc_ev(rl_prob_away_adj, rl_a)
 
     if ev_home >= ev_away:
-        pick, rl_cuota, rl_prob, ev, prob_raw = ho, rl_h, rl_prob_home_adj, ev_home, rl_prob_home
+        pick, rl_cuota, rl_prob, ev, prob_raw, prob_market = (
+            ho, rl_h, rl_prob_home_adj, ev_home, rl_prob_home, mkt_home
+        )
     else:
-        pick, rl_cuota, rl_prob, ev, prob_raw = aw, rl_a, rl_prob_away_adj, ev_away, rl_prob_away
+        pick, rl_cuota, rl_prob, ev, prob_raw, prob_market = (
+            aw, rl_a, rl_prob_away_adj, ev_away, rl_prob_away, mkt_away
+        )
 
-    stake = _kelly(rl_prob, rl_cuota)
+    edge = _market_edge(prob_raw, prob_market)
+    cuota_ok = MIN_CUOTA_RL <= rl_cuota <= MAX_CUOTA_RL
+    edge_ok = EDGE_MIN_RL <= edge <= EDGE_MAX_RL
+    stake = 0.0
+    if (cuota_ok and edge_ok and
+            rl_prob >= UMBRAL_PROB_RL and
+            ev >= UMBRAL_EV_RL):
+        stake = _kelly(rl_prob, rl_cuota)
 
     resultado.update({
         'pick_rl':      pick,
         'valor_rl':     ev,
         'kelly_rl':     stake,
         'stake_pct_rl': stake,
+        'edge_rl':      edge,
         'prediccion_rl': {
             'mercado': 'RL', 'seleccion': pick,
             'linea': partido.get('linea_rl_home') if pick == ho else partido.get('linea_rl_away'),
             'valor': ev, 'prob': rl_prob, 'prob_raw': prob_raw,
+            'prob_market': round(prob_market, 4),
+            'edge_market': edge,
             'cuota': rl_cuota, 'stake_pct': stake,
+            'cuota_ok': cuota_ok,
+            'edge_ok': edge_ok,
         },
     })
     return resultado
@@ -258,6 +300,33 @@ def _prob_total_poisson(mu_total: float, linea: float, pick: str) -> float:
         return float(poisson.cdf(linea - 1, mu))
 
 
+def _alertas_calidad_datos(partido: dict) -> list[str]:
+    """Detecta fallbacks criticos que vuelven demasiado fragil un pick."""
+    alertas = []
+
+    if partido.get('home_stats', {}).get('lookup_fallback'):
+        alertas.append('home_pitcher_fallback')
+    if partido.get('away_stats', {}).get('lookup_fallback'):
+        alertas.append('away_pitcher_fallback')
+    if partido.get('home_offense', {}).get('lookup_fallback'):
+        alertas.append('home_offense_fallback')
+    if partido.get('away_offense', {}).get('lookup_fallback'):
+        alertas.append('away_offense_fallback')
+
+    if not partido.get('home_offense', {}).get('runs_recientes_lista'):
+        alertas.append('home_runs_recent_missing')
+    if not partido.get('away_offense', {}).get('runs_recientes_lista'):
+        alertas.append('away_runs_recent_missing')
+
+    return alertas
+
+
+def _calidad_bloquea_pick(alertas: list[str]) -> bool:
+    pitcher_fallbacks = sum(1 for a in alertas if a.endswith('pitcher_fallback'))
+    offense_fallbacks = sum(1 for a in alertas if a.endswith('offense_fallback'))
+    return pitcher_fallbacks >= 2 or offense_fallbacks >= 2
+
+
 def _decidir_total(partido: dict) -> dict:
     """
     Evalúa el mercado de totales para un partido.
@@ -276,12 +345,15 @@ def _decidir_total(partido: dict) -> dict:
     ou_under   = partido.get('cuota_under')
     proj_total = partido.get('proj_total', 0)
     pf         = partido.get('park_factor_usado', 1.0) or 1.0
+    alertas    = _alertas_calidad_datos(partido)
+    bloqueado_calidad = _calidad_bloquea_pick(alertas)
 
     resultado = {
         'pick_total':      'Sin ventaja clara',
         'valor_total':     0.0,
         'stake_pct_total': 0.0,
         'prediccion_total': None,
+        'data_quality_flags': ','.join(alertas),
     }
 
     if not ou_line or not ou_over or not ou_under or proj_total <= 0:
@@ -319,7 +391,8 @@ def _decidir_total(partido: dict) -> dict:
 
     # Stake solo si cumple TODOS los criterios de totales
     cuota_ok = MIN_CUOTA_TOTAL <= cuota_t <= MAX_CUOTA_TOTAL
-    if (prob_t  >= UMBRAL_PROB_TOTAL and
+    if (not bloqueado_calidad and
+            prob_t  >= UMBRAL_PROB_TOTAL and
             ev_t >= UMBRAL_EV_TOTAL and
             cuota_ok):
         stake_t = _kelly(prob_t, cuota_t)
@@ -330,11 +403,14 @@ def _decidir_total(partido: dict) -> dict:
         'stake_pct_total': stake_t,
         'prob_total':      round(prob_t, 4),
         'prob_total_raw':  round(prob_raw, 4),
+        'data_quality_flags': ','.join(alertas),
         'prediccion_total': {
             'mercado': 'TOTAL', 'seleccion': pick_t,
             'valor': ev_t, 'prob': round(prob_t, 3),
             'prob_raw': round(prob_raw, 3),
             'cuota': cuota_t, 'stake_pct': stake_t,
+            'bloqueado_calidad': bloqueado_calidad,
+            'data_quality_flags': alertas,
         },
     })
     return resultado
@@ -364,10 +440,11 @@ def _mejor_pick(partido: dict, ml: dict, rl: dict, total: dict) -> str:
                 else partido.get('cuota_away')) or 0
 
     if (ENABLE_ML_PICKS and
+            ml.get('stake_pct_ml', 0) > 0 and
             ev_ml   >= UMBRAL_EV_ML and
             prob_ml >= UMBRAL_PROB_ML and
             MIN_CUOTA_ML <= cuota_ml <= MAX_CUOTA_ML):
-        candidatos.append(('ML', ev_ml, f"ML: {ml['pick_ml']}"))
+        candidatos.append(('ML', 1, ev_ml, f"ML: {ml['pick_ml']}"))
 
     # RL — FIX #2: usa prob de cubrir RL (rl_home_prob/rl_away_prob),
     # no la probabilidad de ganar el moneyline
@@ -378,24 +455,25 @@ def _mejor_pick(partido: dict, ml: dict, rl: dict, total: dict) -> str:
                 else partido.get('cuota_rl_away')) or 0
 
     if (ENABLE_RL_PICKS and
+            rl.get('stake_pct_rl', 0) > 0 and
             ev_rl   >= UMBRAL_EV_RL and
             prob_rl >= UMBRAL_PROB_RL and
             MIN_CUOTA_RL <= cuota_rl <= MAX_CUOTA_RL):
-        candidatos.append(('RL', ev_rl, f"RL: {rl['pick_rl']}"))
+        candidatos.append(('RL', 1, ev_rl, f"RL: {rl['pick_rl']}"))
 
     # TOTAL — solo entra si stake > 0 (pasó todos los filtros internos)
     ev_total    = total.get('valor_total', 0)
     stake_total = total.get('stake_pct_total', 0)
 
     if ENABLE_TOTAL_PICKS and stake_total > 0 and ev_total >= UMBRAL_EV_TOTAL:
-        candidatos.append(('TOTAL', ev_total, f"TOTAL: {total['pick_total']}"))
+        candidatos.append(('TOTAL', 2, ev_total, f"TOTAL: {total['pick_total']}"))
 
     if not candidatos:
         return 'Ninguno'
 
-    # Gana el de mayor EV
-    mejor = max(candidatos, key=lambda x: x[1])
-    return mejor[2]
+    # TOTAL conserva prioridad estructural; ML/RL funcionan como fill-ins calibrados.
+    mejor = max(candidatos, key=lambda x: (x[1], x[2]))
+    return mejor[3]
 
 
 # ── Punto de entrada principal ────────────────────────────────────────────────
@@ -427,17 +505,20 @@ def analizar_valor(partidos: list) -> list:
             'valor_ml':     ml['valor_ml'],
             'kelly_ml':     ml['kelly_ml'],
             'stake_pct_ml': ml['stake_pct_ml'],
+            'edge_ml':      ml['edge_ml'],
             # RL
             'pick_rl':      rl['pick_rl'],
             'valor_rl':     rl['valor_rl'],
             'kelly_rl':     rl['kelly_rl'],
             'stake_pct_rl': rl['stake_pct_rl'],
+            'edge_rl':      rl['edge_rl'],
             # Total
             'pick_total':      total['pick_total'],
             'valor_total':     total['valor_total'],
             'stake_pct_total': total['stake_pct_total'],
             'prob_total':      total.get('prob_total', 0.0),
             'prob_total_raw':  total.get('prob_total_raw', 0.0),
+            'data_quality_flags': total.get('data_quality_flags', ''),
             # Proyecciones (asegurar que están en el dict)
             'proj_home':    proj_home,
             'proj_away':    proj_away,

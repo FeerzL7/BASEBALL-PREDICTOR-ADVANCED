@@ -1,0 +1,198 @@
+2026-05-28 12:00:09 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-05-28.log
+2026-05-28 12:00:11 | INFO     | main.main                           | =======================================================
+2026-05-28 12:00:11 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-05-28 12:00:11 | INFO     | main.main                           | =======================================================
+2026-05-28 12:00:11 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-05-28 12:00:11 | INFO     | statcast.cargar_statcast            | Calculando FIP y stats avanzadas via MLB API (2026)...
+2026-05-28 12:00:39 | INFO     | statcast.cargar_statcast            | 30 equipos cargados con stats avanzadas.
+2026-05-28 12:00:39 | INFO     | main.main                           | Analizando pitchers del día...
+2026-05-28 12:00:41 | DEBUG    | pitching.get_pitcher_stats          | Jack Flaherty: ERA temp=5.58 | ERA últ.3 sal.=5.164 | ERA efectiva=5.414
+2026-05-28 12:00:42 | DEBUG    | pitching.get_pitcher_stats          | Grayson Rodriguez: ERA temp=8.76 | ERA últ.3 sal.=9.474 | ERA efectiva=9.046
+2026-05-28 12:00:42 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Detroit Tigers: ERA=3.701 WHIP=1.254 IP=569.7 (18 relievers)
+2026-05-28 12:00:43 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Angels: ERA=4.53 WHIP=1.367 IP=558.0 (22 relievers)
+2026-05-28 12:00:44 | DEBUG    | pitching.get_pitcher_stats          | Davis Martin: ERA temp=2.04 | ERA últ.3 sal.=3.14 | ERA efectiva=2.48
+2026-05-28 12:00:46 | DEBUG    | pitching.get_pitcher_stats          | Simeon Woods Richardson: ERA temp=7.2 | ERA últ.3 sal.=11.947 | ERA efectiva=9.099
+2026-05-28 12:00:46 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.272 WHIP=1.411 IP=627.5 (17 relievers)
+2026-05-28 12:00:47 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Minnesota Twins: ERA=4.658 WHIP=1.407 IP=550.9 (21 relievers)
+2026-05-28 12:00:48 | DEBUG    | pitching.get_pitcher_stats          | Payton Tolle: ERA temp=2.45 | ERA últ.3 sal.=2.842 | ERA efectiva=2.607
+2026-05-28 12:00:49 | DEBUG    | pitching.get_pitcher_stats          | Chris Sale: ERA temp=1.89 | ERA últ.3 sal.=1.35 | ERA efectiva=1.674
+2026-05-28 12:00:49 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Boston Red Sox: ERA=3.247 WHIP=1.208 IP=529.2 (17 relievers)
+2026-05-28 12:00:50 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=3.986 WHIP=1.229 IP=531.3 (18 relievers)
+2026-05-28 12:00:51 | DEBUG    | pitching.get_pitcher_stats          | Chris Bassitt: ERA temp=5.51 | ERA últ.3 sal.=5.329 | ERA efectiva=5.438
+2026-05-28 12:00:52 | DEBUG    | pitching.get_pitcher_stats          | Patrick Corbin: ERA temp=3.86 | ERA últ.3 sal.=4.468 | ERA efectiva=4.103
+2026-05-28 12:00:52 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Baltimore Orioles: ERA=4.257 WHIP=1.395 IP=560.5 (22 relievers)
+2026-05-28 12:00:53 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Toronto Blue Jays: ERA=3.963 WHIP=1.273 IP=535.7 (18 relievers)
+2026-05-28 12:00:54 | DEBUG    | pitching.get_pitcher_stats          | Paul Skenes: ERA temp=3.0 | ERA últ.3 sal.=4.5 | ERA efectiva=3.6
+2026-05-28 12:00:55 | DEBUG    | pitching.get_pitcher_stats          | Colin Rea: ERA temp=4.83 | ERA últ.3 sal.=7.059 | ERA efectiva=5.722
+2026-05-28 12:00:55 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=3.906 WHIP=1.228 IP=436.9 (16 relievers)
+2026-05-28 12:00:56 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago Cubs: ERA=3.81 WHIP=1.218 IP=518.2 (20 relievers)
+2026-05-28 12:00:57 | DEBUG    | pitching.get_pitcher_stats          | Nathan Eovaldi: ERA temp=3.65 | ERA últ.3 sal.=1.636 | ERA efectiva=2.844
+2026-05-28 12:00:58 | DEBUG    | pitching.get_pitcher_stats          | Spencer Arrighetti: ERA temp=1.32 | ERA últ.3 sal.=0.52 | ERA efectiva=1.0
+2026-05-28 12:00:58 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=3.466 WHIP=1.189 IP=571.9 (14 relievers)
+2026-05-28 12:01:00 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=3.463 WHIP=1.17 IP=528.9 (17 relievers)
+2026-05-28 12:01:00 | INFO     | pitching.analizar_pitchers          | Pitchers analizados: 6 partidos.
+2026-05-28 12:01:00 | INFO     | main.main                           | Partidos válidos: 6 / 6
+2026-05-28 12:01:00 | INFO     | main.main                           | Analizando ofensiva...
+2026-05-28 12:01:02 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Detroit Tigers vsRHP: OPS pond.=0.789 (5/5 con split)
+2026-05-28 12:01:03 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Los Angeles Angels vsRHP: OPS pond.=0.732 (5/5 con split)
+2026-05-28 12:01:03 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Detroit Tigers (vsRHP OPS=0.789 R/10=4.5 n_runs=0) | Los Angeles Angels (vsRHP OPS=0.732 R/10=4.5 n_runs=0)
+2026-05-28 12:01:04 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Chicago White Sox vsRHP: OPS pond.=0.758 (5/5 con split)
+2026-05-28 12:01:07 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Minnesota Twins vsRHP: OPS pond.=0.719 (5/5 con split)
+2026-05-28 12:01:07 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Chicago White Sox (vsRHP OPS=0.758 R/10=4.5 n_runs=0) | Minnesota Twins (vsRHP OPS=0.719 R/10=4.5 n_runs=0)
+2026-05-28 12:01:08 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Boston Red Sox vsLHP: OPS pond.=0.83 (5/5 con split)
+2026-05-28 12:01:11 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Atlanta Braves vsLHP: OPS pond.=0.805 (5/5 con split)
+2026-05-28 12:01:11 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Boston Red Sox (vsLHP OPS=0.83 R/10=4.5 n_runs=0) | Atlanta Braves (vsLHP OPS=0.805 R/10=4.5 n_runs=0)
+2026-05-28 12:01:13 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Baltimore Orioles vsLHP: OPS pond.=0.704 (5/5 con split)
+2026-05-28 12:01:14 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Toronto Blue Jays vsRHP: OPS pond.=0.726 (5/5 con split)
+2026-05-28 12:01:14 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Baltimore Orioles (vsLHP OPS=0.704 R/10=4.5 n_runs=0) | Toronto Blue Jays (vsRHP OPS=0.726 R/10=4.5 n_runs=0)
+2026-05-28 12:01:17 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Pittsburgh Pirates vsRHP: OPS pond.=0.786 (5/5 con split)
+2026-05-28 12:01:19 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Chicago Cubs vsRHP: OPS pond.=0.733 (5/5 con split)
+2026-05-28 12:01:19 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Pittsburgh Pirates (vsRHP OPS=0.786 R/10=4.5 n_runs=0) | Chicago Cubs (vsRHP OPS=0.733 R/10=4.5 n_runs=0)
+2026-05-28 12:01:21 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Texas Rangers vsRHP: OPS pond.=0.749 (5/5 con split)
+2026-05-28 12:01:23 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Houston Astros vsRHP: OPS pond.=0.797 (5/5 con split)
+2026-05-28 12:01:23 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Texas Rangers (vsRHP OPS=0.749 R/10=4.5 n_runs=0) | Houston Astros (vsRHP OPS=0.797 R/10=4.5 n_runs=0)
+2026-05-28 12:01:23 | INFO     | main.main                           | Analizando defensiva...
+2026-05-28 12:01:29 | INFO     | main.main                           | Analizando historial H2H...
+2026-05-28 12:01:33 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-05-28 12:01:33 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-05-28 12:01:45 | DEBUG    | context.analizar_contexto           | Contexto Detroit Tigers vs Los Angeles Angels: {'temperatura': 22.0, 'viento_kph': 15.8, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 13h
+2026-05-28 12:01:46 | WARNING  | context.analizar_contexto           | Estadio sin coordenadas: Rate Field. Usando coordenada default.
+2026-05-28 12:01:46 | DEBUG    | context.analizar_contexto           | Contexto Chicago White Sox vs Minnesota Twins: {'temperatura': 19.3, 'viento_kph': 16.4, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': True} @ 14h
+2026-05-28 12:01:48 | DEBUG    | context.analizar_contexto           | Contexto Boston Red Sox vs Atlanta Braves: {'temperatura': 22.1, 'viento_kph': 12.9, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 16h
+2026-05-28 12:01:49 | WARNING  | context.analizar_contexto           | Estadio sin coordenadas: Oriole Park at Camden Yards. Usando coordenada default.
+2026-05-28 12:01:49 | DEBUG    | context.analizar_contexto           | Contexto Baltimore Orioles vs Toronto Blue Jays: {'temperatura': 19.3, 'viento_kph': 16.4, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': True} @ 18h
+2026-05-28 12:01:50 | DEBUG    | context.analizar_contexto           | Contexto Pittsburgh Pirates vs Chicago Cubs: {'temperatura': 23.6, 'viento_kph': 24.0, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-05-28 12:01:51 | DEBUG    | context.analizar_contexto           | Contexto Texas Rangers vs Houston Astros: {'temperatura': 26.5, 'viento_kph': 1.4, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-05-28 12:01:51 | INFO     | main.main                           | Proyectando totales...
+2026-05-28 12:01:52 | DEBUG    | projections.proyectar_totales       | Detroit Tigers vs Los Angeles Angels | venue=Comerica Park tipo=abierto T_ext=22.0°C T_ef=22.0°C adj=+2% PF_base=0.93 PF_final=0.949 | ERA_ef=9.046/5.414 FIP=4.321/3.852 | Proy: 6.068 - 4.364 (total=10.432)
+2026-05-28 12:01:52 | DEBUG    | projections.proyectar_totales       | Chicago White Sox vs Minnesota Twins | venue=Rate Field tipo=abierto T_ext=19.3°C T_ef=19.3°C adj=+2% PF_base=1.0 PF_final=1.02 | ERA_ef=9.099/2.48 FIP=4.092/4.444 | Proy: 6.706 - 4.039 (total=10.745)
+2026-05-28 12:01:52 | DEBUG    | projections.proyectar_totales       | Boston Red Sox vs Atlanta Braves | venue=Fenway Park tipo=abierto T_ext=22.1°C T_ef=22.1°C adj=+2% PF_base=1.12 PF_final=1.142 | ERA_ef=1.674/2.607 FIP=3.916/4.083 | Proy: 3.755 - 4.312 (total=8.067)
+2026-05-28 12:01:52 | DEBUG    | projections.proyectar_totales       | Baltimore Orioles vs Toronto Blue Jays | venue=Oriole Park at Camden Yards tipo=abierto T_ext=19.3°C T_ef=19.3°C adj=+2% PF_base=1.0 PF_final=1.02 | ERA_ef=4.103/5.438 FIP=3.551/4.332 | Proy: 4.179 - 5.003 (total=9.182)
+2026-05-28 12:01:52 | DEBUG    | projections.proyectar_totales       | Pittsburgh Pirates vs Chicago Cubs | venue=PNC Park tipo=abierto T_ext=23.6°C T_ef=23.6°C adj=+4% PF_base=0.94 PF_final=0.978 | ERA_ef=5.722/3.6 FIP=4.451/3.8 | Proy: 5.2 - 4.088 (total=9.288)
+2026-05-28 12:01:52 | DEBUG    | projections.proyectar_totales       | Texas Rangers vs Houston Astros | venue=Globe Life Field tipo=retractil_abierto T_ext=26.5°C T_ef=26.5°C adj=+2% PF_base=1.1 PF_final=1.122 | ERA_ef=1.0/2.844 FIP=4.979/4.158 | Proy: 3.829 - 4.379 (total=8.208)
+2026-05-28 12:01:52 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-05-28 12:01:52 | DEBUG    | ensemble.ajustar_proyecciones_ensem | Ensemble: sin datos de carreras recientes → Poisson puro en todos los partidos.
+2026-05-28 12:01:52 | INFO     | main.main                           | Obteniendo cuotas (The Odds API)...
+2026-05-28 12:01:52 | DEBUG    | line_movement.guardar_snapshot_diar | Snapshot de líneas guardado: 14 eventos @ 2026-05-28T18:01
+2026-05-28 12:01:52 | DEBUG    | markets.analizar_mercados           | Procesando mercados de apuestas...
+2026-05-28 12:01:52 | INFO     | main.main                           | Partidos con cuotas disponibles: 6
+2026-05-28 12:01:52 | INFO     | main.main                           | Calculando valor esperado y picks...
+2026-05-28 12:01:52 | DEBUG    | value.analizar_valor                | Detroit Tigers vs Los Angeles Angels | Proy: 6.07-4.36 | ML: Los Angeles Angels EV=-5.8 stake=0.0% | RL: Detroit Tigers EV=1.0 stake=0.18% | Total: Over EV=12.2 stake=0.0% | Mejor: Ninguno
+2026-05-28 12:01:52 | DEBUG    | value.analizar_valor                | Chicago White Sox vs Minnesota Twins | Proy: 6.71-4.04 | ML: Chicago White Sox EV=9.5 stake=1.25% | RL: Chicago White Sox EV=27.2 stake=1.25% | Total: Over EV=22.8 stake=1.25% | Mejor: TOTAL: Over
+2026-05-28 12:01:52 | DEBUG    | value.analizar_valor                | Boston Red Sox vs Atlanta Braves | Proy: 3.75-4.31 | ML: Atlanta Braves EV=1.3 stake=0.3% | RL: Boston Red Sox EV=-2.0 stake=0.0% | Total: Over EV=10.9 stake=0.0% | Mejor: Ninguno
+2026-05-28 12:01:52 | DEBUG    | value.analizar_valor                | Baltimore Orioles vs Toronto Blue Jays | Proy: 4.18-5.00 | ML: Toronto Blue Jays EV=21.2 stake=1.25% | RL: Toronto Blue Jays EV=-9.5 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-05-28 12:01:52 | DEBUG    | value.analizar_valor                | Pittsburgh Pirates vs Chicago Cubs | Proy: 5.20-4.09 | ML: Pittsburgh Pirates EV=3.3 stake=0.96% | RL: Pittsburgh Pirates EV=1.0 stake=0.14% | Total: Over EV=20.9 stake=1.25% | Mejor: TOTAL: Over
+2026-05-28 12:01:52 | DEBUG    | value.analizar_valor                | Texas Rangers vs Houston Astros | Proy: 3.83-4.38 | ML: Houston Astros EV=18.5 stake=1.25% | RL: Houston Astros EV=-10.7 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-05-28 12:01:52 | INFO     | main.main                           | Analizando movimiento de línea...
+2026-05-28 12:01:52 | DEBUG    | line_movement.analizar_movimiento   | Sin suficientes snapshots para detectar movimiento (necesita >= 2).
+2026-05-28 12:01:52 | INFO     | risk_management.aplicar_gestion_rie | Gestion de riesgo: 2 pick(s) activos | exposicion diaria 2.0%
+2026-05-28 12:01:52 | INFO     | main.main                           | Actualizando resultados de picks anteriores...
+2026-05-28 12:01:53 | INFO     | main.main                           | ROI | Resueltos: 142 | Wins: 67 | ROI: -6.65% | Ganancia: -9.44 u | Pendientes: 2
+2026-05-28 12:01:53 | INFO     | main.main                           | CSV exportado → output/predicciones_2026-05-28.csv
+2026-05-28 12:01:53 | INFO     | main.main                           | =======================================================
+2026-05-28 12:01:53 | INFO     | main.main                           | PICKS DEL DÍA
+2026-05-28 12:01:53 | INFO     | main.main                           | =======================================================
+2026-05-28 12:01:53 | DEBUG    | main.main                           | Detroit Tigers vs Los Angeles Angels
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Pitchers : Grayson Rodriguez vs Jack Flaherty
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Proy     : 6.07 - 4.36
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ML pick  : Los Angeles Angels (EV -5.8)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   RL pick  : Detroit Tigers (EV 1.0)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Total    : Over 5.5
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-05-28 12:01:53 | INFO     | main.main                           | Chicago White Sox vs Minnesota Twins
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Pitchers : Simeon Woods Richardson vs Davis Martin
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Proy     : 6.71 - 4.04
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ML pick  : Chicago White Sox (EV 9.5)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   RL pick  : Chicago White Sox (EV 27.2)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Total    : Over 8.0
+2026-05-28 12:01:53 | INFO     | main.main                           |   ✔ TOTAL: Over | Stake: 1.0%
+2026-05-28 12:01:53 | DEBUG    | main.main                           | Boston Red Sox vs Atlanta Braves
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Pitchers : Chris Sale vs Payton Tolle
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Proy     : 3.75 - 4.31
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ML pick  : Atlanta Braves (EV 1.3)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   RL pick  : Boston Red Sox (EV -2.0)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Total    : Over 7.0
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-05-28 12:01:53 | DEBUG    | main.main                           | Baltimore Orioles vs Toronto Blue Jays
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Pitchers : Patrick Corbin vs Chris Bassitt
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Proy     : 4.18 - 5.00
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ML pick  : Toronto Blue Jays (EV 21.2)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   RL pick  : Toronto Blue Jays (EV -9.5)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 8.5
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-05-28 12:01:53 | INFO     | main.main                           | Pittsburgh Pirates vs Chicago Cubs
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Pitchers : Colin Rea vs Paul Skenes
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Proy     : 5.20 - 4.09
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ML pick  : Pittsburgh Pirates (EV 3.3)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   RL pick  : Pittsburgh Pirates (EV 1.0)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Total    : Over 7.5
+2026-05-28 12:01:53 | INFO     | main.main                           |   ✔ TOTAL: Over | Stake: 1.0%
+2026-05-28 12:01:53 | DEBUG    | main.main                           | Texas Rangers vs Houston Astros
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Pitchers : Spencer Arrighetti vs Nathan Eovaldi
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Proy     : 3.83 - 4.38
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ML pick  : Houston Astros (EV 18.5)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   RL pick  : Houston Astros (EV -10.7)
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 7.5
+2026-05-28 12:01:53 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-05-28 12:01:53 | INFO     | main.main                           | Enviando picks a Telegram...
+2026-05-28 12:01:58 | INFO     | main.main                           | Telegram: picks enviados correctamente.
+2026-05-28 12:01:58 | INFO     | main.main                           | Pipeline completado.
+2026-05-28 19:46:52 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-05-28.log
+2026-05-28 19:46:52 | INFO     | backtesting.main                    | Iniciando backtesting histórico...
+2026-05-28 19:46:52 | INFO     | backtesting._leer_roi               | ROI tracking: 114 picks resueltos cargados.
+2026-05-28 19:46:53 | INFO     | backtesting._leer_predicciones      | Predicciones cargadas: 514 filas de 42 archivos.
+2026-05-28 19:46:53 | INFO     | backtesting.cruzar                  | Picks cruzados: 139 | Sin resultado aún: 97
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | BACKTESTING — RESUMEN GLOBAL
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | =======================================================
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | Total picks resueltos : 139
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | Wins                  : 61
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | Hit rate              : 43.9%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | ROI                   : -12.58%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | EV medio de picks     : 41.34
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | Ganancia acumulada    : -17.48 u
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | Mercado        N    Hit%     ROI%   EV med
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | ML            50   38.0%   -24.9%    47.61
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | RL            15   33.3%  -31.87%    45.69
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | TOTAL         74   50.0%   -0.34%    36.22
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | 
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | SENSIBILIDAD POR UMBRAL DE EV
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        | ------------------------------------------
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |   ML:
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  50  hit= 38.0%  ROI=  -24.9%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  50  hit= 38.0%  ROI=  -24.9%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  50  hit= 38.0%  ROI=  -24.9%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  50  hit= 38.0%  ROI=  -24.9%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  50  hit= 38.0%  ROI=  -24.9%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  48  hit= 39.6%  ROI= -21.77%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  44  hit= 40.9%  ROI= -18.73%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  33  hit= 39.4%  ROI= -21.09%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |   RL:
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  15  hit= 33.3%  ROI= -31.87%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  15  hit= 33.3%  ROI= -31.87%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  15  hit= 33.3%  ROI= -31.87%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  15  hit= 33.3%  ROI= -31.87%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  15  hit= 33.3%  ROI= -31.87%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  13  hit= 38.5%  ROI= -21.38%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  13  hit= 38.5%  ROI= -21.38%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=   9  hit= 33.3%  ROI= -32.78%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |   TOTAL:
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   0  →  n=  74  hit= 50.0%  ROI=  -0.34%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   3  →  n=  74  hit= 50.0%  ROI=  -0.34%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   5  →  n=  74  hit= 50.0%  ROI=  -0.34%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=   7  →  n=  74  hit= 50.0%  ROI=  -0.34%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  10  →  n=  73  hit= 49.3%  ROI=  -1.64%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  15  →  n=  69  hit= 52.2%  ROI=   4.06%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  20  →  n=  61  hit= 50.8%  ROI=   1.74%
+2026-05-28 19:46:53 | INFO     | backtesting.imprimir_reporte        |     EV >=  30  →  n=  34  hit= 55.9%  ROI=  12.38%
+2026-05-28 19:46:53 | WARNING  | backtesting.sugerir_umbrales        | Umbral ML: sin banda con ROI >= 0.0% y n >= 8
+2026-05-28 19:46:53 | WARNING  | backtesting.sugerir_umbrales        | Umbral RL: sin banda con ROI >= 0.0% y n >= 8
+2026-05-28 19:46:53 | INFO     | backtesting.sugerir_umbrales        | Umbral óptimo TOTAL: EV >= 30 → hit rate 55.9% | ROI 12.38% | n=34
+2026-05-28 19:46:53 | INFO     | backtesting.exportar_csv            | Resultados exportados:
+2026-05-28 19:46:53 | INFO     | backtesting.exportar_csv            |   output/backtest_results.csv
+2026-05-28 19:46:53 | INFO     | backtesting.exportar_csv            |   output/backtest_results_resumen.csv
+2026-05-28 19:46:53 | INFO     | backtesting.exportar_csv            |   output/backtest_results_sensibilidad.csv
+2026-05-28 19:46:53 | INFO     | backtesting.main                    | Usa --calibrar para actualizar umbrales en value.py automáticamente.
+2026-05-28 19:46:53 | INFO     | backtesting.main                    | Backtesting completado.
