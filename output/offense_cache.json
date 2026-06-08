@@ -1,86 +1,32 @@
 {
-  "Chicago Cubs|L": {
+  "Atlanta Braves|L": {
     "runsPerGame": 4.5,
-    "OPS": 0.702,
-    "wRC+": 96.2,
+    "OPS": 0.745,
+    "wRC+": 102.1,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsLHP",
     "lookup_fallback": false
   },
-  "San Francisco Giants|R": {
+  "Pittsburgh Pirates|R": {
     "runsPerGame": 4.5,
-    "OPS": 0.756,
-    "wRC+": 103.6,
+    "OPS": 0.837,
+    "wRC+": 114.7,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Detroit Tigers|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.801,
-    "wRC+": 109.7,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Seattle Mariners|L": {
-    "runsPerGame": 4.5,
-    "OPS": 0.714,
-    "wRC+": 97.8,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsLHP",
     "lookup_fallback": false
   },
   "Philadelphia Phillies|L": {
     "runsPerGame": 4.5,
-    "OPS": 0.729,
-    "wRC+": 99.9,
+    "OPS": 0.746,
+    "wRC+": 102.2,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsLHP",
     "lookup_fallback": false
   },
-  "Chicago White Sox|L": {
-    "runsPerGame": 4.5,
-    "OPS": 0.885,
-    "wRC+": 121.2,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsLHP",
-    "lookup_fallback": false
-  },
-  "New York Yankees|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.842,
-    "wRC+": 115.3,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Boston Red Sox|L": {
-    "runsPerGame": 4.5,
-    "OPS": 0.829,
-    "wRC+": 113.6,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsLHP",
-    "lookup_fallback": false
-  },
-  "Toronto Blue Jays|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.728,
-    "wRC+": 99.7,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Baltimore Orioles|R": {
+  "Chicago White Sox|R": {
     "runsPerGame": 4.5,
     "OPS": 0.783,
     "wRC+": 107.3,
@@ -89,124 +35,34 @@
     "split": "vsRHP",
     "lookup_fallback": false
   },
-  "Miami Marlins|R": {
+  "New York Yankees|L": {
     "runsPerGame": 4.5,
-    "OPS": 0.753,
-    "wRC+": 103.2,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Tampa Bay Rays|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.797,
-    "wRC+": 109.2,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Atlanta Braves|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.795,
-    "wRC+": 108.9,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Pittsburgh Pirates|L": {
-    "runsPerGame": 4.5,
-    "OPS": 0.748,
-    "wRC+": 102.5,
+    "OPS": 0.827,
+    "wRC+": 113.3,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsLHP",
     "lookup_fallback": false
   },
-  "Houston Astros|R": {
+  "Boston Red Sox|R": {
     "runsPerGame": 4.5,
-    "OPS": 0.803,
-    "wRC+": 110.0,
+    "OPS": 0.716,
+    "wRC+": 98.1,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsRHP",
     "lookup_fallback": false
   },
-  "Athletics|R": {
+  "Toronto Blue Jays|R": {
     "runsPerGame": 4.5,
-    "OPS": 0.817,
-    "wRC+": 111.9,
+    "OPS": 0.726,
+    "wRC+": 99.5,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsRHP",
     "lookup_fallback": false
   },
-  "St. Louis Cardinals|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.791,
-    "wRC+": 108.4,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Cincinnati Reds|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.696,
-    "wRC+": 95.3,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Texas Rangers|L": {
-    "runsPerGame": 4.5,
-    "OPS": 0.658,
-    "wRC+": 90.1,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsLHP",
-    "lookup_fallback": false
-  },
-  "Cleveland Guardians|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.687,
-    "wRC+": 94.1,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Minnesota Twins|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.708,
-    "wRC+": 97.0,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Kansas City Royals|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.693,
-    "wRC+": 94.9,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Colorado Rockies|R": {
-    "runsPerGame": 4.5,
-    "OPS": 0.772,
-    "wRC+": 105.8,
-    "runs_last_5": 4.5,
-    "runs_recientes_lista": [],
-    "split": "vsRHP",
-    "lookup_fallback": false
-  },
-  "Milwaukee Brewers|R": {
+  "Baltimore Orioles|R": {
     "runsPerGame": 4.5,
     "OPS": 0.792,
     "wRC+": 108.5,
@@ -215,19 +71,163 @@
     "split": "vsRHP",
     "lookup_fallback": false
   },
-  "Arizona Diamondbacks|L": {
+  "Detroit Tigers|R": {
     "runsPerGame": 4.5,
-    "OPS": 0.89,
-    "wRC+": 121.9,
+    "OPS": 0.794,
+    "wRC+": 108.8,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Seattle Mariners|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.752,
+    "wRC+": 103.0,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Miami Marlins|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.744,
+    "wRC+": 101.9,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Tampa Bay Rays|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.802,
+    "wRC+": 109.9,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Houston Astros|L": {
+    "runsPerGame": 4.5,
+    "OPS": 0.825,
+    "wRC+": 113.0,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsLHP",
     "lookup_fallback": false
   },
+  "Athletics|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.805,
+    "wRC+": 110.3,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Minnesota Twins|L": {
+    "runsPerGame": 4.5,
+    "OPS": 0.693,
+    "wRC+": 94.9,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsLHP",
+    "lookup_fallback": false
+  },
+  "Kansas City Royals|L": {
+    "runsPerGame": 4.5,
+    "OPS": 0.76,
+    "wRC+": 104.1,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsLHP",
+    "lookup_fallback": false
+  },
+  "St. Louis Cardinals|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.797,
+    "wRC+": 109.2,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Cincinnati Reds|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.694,
+    "wRC+": 95.1,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Texas Rangers|L": {
+    "runsPerGame": 4.5,
+    "OPS": 0.643,
+    "wRC+": 88.1,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsLHP",
+    "lookup_fallback": false
+  },
+  "Cleveland Guardians|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.693,
+    "wRC+": 94.9,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Colorado Rockies|L": {
+    "runsPerGame": 4.5,
+    "OPS": 0.608,
+    "wRC+": 83.3,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsLHP",
+    "lookup_fallback": false
+  },
+  "Milwaukee Brewers|L": {
+    "runsPerGame": 4.5,
+    "OPS": 0.638,
+    "wRC+": 87.4,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsLHP",
+    "lookup_fallback": false
+  },
+  "Arizona Diamondbacks|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.731,
+    "wRC+": 100.1,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
   "Washington Nationals|R": {
     "runsPerGame": 4.5,
-    "OPS": 0.79,
-    "wRC+": 108.2,
+    "OPS": 0.8,
+    "wRC+": 109.6,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Los Angeles Dodgers|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.856,
+    "wRC+": 117.3,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Los Angeles Angels|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.725,
+    "wRC+": 99.3,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsRHP",
@@ -235,8 +235,8 @@
   },
   "San Diego Padres|R": {
     "runsPerGame": 4.5,
-    "OPS": 0.622,
-    "wRC+": 85.2,
+    "OPS": 0.613,
+    "wRC+": 84.0,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsRHP",
@@ -244,8 +244,26 @@
   },
   "New York Mets|R": {
     "runsPerGame": 4.5,
-    "OPS": 0.594,
-    "wRC+": 81.4,
+    "OPS": 0.6,
+    "wRC+": 82.2,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "Chicago Cubs|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.766,
+    "wRC+": 104.9,
+    "runs_last_5": 4.5,
+    "runs_recientes_lista": [],
+    "split": "vsRHP",
+    "lookup_fallback": false
+  },
+  "San Francisco Giants|R": {
+    "runsPerGame": 4.5,
+    "OPS": 0.773,
+    "wRC+": 105.9,
     "runs_last_5": 4.5,
     "runs_recientes_lista": [],
     "split": "vsRHP",

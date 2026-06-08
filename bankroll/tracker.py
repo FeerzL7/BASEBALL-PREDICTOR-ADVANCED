@@ -286,6 +286,7 @@ def metricas_acumuladas(registros: list[dict] | None = None) -> dict:
     roi = profit / stake_total * 100 if stake_total > 0 else 0.0
     growth = (bankroll - INITIAL_BANKROLL) / INITIAL_BANKROLL * 100
     drawdown = max_drawdown_pct(registros)
+    monthly = metricas_mensuales(registros, limit=6)
 
     return {
         "total_apuestas": len(resueltos),
@@ -303,6 +304,8 @@ def metricas_acumuladas(registros: list[dict] | None = None) -> dict:
         "bankroll_inicial": round(INITIAL_BANKROLL, 2),
         "growth_pct": round(growth, 2),
         "max_drawdown_pct": round(drawdown, 2),
+        "mensual": monthly[-1] if monthly else {},
+        "mensuales": monthly,
     }
 
 
@@ -348,8 +351,7 @@ def _month_key(row: dict) -> str:
     return fecha[:7] if len(fecha) >= 7 else "unknown"
 
 
-def exportar_estadisticas_mensuales(registros: list[dict]):
-    asegurar_output()
+def _monthly_stats_rows(registros: list[dict]) -> list[dict]:
     curve = equity_curve(registros)
     rows = []
     for month, group in groupby(sorted(curve, key=_month_key), key=_month_key):
@@ -387,11 +389,22 @@ def exportar_estadisticas_mensuales(registros: list[dict]):
             "max_drawdown_pct": round(drawdown, 2),
             "avg_odds": round(avg_odds, 3),
         })
+    return rows
 
+
+def exportar_estadisticas_mensuales(registros: list[dict]):
+    asegurar_output()
+    rows = _monthly_stats_rows(registros)
     with open(MONTHLY_STATS_FILE, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=MONTHLY_FIELDS)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def metricas_mensuales(registros: list[dict] | None = None, limit: int = 6) -> list[dict]:
+    registros = registros if registros is not None else leer_registros()
+    rows = _monthly_stats_rows(registros)
+    return rows[-limit:] if limit and limit > 0 else rows
 
 
 def exportar_reportes(registros: list[dict] | None = None):

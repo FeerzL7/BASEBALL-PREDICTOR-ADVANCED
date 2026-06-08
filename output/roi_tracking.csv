@@ -155,5 +155,8 @@
 2026-06-02,Pittsburgh Pirates @ Houston Astros,ML,Pittsburgh Pirates,2.01,0.6283,7.7,win,1.01,1,9.57,957.0,966.67,9.67,101.04,,2026-06-05 14:54:18
 2026-06-03,Athletics @ Chicago Cubs,TOTAL,Over 8.5,1.88,0.62,16.56,win,0.88,1,9.67,966.67,975.18,8.51,88.0,,2026-06-05 14:54:18
 2026-06-03,Colorado Rockies @ Los Angeles Angels,TOTAL,Over 8.5,1.88,0.62,16.56,win,0.88,1,9.75,975.18,983.76,8.58,88.0,,2026-06-05 14:54:18
-2026-06-05,Milwaukee Brewers @ Colorado Rockies,RL,Colorado Rockies +1.5,1.88,0.6635,6.5,pendiente,0.0,1,9.84,983.76,0.0,0.0,0.0,,
-2026-06-05,Tampa Bay Rays @ Miami Marlins,TOTAL,Over 7.5,1.87,0.62,15.94,pendiente,0.0,1,9.84,983.76,0.0,0.0,0.0,2026-06-05 15:00:35,
+2026-06-05,Milwaukee Brewers @ Colorado Rockies,RL,Colorado Rockies +1.5,1.88,0.6635,6.5,lose,-1.0,1,9.84,983.76,973.92,-9.84,-100.0,,2026-06-07 12:10:50
+2026-06-05,Tampa Bay Rays @ Miami Marlins,TOTAL,Over 7.5,1.87,0.62,15.94,lose,-1.0,1,9.84,973.92,964.08,-9.84,-100.0,2026-06-05 15:00:35,2026-06-07 12:10:50
+2026-06-07,Pittsburgh Pirates @ Atlanta Braves,TOTAL,Over 7.5,2.1,0.5813,22.07,pendiente,0.0,1,9.64,964.08,0.0,0.0,0.0,2026-06-07 12:10:50,
+2026-06-07,Milwaukee Brewers @ Colorado Rockies,TOTAL,Over 11.5,1.93,0.6386,23.25,pendiente,0.0,1,9.64,964.08,0.0,0.0,0.0,2026-06-07 12:10:50,
+2026-06-07,San Francisco Giants @ Chicago Cubs,TOTAL,Over 8.0,1.96,0.62,21.52,pendiente,0.0,1,9.64,964.08,,0.0,0.0,2026-06-07 12:10:50,
