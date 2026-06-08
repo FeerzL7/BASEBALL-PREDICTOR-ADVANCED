@@ -25,6 +25,10 @@ from utils.logger import get as get_log
 
 log = get_log()
 
+
+def _normalizar_equipo(nombre: str) -> str:
+    return " ".join((nombre or "").lower().split())
+
 SNAPSHOTS_DIR  = "output/line_snapshots"
 UMBRAL_ML_MOVE = 0.06   # movimiento mínimo en cuota ML para considerarlo significativo
 UMBRAL_JU_MOVE = 0.04   # movimiento mínimo en juice (precio sin mover línea)
@@ -150,6 +154,7 @@ def _movimiento_total(ap: dict, ac: dict) -> Optional[dict]:
             'tipo':    'TOTAL_LINE_MOVE',
             'detalle': f"Total {lt_ap} → {lt_ac} ({dir_}) — {señal}",
             'fuerza':  abs(diff),
+            'direccion': 'over' if diff > 0 else 'under',
         }
 
     # Juice shift (línea estable pero precio se mueve)
@@ -163,12 +168,14 @@ def _movimiento_total(ap: dict, ac: dict) -> Optional[dict]:
                 'tipo':    'JUICE_SHIFT',
                 'detalle': f"Over {op_ap} → {op_ac} | Under {up_ap} → {up_ac} — dinero en UNDER",
                 'fuerza':  abs(diff_over),
+                'direccion': 'under',
             }
         if diff_under < -UMBRAL_JU_MOVE and diff_over > UMBRAL_JU_MOVE:
             return {
                 'tipo':    'JUICE_SHIFT',
                 'detalle': f"Over {op_ap} → {op_ac} | Under {up_ap} → {up_ac} — dinero en OVER",
                 'fuerza':  abs(diff_under),
+                'direccion': 'over',
             }
 
     return None
@@ -193,6 +200,7 @@ def _movimiento_ml(ap: dict, ac: dict) -> Optional[dict]:
             'tipo':    'ML_MOVE',
             'detalle': f"Home ML {hm_ap} → {hm_ac} (se acorta) — dinero en {ac['home_team']}",
             'fuerza':  abs(diff_home),
+            'equipo': ac['home_team'],
         }
     # Away se acorta → dinero en away
     if diff_away < -UMBRAL_ML_MOVE:
@@ -200,6 +208,7 @@ def _movimiento_ml(ap: dict, ac: dict) -> Optional[dict]:
             'tipo':    'ML_MOVE',
             'detalle': f"Away ML {am_ap} → {am_ac} (se acorta) — dinero en {ac['away_team']}",
             'fuerza':  abs(diff_away),
+            'equipo': ac['away_team'],
         }
     # Home se alarga → dinero en away (mercado aleja al home)
     if diff_home > UMBRAL_ML_MOVE:
@@ -207,6 +216,7 @@ def _movimiento_ml(ap: dict, ac: dict) -> Optional[dict]:
             'tipo':    'ML_MOVE',
             'detalle': f"Home ML {hm_ap} → {hm_ac} (se alarga) — dinero en {ac['away_team']}",
             'fuerza':  abs(diff_home),
+            'equipo': ac['away_team'],
         }
 
     return None
@@ -307,7 +317,14 @@ def ajustar_picks_por_movimiento(partidos: list, movimientos: dict) -> list:
                 pick_dir = partido.get('pick_total', '').lower()
 
                 if tipo in ('TOTAL_LINE_MOVE', 'JUICE_SHIFT'):
-                    mov_dir = 'over' if 'over' in detalle else 'under'
+                    mov_dir = mov.get('direccion')
+                    if not mov_dir:
+                        if 'dinero en over' in detalle:
+                            mov_dir = 'over'
+                        elif 'dinero en under' in detalle:
+                            mov_dir = 'under'
+                    if not mov_dir:
+                        continue
                     if mov_dir == pick_dir:
                         partido['mov_confirma']  = True
                         log.info(f"[CONFIRMA] {clave} — movimiento confirma {pick_dir.upper()}")
@@ -326,7 +343,8 @@ def ajustar_picks_por_movimiento(partidos: list, movimientos: dict) -> list:
                 ).lower()
 
                 if tipo == 'ML_MOVE':
-                    if pick_equipo and pick_equipo in detalle:
+                    mov_equipo = _normalizar_equipo(mov.get('equipo', ''))
+                    if pick_equipo and mov_equipo and _normalizar_equipo(pick_equipo) == mov_equipo:
                         partido['mov_confirma']  = True
                         log.info(f"[CONFIRMA] {clave} — movimiento ML confirma {pick_equipo}")
                     elif pick_equipo:

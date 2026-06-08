@@ -33,6 +33,7 @@ from tracking.roi_tracker   import (
     calcular_roi,
     actualizar_resultados,
 )
+from bankroll.staking import aplicar_staking_dinamico
 from utils.risk_management import aplicar_gestion_riesgo
 
 
@@ -128,6 +129,7 @@ def main():
     if movimientos:
         log.info(resumen_movimientos(movimientos))
 
+    partidos = aplicar_staking_dinamico(partidos)
     partidos = aplicar_gestion_riesgo(partidos)
 
     # 6. Asegurar cuotas planas (fallback desde mercados)
@@ -153,6 +155,7 @@ def main():
         mercado = seleccion = ""
         cuota = prob = 1.91
         valor = 0
+        stake_pct = 0
 
         if mejor.startswith("ML:"):
             mercado   = "ML"
@@ -162,15 +165,20 @@ def main():
             prob      = (p.get("prob_home_win") if seleccion == p["home_team"]
                          else p.get("prob_away_win")) or 0.50
             valor     = p.get("valor_ml", 0)
+            stake_pct = int(p.get("stake_pct_ml", 0) or 0)
 
         elif mejor.startswith("RL:"):
             mercado   = "RL"
-            seleccion = p.get("pick_rl", "")
-            cuota     = (p.get("cuota_rl_home") if seleccion == p["home_team"]
+            pick_rl   = p.get("pick_rl", "")
+            linea_rl  = (p.get("linea_rl_home") if pick_rl == p["home_team"]
+                         else p.get("linea_rl_away"))
+            seleccion = f"{pick_rl} {float(linea_rl):+g}" if linea_rl is not None else pick_rl
+            cuota     = (p.get("cuota_rl_home") if pick_rl == p["home_team"]
                          else p.get("cuota_rl_away")) or 1.91
-            prob      = (p.get("prob_home_win") if seleccion == p["home_team"]
-                         else p.get("prob_away_win")) or 0.50
+            prob      = (p.get("rl_home_prob") if pick_rl == p["home_team"]
+                         else p.get("rl_away_prob")) or 0.50
             valor     = p.get("valor_rl", 0)
+            stake_pct = int(p.get("stake_pct_rl", 0) or 0)
 
         elif mejor.startswith("TOTAL:"):
             mercado   = "TOTAL"
@@ -181,6 +189,7 @@ def main():
                          else p.get("cuota_under")) or 1.91
             prob      = p.get("prob_total") or 0.52
             valor     = p.get("valor_total", 0)
+            stake_pct = int(p.get("stake_pct_total", 0) or 0)
 
         registrar_pick(
             fecha=TODAY,
@@ -191,6 +200,7 @@ def main():
             probabilidad=prob,
             valor=valor,
             resultado="pendiente",
+            stake_pct=stake_pct,
         )
 
     stats = calcular_roi()
@@ -198,7 +208,8 @@ def main():
         f"ROI | Resueltos: {stats['total_apuestas']} | "
         f"Wins: {stats.get('wins', '?')} | "
         f"ROI: {stats['roi']}% | "
-        f"Ganancia: {stats['ganancias']} u | "
+        f"Ganancia: {stats['ganancias']} | "
+        f"Bankroll: {stats.get('bankroll', '?')} | "
         f"Pendientes: {stats.get('pendientes', '?')}"
     )
 
@@ -210,16 +221,20 @@ def main():
         "prob_home_win", "prob_away_win",
         "linea_total", "pick_total", "valor_total", "stake_pct_total",
         "prob_total", "prob_total_raw",
-        "pick_ml",  "valor_ml",  "stake_pct_ml",
-        "pick_rl",  "valor_rl",  "stake_pct_rl",
+        "pick_ml",  "valor_ml",  "stake_pct_ml", "edge_ml",
+        "pick_rl",  "valor_rl",  "stake_pct_rl", "edge_rl",
+        "stake_pct_recomendado", "staking_model",
         "mejor_pick",
         "riesgo_estado", "riesgo_motivo",
+        "data_quality_flags",
         "odds_event_id", "odds_loaded",
         "cuota_home", "cuota_away",
         "cuota_over", "cuota_under",
         "cuota_rl_home", "cuota_rl_away",
+        "linea_rl_home", "linea_rl_away",
         "kelly_ml", "kelly_rl",
         "park_factor_usado",
+        "venue_usado", "temp_efectiva", "ajuste_temp",
     ]
 
     df        = pd.DataFrame(partidos)

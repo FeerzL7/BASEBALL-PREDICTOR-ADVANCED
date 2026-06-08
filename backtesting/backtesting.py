@@ -118,6 +118,10 @@ def _extraer_picks(row: dict) -> list:
     if not mejor or mejor == 'Ninguno':
         return picks
 
+    riesgo_estado = row.get('riesgo_estado', '').strip().lower()
+    if riesgo_estado and riesgo_estado != 'activo':
+        return picks
+
     home = row.get('home_team', '')
     away = row.get('away_team', '')
 
@@ -158,7 +162,7 @@ def _extraer_picks(row: dict) -> list:
                                     else row.get('cuota_under'), 1.91),
         })
 
-    return picks
+    return [p for p in picks if p.get('stake_pct', 0) > 0]
 
 
 def cruzar(registros: list, resultados: dict) -> list:

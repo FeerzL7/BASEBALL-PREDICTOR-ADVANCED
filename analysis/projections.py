@@ -20,6 +20,13 @@ H2H_MIN_PARTIDOS = 3
 PESO_RECIENTE    = 0.80
 PESO_H2H         = 0.20
 
+# La version historicamente mas estable proyectaba con park factor base y sin
+# meter H2H en el total. Dejamos las capas nuevas disponibles, pero apagadas por
+# defecto para que no agreguen ruido cuando la muestra es pequena o el clima API
+# cae en defaults.
+USE_CONTEXT_ADJUSTMENTS = False
+USE_H2H_IN_PROJECTION = False
+
 
 # ── Clasificación de estadios ─────────────────────────────────────────────────
 #
@@ -148,7 +155,7 @@ def ajustar_park_factor(base_pf: float, contexto: dict,
 
     Devuelve (pf_final, detalle_ajustes) para trazabilidad en logs.
     """
-    if not contexto:
+    if not USE_CONTEXT_ADJUSTMENTS or not contexto:
         return max(round(base_pf, 3), 0.85), {}
 
     temp_ext  = float(contexto.get("clima", {}).get("temperatura", 20))
@@ -307,10 +314,10 @@ def proyectar_totales(partidos: list) -> list:
         fg_bat_home   = get_batting(home_team)
         fg_bat_away   = get_batting(away_team)
 
-        h2h           = partido.get('h2h', {})
+        h2h           = partido.get('h2h', {}) if USE_H2H_IN_PROJECTION else {}
         n_h2h         = int(h2h.get('partidos', 0) or 0)
-        h2h_home_prom = h2h.get('runs_home_prom')
-        h2h_away_prom = h2h.get('runs_away_prom')
+        h2h_home_prom = h2h.get('runs_home_prom') if USE_H2H_IN_PROJECTION else None
+        h2h_away_prom = h2h.get('runs_away_prom') if USE_H2H_IN_PROJECTION else None
 
         home_proj = proyectar_carreras(
             partido['home_offense'], partido['away_stats'], away_bullpen,

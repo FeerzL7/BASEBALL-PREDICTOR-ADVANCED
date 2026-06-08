@@ -63,11 +63,13 @@ def _stats_temporada(player_id: int) -> dict:
             'IP':         ip,
             'throws':     throws,
             'confirmado': True,
+            'lookup_fallback': False,
         }
     except Exception:
         return {
             'ERA': 4.50, 'WHIP': 1.30, 'K9': 8.00,
             'IP': 0, 'throws': 'R', 'confirmado': True,
+            'lookup_fallback': True,
         }
 
 
@@ -153,6 +155,7 @@ def get_pitcher_stats(name: str) -> dict:
             'throws': 'R', 'confirmado': False,
             'ERA_efectiva': 4.50, 'ERA_reciente': None,
             'WHIP_reciente': None, 'n_salidas_recientes': 0,
+            'lookup_fallback': True,
         }
 
     try:
@@ -208,6 +211,7 @@ def get_pitcher_stats(name: str) -> dict:
             'throws': 'R', 'confirmado': True,
             'ERA_efectiva': 4.50, 'ERA_reciente': None,
             'WHIP_reciente': None, 'n_salidas_recientes': 0,
+            'lookup_fallback': True,
         }
 
 
