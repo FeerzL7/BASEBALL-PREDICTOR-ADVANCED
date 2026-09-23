@@ -1,0 +1,145 @@
+2026-07-28 12:00:18 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-07-28.log
+2026-07-28 12:00:19 | INFO     | main.main                           | =======================================================
+2026-07-28 12:00:19 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-07-28 12:00:19 | INFO     | main.main                           | =======================================================
+2026-07-28 12:00:19 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-07-28 12:00:19 | INFO     | statcast.cargar_statcast            | Stats avanzadas desde caché (30 pitching, 30 batting).
+2026-07-28 12:00:19 | INFO     | main.main                           | Analizando pitchers del día...
+2026-07-28 12:00:20 | DEBUG    | pitching.get_pitcher_stats          | Chase Burns: ERA temp=2.41 | ERA últ.3 sal.=2.455 | ERA efectiva=2.428
+2026-07-28 12:00:21 | DEBUG    | pitching.get_pitcher_stats          | Slade Cecconi: ERA temp=4.6 | ERA últ.3 sal.=7.984 | ERA efectiva=5.954
+2026-07-28 12:00:27 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cincinnati Reds: ERA=3.917 WHIP=1.299 IP=530.5 (15 relievers)
+2026-07-28 12:00:28 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cleveland Guardians: ERA=3.314 WHIP=1.208 IP=518.7 (13 relievers)
+2026-07-28 12:00:29 | DEBUG    | pitching.get_pitcher_stats          | Gavin Williams: ERA temp=3.78 | ERA últ.3 sal.=3.15 | ERA efectiva=3.528
+2026-07-28 12:00:29 | WARNING  | pitching.analizar_pitchers          | Cincinnati Reds vs Cleveland Guardians — lanzador no confirmado (home: TBD)
+2026-07-28 12:00:32 | DEBUG    | pitching.get_pitcher_stats          | Troy Melton: ERA temp=1.95 | ERA últ.3 sal.=1.765 | ERA efectiva=1.876
+2026-07-28 12:00:33 | DEBUG    | pitching.get_pitcher_stats          | Dean Kremer: ERA temp=5.06 | ERA últ.3 sal.=7.2 | ERA efectiva=5.916
+2026-07-28 12:00:34 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Detroit Tigers: ERA=3.701 WHIP=1.254 IP=569.7 (18 relievers)
+2026-07-28 12:00:36 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Baltimore Orioles: ERA=4.257 WHIP=1.395 IP=560.5 (22 relievers)
+2026-07-28 12:00:37 | DEBUG    | pitching.get_pitcher_stats          | Bubba Chandler: ERA temp=4.47 | ERA últ.3 sal.=3.776 | ERA efectiva=4.192
+2026-07-28 12:00:38 | DEBUG    | pitching.get_pitcher_stats          | Brandon Pfaadt: ERA temp=4.43 | ERA últ.3 sal.=3.333 | ERA efectiva=3.991
+2026-07-28 12:00:39 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=3.906 WHIP=1.228 IP=436.9 (16 relievers)
+2026-07-28 12:00:39 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Arizona Diamondbacks: ERA=4.99 WHIP=1.433 IP=431.4 (22 relievers)
+2026-07-28 12:00:41 | DEBUG    | pitching.get_pitcher_stats          | Griffin Jax: ERA temp=3.89 | ERA últ.3 sal.=5.062 | ERA efectiva=4.359
+2026-07-28 12:00:41 | WARNING  | pitching.analizar_pitchers          | Tampa Bay Rays vs Texas Rangers — lanzador no confirmado (away: TBD)
+2026-07-28 12:00:41 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Tampa Bay Rays: ERA=3.618 WHIP=1.215 IP=577.9 (18 relievers)
+2026-07-28 12:00:42 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=3.466 WHIP=1.189 IP=571.9 (14 relievers)
+2026-07-28 12:00:43 | DEBUG    | pitching.get_pitcher_stats          | Sandy Alcantara: ERA temp=4.01 | ERA últ.3 sal.=4.05 | ERA efectiva=4.026
+2026-07-28 12:00:44 | DEBUG    | pitching.get_pitcher_stats          | Aaron Nola: ERA temp=5.82 | ERA últ.3 sal.=5.59 | ERA efectiva=5.728
+2026-07-28 12:00:44 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Miami Marlins: ERA=4.207 WHIP=1.328 IP=626.7 (17 relievers)
+2026-07-28 12:00:45 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Philadelphia Phillies: ERA=4.234 WHIP=1.312 IP=478.5 (16 relievers)
+2026-07-28 12:00:46 | DEBUG    | pitching.get_pitcher_stats          | Cade Cavalli: ERA temp=3.58 | ERA últ.3 sal.=2.0 | ERA efectiva=2.948
+2026-07-28 12:00:48 | DEBUG    | pitching.get_pitcher_stats          | Shane Bieber: ERA temp=4.7 | ERA últ.3 sal.=1.57 | ERA efectiva=3.448
+2026-07-28 12:00:49 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Washington Nationals: ERA=5.903 WHIP=1.575 IP=504.2 (19 relievers)
+2026-07-28 12:00:50 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Toronto Blue Jays: ERA=3.963 WHIP=1.273 IP=535.7 (18 relievers)
+2026-07-28 12:00:51 | DEBUG    | pitching.get_pitcher_stats          | Taj Bradley: ERA temp=3.69 | ERA últ.3 sal.=3.789 | ERA efectiva=3.73
+2026-07-28 12:00:52 | DEBUG    | pitching.get_pitcher_stats          | Seth Lugo: ERA temp=4.36 | ERA últ.3 sal.=3.176 | ERA efectiva=3.886
+2026-07-28 12:00:52 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Minnesota Twins: ERA=4.658 WHIP=1.407 IP=550.9 (21 relievers)
+2026-07-28 12:00:53 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Kansas City Royals: ERA=3.507 WHIP=1.243 IP=553.3 (13 relievers)
+2026-07-28 12:00:54 | DEBUG    | pitching.get_pitcher_stats          | Anthony Kay: ERA temp=4.21 | ERA últ.3 sal.=3.83 | ERA efectiva=4.058
+2026-07-28 12:00:55 | DEBUG    | pitching.get_pitcher_stats          | Gerrit Cole: ERA temp=3.92 | ERA últ.3 sal.=3.77 | ERA efectiva=3.86
+2026-07-28 12:00:56 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.272 WHIP=1.411 IP=627.5 (17 relievers)
+2026-07-28 12:00:57 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Yankees: ERA=3.943 WHIP=1.255 IP=516.5 (16 relievers)
+2026-07-28 12:00:58 | DEBUG    | pitching.get_pitcher_stats          | Colin Rea: ERA temp=4.85 | ERA últ.3 sal.=5.59 | ERA efectiva=5.146
+2026-07-28 12:00:58 | WARNING  | pitching.analizar_pitchers          | St. Louis Cardinals vs Chicago Cubs — lanzador no confirmado (home: TBD)
+2026-07-28 12:00:58 | DEBUG    | bullpen.obtener_bullpen             | Bullpen St. Louis Cardinals: ERA=3.785 WHIP=1.305 IP=537.7 (13 relievers)
+2026-07-28 12:00:59 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago Cubs: ERA=3.81 WHIP=1.218 IP=518.2 (20 relievers)
+2026-07-28 12:01:01 | DEBUG    | pitching.get_pitcher_stats          | Reid Detmers: ERA temp=4.05 | ERA últ.3 sal.=3.576 | ERA efectiva=3.86
+2026-07-28 12:01:02 | DEBUG    | pitching.get_pitcher_stats          | Peter Lambert: ERA temp=3.03 | ERA últ.3 sal.=2.0 | ERA efectiva=2.618
+2026-07-28 12:01:03 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Angels: ERA=4.53 WHIP=1.367 IP=558.0 (22 relievers)
+2026-07-28 12:01:03 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=3.463 WHIP=1.17 IP=528.9 (17 relievers)
+2026-07-28 12:01:05 | DEBUG    | pitching.get_pitcher_stats          | Gage Jump: ERA temp=4.42 | ERA últ.3 sal.=7.143 | ERA efectiva=5.509
+2026-07-28 12:01:06 | DEBUG    | pitching.get_pitcher_stats          | Jake Bennett: ERA temp=2.58 | ERA últ.3 sal.=1.484 | ERA efectiva=2.142
+2026-07-28 12:01:07 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Athletics: ERA=4.487 WHIP=1.423 IP=523.5 (18 relievers)
+2026-07-28 12:01:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Boston Red Sox: ERA=3.247 WHIP=1.208 IP=529.2 (17 relievers)
+2026-07-28 12:01:09 | DEBUG    | pitching.get_pitcher_stats          | Michael King: ERA temp=3.24 | ERA últ.3 sal.=1.588 | ERA efectiva=2.579
+2026-07-28 12:01:10 | DEBUG    | pitching.get_pitcher_stats          | Michael Lorenzen: ERA temp=6.53 | ERA últ.3 sal.=5.704 | ERA efectiva=6.2
+2026-07-28 12:01:10 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Diego Padres: ERA=2.994 WHIP=1.159 IP=577.5 (14 relievers)
+2026-07-28 12:01:11 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Colorado Rockies: ERA=5.108 WHIP=1.482 IP=597.2 (16 relievers)
+2026-07-28 12:01:12 | DEBUG    | pitching.get_pitcher_stats          | Landen Roupp: ERA temp=3.93 | ERA últ.3 sal.=1.286 | ERA efectiva=2.872
+2026-07-28 12:01:14 | DEBUG    | pitching.get_pitcher_stats          | Logan Henderson: ERA temp=3.05 | ERA últ.3 sal.=3.576 | ERA efectiva=3.26
+2026-07-28 12:01:14 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Francisco Giants: ERA=3.658 WHIP=1.235 IP=519.1 (15 relievers)
+2026-07-28 12:01:15 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Milwaukee Brewers: ERA=3.492 WHIP=1.256 IP=633.5 (20 relievers)
+2026-07-28 12:01:16 | DEBUG    | pitching.get_pitcher_stats          | Luis Castillo: ERA temp=4.85 | ERA últ.3 sal.=4.5 | ERA efectiva=4.71
+2026-07-28 12:01:16 | WARNING  | pitching.analizar_pitchers          | Los Angeles Dodgers vs Seattle Mariners — lanzador no confirmado (home: TBD)
+2026-07-28 12:01:16 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Dodgers: ERA=4.244 WHIP=1.32 IP=625.8 (19 relievers)
+2026-07-28 12:01:17 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Seattle Mariners: ERA=3.701 WHIP=1.255 IP=551.5 (18 relievers)
+2026-07-28 12:01:18 | DEBUG    | pitching.get_pitcher_stats          | Christian Scott: ERA temp=3.13 | ERA últ.3 sal.=2.015 | ERA efectiva=2.684
+2026-07-28 12:01:19 | DEBUG    | pitching.get_pitcher_stats          | Chris Sale: ERA temp=2.19 | ERA últ.3 sal.=1.688 | ERA efectiva=1.989
+2026-07-28 12:01:19 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Mets: ERA=3.55 WHIP=1.232 IP=591.1 (23 relievers)
+2026-07-28 12:01:20 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=3.986 WHIP=1.229 IP=531.3 (18 relievers)
+2026-07-28 12:01:20 | INFO     | pitching.analizar_pitchers          | Pitchers analizados: 16 partidos.
+2026-07-28 12:01:20 | WARNING  | main.main                           | 4 partido(s) excluido(s) por lanzador TBD:
+2026-07-28 12:01:20 | WARNING  | main.main                           |   Cleveland Guardians @ Cincinnati Reds (home=TBD, away=Gavin Williams)
+2026-07-28 12:01:20 | WARNING  | main.main                           |   Texas Rangers @ Tampa Bay Rays (home=Griffin Jax, away=TBD)
+2026-07-28 12:01:20 | WARNING  | main.main                           |   Chicago Cubs @ St. Louis Cardinals (home=TBD, away=Colin Rea)
+2026-07-28 12:01:20 | WARNING  | main.main                           |   Seattle Mariners @ Los Angeles Dodgers (home=TBD, away=Luis Castillo)
+2026-07-28 12:01:20 | INFO     | main.main                           | Partidos válidos: 12 / 16
+2026-07-28 12:01:20 | INFO     | main.main                           | Analizando ofensiva...
+2026-07-28 12:01:22 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Cincinnati Reds vsRHP: OPS pond.=0.726 (5/5 con split)
+2026-07-28 12:01:24 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Cleveland Guardians vsRHP: OPS pond.=0.705 (5/5 con split)
+2026-07-28 12:01:24 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Cincinnati Reds (vsRHP OPS=0.726 R/10=4.5 n_runs=0) | Cleveland Guardians (vsRHP OPS=0.705 R/10=4.5 n_runs=0)
+2026-07-28 12:01:25 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Detroit Tigers vsRHP: OPS pond.=0.833 (5/5 con split)
+2026-07-28 12:01:27 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Baltimore Orioles vsRHP: OPS pond.=0.755 (5/5 con split)
+2026-07-28 12:01:27 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Detroit Tigers (vsRHP OPS=0.833 R/10=4.5 n_runs=0) | Baltimore Orioles (vsRHP OPS=0.755 R/10=4.5 n_runs=0)
+2026-07-28 12:01:29 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Pittsburgh Pirates vsRHP: OPS pond.=0.852 (5/5 con split)
+2026-07-28 12:01:31 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Arizona Diamondbacks vsRHP: OPS pond.=0.712 (5/5 con split)
+2026-07-28 12:01:31 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Pittsburgh Pirates (vsRHP OPS=0.852 R/10=4.5 n_runs=0) | Arizona Diamondbacks (vsRHP OPS=0.712 R/10=4.5 n_runs=0)
+2026-07-28 12:01:32 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Miami Marlins vsRHP: OPS pond.=0.779 (5/5 con split)
+2026-07-28 12:01:34 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Philadelphia Phillies vsRHP: OPS pond.=0.813 (5/5 con split)
+2026-07-28 12:01:34 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Miami Marlins (vsRHP OPS=0.779 R/10=4.5 n_runs=0) | Philadelphia Phillies (vsRHP OPS=0.813 R/10=4.5 n_runs=0)
+2026-07-28 12:01:37 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Washington Nationals vsRHP: OPS pond.=0.865 (5/5 con split)
+2026-07-28 12:01:39 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Toronto Blue Jays vsRHP: OPS pond.=0.703 (5/5 con split)
+2026-07-28 12:01:39 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Washington Nationals (vsRHP OPS=0.865 R/10=4.5 n_runs=0) | Toronto Blue Jays (vsRHP OPS=0.703 R/10=4.5 n_runs=0)
+2026-07-28 12:01:40 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Minnesota Twins vsRHP: OPS pond.=0.785 (5/5 con split)
+2026-07-28 12:01:42 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Kansas City Royals vsRHP: OPS pond.=0.722 (5/5 con split)
+2026-07-28 12:01:42 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Minnesota Twins (vsRHP OPS=0.785 R/10=4.5 n_runs=0) | Kansas City Royals (vsRHP OPS=0.722 R/10=4.5 n_runs=0)
+2026-07-28 12:01:44 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Chicago White Sox vsRHP: OPS pond.=0.755 (5/5 con split)
+2026-07-28 12:01:45 | DEBUG    | offense.obtener_stats_ofensivas     | Offense New York Yankees vsLHP: OPS pond.=0.716 (5/5 con split)
+2026-07-28 12:01:45 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Chicago White Sox (vsRHP OPS=0.755 R/10=4.5 n_runs=0) | New York Yankees (vsLHP OPS=0.716 R/10=4.5 n_runs=0)
+2026-07-28 12:01:47 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Los Angeles Angels vsRHP: OPS pond.=0.724 (5/5 con split)
+2026-07-28 12:01:49 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Houston Astros vsLHP: OPS pond.=0.756 (5/5 con split)
+2026-07-28 12:01:49 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Los Angeles Angels (vsRHP OPS=0.724 R/10=4.5 n_runs=0) | Houston Astros (vsLHP OPS=0.756 R/10=4.5 n_runs=0)
+2026-07-28 12:01:51 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Athletics vsLHP: OPS pond.=0.731 (5/5 con split)
+2026-07-28 12:01:52 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Boston Red Sox vsLHP: OPS pond.=0.837 (5/5 con split)
+2026-07-28 12:01:52 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Athletics (vsLHP OPS=0.731 R/10=4.5 n_runs=0) | Boston Red Sox (vsLHP OPS=0.837 R/10=4.5 n_runs=0)
+2026-07-28 12:01:54 | DEBUG    | offense.obtener_stats_ofensivas     | Offense San Diego Padres vsRHP: OPS pond.=0.696 (5/5 con split)
+2026-07-28 12:01:56 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Colorado Rockies vsRHP: OPS pond.=0.783 (5/5 con split)
+2026-07-28 12:01:56 | DEBUG    | offense.analizar_ofensiva           | OFFENSE San Diego Padres (vsRHP OPS=0.696 R/10=4.5 n_runs=0) | Colorado Rockies (vsRHP OPS=0.783 R/10=4.5 n_runs=0)
+2026-07-28 12:01:58 | DEBUG    | offense.obtener_stats_ofensivas     | Offense San Francisco Giants vsRHP: OPS pond.=0.805 (5/5 con split)
+2026-07-28 12:02:00 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Milwaukee Brewers vsRHP: OPS pond.=0.827 (5/5 con split)
+2026-07-28 12:02:00 | DEBUG    | offense.analizar_ofensiva           | OFFENSE San Francisco Giants (vsRHP OPS=0.805 R/10=4.5 n_runs=0) | Milwaukee Brewers (vsRHP OPS=0.827 R/10=4.5 n_runs=0)
+2026-07-28 12:02:02 | DEBUG    | offense.obtener_stats_ofensivas     | Offense New York Mets vsLHP: OPS pond.=0.689 (5/5 con split)
+2026-07-28 12:02:04 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Atlanta Braves vsRHP: OPS pond.=0.773 (5/5 con split)
+2026-07-28 12:02:04 | DEBUG    | offense.analizar_ofensiva           | OFFENSE New York Mets (vsLHP OPS=0.689 R/10=4.5 n_runs=0) | Atlanta Braves (vsRHP OPS=0.773 R/10=4.5 n_runs=0)
+2026-07-28 12:02:04 | INFO     | main.main                           | Analizando defensiva...
+2026-07-28 12:02:12 | INFO     | main.main                           | Analizando historial H2H...
+2026-07-28 12:02:21 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-07-28 12:02:21 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-07-28 12:02:26 | DEBUG    | context.analizar_contexto           | Contexto Cincinnati Reds vs Cleveland Guardians: {'temperatura': 28.9, 'viento_kph': 12.5, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 13h
+2026-07-28 12:02:28 | DEBUG    | context.analizar_contexto           | Contexto Detroit Tigers vs Baltimore Orioles: {'temperatura': 26.4, 'viento_kph': 21.9, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-07-28 12:02:29 | DEBUG    | context.analizar_contexto           | Contexto Pittsburgh Pirates vs Arizona Diamondbacks: {'temperatura': 24.8, 'viento_kph': 12.8, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-07-28 12:02:30 | DEBUG    | context.analizar_contexto           | Contexto Miami Marlins vs Philadelphia Phillies: {'temperatura': 31.2, 'viento_kph': 11.3, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-07-28 12:02:31 | DEBUG    | context.analizar_contexto           | Contexto Washington Nationals vs Toronto Blue Jays: {'temperatura': 29.9, 'viento_kph': 19.4, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-07-28 12:02:31 | DEBUG    | context.analizar_contexto           | Contexto Minnesota Twins vs Kansas City Royals: {'temperatura': 29.8, 'viento_kph': 1.5, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-07-28 12:02:32 | WARNING  | context.analizar_contexto           | Estadio sin coordenadas: Rate Field. Usando coordenada default.
+2026-07-28 12:02:32 | DEBUG    | context.analizar_contexto           | Contexto Chicago White Sox vs New York Yankees: {'temperatura': 30.5, 'viento_kph': 5.6, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': True} @ 19h
+2026-07-28 12:02:33 | DEBUG    | context.analizar_contexto           | Contexto Los Angeles Angels vs Houston Astros: {'temperatura': 26.5, 'viento_kph': 11.2, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-07-28 12:02:33 | WARNING  | context.analizar_contexto           | Estadio sin coordenadas: Sutter Health Park. Usando coordenada default.
+2026-07-28 12:02:33 | DEBUG    | context.analizar_contexto           | Contexto Athletics vs Boston Red Sox: {'temperatura': 30.5, 'viento_kph': 5.6, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': True} @ 21h
+2026-07-28 12:02:34 | DEBUG    | context.analizar_contexto           | Contexto San Diego Padres vs Colorado Rockies: {'temperatura': 23.8, 'viento_kph': 12.0, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-07-28 12:02:35 | DEBUG    | context.analizar_contexto           | Contexto San Francisco Giants vs Milwaukee Brewers: {'temperatura': 20.2, 'viento_kph': 3.9, 'condiciones': 'Despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 18h
+2026-07-28 12:02:36 | DEBUG    | context.analizar_contexto           | Contexto New York Mets vs Atlanta Braves: {'temperatura': 27.1, 'viento_kph': 22.9, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-07-28 12:02:36 | INFO     | main.main                           | Proyectando totales...
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Cincinnati Reds vs Cleveland Guardians | venue=Great American Ball Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.08 PF_final=1.08 | ERA_ef=5.954/2.428 FIP=3.88/4.822 | Proy: 5.155 - 4.236 (total=9.391)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Detroit Tigers vs Baltimore Orioles | venue=Comerica Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.93 PF_final=0.93 | ERA_ef=5.916/1.876 FIP=4.116/3.83 | Proy: 4.743 - 3.119 (total=7.862)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Pittsburgh Pirates vs Arizona Diamondbacks | venue=PNC Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.94 PF_final=0.94 | ERA_ef=3.991/4.192 FIP=4.494/3.93 | Proy: 4.736 - 4.03 (total=8.766)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Miami Marlins vs Philadelphia Phillies | venue=loanDepot park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.92 PF_final=0.92 | ERA_ef=5.728/4.026 FIP=3.798/4.059 | Proy: 4.634 - 3.91 (total=8.544)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Washington Nationals vs Toronto Blue Jays | venue=Nationals Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.96 PF_final=0.96 | ERA_ef=3.448/2.948 FIP=3.962/4.722 | Proy: 4.135 - 4.227 (total=8.362)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Minnesota Twins vs Kansas City Royals | venue=Target Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.98 PF_final=0.98 | ERA_ef=3.886/3.73 FIP=4.757/4.38 | Proy: 4.504 - 4.396 (total=8.9)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Chicago White Sox vs New York Yankees | venue=Rate Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=3.86/4.058 FIP=3.692/4.244 | Proy: 4.129 - 4.519 (total=8.648)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Los Angeles Angels vs Houston Astros | venue=Angel Stadium tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=2.618/3.86 FIP=4.81/4.304 | Proy: 4.016 - 4.531 (total=8.547)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | Athletics vs Boston Red Sox | venue=Sutter Health Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=2.142/5.509 FIP=3.744/4.966 | Proy: 3.361 - 5.402 (total=8.763)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | San Diego Padres vs Colorado Rockies | venue=Petco Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=6.2/2.579 FIP=4.842/4.25 | Proy: 5.617 - 3.781 (total=9.398)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | San Francisco Giants vs Milwaukee Brewers | venue=Oracle Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.93 PF_final=0.93 | ERA_ef=3.26/2.872 FIP=3.537/4.278 | Proy: 3.404 - 3.832 (total=7.236)
+2026-07-28 12:02:37 | DEBUG    | projections.proyectar_totales       | New York Mets vs Atlanta Braves | venue=Citi Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.95 PF_final=0.95 | ERA_ef=1.989/2.684 FIP=4.108/4.014 | Proy: 3.245 - 3.559 (total=6.804)
+2026-07-28 12:02:37 | INFO     | main.main                           | Aplicando simulaciones Poisson...

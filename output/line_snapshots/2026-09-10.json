@@ -1,0 +1,72 @@
+[
+  {
+    "timestamp": "2026-09-10T16:46:44.847682+00:00",
+    "eventos": [
+      {
+        "game_id": "3ef6a964abad382c28ff1f91886dc99a",
+        "home_team": "Atlanta Braves",
+        "away_team": "Tampa Bay Rays",
+        "commence": "2026-09-10T16:16:28Z",
+        "total_line": 5.5,
+        "over_price": 1.91,
+        "under_price": 2.1,
+        "home_ml": 1.74,
+        "away_ml": 2.16,
+        "home_rl": 2.8,
+        "away_rl": 1.67
+      },
+      {
+        "game_id": "01c6d0131073b3384f27ac03c02906e4",
+        "home_team": "Philadelphia Phillies",
+        "away_team": "Houston Astros",
+        "commence": "2026-09-10T17:06:00Z",
+        "total_line": 8.5,
+        "over_price": 1.97,
+        "under_price": 1.99,
+        "home_ml": 1.56,
+        "away_ml": 2.65,
+        "home_rl": 2.17,
+        "away_rl": 1.79
+      },
+      {
+        "game_id": "36a89478e8db28447dfe1b5d1f656477",
+        "home_team": "Seattle Mariners",
+        "away_team": "Texas Rangers",
+        "commence": "2026-09-10T20:10:00Z",
+        "total_line": 7.0,
+        "over_price": 2.05,
+        "under_price": 2.05,
+        "home_ml": 1.83,
+        "away_ml": 2.11,
+        "home_rl": 2.84,
+        "away_rl": 1.49
+      },
+      {
+        "game_id": "de5c4fe6a041ce8073e59e063fe7f31f",
+        "home_team": "New York Yankees",
+        "away_team": "Colorado Rockies",
+        "commence": "2026-09-10T23:05:00Z",
+        "total_line": 8.5,
+        "over_price": 1.98,
+        "under_price": 2.0,
+        "home_ml": 1.36,
+        "away_ml": 3.5,
+        "home_rl": 2.12,
+        "away_rl": 2.15
+      },
+      {
+        "game_id": "46bb732d224f9da07f9e3bb2f32281cc",
+        "home_team": "Chicago White Sox",
+        "away_team": "Pittsburgh Pirates",
+        "commence": "2026-09-10T23:41:00Z",
+        "total_line": 7.5,
+        "over_price": 2.0,
+        "under_price": 2.03,
+        "home_ml": 1.96,
+        "away_ml": 1.95,
+        "home_rl": 1.54,
+        "away_rl": 2.62
+      }
+    ]
+  }
+]

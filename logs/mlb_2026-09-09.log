@@ -1,0 +1,82 @@
+2026-09-09 14:26:47 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-09-09.log
+2026-09-09 14:26:48 | INFO     | main.main                           | =======================================================
+2026-09-09 14:26:48 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-09-09 14:26:48 | INFO     | main.main                           | =======================================================
+2026-09-09 14:26:48 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-09-09 14:26:48 | INFO     | statcast.cargar_statcast            | Stats avanzadas desde caché (30 pitching, 30 batting).
+2026-09-09 14:26:48 | INFO     | main.main                           | Analizando pitchers del día...
+2026-09-09 14:26:51 | DEBUG    | pitching.get_pitcher_stats          | Keider Montero: ERA temp=3.55 | ERA últ.3 sal.=6.183 | ERA efectiva=4.603
+2026-09-09 14:26:53 | DEBUG    | pitching.get_pitcher_stats          | Zebby Matthews: ERA temp=4.98 | ERA últ.3 sal.=5.921 | ERA efectiva=5.356
+2026-09-09 14:26:53 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Detroit Tigers: ERA=3.701 WHIP=1.254 IP=569.7 (18 relievers)
+2026-09-09 14:26:54 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Minnesota Twins: ERA=4.658 WHIP=1.407 IP=550.9 (21 relievers)
+2026-09-09 14:26:56 | DEBUG    | pitching.get_pitcher_stats          | Brady Basso: ERA temp=3.86 | ERA últ.3 sal.=6.338 | ERA efectiva=4.851
+2026-09-09 14:26:57 | DEBUG    | pitching.get_pitcher_stats          | Braydon Fisher: ERA temp=3.15 | ERA últ.3 sal.=2.903 | ERA efectiva=3.051
+2026-09-09 14:26:58 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Athletics: ERA=4.487 WHIP=1.423 IP=523.5 (18 relievers)
+2026-09-09 14:26:59 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Toronto Blue Jays: ERA=3.963 WHIP=1.273 IP=535.7 (18 relievers)
+2026-09-09 14:27:00 | DEBUG    | pitching.get_pitcher_stats          | Blade Tidwell: ERA temp=4.43 | ERA últ.3 sal.=6.75 | ERA efectiva=5.358
+2026-09-09 14:27:02 | DEBUG    | pitching.get_pitcher_stats          | Andre Pallante: ERA temp=3.53 | ERA últ.3 sal.=4.426 | ERA efectiva=3.888
+2026-09-09 14:27:03 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Francisco Giants: ERA=3.658 WHIP=1.235 IP=519.1 (15 relievers)
+2026-09-09 14:27:03 | DEBUG    | bullpen.obtener_bullpen             | Bullpen St. Louis Cardinals: ERA=3.785 WHIP=1.305 IP=537.7 (13 relievers)
+2026-09-09 14:27:05 | DEBUG    | pitching.get_pitcher_stats          | Walker Buehler: ERA temp=4.52 | ERA últ.3 sal.=3.273 | ERA efectiva=4.021
+2026-09-09 14:27:06 | DEBUG    | pitching.get_pitcher_stats          | Jackson Kent: ERA temp=5.33 | ERA últ.3 sal.=3.889 | ERA efectiva=4.754
+2026-09-09 14:27:07 | DEBUG    | bullpen.obtener_bullpen             | Bullpen San Diego Padres: ERA=2.994 WHIP=1.159 IP=577.5 (14 relievers)
+2026-09-09 14:27:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Washington Nationals: ERA=5.903 WHIP=1.575 IP=504.2 (19 relievers)
+2026-09-09 14:27:10 | DEBUG    | pitching.get_pitcher_stats          | Kade Anderson: ERA temp=5.06 | ERA últ.3 sal.=6.238 | ERA efectiva=5.531
+2026-09-09 14:27:11 | DEBUG    | pitching.get_pitcher_stats          | Cody Bradford: ERA temp=4.35 | ERA últ.3 sal.=7.059 | ERA efectiva=5.434
+2026-09-09 14:27:12 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Seattle Mariners: ERA=3.701 WHIP=1.255 IP=551.5 (18 relievers)
+2026-09-09 14:27:13 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=3.466 WHIP=1.189 IP=571.9 (14 relievers)
+2026-09-09 14:27:14 | DEBUG    | pitching.get_pitcher_stats          | Shane Baz: ERA temp=3.91 | ERA últ.3 sal.=3.273 | ERA efectiva=3.655
+2026-09-09 14:27:16 | DEBUG    | pitching.get_pitcher_stats          | Foster Griffin: ERA temp=3.26 | ERA últ.3 sal.=3.938 | ERA efectiva=3.531
+2026-09-09 14:27:17 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Baltimore Orioles: ERA=4.257 WHIP=1.395 IP=560.5 (22 relievers)
+2026-09-09 14:27:18 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cleveland Guardians: ERA=3.314 WHIP=1.208 IP=518.7 (13 relievers)
+2026-09-09 14:27:20 | DEBUG    | pitching.get_pitcher_stats          | Cristopher Sánchez: ERA temp=2.58 | ERA últ.3 sal.=3.281 | ERA efectiva=2.86
+2026-09-09 14:27:21 | DEBUG    | pitching.get_pitcher_stats          | Hunter Brown: ERA temp=3.31 | ERA últ.3 sal.=2.069 | ERA efectiva=2.814
+2026-09-09 14:27:22 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Philadelphia Phillies: ERA=4.234 WHIP=1.312 IP=478.5 (16 relievers)
+2026-09-09 14:27:23 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=3.463 WHIP=1.17 IP=528.9 (17 relievers)
+2026-09-09 14:27:29 | DEBUG    | pitching.get_pitcher_stats          | Janson Junk: ERA temp=4.0 | ERA últ.3 sal.=2.015 | ERA efectiva=3.206
+2026-09-09 14:27:33 | DEBUG    | pitching.get_pitcher_stats          | Robert Stock: ERA temp=5.81 | ERA últ.3 sal.=5.455 | ERA efectiva=5.668
+2026-09-09 14:27:36 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Miami Marlins: ERA=4.207 WHIP=1.328 IP=626.7 (17 relievers)
+2026-09-09 14:27:41 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Mets: ERA=3.55 WHIP=1.232 IP=591.1 (23 relievers)
+2026-09-09 14:28:02 | DEBUG    | pitching.get_pitcher_stats          | Jake Bennett: ERA temp=3.34 | ERA últ.3 sal.=2.842 | ERA efectiva=3.141
+2026-09-09 14:28:05 | DEBUG    | pitching.get_pitcher_stats          | Ryan Johnson: ERA temp=5.17 | ERA últ.3 sal.=1.0 | ERA efectiva=3.502
+2026-09-09 14:28:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Boston Red Sox: ERA=3.247 WHIP=1.208 IP=529.2 (17 relievers)
+2026-09-09 14:28:10 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Angels: ERA=4.53 WHIP=1.367 IP=558.0 (22 relievers)
+2026-09-09 14:28:14 | DEBUG    | pitching.get_pitcher_stats          | Will Warren: ERA temp=4.16 | ERA últ.3 sal.=2.812 | ERA efectiva=3.621
+2026-09-09 14:28:25 | DEBUG    | pitching.get_pitcher_stats          | Tomoyuki Sugano: ERA temp=5.19 | ERA últ.3 sal.=9.692 | ERA efectiva=6.991
+2026-09-09 14:28:28 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Yankees: ERA=3.943 WHIP=1.255 IP=516.5 (16 relievers)
+2026-09-09 14:28:30 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Colorado Rockies: ERA=5.108 WHIP=1.482 IP=597.2 (16 relievers)
+2026-09-09 14:28:39 | DEBUG    | pitching.get_pitcher_stats          | Reynaldo López: ERA temp=3.64 | ERA últ.3 sal.=5.664 | ERA efectiva=4.45
+2026-09-09 14:29:00 | DEBUG    | pitching.get_pitcher_stats          | Griffin Jax: ERA temp=3.82 | ERA últ.3 sal.=3.629 | ERA efectiva=3.744
+2026-09-09 14:29:03 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=3.986 WHIP=1.229 IP=531.3 (18 relievers)
+2026-09-09 14:29:07 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Tampa Bay Rays: ERA=3.618 WHIP=1.215 IP=577.9 (18 relievers)
+2026-09-09 14:29:17 | DEBUG    | pitching.get_pitcher_stats          | Daniel Lynch IV: ERA temp=3.51 | ERA últ.3 sal.=6.639 | ERA efectiva=4.762
+2026-09-09 14:29:36 | DEBUG    | pitching.get_pitcher_stats          | Zac Gallen: ERA temp=6.34 | ERA últ.3 sal.=7.759 | ERA efectiva=6.908
+2026-09-09 14:29:37 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Kansas City Royals: ERA=3.507 WHIP=1.243 IP=553.3 (13 relievers)
+2026-09-09 14:29:40 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Arizona Diamondbacks: ERA=4.99 WHIP=1.433 IP=431.4 (22 relievers)
+2026-09-09 14:29:44 | DEBUG    | pitching.get_pitcher_stats          | Davis Martin: ERA temp=4.13 | ERA últ.3 sal.=4.39 | ERA efectiva=4.234
+2026-09-09 14:29:56 | DEBUG    | pitching.get_pitcher_stats          | Lake Bachar: ERA temp=3.59 | ERA últ.3 sal.=2.903 | ERA efectiva=3.315
+2026-09-09 14:29:59 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.272 WHIP=1.411 IP=627.5 (17 relievers)
+2026-09-09 14:30:00 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=3.906 WHIP=1.228 IP=436.9 (16 relievers)
+2026-09-09 14:30:34 | DEBUG    | pitching.get_pitcher_stats          | Logan Henderson: ERA temp=2.48 | ERA últ.3 sal.=1.8 | ERA efectiva=2.208
+2026-09-09 14:30:36 | DEBUG    | pitching.get_pitcher_stats          | Kevin Gausman: ERA temp=4.38 | ERA últ.3 sal.=2.842 | ERA efectiva=3.765
+2026-09-09 14:30:38 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Milwaukee Brewers: ERA=3.492 WHIP=1.256 IP=633.5 (20 relievers)
+2026-09-09 14:30:40 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago Cubs: ERA=3.81 WHIP=1.218 IP=518.2 (20 relievers)
+2026-09-09 14:30:50 | DEBUG    | pitching.get_pitcher_stats          | Yoshinobu Yamamoto: ERA temp=2.67 | ERA últ.3 sal.=3.281 | ERA efectiva=2.914
+2026-09-09 14:31:01 | DEBUG    | pitching.get_pitcher_stats          | Rhett Lowder: ERA temp=5.43 | ERA últ.3 sal.=7.2 | ERA efectiva=6.138
+2026-09-09 14:31:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Los Angeles Dodgers: ERA=4.244 WHIP=1.32 IP=625.8 (19 relievers)
+2026-09-09 14:31:07 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Cincinnati Reds: ERA=3.917 WHIP=1.299 IP=530.5 (15 relievers)
+2026-09-09 14:31:07 | INFO     | pitching.analizar_pitchers          | Pitchers analizados: 15 partidos.
+2026-09-09 14:31:07 | INFO     | main.main                           | Partidos válidos: 15 / 15
+2026-09-09 14:31:07 | INFO     | main.main                           | Analizando ofensiva...
+2026-09-09 14:31:15 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Detroit Tigers vsRHP: OPS pond.=0.807 (5/5 con split)
+2026-09-09 14:31:27 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Minnesota Twins vsRHP: OPS pond.=0.758 (5/5 con split)
+2026-09-09 14:31:27 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Detroit Tigers (vsRHP OPS=0.807 R/10=4.5 n_runs=0) | Minnesota Twins (vsRHP OPS=0.758 R/10=4.5 n_runs=0)
+2026-09-09 14:31:33 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Athletics vsRHP: OPS pond.=0.793 (5/5 con split)
+2026-09-09 14:31:42 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Toronto Blue Jays vsLHP: OPS pond.=0.726 (5/5 con split)
+2026-09-09 14:31:42 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Athletics (vsRHP OPS=0.793 R/10=4.5 n_runs=0) | Toronto Blue Jays (vsLHP OPS=0.726 R/10=4.5 n_runs=0)
+2026-09-09 14:31:52 | DEBUG    | offense.obtener_stats_ofensivas     | Offense San Francisco Giants vsRHP: OPS pond.=0.832 (5/5 con split)
+2026-09-09 14:32:07 | DEBUG    | offense.obtener_stats_ofensivas     | Offense St. Louis Cardinals vsRHP: OPS pond.=0.766 (5/5 con split)
+2026-09-09 14:32:07 | DEBUG    | offense.analizar_ofensiva           | OFFENSE San Francisco Giants (vsRHP OPS=0.832 R/10=4.5 n_runs=0) | St. Louis Cardinals (vsRHP OPS=0.766 R/10=4.5 n_runs=0)
+2026-09-09 14:32:14 | DEBUG    | offense.obtener_stats_ofensivas     | Offense San Diego Padres vsLHP: OPS pond.=0.773 (5/5 con split)
+2026-09-09 14:32:25 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Washington Nationals vsRHP: OPS pond.=0.778 (5/5 con split)
+2026-09-09 14:32:25 | DEBUG    | offense.analizar_ofensiva           | OFFENSE San Diego Padres (vsLHP OPS=0.773 R/10=4.5 n_runs=0) | Washington Nationals (vsRHP OPS=0.778 R/10=4.5 n_runs=0)

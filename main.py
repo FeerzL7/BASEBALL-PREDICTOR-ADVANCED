@@ -90,6 +90,12 @@ def main():
     log.info("Aplicando simulaciones Poisson...")
     partidos = aplicar_simulaciones(partidos)
 
+    import pprint
+
+    print("\n=== PARTIDO DESPUÉS DE PROJECTIONS ===")
+    pprint.pprint(partidos[0], sort_dicts=False)
+    input("Presiona Enter...")
+    
     # 3. Cuotas + snapshot de línea
     log.info("Obteniendo cuotas (The Odds API)...")
     cuotas = obtener_cuotas()

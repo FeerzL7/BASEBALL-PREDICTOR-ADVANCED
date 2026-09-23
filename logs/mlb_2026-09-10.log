@@ -1,0 +1,227 @@
+2026-09-10 10:43:22 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-09-10.log
+2026-09-10 10:43:23 | INFO     | main.main                           | =======================================================
+2026-09-10 10:43:23 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-09-10 10:43:23 | INFO     | main.main                           | =======================================================
+2026-09-10 10:43:23 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-09-10 10:43:23 | INFO     | statcast.cargar_statcast            | Calculando FIP y stats avanzadas via MLB API (2026)...
+2026-09-10 10:43:23 | INFO     | main.main                           | =======================================================
+2026-09-10 10:43:23 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-09-10 10:43:23 | INFO     | main.main                           | =======================================================
+2026-09-10 10:43:23 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-09-10 10:43:23 | INFO     | statcast.cargar_statcast            | Calculando FIP y stats avanzadas via MLB API (2026)...
+2026-09-10 10:45:58 | INFO     | statcast.cargar_statcast            | 30 equipos cargados con stats avanzadas.
+2026-09-10 10:45:58 | INFO     | main.main                           | Analizando pitchers del día...
+2026-09-10 10:45:59 | INFO     | statcast.cargar_statcast            | 30 equipos cargados con stats avanzadas.
+2026-09-10 10:45:59 | INFO     | main.main                           | Analizando pitchers del día...
+2026-09-10 10:46:00 | DEBUG    | pitching.get_pitcher_stats          | Martín Pérez: ERA temp=3.19 | ERA últ.3 sal.=4.286 | ERA efectiva=3.628
+2026-09-10 10:46:00 | DEBUG    | pitching.get_pitcher_stats          | Martín Pérez: ERA temp=3.19 | ERA últ.3 sal.=4.286 | ERA efectiva=3.628
+2026-09-10 10:46:01 | DEBUG    | pitching.get_pitcher_stats          | Nick Martinez: ERA temp=3.0 | ERA últ.3 sal.=3.83 | ERA efectiva=3.332
+2026-09-10 10:46:01 | DEBUG    | pitching.get_pitcher_stats          | Nick Martinez: ERA temp=3.0 | ERA últ.3 sal.=3.83 | ERA efectiva=3.332
+2026-09-10 10:46:02 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=3.986 WHIP=1.229 IP=531.3 (18 relievers)
+2026-09-10 10:46:02 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=3.986 WHIP=1.229 IP=531.3 (18 relievers)
+2026-09-10 10:46:02 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Tampa Bay Rays: ERA=3.618 WHIP=1.215 IP=577.9 (18 relievers)
+2026-09-10 10:46:02 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Tampa Bay Rays: ERA=3.618 WHIP=1.215 IP=577.9 (18 relievers)
+2026-09-10 10:46:03 | DEBUG    | pitching.get_pitcher_stats          | Zack Wheeler: ERA temp=3.23 | ERA últ.3 sal.=5.625 | ERA efectiva=4.188
+2026-09-10 10:46:05 | DEBUG    | pitching.get_pitcher_stats          | Cristian Javier: ERA temp=5.98 | ERA últ.3 sal.=4.154 | ERA efectiva=5.25
+2026-09-10 10:46:05 | DEBUG    | pitching.get_pitcher_stats          | Cristian Javier: ERA temp=5.98 | ERA últ.3 sal.=4.154 | ERA efectiva=5.25
+2026-09-10 10:46:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Philadelphia Phillies: ERA=4.234 WHIP=1.312 IP=478.5 (16 relievers)
+2026-09-10 10:46:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Philadelphia Phillies: ERA=4.234 WHIP=1.312 IP=478.5 (16 relievers)
+2026-09-10 10:46:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=3.463 WHIP=1.17 IP=528.9 (17 relievers)
+2026-09-10 10:46:05 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=3.463 WHIP=1.17 IP=528.9 (17 relievers)
+2026-09-10 10:46:06 | DEBUG    | pitching.get_pitcher_stats          | Logan Gilbert: ERA temp=3.71 | ERA últ.3 sal.=7.606 | ERA efectiva=5.268
+2026-09-10 10:46:06 | DEBUG    | pitching.get_pitcher_stats          | Logan Gilbert: ERA temp=3.71 | ERA últ.3 sal.=7.606 | ERA efectiva=5.268
+2026-09-10 10:46:07 | DEBUG    | pitching.get_pitcher_stats          | Jacob deGrom: ERA temp=3.96 | ERA últ.3 sal.=5.556 | ERA efectiva=4.598
+2026-09-10 10:46:07 | DEBUG    | pitching.get_pitcher_stats          | Jacob deGrom: ERA temp=3.96 | ERA últ.3 sal.=5.556 | ERA efectiva=4.598
+2026-09-10 10:46:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Seattle Mariners: ERA=3.701 WHIP=1.255 IP=551.5 (18 relievers)
+2026-09-10 10:46:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=3.466 WHIP=1.189 IP=571.9 (14 relievers)
+2026-09-10 10:46:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=3.466 WHIP=1.189 IP=571.9 (14 relievers)
+2026-09-10 10:46:09 | DEBUG    | pitching.get_pitcher_stats          | Max Fried: ERA temp=2.73 | ERA últ.3 sal.=2.015 | ERA efectiva=2.444
+2026-09-10 10:46:10 | DEBUG    | pitching.get_pitcher_stats          | Ryan Feltner: ERA temp=5.91 | ERA últ.3 sal.=9.474 | ERA efectiva=7.336
+2026-09-10 10:46:10 | DEBUG    | pitching.get_pitcher_stats          | Ryan Feltner: ERA temp=5.91 | ERA últ.3 sal.=9.474 | ERA efectiva=7.336
+2026-09-10 10:46:11 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Yankees: ERA=3.943 WHIP=1.255 IP=516.5 (16 relievers)
+2026-09-10 10:46:11 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Yankees: ERA=3.943 WHIP=1.255 IP=516.5 (16 relievers)
+2026-09-10 10:46:11 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Colorado Rockies: ERA=5.108 WHIP=1.482 IP=597.2 (16 relievers)
+2026-09-10 10:46:12 | DEBUG    | pitching.get_pitcher_stats          | Hagen Smith: ERA temp=0.56 | sin salidas recientes
+2026-09-10 10:46:13 | DEBUG    | pitching.get_pitcher_stats          | Jared Jones: ERA temp=4.46 | ERA últ.3 sal.=3.169 | ERA efectiva=3.944
+2026-09-10 10:46:13 | DEBUG    | pitching.get_pitcher_stats          | Jared Jones: ERA temp=4.46 | ERA últ.3 sal.=3.169 | ERA efectiva=3.944
+2026-09-10 10:46:14 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.272 WHIP=1.411 IP=627.5 (17 relievers)
+2026-09-10 10:46:14 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=3.906 WHIP=1.228 IP=436.9 (16 relievers)
+2026-09-10 10:46:14 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=3.906 WHIP=1.228 IP=436.9 (16 relievers)
+2026-09-10 10:46:14 | INFO     | pitching.analizar_pitchers          | Pitchers analizados: 5 partidos.
+2026-09-10 10:46:14 | INFO     | pitching.analizar_pitchers          | Pitchers analizados: 5 partidos.
+2026-09-10 10:46:14 | INFO     | main.main                           | Partidos válidos: 5 / 5
+2026-09-10 10:46:14 | INFO     | main.main                           | Partidos válidos: 5 / 5
+2026-09-10 10:46:14 | INFO     | main.main                           | Analizando ofensiva...
+2026-09-10 10:46:14 | INFO     | main.main                           | Analizando ofensiva...
+2026-09-10 10:46:15 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Atlanta Braves vsRHP: OPS pond.=0.743 (5/5 con split)
+2026-09-10 10:46:15 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Atlanta Braves vsRHP: OPS pond.=0.743 (5/5 con split)
+2026-09-10 10:46:17 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Tampa Bay Rays vsLHP: OPS pond.=0.75 (5/5 con split)
+2026-09-10 10:46:17 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Atlanta Braves (vsRHP OPS=0.743 R/10=4.5 n_runs=0) | Tampa Bay Rays (vsLHP OPS=0.75 R/10=4.5 n_runs=0)
+2026-09-10 10:46:17 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Tampa Bay Rays vsLHP: OPS pond.=0.75 (5/5 con split)
+2026-09-10 10:46:17 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Atlanta Braves (vsRHP OPS=0.743 R/10=4.5 n_runs=0) | Tampa Bay Rays (vsLHP OPS=0.75 R/10=4.5 n_runs=0)
+2026-09-10 10:46:18 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Philadelphia Phillies vsRHP: OPS pond.=0.793 (5/5 con split)
+2026-09-10 10:46:18 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Philadelphia Phillies vsRHP: OPS pond.=0.793 (5/5 con split)
+2026-09-10 10:46:20 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Houston Astros vsRHP: OPS pond.=0.802 (5/5 con split)
+2026-09-10 10:46:20 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Houston Astros vsRHP: OPS pond.=0.802 (5/5 con split)
+2026-09-10 10:46:20 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Philadelphia Phillies (vsRHP OPS=0.793 R/10=4.5 n_runs=0) | Houston Astros (vsRHP OPS=0.802 R/10=4.5 n_runs=0)
+2026-09-10 10:46:20 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Philadelphia Phillies (vsRHP OPS=0.793 R/10=4.5 n_runs=0) | Houston Astros (vsRHP OPS=0.802 R/10=4.5 n_runs=0)
+2026-09-10 10:46:21 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Seattle Mariners vsRHP: OPS pond.=0.733 (5/5 con split)
+2026-09-10 10:46:21 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Seattle Mariners vsRHP: OPS pond.=0.733 (5/5 con split)
+2026-09-10 10:46:22 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Texas Rangers vsRHP: OPS pond.=0.72 (5/5 con split)
+2026-09-10 10:46:22 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Seattle Mariners (vsRHP OPS=0.733 R/10=4.5 n_runs=0) | Texas Rangers (vsRHP OPS=0.72 R/10=4.5 n_runs=0)
+2026-09-10 10:46:22 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Texas Rangers vsRHP: OPS pond.=0.72 (5/5 con split)
+2026-09-10 10:46:22 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Seattle Mariners (vsRHP OPS=0.733 R/10=4.5 n_runs=0) | Texas Rangers (vsRHP OPS=0.72 R/10=4.5 n_runs=0)
+2026-09-10 10:46:24 | DEBUG    | offense.obtener_stats_ofensivas     | Offense New York Yankees vsRHP: OPS pond.=0.767 (5/5 con split)
+2026-09-10 10:46:24 | DEBUG    | offense.obtener_stats_ofensivas     | Offense New York Yankees vsRHP: OPS pond.=0.767 (5/5 con split)
+2026-09-10 10:46:25 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Colorado Rockies vsLHP: OPS pond.=0.758 (5/5 con split)
+2026-09-10 10:46:25 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Colorado Rockies vsLHP: OPS pond.=0.758 (5/5 con split)
+2026-09-10 10:46:25 | DEBUG    | offense.analizar_ofensiva           | OFFENSE New York Yankees (vsRHP OPS=0.767 R/10=4.5 n_runs=0) | Colorado Rockies (vsLHP OPS=0.758 R/10=4.5 n_runs=0)
+2026-09-10 10:46:25 | DEBUG    | offense.analizar_ofensiva           | OFFENSE New York Yankees (vsRHP OPS=0.767 R/10=4.5 n_runs=0) | Colorado Rockies (vsLHP OPS=0.758 R/10=4.5 n_runs=0)
+2026-09-10 10:46:26 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Chicago White Sox vsRHP: OPS pond.=0.756 (5/5 con split)
+2026-09-10 10:46:26 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Chicago White Sox vsRHP: OPS pond.=0.756 (5/5 con split)
+2026-09-10 10:46:28 | DEBUG    | offense.obtener_stats_ofensivas     | Offense Pittsburgh Pirates vsLHP: OPS pond.=0.678 (5/5 con split)
+2026-09-10 10:46:28 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Chicago White Sox (vsRHP OPS=0.756 R/10=4.5 n_runs=0) | Pittsburgh Pirates (vsLHP OPS=0.678 R/10=4.5 n_runs=0)
+2026-09-10 10:46:28 | INFO     | main.main                           | Analizando defensiva...
+2026-09-10 10:46:28 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Chicago White Sox (vsRHP OPS=0.756 R/10=4.5 n_runs=0) | Pittsburgh Pirates (vsLHP OPS=0.678 R/10=4.5 n_runs=0)
+2026-09-10 10:46:28 | INFO     | main.main                           | Analizando defensiva...
+2026-09-10 10:46:30 | INFO     | main.main                           | Analizando historial H2H...
+2026-09-10 10:46:32 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-09-10 10:46:32 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-09-10 10:46:32 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-09-10 10:46:32 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-09-10 10:46:35 | DEBUG    | context.analizar_contexto           | Contexto Atlanta Braves vs Tampa Bay Rays: {'temperatura': 30.6, 'viento_kph': 6.5, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 12h
+2026-09-10 10:46:35 | DEBUG    | context.analizar_contexto           | Contexto Atlanta Braves vs Tampa Bay Rays: {'temperatura': 30.6, 'viento_kph': 6.5, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 12h
+2026-09-10 10:46:36 | DEBUG    | context.analizar_contexto           | Contexto Philadelphia Phillies vs Houston Astros: {'temperatura': 30.5, 'viento_kph': 14.4, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 13h
+2026-09-10 10:46:36 | DEBUG    | context.analizar_contexto           | Contexto Philadelphia Phillies vs Houston Astros: {'temperatura': 30.5, 'viento_kph': 14.4, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 13h
+2026-09-10 10:46:36 | DEBUG    | context.analizar_contexto           | Contexto Seattle Mariners vs Texas Rangers: {'temperatura': 16.2, 'viento_kph': 11.6, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 13h
+2026-09-10 10:46:36 | DEBUG    | context.analizar_contexto           | Contexto Seattle Mariners vs Texas Rangers: {'temperatura': 16.2, 'viento_kph': 11.6, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 13h
+2026-09-10 10:46:37 | DEBUG    | context.analizar_contexto           | Contexto New York Yankees vs Colorado Rockies: {'temperatura': 30.4, 'viento_kph': 17.5, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-09-10 10:46:37 | DEBUG    | context.analizar_contexto           | Contexto New York Yankees vs Colorado Rockies: {'temperatura': 30.4, 'viento_kph': 17.5, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-09-10 10:46:38 | WARNING  | context.analizar_contexto           | Estadio sin coordenadas: Rate Field. Usando coordenada default.
+2026-09-10 10:46:38 | DEBUG    | context.analizar_contexto           | Contexto Chicago White Sox vs Pittsburgh Pirates: {'temperatura': 23.8, 'viento_kph': 9.2, 'condiciones': 'Parcialmente nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': True} @ 19h
+2026-09-10 10:46:38 | INFO     | main.main                           | Proyectando totales...
+2026-09-10 10:46:38 | WARNING  | context.analizar_contexto           | Estadio sin coordenadas: Rate Field. Usando coordenada default.
+2026-09-10 10:46:38 | DEBUG    | context.analizar_contexto           | Contexto Chicago White Sox vs Pittsburgh Pirates: {'temperatura': 23.8, 'viento_kph': 9.2, 'condiciones': 'Parcialmente nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': True} @ 19h
+2026-09-10 10:46:38 | INFO     | main.main                           | Proyectando totales...
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | Atlanta Braves vs Tampa Bay Rays | venue=Truist Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.03 PF_final=1.03 | ERA_ef=3.332/3.628 FIP=4.075/4.078 | Proy: 4.076 - 4.456 (total=8.532)
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | Atlanta Braves vs Tampa Bay Rays | venue=Truist Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.03 PF_final=1.03 | ERA_ef=3.332/3.628 FIP=4.075/4.078 | Proy: 4.076 - 4.456 (total=8.532)
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | Philadelphia Phillies vs Houston Astros | venue=Citizens Bank Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.01 PF_final=1.01 | ERA_ef=5.25/4.188 FIP=4.564/3.776 | Proy: 4.966 - 4.37 (total=9.336)
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | Seattle Mariners vs Texas Rangers | venue=T-Mobile Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.94 PF_final=0.94 | ERA_ef=4.598/5.268 FIP=4.145/4.019 | Proy: 4.096 - 4.486 (total=8.582)
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | Philadelphia Phillies vs Houston Astros | venue=Citizens Bank Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.01 PF_final=1.01 | ERA_ef=5.25/4.188 FIP=4.564/3.776 | Proy: 4.966 - 4.37 (total=9.336)
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | New York Yankees vs Colorado Rockies | venue=Yankee Stadium tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.04 PF_final=1.04 | ERA_ef=7.336/2.444 FIP=4.792/3.686 | Proy: 6.43 - 3.755 (total=10.185)
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | Chicago White Sox vs Pittsburgh Pirates | venue=Rate Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=3.944/0.56 FIP=3.842/4.283 | Proy: 4.23 - 3.435 (total=7.665)
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | Seattle Mariners vs Texas Rangers | venue=T-Mobile Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.94 PF_final=0.94 | ERA_ef=4.598/5.268 FIP=4.145/4.019 | Proy: 4.096 - 4.486 (total=8.582)
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | New York Yankees vs Colorado Rockies | venue=Yankee Stadium tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.04 PF_final=1.04 | ERA_ef=7.336/2.444 FIP=4.792/3.686 | Proy: 6.43 - 3.755 (total=10.185)
+2026-09-10 10:46:38 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-09-10 10:46:38 | DEBUG    | projections.proyectar_totales       | Chicago White Sox vs Pittsburgh Pirates | venue=Rate Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=3.944/0.56 FIP=3.842/4.283 | Proy: 4.23 - 3.435 (total=7.665)
+2026-09-10 10:46:38 | INFO     | main.main                           | Aplicando simulaciones Poisson...
+2026-09-10 10:46:44 | INFO     | main.main                           | Obteniendo cuotas (The Odds API)...
+2026-09-10 10:46:44 | DEBUG    | line_movement.guardar_snapshot_diar | Snapshot de líneas guardado: 5 eventos @ 2026-09-10T16:46
+2026-09-10 10:46:44 | DEBUG    | markets.analizar_mercados           | Procesando mercados de apuestas...
+2026-09-10 10:46:44 | INFO     | main.main                           | Partidos con cuotas disponibles: 5
+2026-09-10 10:46:44 | INFO     | main.main                           | Calculando valor esperado y picks...
+2026-09-10 10:46:44 | DEBUG    | value.analizar_valor                | Atlanta Braves vs Tampa Bay Rays | Proy: 4.08-4.46 | ML: Tampa Bay Rays EV=4.9 stake=0.0% | RL: Atlanta Braves EV=-12.2 stake=0.0% | Total: Over EV=11.0 stake=0.0% | Mejor: Ninguno
+2026-09-10 10:46:44 | DEBUG    | value.analizar_valor                | Philadelphia Phillies vs Houston Astros | Proy: 4.97-4.37 | ML: Houston Astros EV=2.1 stake=0.0% | RL: Houston Astros EV=2.0 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: Ninguno
+2026-09-10 10:46:44 | DEBUG    | value.analizar_valor                | Seattle Mariners vs Texas Rangers | Proy: 4.10-4.49 | ML: Texas Rangers EV=5.1 stake=0.0% | RL: Seattle Mariners EV=-11.0 stake=0.0% | Total: Over EV=16.6 stake=1.25% | Mejor: TOTAL: Over
+2026-09-10 10:46:44 | DEBUG    | value.analizar_valor                | New York Yankees vs Colorado Rockies | Proy: 6.43-3.75 | ML: Colorado Rockies EV=-15.2 stake=0.0% | RL: New York Yankees EV=1.5 stake=0.0% | Total: Over EV=21.4 stake=1.25% | Mejor: TOTAL: Over
+2026-09-10 10:46:44 | DEBUG    | value.analizar_valor                | Chicago White Sox vs Pittsburgh Pirates | Proy: 4.23-3.44 | ML: Chicago White Sox EV=6.7 stake=1.25% | RL: Chicago White Sox EV=-12.2 stake=0.0% | Total: Sin ventaja clara EV=0.0 stake=0.0% | Mejor: ML: Chicago White Sox
+2026-09-10 10:46:44 | INFO     | main.main                           | Analizando movimiento de línea...
+2026-09-10 10:46:44 | DEBUG    | line_movement.analizar_movimiento   | Sin suficientes snapshots para detectar movimiento (necesita >= 2).
+2026-09-10 10:46:44 | INFO     | risk_management.aplicar_gestion_rie | Gestion de riesgo: 3 pick(s) activos | exposicion diaria 3%
+2026-09-10 10:46:44 | INFO     | main.main                           | Actualizando resultados de picks anteriores...
+2026-09-10 10:46:45 | INFO     | main.main                           | ROI | Resueltos: 171 | Wins: 85 | ROI: -2.25% | Ganancia: -38.61 | Bankroll: 961.39 | Pendientes: 3
+2026-09-10 10:46:45 | INFO     | main.main                           | CSV exportado → output/predicciones_2026-09-10.csv
+2026-09-10 10:46:45 | INFO     | main.main                           | =======================================================
+2026-09-10 10:46:45 | INFO     | main.main                           | PICKS DEL DÍA
+2026-09-10 10:46:45 | INFO     | main.main                           | =======================================================
+2026-09-10 10:46:45 | DEBUG    | main.main                           | Atlanta Braves vs Tampa Bay Rays
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Pitchers : Nick Martinez vs Martín Pérez
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Proy     : 4.08 - 4.46
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   ML pick  : Tampa Bay Rays (EV 4.9)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   RL pick  : Atlanta Braves (EV -12.2)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Total    : Over 5.5
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-09-10 10:46:45 | DEBUG    | main.main                           | Philadelphia Phillies vs Houston Astros
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Pitchers : Cristian Javier vs Zack Wheeler
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Proy     : 4.97 - 4.37
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   ML pick  : Houston Astros (EV 2.1)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   RL pick  : Houston Astros (EV 2.0)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 8.5
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   ✔ Ninguno
+2026-09-10 10:46:45 | INFO     | main.main                           | Seattle Mariners vs Texas Rangers
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Pitchers : Jacob deGrom vs Logan Gilbert
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Proy     : 4.10 - 4.49
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   ML pick  : Texas Rangers (EV 5.1)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   RL pick  : Seattle Mariners (EV -11.0)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Total    : Over 7.0
+2026-09-10 10:46:45 | INFO     | main.main                           |   ✔ TOTAL: Over | Stake: 1%
+2026-09-10 10:46:45 | INFO     | main.main                           | New York Yankees vs Colorado Rockies
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Pitchers : Ryan Feltner vs Max Fried
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Proy     : 6.43 - 3.75
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   ML pick  : Colorado Rockies (EV -15.2)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   RL pick  : New York Yankees (EV 1.5)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Total    : Over 8.5
+2026-09-10 10:46:45 | INFO     | main.main                           |   ✔ TOTAL: Over | Stake: 1%
+2026-09-10 10:46:45 | INFO     | main.main                           | Chicago White Sox vs Pittsburgh Pirates
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Pitchers : Jared Jones vs Hagen Smith
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Proy     : 4.23 - 3.44
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   ML pick  : Chicago White Sox (EV 6.7)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   RL pick  : Chicago White Sox (EV -12.2)
+2026-09-10 10:46:45 | DEBUG    | main.main                           |   Total    : Sin ventaja clara 7.5
+2026-09-10 10:46:45 | INFO     | main.main                           |   ✔ ML: Chicago White Sox | Stake: 1%
+2026-09-10 10:46:45 | INFO     | main.main                           | Enviando picks a Telegram...
+2026-09-10 10:46:58 | INFO     | main.main                           | Telegram: picks enviados correctamente.
+2026-09-10 10:46:58 | INFO     | main.main                           | Pipeline completado.
+2026-09-10 12:00:05 | INFO     | logger.configurar                   | Logger iniciado → logs\mlb_2026-09-10.log
+2026-09-10 12:00:06 | INFO     | main.main                           | =======================================================
+2026-09-10 12:00:06 | INFO     | main.main                           | Iniciando análisis de predicciones MLB
+2026-09-10 12:00:06 | INFO     | main.main                           | =======================================================
+2026-09-10 12:00:06 | INFO     | main.main                           | Cargando stats avanzadas (FIP, wRC+)...
+2026-09-10 12:00:06 | INFO     | statcast.cargar_statcast            | Stats avanzadas desde caché (30 pitching, 30 batting).
+2026-09-10 12:00:06 | INFO     | main.main                           | Analizando pitchers del día...
+2026-09-10 12:00:07 | DEBUG    | pitching.get_pitcher_stats          | Martín Pérez: ERA temp=3.08 | ERA últ.3 sal.=2.922 | ERA efectiva=3.017
+2026-09-10 12:00:07 | DEBUG    | pitching.get_pitcher_stats          | Nick Martinez: ERA temp=2.92 | ERA últ.3 sal.=2.967 | ERA efectiva=2.939
+2026-09-10 12:00:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Atlanta Braves: ERA=3.986 WHIP=1.229 IP=531.3 (18 relievers)
+2026-09-10 12:00:08 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Tampa Bay Rays: ERA=3.618 WHIP=1.215 IP=577.9 (18 relievers)
+2026-09-10 12:00:09 | DEBUG    | pitching.get_pitcher_stats          | Zack Wheeler: ERA temp=3.21 | ERA últ.3 sal.=1.688 | ERA efectiva=2.601
+2026-09-10 12:00:10 | DEBUG    | pitching.get_pitcher_stats          | Cristian Javier: ERA temp=5.64 | ERA últ.3 sal.=3.0 | ERA efectiva=4.584
+2026-09-10 12:00:10 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Philadelphia Phillies: ERA=4.234 WHIP=1.312 IP=478.5 (16 relievers)
+2026-09-10 12:00:11 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Houston Astros: ERA=3.463 WHIP=1.17 IP=528.9 (17 relievers)
+2026-09-10 12:00:11 | DEBUG    | pitching.get_pitcher_stats          | Logan Gilbert: ERA temp=3.71 | ERA últ.3 sal.=7.606 | ERA efectiva=5.268
+2026-09-10 12:00:12 | DEBUG    | pitching.get_pitcher_stats          | Jacob deGrom: ERA temp=3.96 | ERA últ.3 sal.=5.556 | ERA efectiva=4.598
+2026-09-10 12:00:13 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Seattle Mariners: ERA=3.701 WHIP=1.255 IP=551.5 (18 relievers)
+2026-09-10 12:00:13 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Texas Rangers: ERA=3.466 WHIP=1.189 IP=571.9 (14 relievers)
+2026-09-10 12:00:14 | DEBUG    | pitching.get_pitcher_stats          | Max Fried: ERA temp=2.73 | ERA últ.3 sal.=2.015 | ERA efectiva=2.444
+2026-09-10 12:00:15 | DEBUG    | pitching.get_pitcher_stats          | Ryan Feltner: ERA temp=5.91 | ERA últ.3 sal.=9.474 | ERA efectiva=7.336
+2026-09-10 12:00:15 | DEBUG    | bullpen.obtener_bullpen             | Bullpen New York Yankees: ERA=3.943 WHIP=1.255 IP=516.5 (16 relievers)
+2026-09-10 12:00:16 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Colorado Rockies: ERA=5.108 WHIP=1.482 IP=597.2 (16 relievers)
+2026-09-10 12:00:16 | DEBUG    | pitching.get_pitcher_stats          | Hagen Smith: ERA temp=0.56 | sin salidas recientes
+2026-09-10 12:00:17 | DEBUG    | pitching.get_pitcher_stats          | Jared Jones: ERA temp=4.46 | ERA últ.3 sal.=3.169 | ERA efectiva=3.944
+2026-09-10 12:00:17 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Chicago White Sox: ERA=4.272 WHIP=1.411 IP=627.5 (17 relievers)
+2026-09-10 12:00:18 | DEBUG    | bullpen.obtener_bullpen             | Bullpen Pittsburgh Pirates: ERA=3.906 WHIP=1.228 IP=436.9 (16 relievers)
+2026-09-10 12:00:18 | INFO     | pitching.analizar_pitchers          | Pitchers analizados: 5 partidos.
+2026-09-10 12:00:18 | INFO     | main.main                           | Partidos válidos: 5 / 5
+2026-09-10 12:00:18 | INFO     | main.main                           | Analizando ofensiva...
+2026-09-10 12:00:18 | DEBUG    | offense._cargar_cache_si_vigente    | Offense caché cargado (10 equipos).
+2026-09-10 12:00:18 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Atlanta Braves (vsRHP OPS=0.743 R/10=4.5 n_runs=0) | Tampa Bay Rays (vsLHP OPS=0.75 R/10=4.5 n_runs=0)
+2026-09-10 12:00:18 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Philadelphia Phillies (vsRHP OPS=0.793 R/10=4.5 n_runs=0) | Houston Astros (vsRHP OPS=0.802 R/10=4.5 n_runs=0)
+2026-09-10 12:00:18 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Seattle Mariners (vsRHP OPS=0.733 R/10=4.5 n_runs=0) | Texas Rangers (vsRHP OPS=0.72 R/10=4.5 n_runs=0)
+2026-09-10 12:00:18 | DEBUG    | offense.analizar_ofensiva           | OFFENSE New York Yankees (vsRHP OPS=0.767 R/10=4.5 n_runs=0) | Colorado Rockies (vsLHP OPS=0.758 R/10=4.5 n_runs=0)
+2026-09-10 12:00:18 | DEBUG    | offense.analizar_ofensiva           | OFFENSE Chicago White Sox (vsRHP OPS=0.756 R/10=4.5 n_runs=0) | Pittsburgh Pirates (vsLHP OPS=0.678 R/10=4.5 n_runs=0)
+2026-09-10 12:00:18 | INFO     | main.main                           | Analizando defensiva...
+2026-09-10 12:00:20 | INFO     | main.main                           | Analizando historial H2H...
+2026-09-10 12:00:22 | INFO     | main.main                           | Analizando contexto ambiental...
+2026-09-10 12:00:22 | DEBUG    | context.analizar_contexto           | Analizando contexto ambiental...
+2026-09-10 12:00:27 | DEBUG    | context.analizar_contexto           | Contexto Atlanta Braves vs Tampa Bay Rays: {'temperatura': 31.2, 'viento_kph': 8.9, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 12h
+2026-09-10 12:00:28 | DEBUG    | context.analizar_contexto           | Contexto Philadelphia Phillies vs Houston Astros: {'temperatura': 31.2, 'viento_kph': 17.0, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 13h
+2026-09-10 12:00:29 | DEBUG    | context.analizar_contexto           | Contexto Seattle Mariners vs Texas Rangers: {'temperatura': 18.5, 'viento_kph': 12.0, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 13h
+2026-09-10 12:00:29 | DEBUG    | context.analizar_contexto           | Contexto New York Yankees vs Colorado Rockies: {'temperatura': 31.3, 'viento_kph': 17.8, 'condiciones': 'Nublado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': False} @ 19h
+2026-09-10 12:00:30 | WARNING  | context.analizar_contexto           | Estadio sin coordenadas: Rate Field. Usando coordenada default.
+2026-09-10 12:00:30 | DEBUG    | context.analizar_contexto           | Contexto Chicago White Sox vs Pittsburgh Pirates: {'temperatura': 26.3, 'viento_kph': 8.5, 'condiciones': 'Principalmente despejado', 'fuente': 'open-meteo-current', 'is_default': False, 'venue_default': True} @ 19h
+2026-09-10 12:00:30 | INFO     | main.main                           | Proyectando totales...
+2026-09-10 12:00:30 | DEBUG    | projections.proyectar_totales       | Atlanta Braves vs Tampa Bay Rays | venue=Truist Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.03 PF_final=1.03 | ERA_ef=2.939/3.017 FIP=4.075/4.078 | Proy: 3.919 - 4.201 (total=8.12)
+2026-09-10 12:00:30 | DEBUG    | projections.proyectar_totales       | Philadelphia Phillies vs Houston Astros | venue=Citizens Bank Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.01 PF_final=1.01 | ERA_ef=4.584/2.601 FIP=4.564/3.776 | Proy: 4.705 - 3.74 (total=8.445)
+2026-09-10 12:00:30 | DEBUG    | projections.proyectar_totales       | Seattle Mariners vs Texas Rangers | venue=T-Mobile Park tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=0.94 PF_final=0.94 | ERA_ef=4.598/5.268 FIP=4.145/4.019 | Proy: 4.096 - 4.486 (total=8.582)
+2026-09-10 12:00:30 | DEBUG    | projections.proyectar_totales       | New York Yankees vs Colorado Rockies | venue=Yankee Stadium tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.04 PF_final=1.04 | ERA_ef=7.336/2.444 FIP=4.792/3.686 | Proy: 6.43 - 3.755 (total=10.185)
+2026-09-10 12:00:30 | DEBUG    | projections.proyectar_totales       | Chicago White Sox vs Pittsburgh Pirates | venue=Rate Field tipo=abierto T_ext=20°C T_ef=20°C adj=+0% PF_base=1.0 PF_final=1.0 | ERA_ef=3.944/0.56 FIP=3.842/4.283 | Proy: 4.23 - 3.435 (total=7.665)
+2026-09-10 12:00:30 | INFO     | main.main                           | Aplicando simulaciones Poisson...
